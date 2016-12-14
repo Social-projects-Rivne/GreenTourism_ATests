@@ -1,1 +1,9 @@
+<<<<<<< HEAD
+=======
+.idea/
+.classpath
+.project
+.settings/
+*.class
+>>>>>>> 25eb23e075ad34c563697470c6505fa169c90679
 /target/
