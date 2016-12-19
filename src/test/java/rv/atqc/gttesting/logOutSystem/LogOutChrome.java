@@ -15,11 +15,23 @@ public class LogOutChrome {
     @Test
     public void identifyLogOutButtonChrome() {
         clickOnLeftTopGreenButton();
-        insertLogin();
-        insertPassword();
+        insertLogin("17141@rambler.ru");
+        insertPassword("12345678");
         clickOnLoginButton();
         clickOnLeftTopGreenButton();
         Assert.assertEquals(getLogOutText(), "Log out");
+    }
+
+    @Test
+    public void identifyTitleForgotPasswordAfterLogingOutChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin("17141@rambler.ru");
+        insertPassword("12345678");
+        clickOnLoginButton();
+        clickOnLeftTopGreenButton();
+        clickOnLogOutButton();
+        clickOnLeftTopGreenButton();
+        Assert.assertEquals(getForgotPasswordText(), "Forgot password?");
     }
 
     @BeforeMethod
@@ -34,7 +46,6 @@ public class LogOutChrome {
         driver.close();
     }
 
-
     private void clickOnLeftTopGreenButton() {
         driver.findElement(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop")).click();
     }
@@ -43,15 +54,23 @@ public class LogOutChrome {
         driver.findElement(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-dirty.ng-valid-parse.ng-valid-required.ng-valid-email.ng-valid.ng-valid-pattern input.btn.btn-success.btn-block.submit-btn")).click();
     }
 
-    private void insertPassword() {
-        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input")).sendKeys("12345678");
+    private void insertPassword(String password) {
+        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input")).sendKeys(password);
     }
 
-    private void insertLogin() {
-        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input")).sendKeys("17141@rambler.ru");
+    private void insertLogin(String login) {
+        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input")).sendKeys(login);
     }
 
     private String getLogOutText() {
         return driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a")).getText();
+    }
+
+    private String getForgotPasswordText() {
+        return driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/p[1]/a")).getText();
+    }
+
+    private void clickOnLogOutButton() {
+        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a")).click();
     }
 }
