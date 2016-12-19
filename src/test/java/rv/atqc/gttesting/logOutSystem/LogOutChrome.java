@@ -11,22 +11,24 @@ import org.testng.annotations.Test;
 
 public class LogOutChrome {
     private WebDriver driver;
+    private String USER_LOGIN = "17141@rambler.ru";
+    private String USER_PASSWORD = "12345678";
 
     @Test
-    public void identifyLogOutButtonChrome() {
+    public void checkLogOutButtonTitleInChrome() {
         clickOnLeftTopGreenButton();
-        insertLogin("17141@rambler.ru");
-        insertPassword("12345678");
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
         clickOnLoginButton();
         clickOnLeftTopGreenButton();
         Assert.assertEquals(getLogOutText(), "Log out");
     }
 
     @Test
-    public void identifyTitleForgotPasswordAfterLogingOutChrome() {
+    public void checkForgotPasswordLinkTitleInChrome() {
         clickOnLeftTopGreenButton();
-        insertLogin("17141@rambler.ru");
-        insertPassword("12345678");
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
         clickOnLoginButton();
         clickOnLeftTopGreenButton();
         clickOnLogOutButton();
