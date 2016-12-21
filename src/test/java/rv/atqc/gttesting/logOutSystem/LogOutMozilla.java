@@ -1,38 +1,61 @@
 package rv.atqc.gttesting.logOutSystem;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LogOutChrome {
+/**
+ * Created by roman on 19.12.16.
+ */
+public class LogOutMozilla {
     private WebDriver driver;
+    WebDriverWait wait;
     private String USER_LOGIN = "17141@rambler.ru";
     private String USER_PASSWORD = "12345678";
 
+    @BeforeMethod
+    public void before() {
+        FirefoxDriverManager.getInstance().setup();
+        driver = new FirefoxDriver();
+        driver.get("https://green-tourism.herokuapp.com/#!/");
+        wait = new WebDriverWait(driver, 5);
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        driver.quit();
+    }
+
     @Test
-    public void checkLogOutButtonTitleInChrome() {
+    public void checkLogOutButtonTitleInMozilla() {
         clickOnLeftTopGreenButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
         clickOnLoginButton();
+        waitForPresentsLogOutButton();
         clickOnLeftTopGreenButton();
         Assert.assertEquals(getLogOutText(), "Log out");
     }
 
     @Test
-    public void checkForgotPasswordLinkTitleInChrome() {
+    public void checkForgotPasswordLinkTitleInMozilla() {
         clickOnLeftTopGreenButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
         clickOnLoginButton();
+        waitForLoadProfilePage();
         clickOnLeftTopGreenButton();
+        waitForPresentsLogOutButton();
         clickOnLogOutButton();
+        waotForLoadMainPage();
         clickOnLeftTopGreenButton();
         Assert.assertEquals(getForgotPasswordText(), "Forgot password?");
     }
@@ -41,18 +64,6 @@ public class LogOutChrome {
     public void checkAbcentTitleLogOutChrome() {
         driver.get("https://green-tourism.herokuapp.com/#!/profile");
         Assert.assertFalse(isLogOutTitlePresent());
-    }
-
-    @BeforeMethod
-    public void before() {
-        ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
-        driver.get("https://green-tourism.herokuapp.com/#!/");
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        driver.close();
     }
 
     private boolean isLogOutTitlePresent() {
@@ -64,6 +75,18 @@ public class LogOutChrome {
             isPresent = false;
         }
         return isPresent;
+    }
+
+    private void waotForLoadMainPage() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".parallax-title > h2:nth-child(1)")));
+    }
+
+    private void waitForLoadProfilePage() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".nav-pills > li:nth-child(1) > a:nth-child(1)")));
+    }
+
+    private void waitForPresentsLogOutButton() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a")));
     }
 
     private void clickOnLeftTopGreenButton() {
