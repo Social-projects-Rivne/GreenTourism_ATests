@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,23 +18,25 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 public class PossibilityViewMainPageChrome{
 
 	public WebDriver driver;
+	public WebDriverWait wait;
 	
-	@Test
-	public void checkExistenceOfTheTitle(){
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-		driver.get("https://green-tourism.herokuapp.com/");
-		WebElement titleElement = driver.findElement(By.className("parallax-title"));
-		Assert.assertTrue(titleElement.isDisplayed());
-	}
-
 	@BeforeClass
 	public void before(){		
 		ChromeDriverManager.getInstance().setup();
 		driver=new ChromeDriver();
+		driver.get("https://green-tourism.herokuapp.com/");
+		wait = new WebDriverWait(driver,10);
 	}
 	
 	@AfterClass
 	public void afterMethod(){		
 		driver.quit();
+	}
+	
+	@Test
+	public void checkPossibilityViewTheTitle(){
+		WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated 
+				                            (By.xpath("//h2[text()='Find. Plan. Travel']")));
+		Assert.assertTrue(titleElement.isDisplayed());
 	}
 }
