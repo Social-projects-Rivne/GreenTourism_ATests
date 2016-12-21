@@ -1,7 +1,9 @@
 package rv.atqc.gttesting.logOutSystem;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.apache.xpath.operations.Bool;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -36,6 +38,12 @@ public class LogOutChrome {
         Assert.assertEquals(getForgotPasswordText(), "Forgot password?");
     }
 
+    @Test
+    public void checkAbcentTitleLogOutChrome() {
+        driver.get("https://green-tourism.herokuapp.com/#!/profile");
+        Assert.assertFalse(isLogOutTitlePresent());
+        }
+
     @BeforeMethod
     public void before() {
         ChromeDriverManager.getInstance().setup();
@@ -46,6 +54,17 @@ public class LogOutChrome {
     @AfterMethod
     public void afterMethod() {
         driver.close();
+    }
+
+    private boolean isLogOutTitlePresent() {
+        boolean isPresent;
+        try {
+            driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a"));
+            isPresent = true;
+        } catch (NoSuchElementException e) {
+            isPresent = false;
+        }
+        return isPresent;
     }
 
     private void clickOnLeftTopGreenButton() {
