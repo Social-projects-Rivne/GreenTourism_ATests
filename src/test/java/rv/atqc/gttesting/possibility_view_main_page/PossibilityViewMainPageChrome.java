@@ -17,15 +17,16 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 public class PossibilityViewMainPageChrome{
 
-	public WebDriver driver;
-	public WebDriverWait wait;
+	private WebDriver driver;
+	private WebDriverWait wait;
+	private final int MAX_WAIT_TIME=10;
 	
 	@BeforeClass
 	public void before(){		
 		ChromeDriverManager.getInstance().setup();
 		driver=new ChromeDriver();
 		driver.get("https://green-tourism.herokuapp.com/");
-		wait = new WebDriverWait(driver,10);
+		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 	}
 	
 	@AfterClass
@@ -39,4 +40,6 @@ public class PossibilityViewMainPageChrome{
 				                            (By.xpath("//h2[text()='Find. Plan. Travel']")));
 		Assert.assertTrue(titleElement.isDisplayed());
 	}
+	
+	
 }
