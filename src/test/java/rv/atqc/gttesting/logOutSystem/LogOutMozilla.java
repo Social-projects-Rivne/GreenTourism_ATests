@@ -2,6 +2,7 @@ package rv.atqc.gttesting.logOutSystem;
 
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -57,6 +58,23 @@ public class LogOutMozilla {
         waotForLoadMainPage();
         clickOnLeftTopGreenButton();
         Assert.assertEquals(getForgotPasswordText(), "Forgot password?");
+    }
+
+    @Test
+    public void checkAbcentTitleLogOutChrome() {
+        driver.get("https://green-tourism.herokuapp.com/#!/profile");
+        Assert.assertFalse(isLogOutTitlePresent());
+    }
+
+    private boolean isLogOutTitlePresent() {
+        boolean isPresent;
+        try {
+            driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a"));
+            isPresent = true;
+        } catch (NoSuchElementException e) {
+            isPresent = false;
+        }
+        return isPresent;
     }
 
     private void waotForLoadMainPage() {

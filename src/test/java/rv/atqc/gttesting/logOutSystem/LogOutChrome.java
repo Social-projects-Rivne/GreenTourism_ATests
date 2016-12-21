@@ -1,7 +1,6 @@
 package rv.atqc.gttesting.logOutSystem;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
-import org.apache.xpath.operations.Bool;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -42,7 +41,7 @@ public class LogOutChrome {
     public void checkAbcentTitleLogOutChrome() {
         driver.get("https://green-tourism.herokuapp.com/#!/profile");
         Assert.assertFalse(isLogOutTitlePresent());
-        }
+    }
 
     @BeforeMethod
     public void before() {
