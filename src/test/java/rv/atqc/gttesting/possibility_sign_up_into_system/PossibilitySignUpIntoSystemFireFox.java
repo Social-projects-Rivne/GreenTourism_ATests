@@ -84,6 +84,14 @@ public class PossibilitySignUpIntoSystemFireFox {
 				"Confirm password input is not exist!!!");
 
 	}
+	
+	@Test(groups = "existence_of_signup")
+	public void existenceSignUpButton() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/input")),
+				"SignUp button is not exist!!!");
+
+	}
 
 	protected boolean isExist(By element) {
 		try {
