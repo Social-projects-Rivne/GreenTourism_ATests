@@ -5,16 +5,20 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class ChangePassword {
-	
+
 	private static String MAIL = "romanukhaav@gmail.com";
 	private static String PASS = "123456789";
 	private WebDriver driver;
+	private WebDriverWait wait;
+	private final int MAX_WAIT_TIME=10;
 	
 	@BeforeMethod
 	public void before() {
@@ -25,7 +29,10 @@ public class ChangePassword {
 		inputEmail(MAIL);
 		inputPass(PASS);
 		clickOnLoginButton();
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
+		wait.until(ExpectedConditions.presenceOfElementLocated
+					(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")));
+	
 	}
 	
 	@AfterMethod
