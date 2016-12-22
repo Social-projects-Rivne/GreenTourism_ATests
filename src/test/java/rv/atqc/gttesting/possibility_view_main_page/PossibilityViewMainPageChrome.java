@@ -47,4 +47,11 @@ public class PossibilityViewMainPageChrome{
 					                       (By.xpath("//div[@id='navbar']//i[@class='fa fa-bars navtop']")));
 		Assert.assertTrue(menuElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewLoginOrSignupItem(){
+		WebElement loginOrSignupItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//div[@id='navbar']//i[@class='fa fa-user navtop']")));
+		Assert.assertTrue(loginOrSignupItem.isDisplayed());
+	}
 }
