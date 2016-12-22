@@ -128,4 +128,14 @@ public class PossibilityViewMainPageChrome{
 		Assert.assertTrue(textBlock1.isDisplayed());
 	}
 	
+	@Test
+	public void checkPossibilityViewTextBlock2(){
+		String TextBlock2xpath="//div[@class='col-md-6 col-md-pull-6 "
+				               + "welcome-page-section-text']/p";
+		
+		WebElement textBlock2 = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath(TextBlock2xpath)));
+		Assert.assertTrue(textBlock2.isDisplayed());
+	}
+	
 }
