@@ -54,4 +54,11 @@ public class PossibilityViewMainPageChrome{
 				                           (By.xpath("//div[@id='navbar']//i[@class='fa fa-user navtop']")));
 		Assert.assertTrue(loginOrSignupItem.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewGreenTourismLink1(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//div[@class='hidden-xs logo']")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
 }
