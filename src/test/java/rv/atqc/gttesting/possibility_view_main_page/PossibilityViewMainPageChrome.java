@@ -75,4 +75,14 @@ public class PossibilityViewMainPageChrome{
 				                           (By.xpath("//div[@class='parallax hidden-xs hidden-sm']")));
 		Assert.assertTrue(backgroundImageElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewImage1(){
+		WebElement imageElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//img[@src='/assets/img/welcome-page/m1.jpg']")));
+		Assert.assertTrue(imageElement.isDisplayed());
+	}
+	
+	
+	
 }
