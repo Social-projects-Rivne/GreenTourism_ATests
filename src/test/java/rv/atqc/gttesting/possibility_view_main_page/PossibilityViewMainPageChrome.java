@@ -174,4 +174,11 @@ public class PossibilityViewMainPageChrome{
 				                        (By.xpath(linckItemXpath)));
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewGreenTourismLink2(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//div[@class='footer-content']/a")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
 }
