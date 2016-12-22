@@ -63,6 +63,15 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	}
 	
+	@Test(groups = "existence_of_signup")
+	public void existenceEmailInput() {
+		Assert.assertTrue(
+				isExist(By.xpath(
+						"/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/input")),
+				"First name input is not exist!!!");
+
+	}
+	
 	protected boolean isExist(By element) {
 		try {
 			driver.findElement(element);
