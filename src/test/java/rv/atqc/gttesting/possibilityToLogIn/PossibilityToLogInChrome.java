@@ -10,9 +10,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class PossibilityToLogInChrome {
-	private WebDriver driver;
+    private WebDriver driver;
     private String USER_LOGIN = "test@test.com";
     private String USER_PASSWORD = "Test@123";
+    private String INVALID_PASSWORD = "111";
     
     @Test
     public void checkLogInWithExistingAccountChrome() {
@@ -28,7 +29,7 @@ public class PossibilityToLogInChrome {
     public void checkLogInWithIncorrectPasswordChrome() {
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);
-        insertPassword("111");
+        insertPassword(INVALID_PASSWORD);
         clickOnLoginButton();
         Assert.assertEquals(getInvalidMailOrPasswordText(), "×\nInvalid email or password!");
     }
@@ -66,7 +67,7 @@ public class PossibilityToLogInChrome {
     }
     
     private String getInvalidMailOrPasswordText() {
-        return driver.findElement(By.xpath(".//*[@id='main']/div[1]/text()")).getText();
+        return driver.findElement(By.xpath(".//*[@id='main']/div[1]")).getText();
     }
 
 }
