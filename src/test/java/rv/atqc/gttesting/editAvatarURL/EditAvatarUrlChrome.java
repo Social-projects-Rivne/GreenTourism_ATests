@@ -17,13 +17,14 @@ public class EditAvatarUrlChrome {
     WebDriverWait wait;
     private String USER_LOGIN = "17141@rambler.ru";
     private String USER_PASSWORD = "12345678";
+    private final int MAX_WAIT_TIME = 5;
 
     @BeforeMethod
     public void before() {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
         driver.get("https://green-tourism.herokuapp.com/");
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, MAX_WAIT_TIME);
     }
 
     @AfterMethod
