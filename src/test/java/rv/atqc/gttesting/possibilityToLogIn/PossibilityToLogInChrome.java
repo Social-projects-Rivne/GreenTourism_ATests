@@ -14,6 +14,7 @@ public class PossibilityToLogInChrome {
     private String USER_LOGIN = "test@test.com";
     private String USER_PASSWORD = "Test@123";
     private String INVALID_PASSWORD = "111";
+    private String TWO_AT_SIGNS_LOGIN = "test@@test.com";
     
     @Test
     public void checkLogInWithExistingAccountChrome() {
@@ -32,6 +33,14 @@ public class PossibilityToLogInChrome {
         insertPassword(INVALID_PASSWORD);
         clickOnLoginButton();
         Assert.assertEquals(getInvalidMailOrPasswordText(), "×\nInvalid email or password!");
+    }
+    
+    @Test
+    public void checkLogInWithTwoAtSignsChrome() {
+        clickOnDropdownButton();
+        insertLogin(TWO_AT_SIGNS_LOGIN);
+        insertPassword(USER_PASSWORD);
+        Assert.assertEquals(getInvalidEmailText(), "Invalid email");
     }
   
     @BeforeMethod
@@ -68,6 +77,10 @@ public class PossibilityToLogInChrome {
     
     private String getInvalidMailOrPasswordText() {
         return driver.findElement(By.xpath(".//*[@id='main']/div[1]")).getText();
+    }
+    
+    private String getInvalidEmailText() {
+    	return driver.findElement(By.xpath("html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/p[1]")).getText();
     }
 
 }
