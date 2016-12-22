@@ -111,4 +111,11 @@ public class PossibilityViewMainPageChrome{
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@Test
+	public void checkPossibilityViewLinkItemFunOnEvents(){
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Fun on events")));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
+	
 }
