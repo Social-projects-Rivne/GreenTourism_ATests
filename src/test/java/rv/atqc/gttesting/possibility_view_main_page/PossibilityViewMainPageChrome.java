@@ -118,4 +118,14 @@ public class PossibilityViewMainPageChrome{
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@Test
+	public void checkPossibilityViewTextBlock1(){
+		String TextBlock1xpath="//div[@class='row'][1]/div[@class='col-md-6 "
+				                 + "welcome-page-section-text']/p";
+		
+		WebElement textBlock1 = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath(TextBlock1xpath)));
+		Assert.assertTrue(textBlock1.isDisplayed());
+	}
+	
 }
