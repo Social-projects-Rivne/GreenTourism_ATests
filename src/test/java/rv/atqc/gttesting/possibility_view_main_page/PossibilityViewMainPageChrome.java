@@ -165,4 +165,13 @@ public class PossibilityViewMainPageChrome{
 				                        (By.xpath(linckItemXpath)));
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewLinkItemGoToSearch3(){
+		String linckItemXpath="//div[@class='row'][3]/div[@class='col-md-6 welcome-"
+				              + "page-section-text']/div/a";
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                        (By.xpath(linckItemXpath)));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
 }
