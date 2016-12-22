@@ -44,12 +44,11 @@ public class PossibilitySignUpIntoSystemFireFox {
 				"Signup form is not exist!!!");
 
 	}
-	
+
 	@Test(groups = "existence_of_signup")
 	public void existenceFirstNameInput() {
 		Assert.assertTrue(
-				isExist(By.xpath(
-						"/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/input")),
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/input")),
 				"First name input is not exist!!!");
 
 	}
@@ -57,12 +56,43 @@ public class PossibilitySignUpIntoSystemFireFox {
 	@Test(groups = "existence_of_signup")
 	public void existenceLastNameInput() {
 		Assert.assertTrue(
-				isExist(By.xpath(
-						"/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/input")),
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/input")),
 				"First name input is not exist!!!");
 
 	}
+
+	@Test(groups = "existence_of_signup")
+	public void existenceEmailInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/input")),
+				"First name input is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existencePasswordInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/input")),
+				"Password input is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existenceConfitmPasswordInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/input")),
+				"Confirm password input is not exist!!!");
+
+	}
 	
+	@Test(groups = "existence_of_signup")
+	public void existenceSignUpButton() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/input")),
+				"SignUp button is not exist!!!");
+
+	}
+
 	protected boolean isExist(By element) {
 		try {
 			driver.findElement(element);
