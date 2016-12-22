@@ -97,4 +97,11 @@ public class PossibilityViewMainPageChrome{
 		Assert.assertTrue(imageElement.isDisplayed());
 	}
 	
+	@Test
+	public void checkPossibilityViewLinkItemFindPlace(){
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Find place")));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
+	
 }
