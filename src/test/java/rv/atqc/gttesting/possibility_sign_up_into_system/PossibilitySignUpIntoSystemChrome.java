@@ -52,6 +52,15 @@ public class PossibilitySignUpIntoSystemChrome {
 				"First name input is not exist!!!");
 
 	}
+	
+	@Test(groups = "existence_of_signup")
+	public void existenceLastNameInput() {
+		Assert.assertTrue(
+				isExist(By.xpath(
+						"/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/input")),
+				"First name input is not exist!!!");
+
+	}
 
 	@Test(groups = "existence_of_signup")
 	public void existenceLastNameInput() {
