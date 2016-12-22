@@ -18,7 +18,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private static final int MAX_WAIT_TIME = 10;
-	
+
 	@BeforeClass
 	public void beforeClass() {
 		ChromeDriverManager.getInstance().setup();
@@ -42,6 +42,63 @@ public class PossibilitySignUpIntoSystemChrome {
 				isExist(By.cssSelector(
 						"html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-pristine.ng-invalid.ng-invalid-required.ng-valid-minlength.ng-valid-maxlength.ng-valid-email.ng-valid-pattern.ng-valid-match")),
 				"Signup form is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existenceFirstNameInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/input")),
+				"First name input is not exist!!!");
+
+	}
+	
+	@Test(groups = "existence_of_signup")
+	public void existenceLastNameInput() {
+		Assert.assertTrue(
+				isExist(By.xpath(
+						"/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/input")),
+				"First name input is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existenceLastNameInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/input")),
+				"First name input is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existenceEmailInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/input")),
+				"First name input is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existencePasswordInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/input")),
+				"Password input is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existenceConfitmPasswordInput() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/input")),
+				"Confirm password input is not exist!!!");
+
+	}
+
+	@Test(groups = "existence_of_signup")
+	public void existenceSignUpButton() {
+		Assert.assertTrue(
+				isExist(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/input")),
+				"SignUp button is not exist!!!");
 
 	}
 
