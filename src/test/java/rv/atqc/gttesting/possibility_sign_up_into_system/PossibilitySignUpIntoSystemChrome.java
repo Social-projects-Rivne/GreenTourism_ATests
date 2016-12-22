@@ -17,13 +17,14 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-
+	private static final int MAX_WAIT_TIME = 10;
+	
 	@BeforeClass
 	public void beforeClass() {
 		ChromeDriverManager.getInstance().setup();
 		driver = new ChromeDriver();
 		driver.get("https://green-tourism.herokuapp.com");
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, MAX_WAIT_TIME);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
 				"html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop")))
 				.click();
