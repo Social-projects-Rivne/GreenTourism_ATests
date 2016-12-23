@@ -187,4 +187,11 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                           (By.linkText("The GreenTourism Team")));
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewTwitterLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Twitter")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
 }
