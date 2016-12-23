@@ -2,26 +2,27 @@ package rv.atqc.gttesting.possibility_sign_up_into_system;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 public class PossibilitySignUpIntoSystemChrome {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private WebDriverWait littleWait;
 
 	private static final int MAX_WAIT_TIME = 10;
 
 	private static final String NAME_VALID = "Anonym";
 	private static final String NAME_ABSENCE = "";
+	private static final String NAME_INVALIDE = "An786m";
 
 	private By signUpForm;
 	private By firstName;
@@ -33,8 +34,8 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@BeforeClass
 	public void beforeClass() {
-		FirefoxDriverManager.getInstance().setup();
-		driver = new FirefoxDriver();
+		ChromeDriverManager.getInstance().setup();
+		driver = new ChromeDriver();
 		driver.get("https://green-tourism.herokuapp.com");
 		wait = new WebDriverWait(driver, MAX_WAIT_TIME);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
@@ -101,7 +102,12 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertTrue(isExist(signUp), "SignUp button is not exist!!!");
 	}
 
-	@Test(groups = "validation", dependsOnMethods = { "existenceFirstNameInput" })
+	@BeforeMethod(groups = "validation_first_name")
+	public void clearFirstName() {
+		driver.findElement(firstName).clear();
+	}
+
+	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void validateFirstName() {
 		driver.findElement(firstName).sendKeys(NAME_VALID);
 		sleep(500);
@@ -114,7 +120,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertTrue(error.length() == 0, out.toString());
 
 	}
-	
+
 	@Test(groups = "validation", dependsOnMethods = { "existenceFirstNameInput" })
 	public void absenceFirstName() {
 		driver.findElement(firstName).sendKeys(NAME_ABSENCE);
@@ -128,7 +134,20 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertTrue(error.equals("First name is required"), out.toString());
 
 	}
-	
+
+	@Test(groups = "validation", dependsOnMethods = { "existenceFirstNameInput" })
+	public void invalideteFirstName() {
+		driver.findElement(firstName).sendKeys(NAME_INVALIDE);
+		sleep(500);
+		driver.findElement(lastName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("First name is invalide"), out.toString());
+
+	}
 
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
