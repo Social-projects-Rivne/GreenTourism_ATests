@@ -19,11 +19,7 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private WebDriverWait littleWait;
-
 	private static final int MAX_WAIT_TIME = 10;
-
-	private static final String NAME_VALID = "Anonym";
 
 	private By signUpForm;
 	private By firstName;
@@ -62,7 +58,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		driver.close();
 	}
 
-	@Test(groups = "existence_of_signup", priority = 0)
+	@Test(groups = "existence_of_signup")
 	public void existenceSignUpForm() {
 		Assert.assertTrue(isExist(signUpForm), "Signup form is not exist!!!");
 
@@ -101,32 +97,11 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "existence_of_signup")
 	public void existenceSignUpButton() {
 		Assert.assertTrue(isExist(signUp), "SignUp button is not exist!!!");
-	}
-
-	@Test(groups = "validation", dependsOnMethods = { "existenceFirstNameInput" })
-	public void validateFirstName() {
-		driver.findElement(firstName).sendKeys(NAME_VALID);
-		sleep(500);
-		driver.findElement(lastName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]"))
-				.getText();
-		StringBuilder out = new StringBuilder("System show error message: '").append(error)
-				.append("' when user put valid data");
-		Assert.assertTrue(error.length() == 0, out.toString());
 
 	}
 
-	private boolean isExist(By element) {
+	protected boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
-	}
-
-	private void sleep(long l) {
-		try {
-			Thread.sleep(l);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 
 }
