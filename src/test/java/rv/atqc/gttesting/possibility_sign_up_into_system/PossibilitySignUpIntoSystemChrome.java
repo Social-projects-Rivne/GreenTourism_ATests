@@ -294,6 +294,24 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertTrue(error.equals("Password is required"), out.toString());
 	}
 
+	@BeforeMethod(groups = "confirm_password_length")
+	public void clearConfirmPassword() {
+		driver.findElement(confirmPassword).clear();
+	}
+
+	@Test(groups = "confirm_password_length", dependsOnMethods = { "existenceConfitmPasswordInput" })
+	public void lengthLess8ConfirmPassword() {
+		driver.findElement(confirmPassword).sendKeys(LESS_8_PASSWORD);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Passwords doesn't match"), out.toString());
+	}
+
 	private void sleep(long l) {
 		try {
 			Thread.sleep(l);
