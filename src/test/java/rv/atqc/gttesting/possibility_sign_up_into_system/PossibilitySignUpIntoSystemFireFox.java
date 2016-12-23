@@ -20,7 +20,8 @@ public class PossibilitySignUpIntoSystemFireFox {
 	private static final int MAX_WAIT_TIME = 10;
 
 	private static final String NAME_VALID = "Anonym";
-
+	private static final String NAME_ABSENCE = "";
+	
 	private By signUpForm;
 	private By firstName;
 	private By lastName;
@@ -110,6 +111,20 @@ public class PossibilitySignUpIntoSystemFireFox {
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
+
+	}
+	
+	@Test(groups = "validation", dependsOnMethods = { "existenceFirstNameInput" })
+	public void absenceFirstName() {
+		driver.findElement(firstName).sendKeys(NAME_ABSENCE);
+		sleep(500);
+		driver.findElement(lastName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user did not put empty string");
+		Assert.assertTrue(error.equals("First name is required"), out.toString());
 
 	}
 
