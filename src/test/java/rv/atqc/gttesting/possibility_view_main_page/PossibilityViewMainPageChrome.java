@@ -174,4 +174,40 @@ public class PossibilityViewMainPageChrome{
 				                        (By.xpath(linckItemXpath)));
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewGreenTourismLink2(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//div[@class='footer-content']/a")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewTheGreenTourismTeamLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("The GreenTourism Team")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewTwitterLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Twitter")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewGooglePlusLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Google+")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewFacebookLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Facebook")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
 }
+
