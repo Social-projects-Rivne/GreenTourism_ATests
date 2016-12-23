@@ -195,5 +195,19 @@ public class PossibilityViewMainPageChrome{
 				                           (By.linkText("Twitter")));
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewGooglePlusLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Google+")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewFacebookLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Facebook")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
 }
 
