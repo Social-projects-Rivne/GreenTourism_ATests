@@ -281,6 +281,19 @@ public class PossibilitySignUpIntoSystemChrome {
 		return driver.findElement(element).isDisplayed();
 	}
 
+	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
+	public void emptyPassword() {
+		driver.findElement(password).sendKeys(ABSENCE);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[2]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put empty string");
+		Assert.assertTrue(error.equals("Password is required"), out.toString());
+	}
+
 	private void sleep(long l) {
 		try {
 			Thread.sleep(l);

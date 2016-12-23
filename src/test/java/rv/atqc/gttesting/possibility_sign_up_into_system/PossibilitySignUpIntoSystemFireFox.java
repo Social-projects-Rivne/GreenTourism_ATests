@@ -263,7 +263,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Password should be longer than 8 characters"), out.toString());
 	}
-	
+
 	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
 	public void length8Password() {
 		driver.findElement(password).sendKeys(PASSWORD_8);
@@ -275,6 +275,19 @@ public class PossibilitySignUpIntoSystemFireFox {
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
+	}
+
+	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
+	public void emptyPassword() {
+		driver.findElement(password).sendKeys(ABSENCE);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[2]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put empty string");
+		Assert.assertTrue(error.equals("Password is required"), out.toString());
 	}
 
 	private boolean isExist(By element) {
