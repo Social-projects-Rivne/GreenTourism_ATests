@@ -18,9 +18,10 @@ public class PossibilityToLogInFirefox {
     private String INVALID_PASSWORD = "111";
     private String TWO_AT_SIGNS_LOGIN = "test@@test.com";
     private String NO_DOMAIN_LOGIN = "test@";
+    private long MAX_WAIT_TIME = 5;
     
     @Test
-    public void checkLogInWithExistingAccountChrome() {
+    public void checkLogInWithExistingAccountFirefox() {
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
@@ -30,7 +31,7 @@ public class PossibilityToLogInFirefox {
     }
     
     @Test
-    public void checkLogInWithIncorrectPasswordChrome() {
+    public void checkLogInWithIncorrectPasswordFirefox() {
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);
         insertPassword(INVALID_PASSWORD);
@@ -39,7 +40,7 @@ public class PossibilityToLogInFirefox {
     }
     
     @Test
-    public void checkLogInWithTwoAtSignsChrome() {
+    public void checkLogInWithTwoAtSignsFirefox() {
         clickOnDropdownButton();
         insertLogin(TWO_AT_SIGNS_LOGIN);
         insertPassword(USER_PASSWORD);
@@ -47,7 +48,7 @@ public class PossibilityToLogInFirefox {
     }
     
     @Test
-    public void checkLogInWithNoDomainChrome() {
+    public void checkLogInWithNoDomainFirefox() {
         clickOnDropdownButton();
         insertLogin(NO_DOMAIN_LOGIN);
         insertPassword(USER_PASSWORD);
@@ -59,7 +60,7 @@ public class PossibilityToLogInFirefox {
         FirefoxDriverManager.getInstance().setup();
         driver = new FirefoxDriver();
         driver.get("https://green-tourism.herokuapp.com/#!/");
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, MAX_WAIT_TIME);
     }
     
     @AfterMethod
