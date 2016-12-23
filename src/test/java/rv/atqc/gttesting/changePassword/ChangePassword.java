@@ -14,8 +14,9 @@ import org.testng.annotations.Test;
 public class ChangePassword {
 
 	private static String MAIL = "romanukhaav@gmail.com";
-	private static String PASS = "123456789";
-	private static String SHORT_PASS = "1234567";
+	private static String OLD_PASS = "123456789";
+	private static String SHORT_PASS = "123456";
+	private static String NEV_PASS = "12345678";
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private final int MAX_WAIT_TIME = 10;
@@ -27,12 +28,11 @@ public class ChangePassword {
 		driver.get("https://green-tourism.herokuapp.com/#!/");
 		clickOnLoginMenu();	
 		inputEmail(MAIL);
-		inputPass(PASS);
+		inputPass(OLD_PASS);
 		clickOnLoginButton();
 		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 		wait.until(ExpectedConditions.presenceOfElementLocated
 					(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")));
-	
 	}
 	
 	@AfterMethod
@@ -55,6 +55,13 @@ public class ChangePassword {
 		Assert.assertEquals(getErrorText(), "Password should be longer than 8 characters");
 	}
 	
+	@Test
+	public void inputDifferentPasswords() {
+		clickOnChangePassButton();
+		inputPassFild1(NEV_PASS);
+		inputPassFild2(SHORT_PASS);
+		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
+	}
 	
 	private void clickOnLoginMenu() {
         driver.findElement(By.cssSelector("#navbar > ul:nth-child(1) > li")).click();
@@ -90,6 +97,11 @@ public class ChangePassword {
 	 
 	 private String getErrorText() {
 	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[2]")).getText();
+	 }
+	 
+	 private String getError2Text() {
+		 	clickOnLoginMenu();
+	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/div/p")).getText();
 	 }
 	 	 
 }
