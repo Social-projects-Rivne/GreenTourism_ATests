@@ -264,6 +264,19 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertTrue(error.equals("Password should be longer than 8 characters"), out.toString());
 	}
 
+	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
+	public void length8Password() {
+		driver.findElement(password).sendKeys(PASSWORD_8);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put valid data");
+		Assert.assertTrue(error.length() == 0, out.toString());
+	}
+
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
 	}
