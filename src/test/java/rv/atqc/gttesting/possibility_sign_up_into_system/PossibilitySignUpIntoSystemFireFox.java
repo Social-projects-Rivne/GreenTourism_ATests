@@ -29,6 +29,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 	private static final String EMAIL_INVALID = "email@11111.222";
 	private static final String LESS_8_PASSWORD = "1234567";
 	private static final String PASSWORD_8 = "12345678";
+	private static final String PASSWORD_9 = "123456789";
 
 	private By signUpForm;
 	private By firstName;
@@ -335,6 +336,20 @@ public class PossibilitySignUpIntoSystemFireFox {
 		Assert.assertTrue(error.length() == 0, out.toString());
 	}
 
+	@Test(groups = "confirm_password", dependsOnMethods = { "existenceConfitmPasswordInput", "existencePasswordInput" })
+	public void confirmPasswordNeg() {
+		driver.findElement(password).sendKeys(PASSWORD_8);
+		driver.findElement(confirmPassword).sendKeys(PASSWORD_9);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Passwords doesn't match"), out.toString());
+	}
+
 	@Test(dependsOnMethods = { "existenceFirstNameInput", "existenceSignUpForm", "existenceLastNameInput",
 			"existenceEmailInput", "existenceConfitmPasswordInput", "existencePasswordInput" })
 	public void checkSignUp() {
@@ -357,33 +372,32 @@ public class PossibilitySignUpIntoSystemFireFox {
 		beforeInit();
 		Assert.assertTrue(url.equals("https://green-tourism.herokuapp.com/#!/profile"));
 	}
-	
-	private String nameGenerator(){
+
+	private String nameGenerator() {
 		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 		StringBuilder sb = new StringBuilder("A");
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
-		    char c = chars[random.nextInt(chars.length)];
-		    sb.append(c);
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
 		}
 		String output = sb.toString();
 		return output;
 	}
-	
-	private String emailGenerator(){
+
+	private String emailGenerator() {
 		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 		StringBuilder sb = new StringBuilder("A");
 		Random random = new Random();
 		for (int i = 0; i < 10; i++) {
-		    char c = chars[random.nextInt(chars.length)];
-		    sb.append(c);
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
 		}
 		sb.append("@gmail.com");
 		String output = sb.toString();
 		return output;
 	}
 
-	
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
 	}
