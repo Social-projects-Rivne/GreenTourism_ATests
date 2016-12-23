@@ -23,6 +23,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 	private static final String NAME_VALID = "Anonym";
 	private static final String NAME_ABSENCE = "";
 	private static final String NAME_INVALIDE = "An786m";
+	private static final CharSequence EMAIL_VALID = "first.last@domain.com";
 
 	private By signUpForm;
 	private By firstName;
@@ -194,6 +195,24 @@ public class PossibilitySignUpIntoSystemFireFox {
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Last name is invalide"), out.toString());
 
+	}
+	
+	@BeforeMethod(groups = "validation_email")
+	public void clearEmail() {
+		driver.findElement(email).clear();
+	}
+
+	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
+	public void validateEmail() {
+		driver.findElement(email).sendKeys(EMAIL_VALID);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put valid data");
+		Assert.assertTrue(error.length() == 0, out.toString());
 	}
 	
 	private boolean isExist(By element) {
