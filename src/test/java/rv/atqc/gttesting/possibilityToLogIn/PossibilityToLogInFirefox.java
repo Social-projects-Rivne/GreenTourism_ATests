@@ -1,24 +1,27 @@
 package rv.atqc.gttesting.possibilityToLogIn;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class PossibilityToLogInChrome {
+public class PossibilityToLogInFirefox {
     private WebDriver driver;
+    WebDriverWait wait;
     private String USER_LOGIN = "test@test.com";
     private String USER_PASSWORD = "Test@123";
     private String INVALID_PASSWORD = "111";
     private String TWO_AT_SIGNS_LOGIN = "test@@test.com";
     private String NO_DOMAIN_LOGIN = "test@";
+    private long MAX_WAIT_TIME = 5;
     
     @Test
-    public void checkLogInWithExistingAccountChrome() {
+    public void checkLogInWithExistingAccountFirefox() {
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
@@ -28,7 +31,7 @@ public class PossibilityToLogInChrome {
     }
     
     @Test
-    public void checkLogInWithIncorrectPasswordChrome() {
+    public void checkLogInWithIncorrectPasswordFirefox() {
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);
         insertPassword(INVALID_PASSWORD);
@@ -37,7 +40,7 @@ public class PossibilityToLogInChrome {
     }
     
     @Test
-    public void checkLogInWithTwoAtSignsChrome() {
+    public void checkLogInWithTwoAtSignsFirefox() {
         clickOnDropdownButton();
         insertLogin(TWO_AT_SIGNS_LOGIN);
         insertPassword(USER_PASSWORD);
@@ -45,7 +48,7 @@ public class PossibilityToLogInChrome {
     }
     
     @Test
-    public void checkLogInWithNoDomainChrome() {
+    public void checkLogInWithNoDomainFirefox() {
         clickOnDropdownButton();
         insertLogin(NO_DOMAIN_LOGIN);
         insertPassword(USER_PASSWORD);
@@ -54,14 +57,15 @@ public class PossibilityToLogInChrome {
   
     @BeforeMethod
     public void before() {
-        ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+        FirefoxDriverManager.getInstance().setup();
+        driver = new FirefoxDriver();
         driver.get("https://green-tourism.herokuapp.com/#!/");
+        wait = new WebDriverWait(driver, MAX_WAIT_TIME);
     }
     
     @AfterMethod
     public void afterMethod() {
-        driver.close();
+        driver.quit();
     }
 
     private void clickOnDropdownButton() {
