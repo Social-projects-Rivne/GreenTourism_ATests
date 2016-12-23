@@ -24,7 +24,8 @@ public class PossibilitySignUpIntoSystemChrome {
 	private static final String ABSENCE = "";
 	private static final String NAME_INVALIDE = "An786m";
 	private static final CharSequence EMAIL_VALID = "first.last@domain.com";
-	
+	private static final CharSequence EMAIL_INVALID = "email@11111.222";
+
 	private By signUpForm;
 	private By firstName;
 	private By lastName;
@@ -214,7 +215,7 @@ public class PossibilitySignUpIntoSystemChrome {
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
 	}
-	
+
 	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
 	public void absenceEmail() {
 		driver.findElement(email).sendKeys(ABSENCE);
@@ -226,6 +227,20 @@ public class PossibilitySignUpIntoSystemChrome {
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put empty string");
 		Assert.assertTrue(error.equals("Email is required"), out.toString());
+
+	}
+
+	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
+	public void invalideteEmail() {
+		driver.findElement(email).sendKeys(EMAIL_INVALID);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Email is invalide"), out.toString());
 
 	}
 

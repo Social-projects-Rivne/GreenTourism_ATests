@@ -24,6 +24,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 	private static final String ABSENCE = "";
 	private static final String NAME_INVALIDE = "An786m";
 	private static final CharSequence EMAIL_VALID = "first.last@domain.com";
+	private static final CharSequence EMAIL_INVALID = "email@11111.222";
 
 	private By signUpForm;
 	private By firstName;
@@ -168,7 +169,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 		Assert.assertTrue(error.length() == 0, out.toString());
 
 	}
-	
+
 	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
 	public void absenceLastName() {
 		driver.findElement(lastName).sendKeys(ABSENCE);
@@ -196,7 +197,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 		Assert.assertTrue(error.equals("Last name is invalide"), out.toString());
 
 	}
-	
+
 	@BeforeMethod(groups = "validation_email")
 	public void clearEmail() {
 		driver.findElement(email).clear();
@@ -214,7 +215,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
 	}
-	
+
 	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
 	public void absenceEmail() {
 		driver.findElement(email).sendKeys(ABSENCE);
@@ -228,7 +229,21 @@ public class PossibilitySignUpIntoSystemFireFox {
 		Assert.assertTrue(error.equals("Email is required"), out.toString());
 
 	}
-	
+
+	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
+	public void invalideteEmail() {
+		driver.findElement(email).sendKeys(EMAIL_INVALID);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Email is invalide"), out.toString());
+
+	}
+
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
 	}
