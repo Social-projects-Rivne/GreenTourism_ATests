@@ -60,4 +60,11 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                           (By.xpath("//div[@class='hidden-xs logo']")));
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewNavigationItem(){
+		WebElement navigationItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//i[@class='fa fa-angle-down']")));
+		Assert.assertTrue(navigationItem.isDisplayed());
+	}
 }
