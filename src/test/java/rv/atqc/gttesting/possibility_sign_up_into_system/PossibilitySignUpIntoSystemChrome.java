@@ -23,8 +23,10 @@ public class PossibilitySignUpIntoSystemChrome {
 	private static final String NAME_VALID = "Anonym";
 	private static final String ABSENCE = "";
 	private static final String NAME_INVALIDE = "An786m";
-	private static final CharSequence EMAIL_VALID = "first.last@domain.com";
-	private static final CharSequence EMAIL_INVALID = "email@11111.222";
+	private static final String EMAIL_VALID = "first.last@domain.com";
+	private static final String EMAIL_INVALID = "email@11111.222";
+	private static final String LESS_8_PASSWORD = "1234567";
+	private static final String PASSWORD_8 = "12345678";
 
 	private By signUpForm;
 	private By firstName;
@@ -242,6 +244,24 @@ public class PossibilitySignUpIntoSystemChrome {
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Email is invalide"), out.toString());
 
+	}
+
+	@BeforeMethod(groups = "password_length")
+	public void clearPassword() {
+		driver.findElement(password).clear();
+	}
+
+	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
+	public void lengthLess8Password() {
+		driver.findElement(password).sendKeys(LESS_8_PASSWORD);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Password should be longer than 8 characters"), out.toString());
 	}
 
 	private boolean isExist(By element) {
