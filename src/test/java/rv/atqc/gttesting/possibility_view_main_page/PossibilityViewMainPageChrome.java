@@ -104,4 +104,110 @@ public class PossibilityViewMainPageChrome{
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@Test
+	public void checkPossibilityViewLinkItemPlanYourTrack(){
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Plan your track")));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewLinkItemFunOnEvents(){
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Fun on events")));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewTextBlock1(){
+		String TextBlock1xpath="//div[@class='row'][1]/div[@class='col-md-6 "
+				                 + "welcome-page-section-text']/p";
+		
+		WebElement textBlock1 = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath(TextBlock1xpath)));
+		Assert.assertTrue(textBlock1.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewTextBlock2(){
+		String TextBlock2xpath="//div[@class='col-md-6 col-md-pull-6 "
+				               + "welcome-page-section-text']/p";
+		
+		WebElement textBlock2 = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath(TextBlock2xpath)));
+		Assert.assertTrue(textBlock2.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewTextBlock3(){
+		String TextBlock3xpath="//div[@class='row'][3]/div[@class='col-md-6 "
+				                 + "welcome-page-section-text']/p";
+		
+		WebElement textBlock3 = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath(TextBlock3xpath)));
+		Assert.assertTrue(textBlock3.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewLinkItemGoToSearch1(){
+		String linkItemXpath="//div[@class='row'][1]/div[@class='col-md-6 welcome-"
+				              + "page-section-text']/div/a";
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                        (By.xpath(linkItemXpath)));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewLinkItemGoToSearch2(){
+		String linkItemXpath="//div[@class='row']/div[@class='col-md-6 col-md-pull-6 "
+				              + "welcome-page-section-text']/div/a";
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                        (By.xpath(linkItemXpath)));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewLinkItemGoToSearch3(){
+		String linkItemXpath="//div[@class='row'][3]/div[@class='col-md-6 welcome-"
+				              + "page-section-text']/div/a";
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                        (By.xpath(linkItemXpath)));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewGreenTourismLink2(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//div[@class='footer-content']/a")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewTheGreenTourismTeamLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("The GreenTourism Team")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewTwitterLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Twitter")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewGooglePlusLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Google+")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
+	
+	@Test
+	public void checkPossibilityViewFacebookLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Facebook")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
 }
+
