@@ -21,7 +21,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 	private static final int MAX_WAIT_TIME = 10;
 
 	private static final String NAME_VALID = "Anonym";
-	private static final String NAME_ABSENCE = "";
+	private static final String ABSENCE = "";
 	private static final String NAME_INVALIDE = "An786m";
 	private static final CharSequence EMAIL_VALID = "first.last@domain.com";
 
@@ -124,7 +124,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void absenceFirstName() {
-		driver.findElement(firstName).sendKeys(NAME_ABSENCE);
+		driver.findElement(firstName).sendKeys(ABSENCE);
 		sleep(500);
 		driver.findElement(lastName).sendKeys("");
 		String error = driver
@@ -171,7 +171,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 	
 	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
 	public void absenceLastName() {
-		driver.findElement(lastName).sendKeys(NAME_ABSENCE);
+		driver.findElement(lastName).sendKeys(ABSENCE);
 		sleep(500);
 		driver.findElement(firstName).sendKeys("");
 		String error = driver
@@ -213,6 +213,20 @@ public class PossibilitySignUpIntoSystemFireFox {
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
+	}
+	
+	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
+	public void absenceEmail() {
+		driver.findElement(email).sendKeys(ABSENCE);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put empty string");
+		Assert.assertTrue(error.equals("Email is required"), out.toString());
+
 	}
 	
 	private boolean isExist(By element) {
