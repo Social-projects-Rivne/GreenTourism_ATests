@@ -180,4 +180,11 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                           (By.xpath("//div[@class='footer-content']/a")));
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewTheGreenTourismTeamLink(){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("The GreenTourism Team")));
+		Assert.assertTrue(linkElement.isDisplayed());
+	}
 }
