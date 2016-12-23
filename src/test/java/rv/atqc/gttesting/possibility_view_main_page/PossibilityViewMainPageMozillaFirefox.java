@@ -67,4 +67,11 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                           (By.xpath("//i[@class='fa fa-angle-down']")));
 		Assert.assertTrue(navigationItem.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewElementWithBackgroundImage(){
+		WebElement backgroundImageElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//div[@class='parallax hidden-xs hidden-sm']")));
+		Assert.assertTrue(backgroundImageElement.isDisplayed());
+	}
 }
