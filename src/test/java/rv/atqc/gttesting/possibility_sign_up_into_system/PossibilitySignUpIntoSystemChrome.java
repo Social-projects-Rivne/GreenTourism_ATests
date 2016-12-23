@@ -311,6 +311,26 @@ public class PossibilitySignUpIntoSystemChrome {
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Passwords doesn't match"), out.toString());
 	}
+	
+	@BeforeMethod(groups = "confirm_password")
+	public void clearPasswords() {
+		driver.findElement(confirmPassword).clear();
+		driver.findElement(password).clear();
+	}
+
+	@Test(groups = "confirm_password", dependsOnMethods = { "existenceConfitmPasswordInput" , "existencePasswordInput"})
+	public void confirmPassword() {
+		driver.findElement(password).sendKeys(PASSWORD_8);
+		driver.findElement(confirmPassword).sendKeys(PASSWORD_8);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put equal password");
+		Assert.assertTrue(error.length() == 0, out.toString());
+	}
 
 	private void sleep(long l) {
 		try {
