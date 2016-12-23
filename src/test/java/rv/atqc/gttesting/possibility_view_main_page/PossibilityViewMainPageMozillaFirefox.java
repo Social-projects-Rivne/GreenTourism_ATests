@@ -102,4 +102,11 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                           (By.linkText("Find place")));
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewLinkItemPlanYourTrack(){
+		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.linkText("Plan your track")));
+		Assert.assertTrue(linkItem.isDisplayed());
+	}
 }
