@@ -149,6 +149,25 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	}
 
+	@BeforeMethod(groups = "validation_last_name")
+	public void clearLastName() {
+		driver.findElement(firstName).clear();
+	}
+
+	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
+	public void validateLasttName() {
+		driver.findElement(lastName).sendKeys(NAME_VALID);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/p[3]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put valid data");
+		Assert.assertTrue(error.length() == 0, out.toString());
+
+	}
+	
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
 	}
