@@ -121,7 +121,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	}
 
-	@Test(groups = "validation", dependsOnMethods = { "existenceFirstNameInput" })
+	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void absenceFirstName() {
 		driver.findElement(firstName).sendKeys(NAME_ABSENCE);
 		sleep(500);
@@ -135,7 +135,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	}
 
-	@Test(groups = "validation", dependsOnMethods = { "existenceFirstNameInput" })
+	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void invalideteFirstName() {
 		driver.findElement(firstName).sendKeys(NAME_INVALIDE);
 		sleep(500);
@@ -151,7 +151,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	@BeforeMethod(groups = "validation_last_name")
 	public void clearLastName() {
-		driver.findElement(firstName).clear();
+		driver.findElement(lastName).clear();
 	}
 
 	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
@@ -168,7 +168,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	}
 	
-	@Test(groups = "validation", dependsOnMethods = { "existenceLastNameInput" })
+	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
 	public void absenceLastName() {
 		driver.findElement(lastName).sendKeys(NAME_ABSENCE);
 		sleep(500);
@@ -182,6 +182,19 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	}
 
+	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
+	public void invalideteLastName() {
+		driver.findElement(lastName).sendKeys(NAME_INVALIDE);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/p[3]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Last name is invalide"), out.toString());
+
+	}
 	
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
