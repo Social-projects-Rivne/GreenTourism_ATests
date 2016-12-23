@@ -136,4 +136,14 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                           (By.xpath(TextBlock2xpath)));
 		Assert.assertTrue(textBlock2.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewTextBlock3(){
+		String TextBlock3xpath="//div[@class='row'][3]/div[@class='col-md-6 "
+				                 + "welcome-page-section-text']/p";
+		
+		WebElement textBlock3 = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath(TextBlock3xpath)));
+		Assert.assertTrue(textBlock3.isDisplayed());
+	}
 }
