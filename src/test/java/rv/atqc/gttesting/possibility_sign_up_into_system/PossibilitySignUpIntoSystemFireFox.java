@@ -1,5 +1,7 @@
 package rv.atqc.gttesting.possibility_sign_up_into_system;
 
+import java.util.Random;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -21,9 +23,13 @@ public class PossibilitySignUpIntoSystemFireFox {
 	private static final int MAX_WAIT_TIME = 10;
 
 	private static final String NAME_VALID = "Anonym";
-	private static final String NAME_ABSENCE = "";
+	private static final String ABSENCE = "";
 	private static final String NAME_INVALIDE = "An786m";
-	private static final CharSequence EMAIL_VALID = "first.last@domain.com";
+	private static final String EMAIL_VALID = "first.last@domain.com";
+	private static final String EMAIL_INVALID = "email@11111.222";
+	private static final String LESS_8_PASSWORD = "1234567";
+	private static final String PASSWORD_8 = "12345678";
+	private static final String PASSWORD_9 = "123456789";
 
 	private By signUpForm;
 	private By firstName;
@@ -39,11 +45,16 @@ public class PossibilitySignUpIntoSystemFireFox {
 		driver = new FirefoxDriver();
 		driver.get("https://green-tourism.herokuapp.com");
 		wait = new WebDriverWait(driver, MAX_WAIT_TIME);
+		beforeInit();
+		init();
+	}
+
+	private void beforeInit() {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
 				"html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop")))
 				.click();
 		driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[1]/h6/a[2]")).click();
-		init();
+
 	}
 
 	private void init() {
@@ -124,7 +135,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void absenceFirstName() {
-		driver.findElement(firstName).sendKeys(NAME_ABSENCE);
+		driver.findElement(firstName).sendKeys(ABSENCE);
 		sleep(500);
 		driver.findElement(lastName).sendKeys("");
 		String error = driver
@@ -168,10 +179,10 @@ public class PossibilitySignUpIntoSystemFireFox {
 		Assert.assertTrue(error.length() == 0, out.toString());
 
 	}
-	
+
 	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
 	public void absenceLastName() {
-		driver.findElement(lastName).sendKeys(NAME_ABSENCE);
+		driver.findElement(lastName).sendKeys(ABSENCE);
 		sleep(500);
 		driver.findElement(firstName).sendKeys("");
 		String error = driver
@@ -196,7 +207,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 		Assert.assertTrue(error.equals("Last name is invalide"), out.toString());
 
 	}
-	
+
 	@BeforeMethod(groups = "validation_email")
 	public void clearEmail() {
 		driver.findElement(email).clear();
@@ -214,7 +225,179 @@ public class PossibilitySignUpIntoSystemFireFox {
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
 	}
-	
+
+	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
+	public void absenceEmail() {
+		driver.findElement(email).sendKeys(ABSENCE);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put empty string");
+		Assert.assertTrue(error.equals("Email is required"), out.toString());
+
+	}
+
+	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
+	public void invalideteEmail() {
+		driver.findElement(email).sendKeys(EMAIL_INVALID);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Email is invalide"), out.toString());
+
+	}
+
+	@BeforeMethod(groups = "password_length")
+	public void clearPassword() {
+		driver.findElement(password).clear();
+	}
+
+	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
+	public void lengthLess8Password() {
+		driver.findElement(password).sendKeys(LESS_8_PASSWORD);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Password should be longer than 8 characters"), out.toString());
+	}
+
+	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
+	public void length8Password() {
+		driver.findElement(password).sendKeys(PASSWORD_8);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put valid data");
+		Assert.assertTrue(error.length() == 0, out.toString());
+	}
+
+	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
+	public void emptyPassword() {
+		driver.findElement(password).sendKeys(ABSENCE);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[2]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put empty string");
+		Assert.assertTrue(error.equals("Password is required"), out.toString());
+	}
+
+	@BeforeMethod(groups = "confirm_password_length")
+	public void clearConfirmPassword() {
+		driver.findElement(confirmPassword).clear();
+	}
+
+	@Test(groups = "confirm_password_length", dependsOnMethods = { "existenceConfitmPasswordInput" })
+	public void lengthLess8ConfirmPassword() {
+		driver.findElement(confirmPassword).sendKeys(LESS_8_PASSWORD);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Passwords doesn't match"), out.toString());
+	}
+
+	@BeforeMethod(groups = "confirm_password")
+	public void clearPasswords() {
+		driver.findElement(confirmPassword).clear();
+		driver.findElement(password).clear();
+	}
+
+	@Test(groups = "confirm_password", dependsOnMethods = { "existenceConfitmPasswordInput", "existencePasswordInput" })
+	public void confirmPassword() {
+		driver.findElement(password).sendKeys(PASSWORD_8);
+		driver.findElement(confirmPassword).sendKeys(PASSWORD_8);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put equal password");
+		Assert.assertTrue(error.length() == 0, out.toString());
+	}
+
+	@Test(groups = "confirm_password", dependsOnMethods = { "existenceConfitmPasswordInput", "existencePasswordInput" })
+	public void confirmPasswordNeg() {
+		driver.findElement(password).sendKeys(PASSWORD_8);
+		driver.findElement(confirmPassword).sendKeys(PASSWORD_9);
+		sleep(500);
+		driver.findElement(firstName).sendKeys("");
+		String error = driver
+				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
+				.getText();
+		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+				.append("' when user put invalid string");
+		Assert.assertTrue(error.equals("Passwords doesn't match"), out.toString());
+	}
+
+	@Test(dependsOnMethods = { "existenceFirstNameInput", "existenceSignUpForm", "existenceLastNameInput",
+			"existenceEmailInput", "existenceConfitmPasswordInput", "existencePasswordInput" })
+	public void checkSignUp() {
+		driver.findElement(firstName).clear();
+		driver.findElement(lastName).clear();
+		driver.findElement(email).clear();
+		driver.findElement(confirmPassword).clear();
+		driver.findElement(password).clear();
+		driver.findElement(firstName).sendKeys(nameGenerator());
+		driver.findElement(lastName).sendKeys(nameGenerator());
+		driver.findElement(email).sendKeys(emailGenerator());
+		driver.findElement(confirmPassword).sendKeys(PASSWORD_8);
+		driver.findElement(password).sendKeys(PASSWORD_8);
+		driver.findElement(signUp).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(
+				"html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop")))
+				.click();
+		String url = driver.getCurrentUrl();
+		driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a")).click();
+		beforeInit();
+		Assert.assertTrue(url.equals("https://green-tourism.herokuapp.com/#!/profile"));
+	}
+
+	private String nameGenerator() {
+		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		StringBuilder sb = new StringBuilder("A");
+		Random random = new Random();
+		for (int i = 0; i < 10; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		String output = sb.toString();
+		return output;
+	}
+
+	private String emailGenerator() {
+		char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+		StringBuilder sb = new StringBuilder("A");
+		Random random = new Random();
+		for (int i = 0; i < 10; i++) {
+			char c = chars[random.nextInt(chars.length)];
+			sb.append(c);
+		}
+		sb.append("@gmail.com");
+		String output = sb.toString();
+		return output;
+	}
+
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
 	}
