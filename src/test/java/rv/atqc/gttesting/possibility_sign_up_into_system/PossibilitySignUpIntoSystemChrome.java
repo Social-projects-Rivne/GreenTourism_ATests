@@ -5,6 +5,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -19,12 +20,14 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
+	private WebDriverWait w;
 
 	private static final int MAX_WAIT_TIME = 10;
+	private static final int MIN_WAIT_TIME = 1;
 
 	private static final String NAME_VALID = "Anonym";
 	private static final String ABSENCE = "";
-	private static final String NAME_INVALIDE = "An786m";
+	private static final String NAME_INVALID = "An786m";
 	private static final String EMAIL_VALID = "first.last@domain.com";
 	private static final String EMAIL_INVALID = "email@11111.222";
 	private static final String LESS_8_PASSWORD = "1234567";
@@ -38,6 +41,13 @@ public class PossibilitySignUpIntoSystemChrome {
 	private By password;
 	private By confirmPassword;
 	private By signUp;
+	private By signUpLink;
+	private By firstNameErrorMessage;
+	private By lastNameErrorMessage;
+	private By emailErrorMessage;
+	private By passwordErrorMessage;
+	private By passwordErrorMessageForRequired;
+	private By confirmPasswordErrorMessage;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -45,6 +55,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		driver = new ChromeDriver();
 		driver.get("https://green-tourism.herokuapp.com");
 		wait = new WebDriverWait(driver, MAX_WAIT_TIME);
+		w = new WebDriverWait(driver, MIN_WAIT_TIME);
 		beforeInit();
 		init();
 	}
@@ -66,6 +77,18 @@ public class PossibilitySignUpIntoSystemChrome {
 		password = By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/input");
 		confirmPassword = By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/input");
 		signUp = By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/input");
+		signUpLink = By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[1]/h6/a[2]");
+		firstNameErrorMessage = By
+				.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]");
+		lastNameErrorMessage = By
+				.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/p[3]");
+		emailErrorMessage = By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]");
+		passwordErrorMessage = By
+				.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]");
+		passwordErrorMessageForRequired = By
+				.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[2]");
+		confirmPasswordErrorMessage = By
+				.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]");
 	}
 
 	@AfterClass
@@ -73,7 +96,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		driver.close();
 	}
 
-	@Test(groups = "existence_of_signup")
+	@Test(groups = "existence_of_signup", priority = 0)
 	public void existenceSignUpForm() {
 		Assert.assertTrue(isExist(signUpForm), "Signup form is not exist!!!");
 
@@ -122,11 +145,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void validateFirstName() {
 		driver.findElement(firstName).sendKeys(NAME_VALID);
-		sleep(500);
-		driver.findElement(lastName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]"))
-				.getText();
+		String error = getValidateErrorMessage(firstNameErrorMessage, "");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
@@ -136,28 +155,20 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void absenceFirstName() {
 		driver.findElement(firstName).sendKeys(ABSENCE);
-		sleep(500);
-		driver.findElement(lastName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]"))
-				.getText();
+		String error = getValidateErrorMessage(firstNameErrorMessage, "First name is required");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
-				.append("' when user did not put empty string");
+				.append("' when user put empty string");
 		Assert.assertTrue(error.equals("First name is required"), out.toString());
 
 	}
 
 	@Test(groups = "validation_first_name", dependsOnMethods = { "existenceFirstNameInput" })
 	public void invalideteFirstName() {
-		driver.findElement(firstName).sendKeys(NAME_INVALIDE);
-		sleep(500);
-		driver.findElement(lastName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]"))
-				.getText();
-		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+		driver.findElement(firstName).sendKeys(NAME_INVALID);
+		String error = getValidateErrorMessage(firstNameErrorMessage, "First name is invalide");
+		StringBuilder out = new StringBuilder("System show error message:'").append(error)
 				.append("' when user put invalid string");
-		Assert.assertTrue(error.equals("First name is invalide"), out.toString());
+		Assert.assertTrue(error.equals("First name is invalid"), out.toString());
 
 	}
 
@@ -169,12 +180,8 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
 	public void validateLasttName() {
 		driver.findElement(lastName).sendKeys(NAME_VALID);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/p[3]"))
-				.getText();
-		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+		String error = getValidateErrorMessage(lastNameErrorMessage, "");
+		StringBuilder out = new StringBuilder("System show error message:'").append(error)
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
 
@@ -183,11 +190,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
 	public void absenceLastName() {
 		driver.findElement(lastName).sendKeys(ABSENCE);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/p[3]"))
-				.getText();
+		String error = getValidateErrorMessage(lastNameErrorMessage, "Last name is required");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put empty string");
 		Assert.assertTrue(error.equals("Last name is required"), out.toString());
@@ -196,18 +199,13 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@Test(groups = "validation_last_name", dependsOnMethods = { "existenceLastNameInput" })
 	public void invalideteLastName() {
-		driver.findElement(lastName).sendKeys(NAME_INVALIDE);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/p[3]"))
-				.getText();
-		StringBuilder out = new StringBuilder("System show error message: '").append(error)
+		driver.findElement(lastName).sendKeys(NAME_INVALID);
+		String error = getValidateErrorMessage(lastNameErrorMessage, "Last name is invalide");
+		StringBuilder out = new StringBuilder("System show error message:'").append(error)
 				.append("' when user put invalid string");
-		Assert.assertTrue(error.equals("Last name is invalide"), out.toString());
+		Assert.assertTrue(error.equals("Last name is invalid"), out.toString());
 
 	}
-
 
 	@BeforeMethod(groups = "validation_email")
 	public void clearEmail() {
@@ -217,11 +215,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
 	public void validateEmail() {
 		driver.findElement(email).sendKeys(EMAIL_VALID);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(emailErrorMessage, "");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
@@ -230,25 +224,16 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
 	public void absenceEmail() {
 		driver.findElement(email).sendKeys(ABSENCE);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(emailErrorMessage, "Email is required");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put empty string");
 		Assert.assertTrue(error.equals("Email is required"), out.toString());
-
 	}
 
 	@Test(groups = "validation_email", dependsOnMethods = { "existenceEmailInput" })
 	public void invalideteEmail() {
 		driver.findElement(email).sendKeys(EMAIL_INVALID);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(emailErrorMessage, "Email is invalid");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Email is invalide"), out.toString());
@@ -261,14 +246,9 @@ public class PossibilitySignUpIntoSystemChrome {
 	}
 
 	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
-
-  public void lengthLess8Password() {
+	public void lengthLess8Password() {
 		driver.findElement(password).sendKeys(LESS_8_PASSWORD);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(passwordErrorMessage, "Password should be longer than 8 characters");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Password should be longer than 8 characters"), out.toString());
@@ -277,11 +257,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
 	public void length8Password() {
 		driver.findElement(password).sendKeys(PASSWORD_8);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(passwordErrorMessage, "");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put valid data");
 		Assert.assertTrue(error.length() == 0, out.toString());
@@ -290,11 +266,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
 	public void emptyPassword() {
 		driver.findElement(password).sendKeys(ABSENCE);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[2]"))
-				.getText();
+		String error = getValidateErrorMessage(passwordErrorMessageForRequired, "Password is required");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put empty string");
 		Assert.assertTrue(error.equals("Password is required"), out.toString());
@@ -308,11 +280,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	@Test(groups = "confirm_password_length", dependsOnMethods = { "existenceConfitmPasswordInput" })
 	public void lengthLess8ConfirmPassword() {
 		driver.findElement(confirmPassword).sendKeys(LESS_8_PASSWORD);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(confirmPasswordErrorMessage, "Passwords doesn't match");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Passwords doesn't match"), out.toString());
@@ -328,11 +296,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	public void confirmPassword() {
 		driver.findElement(password).sendKeys(PASSWORD_8);
 		driver.findElement(confirmPassword).sendKeys(PASSWORD_8);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(confirmPasswordErrorMessage, "");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put equal password");
 		Assert.assertTrue(error.length() == 0, out.toString());
@@ -342,11 +306,7 @@ public class PossibilitySignUpIntoSystemChrome {
 	public void confirmPasswordNeg() {
 		driver.findElement(password).sendKeys(PASSWORD_8);
 		driver.findElement(confirmPassword).sendKeys(PASSWORD_9);
-		sleep(500);
-		driver.findElement(firstName).sendKeys("");
-		String error = driver
-				.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]"))
-				.getText();
+		String error = getValidateErrorMessage(confirmPasswordErrorMessage, "Passwords doesn't match");
 		StringBuilder out = new StringBuilder("System show error message: '").append(error)
 				.append("' when user put invalid string");
 		Assert.assertTrue(error.equals("Passwords doesn't match"), out.toString());
@@ -400,16 +360,14 @@ public class PossibilitySignUpIntoSystemChrome {
 		return output;
 	}
 
+	private String getValidateErrorMessage(By el, String text) {
+		new Actions(driver).moveToElement(driver.findElement(signUpLink)).click().perform();
+		w.until(ExpectedConditions.textToBe(el, text));
+		String error = driver.findElement(el).getText();
+		return error;
+	}
+
 	private boolean isExist(By element) {
 		return driver.findElement(element).isDisplayed();
 	}
-
-	private void sleep(long l) {
-		try {
-			Thread.sleep(l);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
 }
