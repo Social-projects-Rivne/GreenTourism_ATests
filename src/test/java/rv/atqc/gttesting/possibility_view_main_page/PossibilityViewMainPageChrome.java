@@ -150,28 +150,28 @@ public class PossibilityViewMainPageChrome{
 	
 	@Test
 	public void checkPossibilityViewLinkItemGoToSearch1(){
-		String linckItemXpath="//div[@class='row'][1]/div[@class='col-md-6 welcome-"
+		String linkItemXpath="//div[@class='row'][1]/div[@class='col-md-6 welcome-"
 				              + "page-section-text']/div/a";
 		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
-				                        (By.xpath(linckItemXpath)));
+				                        (By.xpath(linkItemXpath)));
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
 	@Test
 	public void checkPossibilityViewLinkItemGoToSearch2(){
-		String linckItemXpath="//div[@class='row']/div[@class='col-md-6 col-md-pull-6 "
+		String linkItemXpath="//div[@class='row']/div[@class='col-md-6 col-md-pull-6 "
 				              + "welcome-page-section-text']/div/a";
 		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
-				                        (By.xpath(linckItemXpath)));
+				                        (By.xpath(linkItemXpath)));
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
 	@Test
 	public void checkPossibilityViewLinkItemGoToSearch3(){
-		String linckItemXpath="//div[@class='row'][3]/div[@class='col-md-6 welcome-"
+		String linkItemXpath="//div[@class='row'][3]/div[@class='col-md-6 welcome-"
 				              + "page-section-text']/div/a";
 		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
-				                        (By.xpath(linckItemXpath)));
+				                        (By.xpath(linkItemXpath)));
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
