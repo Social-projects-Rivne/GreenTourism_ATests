@@ -14,55 +14,81 @@ import org.testng.annotations.Test;
 public class ChangePassword {
 
 	private static String MAIL = "romanukhaav@gmail.com";
+	private static String MAIL2 = "romanukhaav@i.ua";
 	private static String OLD_PASS = "123456789";
 	private static String SHORT_PASS = "123456";
-	private static String NEV_PASS = "12345678";
+	private static String NEW_PASS = "12345678";
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private final int MAX_WAIT_TIME = 10;
 	
-	@BeforeMethod
+	
+	@BeforeMethod (groups = "static_password")
 	public void before() {
-		ChromeDriverManager.getInstance().setup();
-		driver = new ChromeDriver();
-		driver.get("https://green-tourism.herokuapp.com/#!/");
-		clickOnLoginMenu();	
-		inputEmail(MAIL);
-		inputPass(OLD_PASS);
-		clickOnLoginButton();
-		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
-		wait.until(ExpectedConditions.presenceOfElementLocated
-					(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")));
+		preconditions(MAIL, OLD_PASS);
 	}
 	
-	@AfterMethod
+	@AfterMethod (groups = "static_password" + "change_password")
 	public void afterMethod() {
 		driver.close();
 	}
 	
-	@Test
+	
+	@Test (groups = "static_password") 
 	public void isChangePassMenuPresent() {
 		clickOnChangePassButton();
 		Assert.assertEquals(getTextFromFildNewPass(), "New password");
 	}
 	
 	
-	@Test
+	@Test(groups = "static_password", dependsOnMethods = { "isChangePassMenuPresent" })
 	public void inputShortPasswords() {
 		clickOnChangePassButton();
 		inputPassFild1(SHORT_PASS);
 		inputPassFild2(SHORT_PASS);
-		Assert.assertEquals(getErrorText(), "Password should be longer than 8 characters");
+		Assert.assertEquals(getErrorText(), "Password should be longer than 8 characters");	
 	}
 	
-	@Test
+	
+	@Test(groups = "static_password", dependsOnMethods = { "isChangePassMenuPresent" })
 	public void inputDifferentPasswords() {
 		clickOnChangePassButton();
-		inputPassFild1(NEV_PASS);
+		inputPassFild1(NEW_PASS);
 		inputPassFild2(SHORT_PASS);
 		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
 	}
 	
+	
+	@BeforeMethod (groups = "change_password")
+	public void beforeChangPass() {
+		preconditions(MAIL2, OLD_PASS);		
+	}
+	
+	
+	@Test (groups = "change_password")
+	public void changePassword() {
+		clickOnChangePassButton();
+		inputPassFild1(NEW_PASS);
+		inputPassFild2(NEW_PASS);
+		clickOnChangeButton();
+		Assert.assertEquals(isProfileActive(), "Email:");
+	}
+
+	
+	
+	private void preconditions(String login, String password){
+			ChromeDriverManager.getInstance().setup();
+			driver = new ChromeDriver();
+			driver.get("https://green-tourism.herokuapp.com/#!/");
+			clickOnLoginMenu();	
+			inputEmail(login);
+			inputPass(password);
+			clickOnLoginButton();
+			wait = new WebDriverWait(driver,MAX_WAIT_TIME);
+			wait.until(ExpectedConditions.presenceOfElementLocated
+						(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")));
+	}
+		  
 	private void clickOnLoginMenu() {
         driver.findElement(By.cssSelector("#navbar > ul:nth-child(1) > li")).click();
     }
@@ -104,4 +130,13 @@ public class ChangePassword {
 	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/div/p")).getText();
 	 }
 	 	 
+	 private void clickOnChangeButton() { 
+			driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/input")).click();   
+		 }
+	
+	 private String isProfileActive() {
+		 	clickOnLoginMenu();
+	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/p[1]/strong")).getText();
+	 }
+
 }
