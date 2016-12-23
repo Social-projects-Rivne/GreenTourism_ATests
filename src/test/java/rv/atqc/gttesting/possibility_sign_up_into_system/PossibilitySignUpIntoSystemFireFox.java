@@ -208,6 +208,7 @@ public class PossibilitySignUpIntoSystemFireFox {
 
 	}
 
+
 	@BeforeMethod(groups = "validation_email")
 	public void clearEmail() {
 		driver.findElement(email).clear();

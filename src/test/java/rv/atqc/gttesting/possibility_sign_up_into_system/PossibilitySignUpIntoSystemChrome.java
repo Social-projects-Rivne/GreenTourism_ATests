@@ -208,6 +208,7 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	}
 
+
 	@BeforeMethod(groups = "validation_email")
 	public void clearEmail() {
 		driver.findElement(email).clear();
@@ -260,7 +261,8 @@ public class PossibilitySignUpIntoSystemChrome {
 	}
 
 	@Test(groups = "password_length", dependsOnMethods = { "existencePasswordInput" })
-	public void lengthLess8Password() {
+
+  public void lengthLess8Password() {
 		driver.findElement(password).sendKeys(LESS_8_PASSWORD);
 		sleep(500);
 		driver.findElement(firstName).sendKeys("");
