@@ -39,4 +39,11 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                            (By.xpath("//h2[text()='Find. Plan. Travel']")));
 		Assert.assertTrue(titleElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewMenuItem(){
+		WebElement menuElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+					                       (By.xpath("//div[@id='navbar']//i[@class='fa fa-bars navtop']")));
+		Assert.assertTrue(menuElement.isDisplayed());
+	}
 }
