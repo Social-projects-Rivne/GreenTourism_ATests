@@ -81,4 +81,11 @@ public class PossibilityViewMainPageMozillaFirefox {
 				                           (By.xpath("//img[@src='/assets/img/welcome-page/m1.jpg']")));
 		Assert.assertTrue(imageElement.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityViewImage2(){
+		WebElement imageElement = wait.until(ExpectedConditions.visibilityOfElementLocated
+				                           (By.xpath("//img[@src='/assets/img/welcome-page/m2.jpg']")));
+		Assert.assertTrue(imageElement.isDisplayed());
+	}
 }
