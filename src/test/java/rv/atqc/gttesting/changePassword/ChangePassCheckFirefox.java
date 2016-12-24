@@ -56,6 +56,15 @@ public class ChangePassCheckFirefox {
 	}
 	
 	
+	@Test
+	public void inputDifferentPasswords() {
+		clickOnChangePassButton();
+		inputPassFild1(PASS);
+		inputPassFild2(SHORT_PASS);
+		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
+	}
+
+	
 			
 		  
 	private void clickOnLoginMenu() {
@@ -94,4 +103,8 @@ public class ChangePassCheckFirefox {
 	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[2]")).getText();
 	 }
 	 
+	 private String getError2Text() {
+		 	clickOnLoginMenu();
+	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/div/p")).getText();
+	 }
 }
