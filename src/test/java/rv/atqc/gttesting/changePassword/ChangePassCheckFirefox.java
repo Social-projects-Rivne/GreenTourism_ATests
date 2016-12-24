@@ -14,6 +14,7 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 public class ChangePassCheckFirefox {
 	private static String MAIL = "romanukhaav@gmail.com";
 	private static String PASS = "123456789";
+	private static String SHORT_PASS = "123456";
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private final int MAX_WAIT_TIME = 10;
@@ -45,7 +46,16 @@ public class ChangePassCheckFirefox {
 		Assert.assertEquals(getTextFromFildNewPass(), "New password");
 	}
 	
-
+	
+	@Test
+	public void inputShortPasswords() {
+		clickOnChangePassButton();
+		inputPassFild1(SHORT_PASS);
+		inputPassFild2(SHORT_PASS);
+		Assert.assertEquals(getErrorText(), "Password should be longer than 8 characters");	
+	}
+	
+	
 			
 		  
 	private void clickOnLoginMenu() {
@@ -71,4 +81,17 @@ public class ChangePassCheckFirefox {
 	 private String getTextFromFildNewPass() {
 	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")).getAttribute("placeholder");
 	 }
+	   
+	 private void inputPassFild1(String pass) {
+	        driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")).sendKeys(pass);
+	 }
+	 
+	 private void inputPassFild2(String pass) {
+	        driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/input")).sendKeys(pass);
+	 }
+	 
+	 private String getErrorText() {
+	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[2]")).getText();
+	 }
+	 
 }
