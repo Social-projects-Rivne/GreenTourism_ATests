@@ -44,9 +44,22 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 			Assert.assertEquals(isProfileActive(), "Email:");
 		}
 
+		@Test(dependsOnMethods = { "changePassword" })
+		public void isNewPasswordLegal() {
+			logIn(MAIL, NEW_PASS);
+
+			//return System in previous state
+			clickOnChangePassButton();
+			inputPassFild1(OLD_PASS);
+			inputPassFild2(OLD_PASS);
+			clickOnChangeButton();
+			
+			Assert.assertEquals(isProfileActive(), "Email:");
+		}
 
 
-			  
+
+	  
 		private void clickOnLoginMenu() {
 	        driver.findElement(By.cssSelector("#navbar > ul:nth-child(1) > li")).click();
 	    }
@@ -92,5 +105,4 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 				wait.until(ExpectedConditions.presenceOfElementLocated
 							(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")));
 		 }
-
 }
