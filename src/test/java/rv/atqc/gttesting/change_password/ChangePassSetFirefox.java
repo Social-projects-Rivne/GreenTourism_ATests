@@ -1,4 +1,4 @@
-package rv.atqc.gttesting.changePassword;
+package rv.atqc.gttesting.change_password;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
