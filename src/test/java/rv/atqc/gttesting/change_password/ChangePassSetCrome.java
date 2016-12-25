@@ -1,4 +1,4 @@
-package rv.atqc.gttesting.changePassword;
+package rv.atqc.gttesting.change_password;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.By;
