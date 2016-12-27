@@ -56,6 +56,12 @@ public class FilterPlacesFirexox {
 			Assert.assertTrue(checkFilter(filter));
 		}
 		 
+		@Test
+		public void testFilter02ServicePlaces(){
+			short filter [] = {0,1,0,0,0};
+			setFilters(filter);
+			Assert.assertTrue(checkFilter(filter));
+		}	
 		
 		
 		private void setFilters(short[] filter){
