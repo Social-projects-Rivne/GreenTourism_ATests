@@ -24,6 +24,7 @@ public class ChangePassCheckFirefox {
 	public void before() {
 		FirefoxDriverManager.getInstance().setup();
 		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
 		driver.get("http://green-tourism.herokuapp.com/#!/");
 		clickOnLoginMenu();	
 		inputEmail(MAIL);

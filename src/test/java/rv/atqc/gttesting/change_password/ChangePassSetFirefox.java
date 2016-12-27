@@ -25,6 +25,7 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 		public void before() {
 			FirefoxDriverManager.getInstance().setup();
 			driver = new FirefoxDriver();
+			driver.manage().window().maximize();
 			driver.get("http://green-tourism.herokuapp.com/#!/");
 			clickOnLoginMenu();	
 		}
