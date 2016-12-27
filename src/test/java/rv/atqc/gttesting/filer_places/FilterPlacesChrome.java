@@ -17,8 +17,22 @@ public class FilterPlacesChrome{
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME=100;
-	  
+	private final int MAX_WAIT_TIME=20;
+	
+	
+	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[2]");
+	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
+	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[5]");
+	private By FeaturedPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[27]");
+	private By HealthcarePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img");
+	
+	private By CampPlacesFilter  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]");
+	private By ServicePlacesFilter = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]");
+	private By HostelsPlacesFilter = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[3]");
+	private By FeaturedPlacesFilter = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]");
+	private By HealthcarePlacesFilter = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]");
+
+	
 	@BeforeClass
 	public void before(){		
 		ChromeDriverManager.getInstance().setup();
@@ -37,116 +51,59 @@ public class FilterPlacesChrome{
 	@Test
 	public void testFilter01CampPlaces(){
 		short filter [] = {1,0,0,0,0};
-		setFilter(filter);
+		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
+	 
 	
 	
-	
-	private void setFilter(short[] filter){
-		setCampPlacesFilter(filter[0]);
-		setServicePlacesFilter(filter[1]);
-		setHostelsPlacesFilter(filter[2]);
-		setFeaturedPlacesFilter(filter[3]);
-		setHealthcarePlacesFilter(filter[4]);		
+	private void setFilters(short[] filter){
+		setPlacesFilter(CampPlacesFilter, filter[0]);
+		setPlacesFilter(ServicePlacesFilter, filter[1]);
+		setPlacesFilter(HostelsPlacesFilter, filter[2]);
+		setPlacesFilter(FeaturedPlacesFilter, filter[3]);
+		setPlacesFilter(HealthcarePlacesFilter, filter[4]);		
 	}
 	
 	private boolean checkFilter(short[] filter){
 		boolean isVisiableElements = true;
 		if (filter[0] == 1){
-			isVisiableElements = isVisiableElements && isCampPlacesDisplayed();
+			isVisiableElements = isVisiableElements && isPlacesDisplayed(CampPlace);
 		}
 		
 		if (filter[1] == 1){
-			isVisiableElements = isVisiableElements && isServicePlacesDisplayed();
+			isVisiableElements = isVisiableElements && isPlacesDisplayed(ServicePlace);
 		}
 		
 		if (filter[2] == 1){
-			isVisiableElements = isVisiableElements && isHostelsPlacesDisplayed();
+			isVisiableElements = isVisiableElements && isPlacesDisplayed(HostelsPlace);
 		}
 		
 		if (filter[3] == 1){
-			isVisiableElements = isVisiableElements && isFeaturedPlacesDisplayed();
+			isVisiableElements = isVisiableElements && isPlacesDisplayed(FeaturedPlace);
 		}
 		
 		if (filter[4] == 1){
-			isVisiableElements = isVisiableElements && isHealthcarePlacesDisplayed();
+			isVisiableElements = isVisiableElements && isPlacesDisplayed(HealthcarePlace);
 		}
 		
 		return isVisiableElements;
 	}
 	
 	
-	private void setCampPlacesFilter(short select){
+	private void setPlacesFilter(By element, short select){
 		if (select == 1){
-			WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-					(By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]")));
+			WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 			linkElement.click();
 		}		   
 	 }
 
-	private void setServicePlacesFilter(short select){
-		if (select == 1){
-			WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-					(By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]")));
-			linkElement.click();
-		}		   
-	 }
 	
-	private void setHostelsPlacesFilter(short select){
-		if (select == 1){
-			WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-					(By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[3]")));
-			linkElement.click();
-		}		   
-	 }
-	
-	private void setFeaturedPlacesFilter(short select){
-		if (select == 1){
-			WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-					(By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]")));
-			linkElement.click();
-		}		   
-	 }
-	
-	private void setHealthcarePlacesFilter(short select){
-		if (select == 1){
-			WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-					(By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]")));
-			linkElement.click();
-		}		   
-	 }
-	
-	private boolean isCampPlacesDisplayed(){
-		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-               (By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[2]")));
+	private boolean isPlacesDisplayed(By element){
+		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));   
 		return linkElement.isDisplayed();
 	}
 	
-	private boolean isServicePlacesDisplayed(){
-		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-               (By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]")));
-		return linkElement.isDisplayed();
-	}
-	
-	private boolean isHostelsPlacesDisplayed(){
-		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-				(By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[5]")));
-		return linkElement.isDisplayed();
-	}
-	
-	private boolean isFeaturedPlacesDisplayed(){
-		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-				(By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[27]")));
-		return linkElement.isDisplayed();
-	}
-	
-	private boolean isHealthcarePlacesDisplayed(){
-		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
-				(By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img")));
-		
-		return linkElement.isDisplayed();
-	}
 	
 	private void openCategoryPlaces(){
 		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -162,8 +119,7 @@ public class FilterPlacesChrome{
 		WebElement CheckAllButton = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")));
 		CheckAllButton.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[27]")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(HealthcarePlace));
 		CheckAllButton.click();
 	}
 	
