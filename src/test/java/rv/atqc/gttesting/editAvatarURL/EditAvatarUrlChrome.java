@@ -11,7 +11,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
 public class EditAvatarUrlChrome {
     private WebDriver driver;
     WebDriverWait wait;
@@ -33,13 +32,26 @@ public class EditAvatarUrlChrome {
     }
 
     @Test
-    public void checkLogOutButtonTitleInChrome() {
+    public void checkChangeButtonTitleInChrome() {
         clickOnLeftTopGreenButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
         clickOnLoginButton();
-        waitForLoadProfilPage();
         Assert.assertEquals(getChangeButtonText(), "Change");
+    }
+
+    @Test
+    public void checkCancelButtonInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        Assert.assertEquals(getCancelButtonText(), "Cancel");
+    }
+
+    private void clickOnChangeButton() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
     }
 
     private void clickOnLeftTopGreenButton() {
@@ -47,7 +59,7 @@ public class EditAvatarUrlChrome {
     }
 
     private void insertLogin(String login) {
-        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input")).sendKeys(login);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input"))).sendKeys(login);
     }
 
     private void insertPassword(String password) {
@@ -59,10 +71,10 @@ public class EditAvatarUrlChrome {
     }
 
     private String getChangeButtonText() {
-        return driver.findElement(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)")).getText();
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)"))).getText();
     }
 
-    private void waitForLoadProfilPage() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)")));
+    private String getCancelButtonText() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(2)"))).getText();
     }
 }
