@@ -122,6 +122,29 @@ public class EditAvatarUrlChrome {
         Assert.assertTrue(getPNGAvatar().isDisplayed());
     }
 
+    @Test
+    public void checkSavingJPGAvatarInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        insertURL(JPG_URL);
+        clickOnConfirmButton();
+        clickOnLeftTopGreenButton();
+        clickOnLogOutButton();
+        waitToLoadMainPage();
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        Assert.assertTrue(getJPGAvatar().isDisplayed());
+    }
+
+    private void waitToLoadMainPage() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='/assets/img/welcome-page/m1.jpg']")));
+    }
+
     private void clickOnChangeButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
     }
@@ -131,7 +154,7 @@ public class EditAvatarUrlChrome {
     }
 
     private void clickOnLeftTopGreenButton() {
-        driver.findElement(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop"))).click();
     }
 
     private void insertLogin(String login) {
@@ -180,5 +203,9 @@ public class EditAvatarUrlChrome {
 
     private void insertURL(String url) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input"))).sendKeys(url);
+    }
+
+    private void clickOnLogOutButton() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a"))).click();
     }
 }
