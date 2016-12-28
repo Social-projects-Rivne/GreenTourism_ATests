@@ -55,7 +55,19 @@ public class FilterPlacesChrome{
 		Assert.assertTrue(checkFilter(filter));
 	}
 	 
+	@Test
+	public void testFilter02ServicePlaces(){
+		short filter [] = {0,1,0,0,0};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}	
 	
+	@Test
+	public void testFilter03HostelsPlaces(){
+		short filter [] = {0,0,1,0,0};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
 	
 	private void setFilters(short[] filter){
 		setPlacesFilter(CampPlacesFilter, filter[0]);
