@@ -24,10 +24,12 @@ import org.testng.annotations.Test;
         private WebElement categoriesDropdownList;
         private WebElement eventsDropdownList;
         private WebElement eventsName;
+        private WebElement gamePlaceFilter;
 
         private By categoriesLocator;
         private By eventsLocator;
         private By eventsNameLocator;
+        private By gamePlaceFilterLocator;
 
         private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
@@ -53,13 +55,20 @@ import org.testng.annotations.Test;
         }
         @Test
         public void verifyTitleOfEventsDropdownList(){
+            eventsName = wait.until(ExpectedConditions.presenceOfElementLocated(eventsNameLocator));
             Assert.assertTrue(eventsName.getText().equalsIgnoreCase("Events"));
+        }
+        @Test
+        public void verifyExistenceOfPlaceFilterGame(){
+            gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterLocator));
+            Assert.assertTrue(exists(gamePlaceFilter), "This element doesn't exist");
         }
 
         public void initializeLocators(){
             categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
             eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
             eventsNameLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/a");
+            gamePlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[3]/div/div[5]/ul/li[1]");
         }
 
         public void setUpPreconditions(){
@@ -68,8 +77,6 @@ import org.testng.annotations.Test;
             categoriesDropdownList.click();
             eventsDropdownList = wait.until(ExpectedConditions.presenceOfElementLocated(eventsLocator));
             eventsDropdownList.click();
-            eventsName = wait.until(ExpectedConditions.presenceOfElementLocated(eventsNameLocator));
-
         }
 
         public boolean exists(WebElement element){
