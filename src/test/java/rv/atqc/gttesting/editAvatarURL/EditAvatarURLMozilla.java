@@ -32,12 +32,11 @@ public class EditAvatarURLMozilla {
     }
 
     @Test
-    public void checkLogOutButtonTitleInChrome() {
+    public void checkChangeButtonTitleInChrome() {
         clickOnLeftTopGreenButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
         clickOnLoginButton();
-        waitForLoadProfilPage();
         Assert.assertEquals(getChangeButtonText(), "Change");
     }
 
@@ -46,7 +45,7 @@ public class EditAvatarURLMozilla {
     }
 
     private void insertLogin(String login) {
-        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input")).sendKeys(login);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input"))).sendKeys(login);
     }
 
     private void insertPassword(String password) {
@@ -58,10 +57,6 @@ public class EditAvatarURLMozilla {
     }
 
     private String getChangeButtonText() {
-        return driver.findElement(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)")).getText();
-    }
-
-    private void waitForLoadProfilPage() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)")));
+        return  wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)"))).getText();
     }
 }
