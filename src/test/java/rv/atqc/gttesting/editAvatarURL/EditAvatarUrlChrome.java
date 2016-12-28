@@ -35,57 +35,57 @@ public class EditAvatarUrlChrome {
         driver.quit();
     }
 
-//    @Test
-//    public void checkChangeButtonTitleInChrome() {
-//        clickOnLeftTopGreenButton();
-//        insertLogin(USER_LOGIN);
-//        insertPassword(USER_PASSWORD);
-//        clickOnLoginButton();
-//        Assert.assertEquals(getChangeButtonText(), "Change");
-//    }
-//
-//    @Test
-//    public void checkCancelButtonInEditAvSystChrome() {
-//        clickOnLeftTopGreenButton();
-//        insertLogin(USER_LOGIN);
-//        insertPassword(USER_PASSWORD);
-//        clickOnLoginButton();
-//        clickOnChangeButton();
-//        Assert.assertEquals(getCancelButtonText(), "Cancel");
-//    }
-//
-//    @Test
-//    public void checkConfirmButtonInEditAvSystChrome() {
-//        clickOnLeftTopGreenButton();
-//        insertLogin(USER_LOGIN);
-//        insertPassword(USER_PASSWORD);
-//        clickOnLoginButton();
-//        clickOnChangeButton();
-//        Assert.assertTrue(getConfirmButton().isDisplayed());
-//    }
-//
-//    @Test
-//    public void checkPresentFieldAvatarURLInEditAvSystChrome() {
-//        clickOnLeftTopGreenButton();
-//        insertLogin(USER_LOGIN);
-//        insertPassword(USER_PASSWORD);
-//        clickOnLoginButton();
-//        clickOnChangeButton();
-//        Assert.assertTrue(getAvaURLField().isDisplayed());
-//    }
-//
-//    @Test
-//    public void checkPresentDefaultAvatarInEditAvSystChrome() {
-//        clickOnLeftTopGreenButton();
-//        insertLogin(USER_LOGIN);
-//        insertPassword(USER_PASSWORD);
-//        clickOnLoginButton();
-//        clickOnChangeButton();
-//        clickOnConfirmButton();
-//        Assert.assertTrue(getDefAvatar().isDisplayed());
-//    }
-//
-//
+    @Test
+    public void checkChangeButtonTitleInChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        Assert.assertEquals(getChangeButtonText(), "Change");
+    }
+
+    @Test
+    public void checkCancelButtonInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        Assert.assertEquals(getCancelButtonText(), "Cancel");
+    }
+
+    @Test
+    public void checkConfirmButtonInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        Assert.assertTrue(getConfirmButton().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentFieldAvatarURLInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        Assert.assertTrue(getAvaURLField().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentDefaultAvatarInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        clickOnConfirmButton();
+        Assert.assertTrue(getDefAvatar().isDisplayed());
+    }
+
+
     @Test
     public void checkPresentJPGAvatarInEditAvSystChrome() {
         clickOnLeftTopGreenButton();
