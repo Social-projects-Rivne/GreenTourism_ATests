@@ -18,6 +18,7 @@ public class EditAvatarUrlChrome {
     private String USER_LOGIN = "17141@rambler.ru";
     private String USER_PASSWORD = "12345678";
     private final int MAX_WAIT_TIME = 5;
+    private final String JPG_URL="http://img1.jurko.net/avatar_17294.jpg";
 
     @BeforeMethod
     public void before() {
@@ -82,6 +83,19 @@ public class EditAvatarUrlChrome {
         Assert.assertTrue(getDefAvatar().isDisplayed());
     }
 
+
+    @Test
+    public void checkPresentJPGAvatarInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        insertURL(JPG_URL);
+        clickOnConfirmButton();
+        Assert.assertTrue(getJPGAvatar().isDisplayed());
+    }
+
     private void clickOnChangeButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
     }
@@ -123,7 +137,14 @@ public class EditAvatarUrlChrome {
     }
 
     private WebElement getDefAvatar() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/img")));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='https://secure.gravatar.com/avatar/76e697227c50567bdb5c23f3165cde7f?s=480']")));
     }
 
+    private WebElement getJPGAvatar() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='http://img1.jurko.net/avatar_17294.jpg']")));
+    }
+
+    private void insertURL(String url) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input"))).sendKeys(url);
+    }
 }
