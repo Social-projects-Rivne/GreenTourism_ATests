@@ -3,6 +3,7 @@ package rv.atqc.gttesting.editAvatarURL;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -50,6 +51,16 @@ public class EditAvatarUrlChrome {
         Assert.assertEquals(getCancelButtonText(), "Cancel");
     }
 
+    @Test
+    public void checkConfirmButtonInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        Assert.assertTrue(getConfirmButton().isDisplayed());
+    }
+
     private void clickOnChangeButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
     }
@@ -76,5 +87,9 @@ public class EditAvatarUrlChrome {
 
     private String getCancelButtonText() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(2)"))).getText();
+    }
+
+    private WebElement getConfirmButton() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/input")));
     }
 }
