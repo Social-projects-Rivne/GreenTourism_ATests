@@ -9,8 +9,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 public class PossibilityToViewToolbarOnMapPageFirefox {
 	
@@ -22,26 +22,26 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
     
     @Test
     public void checkDefaultValueOfPlacesButtonFirefox() {
+        WebElement ValueOfPlacesButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath("//html/body/main/div/place-list/div/div/div[1]/div[1]/a[1]/i")));
+        Assert.assertTrue(ValueOfPlacesButton.isDisplayed());
+    }
+    
+    @BeforeClass
+    public void before() {
+        FirefoxDriverManager.getInstance().setup();
+        driver = new FirefoxDriver();
+        driver.get("https://green-tourism.herokuapp.com/#!/");
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
         clickOnLoginButton();
         clickOnSandwichButton();
         clickOnMapPage();
-        WebElement ValueOfPlacesButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
-                (By.xpath("//html/body/main/div/place-list/div/div/div[1]/div[1]/a[1]/i")));
-        Assert.assertTrue(ValueOfPlacesButton.isDisplayed());
-    }
-    
-    @BeforeMethod
-    public void before() {
-        FirefoxDriverManager.getInstance().setup();
-        driver = new FirefoxDriver();
-        driver.get("https://green-tourism.herokuapp.com/#!/");
         wait = new WebDriverWait(driver,MAX_WAIT_TIME);
     }
     
-    @AfterMethod
+    @AfterClass
     public void afterMethod() {
         driver.close();
     }
