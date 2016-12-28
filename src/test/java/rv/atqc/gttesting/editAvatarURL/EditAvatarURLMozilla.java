@@ -52,13 +52,23 @@ public class EditAvatarURLMozilla {
     }
 
     @Test
-    public void checkConfirmButtonInEditAvSystChrome() {
+    public void checkConfirmButtonInEditAvSystMozilla() {
         clickOnLeftTopGreenButton();
         insertLogin(USER_LOGIN);
         insertPassword(USER_PASSWORD);
         clickOnLoginButton();
         clickOnChangeButton();
         Assert.assertTrue(getConfirmButton().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentFieldAvatarURLInEditAvSystMozilla() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        Assert.assertTrue(getAvaURLField().isDisplayed());
     }
 
     private void clickOnChangeButton() {
@@ -91,5 +101,9 @@ public class EditAvatarURLMozilla {
 
     private WebElement getConfirmButton() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/input")));
+    }
+
+    private WebElement getAvaURLField() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input")));
     }
 }
