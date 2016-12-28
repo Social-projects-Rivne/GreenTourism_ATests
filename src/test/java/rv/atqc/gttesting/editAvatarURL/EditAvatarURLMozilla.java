@@ -73,7 +73,7 @@ public class EditAvatarURLMozilla {
     private String getChangeButtonText() {
         return  wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)"))).getText();
     }
-    
+
     private String getCancelButtonText() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(2)"))).getText();
     }
