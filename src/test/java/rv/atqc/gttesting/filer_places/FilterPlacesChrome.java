@@ -75,6 +75,13 @@ public class FilterPlacesChrome{
 		Assert.assertTrue(checkFilter(filter));
 	}
 	
+	@Test //00001
+	public void testFilter05HealthcarePlaces(){
+		boolean filter [] = {false,false,false,false,true};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
 	
 	private void setFilters(boolean[] filter){
 		setPlacesFilter(CampPlacesFilter, filter[0]);
