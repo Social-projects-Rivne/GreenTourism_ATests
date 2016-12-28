@@ -8,8 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
@@ -17,10 +17,8 @@ public class FilterPlacesChrome{
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME=20;
-	
-	
-	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[2]");
+	private final int MAX_WAIT_TIME=30;
+	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
 	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
 	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[5]");
 	private By FeaturedPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[27]");
@@ -33,8 +31,8 @@ public class FilterPlacesChrome{
 	private By HealthcarePlacesFilter = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]");
 
 	
-	@BeforeClass
-	public void before(){		
+	@BeforeMethod
+	public void beforeTest(){
 		ChromeDriverManager.getInstance().setup();
 		driver=new ChromeDriver();
 		driver.manage().window().maximize();
@@ -43,33 +41,42 @@ public class FilterPlacesChrome{
 		openCategoryPlaces();
 	}
 	
-	@AfterClass
+	@AfterMethod
 	public void afterMethod(){		
 		driver.quit();
 	}
 	
-	@Test
+	
+	@Test //10000
 	public void testFilter01CampPlaces(){
-		short filter [] = {1,0,0,0,0};
+		boolean filter [] = {true,false,false,false,false};
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
-	 
-	@Test
+	
+	@Test //01000
 	public void testFilter02ServicePlaces(){
-		short filter [] = {0,1,0,0,0};
-		setFilters(filter);
-		Assert.assertTrue(checkFilter(filter));
-	}	
-	
-	@Test
-	public void testFilter03HostelsPlaces(){
-		short filter [] = {0,0,1,0,0};
+		boolean filter [] = {false,true,false,false,false};
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
 	
-	private void setFilters(short[] filter){
+	@Test //00100
+	public void testFilter03HostelsPlaces(){
+		boolean filter [] = {false,false,true,false,false};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //00010
+	public void testFilter04FeaturedPlaces(){
+		boolean filter [] = {false,false,false,true,false};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	
+	private void setFilters(boolean[] filter){
 		setPlacesFilter(CampPlacesFilter, filter[0]);
 		setPlacesFilter(ServicePlacesFilter, filter[1]);
 		setPlacesFilter(HostelsPlacesFilter, filter[2]);
@@ -77,45 +84,32 @@ public class FilterPlacesChrome{
 		setPlacesFilter(HealthcarePlacesFilter, filter[4]);		
 	}
 	
-	private boolean checkFilter(short[] filter){
+	private boolean checkFilter(boolean[] filter){
 		boolean isVisiableElements = true;
-		if (filter[0] == 1){
+		if (filter[0] == true)
 			isVisiableElements = isVisiableElements && isPlacesDisplayed(CampPlace);
-		}
-		
-		if (filter[1] == 1){
+		if (filter[1] == true)
 			isVisiableElements = isVisiableElements && isPlacesDisplayed(ServicePlace);
-		}
-		
-		if (filter[2] == 1){
-			isVisiableElements = isVisiableElements && isPlacesDisplayed(HostelsPlace);
-		}
-		
-		if (filter[3] == 1){
-			isVisiableElements = isVisiableElements && isPlacesDisplayed(FeaturedPlace);
-		}
-		
-		if (filter[4] == 1){
+		if (filter[2] == true)
+			isVisiableElements = isVisiableElements && isPlacesDisplayed(HostelsPlace);			
+		if (filter[3] == true)
+			isVisiableElements = isVisiableElements && isPlacesDisplayed(FeaturedPlace);		
+		if (filter[4] == true)
 			isVisiableElements = isVisiableElements && isPlacesDisplayed(HealthcarePlace);
-		}
-		
 		return isVisiableElements;
 	}
-	
-	
-	private void setPlacesFilter(By element, short select){
-		if (select == 1){
+		
+	private void setPlacesFilter(By element, boolean select){
+		if (select == true){
 			WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));
 			linkElement.click();
 		}		   
 	 }
-
 	
 	private boolean isPlacesDisplayed(By element){
 		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated(element));   
 		return linkElement.isDisplayed();
 	}
-	
 	
 	private void openCategoryPlaces(){
 		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -131,8 +125,8 @@ public class FilterPlacesChrome{
 		WebElement CheckAllButton = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")));
 		CheckAllButton.click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(HealthcarePlace));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(CampPlace));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(ServicePlace));
 		CheckAllButton.click();
 	}
-	
 }
