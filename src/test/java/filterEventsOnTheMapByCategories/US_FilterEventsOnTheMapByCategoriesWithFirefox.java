@@ -26,12 +26,14 @@ import org.testng.annotations.Test;
         private WebElement eventsName;
         private WebElement gamePlaceFilter;
         private WebElement festivalPlaceFilter;
+        private WebElement meetingPlaceFilter;
 
         private By categoriesLocator;
         private By eventsLocator;
         private By eventsNameLocator;
         private By gamePlaceFilterLocator;
         private By festivalPlaceFilterLocator;
+        private By meetingPlaceFilterLocator;
 
         private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
@@ -70,6 +72,11 @@ import org.testng.annotations.Test;
             festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterLocator));
             Assert.assertTrue(exists(festivalPlaceFilter), "This element doesn't exist");
         }
+        @Test
+        public void verifyExistenceOfPlaceFilterMeeting(){
+            meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterLocator));
+            Assert.assertTrue(exists(meetingPlaceFilter), "This element doesn't exist");
+        }
 
         public void initializeLocators(){
             categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
@@ -77,6 +84,7 @@ import org.testng.annotations.Test;
             eventsNameLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/a");
             gamePlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[3]/div/div[5]/ul/li[1]");
             festivalPlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]");
+            meetingPlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]");
         }
 
         public void setUpPreconditions(){
