@@ -82,6 +82,12 @@ public class FilterPlacesChrome{
 		Assert.assertTrue(checkFilter(filter));
 	}
 	
+	@Test //11000
+	public void testFilter06CampServicePlaces(){
+		boolean filter [] = {true,true,false,false,false};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
 	
 	private void setFilters(boolean[] filter){
 		setPlacesFilter(CampPlacesFilter, filter[0]);
