@@ -19,6 +19,8 @@ public class EditAvatarURLMozilla {
     private String USER_PASSWORD = "12345678";
     private final int MAX_WAIT_TIME = 5;
     private final String JPG_URL="http://img1.jurko.net/avatar_17294.jpg";
+    private final String JPEG_URL = "https://avatars0.githubusercontent.com/u/17428479?v=3&s=460";
+    private final String PNG_URL = "http://pngimg.com/upload/small/arctic_fox_PNG18479.png";
 
 
     @BeforeMethod
@@ -96,6 +98,18 @@ public class EditAvatarURLMozilla {
         Assert.assertTrue(getJPGAvatar().isDisplayed());
     }
 
+    @Test
+    public void checkPresentJPEGAvatarInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        insertURL(JPEG_URL);
+        clickOnConfirmButton();
+        Assert.assertTrue(getJPEGAvatar().isDisplayed());
+    }
+
     private void clickOnChangeButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
     }
@@ -141,7 +155,11 @@ public class EditAvatarURLMozilla {
     }
 
     private void insertURL(String url) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input"))).sendKeys(url);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input"))).sendKeys(url);
+    }
+
+    private WebElement getJPEGAvatar() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='https://avatars0.githubusercontent.com/u/17428479?v=3&s=460']")));
     }
 
     private WebElement getJPGAvatar() {

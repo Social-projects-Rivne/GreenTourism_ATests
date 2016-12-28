@@ -19,6 +19,8 @@ public class EditAvatarUrlChrome {
     private String USER_PASSWORD = "12345678";
     private final int MAX_WAIT_TIME = 5;
     private final String JPG_URL="http://img1.jurko.net/avatar_17294.jpg";
+    private final String JPEG_URL = "https://avatars0.githubusercontent.com/u/17428479?v=3&s=460";
+    private final String PNG_URL = "http://pngimg.com/upload/small/arctic_fox_PNG18479.png";
 
     @BeforeMethod
     public void before() {
@@ -33,57 +35,57 @@ public class EditAvatarUrlChrome {
         driver.quit();
     }
 
-    @Test
-    public void checkChangeButtonTitleInChrome() {
-        clickOnLeftTopGreenButton();
-        insertLogin(USER_LOGIN);
-        insertPassword(USER_PASSWORD);
-        clickOnLoginButton();
-        Assert.assertEquals(getChangeButtonText(), "Change");
-    }
-
-    @Test
-    public void checkCancelButtonInEditAvSystChrome() {
-        clickOnLeftTopGreenButton();
-        insertLogin(USER_LOGIN);
-        insertPassword(USER_PASSWORD);
-        clickOnLoginButton();
-        clickOnChangeButton();
-        Assert.assertEquals(getCancelButtonText(), "Cancel");
-    }
-
-    @Test
-    public void checkConfirmButtonInEditAvSystChrome() {
-        clickOnLeftTopGreenButton();
-        insertLogin(USER_LOGIN);
-        insertPassword(USER_PASSWORD);
-        clickOnLoginButton();
-        clickOnChangeButton();
-        Assert.assertTrue(getConfirmButton().isDisplayed());
-    }
-
-    @Test
-    public void checkPresentFieldAvatarURLInEditAvSystChrome() {
-        clickOnLeftTopGreenButton();
-        insertLogin(USER_LOGIN);
-        insertPassword(USER_PASSWORD);
-        clickOnLoginButton();
-        clickOnChangeButton();
-        Assert.assertTrue(getAvaURLField().isDisplayed());
-    }
-
-    @Test
-    public void checkPresentDefaultAvatarInEditAvSystChrome() {
-        clickOnLeftTopGreenButton();
-        insertLogin(USER_LOGIN);
-        insertPassword(USER_PASSWORD);
-        clickOnLoginButton();
-        clickOnChangeButton();
-        clickOnConfirmButton();
-        Assert.assertTrue(getDefAvatar().isDisplayed());
-    }
-
-
+//    @Test
+//    public void checkChangeButtonTitleInChrome() {
+//        clickOnLeftTopGreenButton();
+//        insertLogin(USER_LOGIN);
+//        insertPassword(USER_PASSWORD);
+//        clickOnLoginButton();
+//        Assert.assertEquals(getChangeButtonText(), "Change");
+//    }
+//
+//    @Test
+//    public void checkCancelButtonInEditAvSystChrome() {
+//        clickOnLeftTopGreenButton();
+//        insertLogin(USER_LOGIN);
+//        insertPassword(USER_PASSWORD);
+//        clickOnLoginButton();
+//        clickOnChangeButton();
+//        Assert.assertEquals(getCancelButtonText(), "Cancel");
+//    }
+//
+//    @Test
+//    public void checkConfirmButtonInEditAvSystChrome() {
+//        clickOnLeftTopGreenButton();
+//        insertLogin(USER_LOGIN);
+//        insertPassword(USER_PASSWORD);
+//        clickOnLoginButton();
+//        clickOnChangeButton();
+//        Assert.assertTrue(getConfirmButton().isDisplayed());
+//    }
+//
+//    @Test
+//    public void checkPresentFieldAvatarURLInEditAvSystChrome() {
+//        clickOnLeftTopGreenButton();
+//        insertLogin(USER_LOGIN);
+//        insertPassword(USER_PASSWORD);
+//        clickOnLoginButton();
+//        clickOnChangeButton();
+//        Assert.assertTrue(getAvaURLField().isDisplayed());
+//    }
+//
+//    @Test
+//    public void checkPresentDefaultAvatarInEditAvSystChrome() {
+//        clickOnLeftTopGreenButton();
+//        insertLogin(USER_LOGIN);
+//        insertPassword(USER_PASSWORD);
+//        clickOnLoginButton();
+//        clickOnChangeButton();
+//        clickOnConfirmButton();
+//        Assert.assertTrue(getDefAvatar().isDisplayed());
+//    }
+//
+//
     @Test
     public void checkPresentJPGAvatarInEditAvSystChrome() {
         clickOnLeftTopGreenButton();
@@ -94,6 +96,18 @@ public class EditAvatarUrlChrome {
         insertURL(JPG_URL);
         clickOnConfirmButton();
         Assert.assertTrue(getJPGAvatar().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentJPEGAvatarInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        insertURL(JPEG_URL);
+        clickOnConfirmButton();
+        Assert.assertTrue(getJPEGAvatar().isDisplayed());
     }
 
     private void clickOnChangeButton() {
@@ -144,7 +158,11 @@ public class EditAvatarUrlChrome {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='http://img1.jurko.net/avatar_17294.jpg']")));
     }
 
+    private WebElement getJPEGAvatar() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='https://avatars0.githubusercontent.com/u/17428479?v=3&s=460']")));
+    }
+
     private void insertURL(String url) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input"))).sendKeys(url);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input"))).sendKeys(url);
     }
 }
