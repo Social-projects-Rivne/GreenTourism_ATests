@@ -71,12 +71,27 @@ public class EditAvatarURLMozilla {
         Assert.assertTrue(getAvaURLField().isDisplayed());
     }
 
+    @Test
+    public void checkPresentDefaultAvatarInEditAvSystMozilla() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        clickOnConfirmButton();
+        Assert.assertTrue(getDefAvatar().isDisplayed());
+    }
+
     private void clickOnChangeButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
     }
 
     private void clickOnLeftTopGreenButton() {
         driver.findElement(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop")).click();
+    }
+
+    private void clickOnConfirmButton() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/input"))).click();
     }
 
     private void insertLogin(String login) {
@@ -105,5 +120,9 @@ public class EditAvatarURLMozilla {
 
     private WebElement getAvaURLField() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input")));
+    }
+
+    private WebElement getDefAvatar() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/img")));
     }
 }

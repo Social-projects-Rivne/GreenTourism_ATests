@@ -71,8 +71,23 @@ public class EditAvatarUrlChrome {
         Assert.assertTrue(getAvaURLField().isDisplayed());
     }
 
+    @Test
+    public void checkPresentDefaultAvatarInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        clickOnConfirmButton();
+        Assert.assertTrue(getDefAvatar().isDisplayed());
+    }
+
     private void clickOnChangeButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
+    }
+
+    private void clickOnConfirmButton() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/input"))).click();
     }
 
     private void clickOnLeftTopGreenButton() {
@@ -106,4 +121,9 @@ public class EditAvatarUrlChrome {
     private WebElement getAvaURLField() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input")));
     }
+
+    private WebElement getDefAvatar() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/img")));
+    }
+
 }
