@@ -110,6 +110,19 @@ public class EditAvatarURLMozilla {
         Assert.assertTrue(getJPEGAvatar().isDisplayed());
     }
 
+    @Test
+    public void checkPresentPNGAvatarInEditAvSystMozilla() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        insertURL(PNG_URL);
+        clickOnConfirmButton();
+        Assert.assertTrue(getPNGAvatar().isDisplayed());
+    }
+
+
     private void clickOnChangeButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
     }
@@ -160,6 +173,10 @@ public class EditAvatarURLMozilla {
 
     private WebElement getJPEGAvatar() {
         return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='https://avatars0.githubusercontent.com/u/17428479?v=3&s=460']")));
+    }
+
+    private WebElement getPNGAvatar() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='http://pngimg.com/upload/small/arctic_fox_PNG18479.png']")));
     }
 
     private WebElement getJPGAvatar() {
