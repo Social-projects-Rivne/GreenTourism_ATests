@@ -40,6 +40,20 @@ public class EditAvatarURLMozilla {
         Assert.assertEquals(getChangeButtonText(), "Change");
     }
 
+    @Test
+    public void checkCancelButtonInEditAvSystChrome() {
+        clickOnLeftTopGreenButton();
+        insertLogin(USER_LOGIN);
+        insertPassword(USER_PASSWORD);
+        clickOnLoginButton();
+        clickOnChangeButton();
+        Assert.assertEquals(getCancelButtonText(), "Cancel");
+    }
+
+    private void clickOnChangeButton() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]"))).click();
+    }
+
     private void clickOnLeftTopGreenButton() {
         driver.findElement(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown a.dropdown-toggle i.fa.fa-user.navtop")).click();
     }
@@ -58,5 +72,9 @@ public class EditAvatarURLMozilla {
 
     private String getChangeButtonText() {
         return  wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)"))).getText();
+    }
+    
+    private String getCancelButtonText() {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(2)"))).getText();
     }
 }
