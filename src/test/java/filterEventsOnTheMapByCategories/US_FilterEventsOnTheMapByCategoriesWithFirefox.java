@@ -26,6 +26,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     private WebElement meetingPlaceFilter;
     private WebElement gamePlaceFilterName;
     private WebElement festivalPlaceFilterName;
+    private WebElement meetingPlaceFilterName;
 
     private By categoriesLocator;
     private By eventsLocator;
@@ -35,6 +36,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     private By meetingPlaceFilterLocator;
     private By gamePlaceFilterNameLocator;
     private By festivalPlaceFilterNameLocator;
+    private By meetingPlaceFilterNameLocator;
 
     private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
@@ -85,6 +87,11 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
         festivalPlaceFilterName = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
         Assert.assertTrue(festivalPlaceFilterName.getText().contains("Festival"));
     }
+    @Test
+    public void verifyTitleOfPlaceFilterMeeting(){
+        meetingPlaceFilterName = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        Assert.assertTrue(meetingPlaceFilterName.getText().contains("Meeting"));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
@@ -94,6 +101,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
         meetingPlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]");
         gamePlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[1]/a");
         festivalPlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]/a");
+        meetingPlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]/a");
     }
     public void setUpPreconditions(){
         driver.get(mapLink);
