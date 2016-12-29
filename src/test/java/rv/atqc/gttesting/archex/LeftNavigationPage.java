@@ -27,11 +27,13 @@ public class LeftNavigationPage extends GreenTourismHeadPage implements LeftNavi
 
 	@Override
 	public void clickLogIn() {
+		clickLeftNavButton();
 		getPage(getClass()).logIn.click();
 	}
 
 	@Override
 	public void clickSignUp() {
+		clickLeftNavButton();
 		initPage().signUp.click();
 	}
 	

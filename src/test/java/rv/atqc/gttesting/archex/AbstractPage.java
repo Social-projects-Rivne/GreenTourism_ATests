@@ -3,7 +3,7 @@ package rv.atqc.gttesting.archex;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class AbstractPage {
+public abstract class AbstractPage implements Scripts{
 
 	protected WebDriver driver;
 	protected AbstractPage page;
@@ -12,8 +12,8 @@ public abstract class AbstractPage {
 		this.driver = driver;
 	}
 
-	protected AbstractPage getNewPage() {
-		return PageFactory.initElements(driver, getClass());
+	protected <T extends AbstractPage> T getNewPage(Class<T> type){
+		return PageFactory.initElements(driver, type);
 	}
 
 	protected <T extends AbstractPage> T getPage(Class<T> type){
@@ -21,5 +21,5 @@ public abstract class AbstractPage {
 		return type.cast(page);
 	}
 	
-	public abstract AbstractPage initPage();
+	
 }
