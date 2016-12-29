@@ -1,6 +1,6 @@
 package rv.atqc.gttesting.archex;
 
-public interface GreenTourismHeadScript {
+public interface GreenTourismHeadScript extends Scripts{
 
 	void clickLeftNavButton();
 	
