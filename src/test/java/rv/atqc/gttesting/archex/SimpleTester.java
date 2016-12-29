@@ -12,8 +12,8 @@ public class SimpleTester {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://green-tourism.herokuapp.com");
-		LeftNavigationScript page = new LeftNavigationPage(driver);
-		page.clickSignUp();
+		GreenTourismHeadPage page = new GreenTourismHeadPage(driver);
+		page.clickLeftNavButton().clickSignUp().setFirstName("Juger").setLastName("Juger").setEmail("shfgs@gmail.com").setPassword("asdfghjk").setPasswordConfirm("asdfghjk");
 	}
 
 }
