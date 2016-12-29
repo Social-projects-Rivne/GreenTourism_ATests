@@ -89,6 +89,35 @@ public class FilterPlacesChrome{
 		Assert.assertTrue(checkFilter(filter));
 	}
 	
+	@Test //01100
+	public void testFilter07ServiceHostelsPlaces(){
+		boolean filter [] = {false,true,true,false,false};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //00110
+	public void testFilter08HostelsFeaturedPlaces(){
+		boolean filter [] = {false,false,true,true,false};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //00011
+	public void testFilter09FeaturedHealthcarePlaces(){
+		boolean filter [] = {false,false,false,true,true};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //10001
+	public void testFilter10CampHealthcarePlaces(){
+		boolean filter [] = {true,false,false,false,true};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	
 	private void setFilters(boolean[] filter){
 		setPlacesFilter(CampPlacesFilter, filter[0]);
 		setPlacesFilter(ServicePlacesFilter, filter[1]);
