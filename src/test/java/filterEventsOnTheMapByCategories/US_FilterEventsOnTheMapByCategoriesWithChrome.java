@@ -24,6 +24,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     private WebElement gamePlaceFilter;
     private WebElement festivalPlaceFilter;
     private WebElement meetingPlaceFilter;
+    private WebElement gamePlaceFilterName;
 
     private By categoriesLocator;
     private By eventsLocator;
@@ -31,6 +32,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     private By gamePlaceFilterLocator;
     private By festivalPlaceFilterLocator;
     private By meetingPlaceFilterLocator;
+    private By gamePlaceFilterNameLocator;
 
     private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
@@ -49,7 +51,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     }
     @Test
     public void verifyExistenceOfEventsDropdownList(){
-        Assert.assertTrue(existsElement(eventsDropdownList), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(eventsDropdownList), "This element doesn't exist");
     }
     @Test
     public void verifyTitleOfEventsDropdownList(){
@@ -59,17 +61,22 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     @Test
     public void verifyExistenceOfPlaceFilterGame(){
         gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterLocator));
-        Assert.assertTrue(existsElement(gamePlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(gamePlaceFilter), "This element doesn't exist");
     }
     @Test
     public void verifyExistenceOfPlaceFilterFestival(){
         festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterLocator));
-        Assert.assertTrue(existsElement(festivalPlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(festivalPlaceFilter), "This element doesn't exist");
     }
     @Test
     public void verifyExistenceOfPlaceFilterMeeting(){
         meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterLocator));
-        Assert.assertTrue(existsElement(meetingPlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(meetingPlaceFilter), "This element doesn't exist");
+    }
+    @Test
+    public void verifyTitleOfPlaceFilterGame(){
+        gamePlaceFilterName = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        Assert.assertTrue(gamePlaceFilterName.getText().contains("Game"));
     }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
@@ -78,6 +85,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         gamePlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[3]/div/div[5]/ul/li[1]");
         festivalPlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]");
         meetingPlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]");
+        gamePlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[1]/a");
     }
     public void setUpPreconditions(){
         driver.get(mapLink);
@@ -86,11 +94,8 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         eventsDropdownList = wait.until(ExpectedConditions.presenceOfElementLocated(eventsLocator));
         eventsDropdownList.click();
     }
-    public boolean existsElement(WebElement element){
-        if (!element.isEnabled()){
-            return false;
-        }
-        return true;
+    public boolean isElementEnabled(WebElement element){
+        return element.isEnabled();
     }
 }
 
