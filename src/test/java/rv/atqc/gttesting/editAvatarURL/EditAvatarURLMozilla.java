@@ -194,11 +194,11 @@ public class EditAvatarURLMozilla {
     }
 
     private WebElement getJPEGAvatar() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='https://avatars0.githubusercontent.com/u/17428479?v=3&s=460']")));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='https://avatars0.githubusercontent.com/u/17428479?v=3&s=460']")));
     }
 
     private WebElement getPNGAvatar() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='http://pngimg.com/upload/small/arctic_fox_PNG18479.png']")));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='http://pngimg.com/upload/small/arctic_fox_PNG18479.png']")));
     }
 
     private WebElement getJPGAvatar() {

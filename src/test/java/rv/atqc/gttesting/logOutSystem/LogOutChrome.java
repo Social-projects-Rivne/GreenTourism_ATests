@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -12,6 +14,8 @@ import org.testng.annotations.Test;
 
 public class LogOutChrome {
     private WebDriver driver;
+    WebDriverWait wait;
+    private final int MAX_WAIT_TIME = 10;
     private String USER_LOGIN = "17141@rambler.ru";
     private String USER_PASSWORD = "12345678";
 
@@ -48,6 +52,7 @@ public class LogOutChrome {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
         driver.get("https://green-tourism.herokuapp.com/#!/");
+        wait = new WebDriverWait(driver, MAX_WAIT_TIME);
     }
 
     @AfterMethod
@@ -79,7 +84,7 @@ public class LogOutChrome {
     }
 
     private void insertLogin(String login) {
-        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input")).sendKeys(login);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input"))).sendKeys(login);
     }
 
     private String getLogOutText() {
@@ -87,7 +92,7 @@ public class LogOutChrome {
     }
 
     private String getForgotPasswordText() {
-        return driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/p[1]/a")).getText();
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/p[1]/a"))).getText();
     }
 
     private void clickOnLogOutButton() {

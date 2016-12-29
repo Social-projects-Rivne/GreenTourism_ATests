@@ -162,11 +162,11 @@ public class EditAvatarUrlChrome {
     }
 
     private void insertPassword(String password) {
-        driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input")).sendKeys(password);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input"))).sendKeys(password);
     }
 
     private void clickOnLoginButton() {
-        driver.findElement(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-dirty.ng-valid-parse.ng-valid-required.ng-valid-email.ng-valid.ng-valid-pattern input.btn.btn-success.btn-block.submit-btn")).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-dirty.ng-valid-parse.ng-valid-required.ng-valid-email.ng-valid.ng-valid-pattern input.btn.btn-success.btn-block.submit-btn"))).click();
     }
 
     private String getChangeButtonText() {
@@ -182,23 +182,23 @@ public class EditAvatarUrlChrome {
     }
 
     private WebElement getAvaURLField() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input")));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input")));
     }
 
     private WebElement getDefAvatar() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='https://secure.gravatar.com/avatar/76e697227c50567bdb5c23f3165cde7f?s=480']")));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='https://secure.gravatar.com/avatar/76e697227c50567bdb5c23f3165cde7f?s=480']")));
     }
 
     private WebElement getJPGAvatar() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='http://img1.jurko.net/avatar_17294.jpg']")));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='http://img1.jurko.net/avatar_17294.jpg']")));
     }
 
     private WebElement getJPEGAvatar() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='https://avatars0.githubusercontent.com/u/17428479?v=3&s=460']")));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='https://avatars0.githubusercontent.com/u/17428479?v=3&s=460']")));
     }
 
     private WebElement getPNGAvatar() {
-        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@src='http://pngimg.com/upload/small/arctic_fox_PNG18479.png']")));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='http://pngimg.com/upload/small/arctic_fox_PNG18479.png']")));
     }
 
     private void insertURL(String url) {
