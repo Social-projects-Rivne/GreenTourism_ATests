@@ -71,4 +71,11 @@ public class PossibilityChangeMapTypeChromePC {
 				.visibilityOfElementLocated(By.xpath("//button[@type='button' and contains" + "(., 'Map Type')]")));
 		Assert.assertTrue(mapTypeButton.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilityClickMapTypeButton() {
+		WebElement mapTypeButton = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//button[@type='button' and contains" + "(., 'Map Type')]")));
+		Assert.assertTrue(mapTypeButton.isEnabled());
+	}
 }
