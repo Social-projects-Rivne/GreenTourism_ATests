@@ -13,8 +13,6 @@ public class SimpleTester {
 		driver.manage().window().maximize();
 		driver.get("https://green-tourism.herokuapp.com");
 		LeftNavigationScript page = new LeftNavigationPage(driver);
-		page.initPage();
-//		page.clickLeftNavButton();
 		page.clickSignUp();
 	}
 
