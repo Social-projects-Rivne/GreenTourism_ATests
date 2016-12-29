@@ -49,7 +49,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     }
     @Test
     public void verifyExistenceOfEventsDropdownList(){
-        Assert.assertTrue(exists(eventsDropdownList), "This element doesn't exist");
+        Assert.assertTrue(existsElement(eventsDropdownList), "This element doesn't exist");
     }
     @Test
     public void verifyTitleOfEventsDropdownList(){
@@ -59,17 +59,17 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     @Test
     public void verifyExistenceOfPlaceFilterGame(){
         gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterLocator));
-        Assert.assertTrue(exists(gamePlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(existsElement(gamePlaceFilter), "This element doesn't exist");
     }
     @Test
     public void verifyExistenceOfPlaceFilterFestival(){
         festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterLocator));
-        Assert.assertTrue(exists(festivalPlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(existsElement(festivalPlaceFilter), "This element doesn't exist");
     }
     @Test
     public void verifyExistenceOfPlaceFilterMeeting(){
         meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterLocator));
-        Assert.assertTrue(exists(meetingPlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(existsElement(meetingPlaceFilter), "This element doesn't exist");
     }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
@@ -86,7 +86,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
         eventsDropdownList = wait.until(ExpectedConditions.presenceOfElementLocated(eventsLocator));
         eventsDropdownList.click();
     }
-    public boolean exists(WebElement element){
+    public boolean existsElement(WebElement element){
         if (!element.isEnabled()){
             return false;
         }
