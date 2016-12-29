@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class GreenTourismHeadPage extends AbstractPage implements GreenTourismHeadScript {
 
-	@FindBy(how = How.XPATH, using = "//*[@id=\"navbar\"]/ul[1]/li/a")
+	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/a/i")
 	public WebElement leftNavButton;
 
 	private GreenTourismHeadPage page;

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LeftNavigationPage extends GreenTourismHeadPage implements LeftNavigationScript {
 
-	@FindBy(how = How.XPATH, using = "//*[@id=\"informlog\"]/a[1]")
+	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[1]/h6/a[1]")
 	public WebElement logIn;
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[1]/h6/a[2]")
 	public WebElement signUp;
