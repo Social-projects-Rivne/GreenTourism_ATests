@@ -11,21 +11,26 @@ public class GreenTourismHeadPage extends AbstractPage implements GreenTourismHe
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/a/i")
 	public WebElement leftNavButton;
 
-	private GreenTourismHeadPage page;
+//	private GreenTourismHeadPage page;
 	
 	public GreenTourismHeadPage(WebDriver driver) {
 		super(driver);
 	}
 
-	@Override
-	protected GreenTourismHeadPage getPage() {
-		page = (page == null) ? PageFactory.initElements(driver, getClass()) : page;
-		return page;
-	}
+//	@Override
+//	protected GreenTourismHeadPage getPage() {
+//		page = (page == null) ? PageFactory.initElements(driver, getClass()) : page;
+//		return page;
+//	}
 
 	@Override
 	public void clickLeftNavButton() {
-		getPage().leftNavButton.click();
+		initPage().leftNavButton.click();
+	}
+
+	@Override
+	public GreenTourismHeadPage initPage() {
+		return getPage(getClass());
 	}
 
 }

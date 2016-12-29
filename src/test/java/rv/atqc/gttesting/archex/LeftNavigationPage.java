@@ -13,26 +13,30 @@ public class LeftNavigationPage extends GreenTourismHeadPage implements LeftNavi
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[1]/h6/a[2]")
 	public WebElement signUp;
 
-	private LeftNavigationPage page;
+//	private LeftNavigationPage page;
 
 	public LeftNavigationPage(WebDriver driver) {
 		super(driver);
 	}
 
-	@Override
-	protected LeftNavigationPage getPage() {
-		page = (page == null) ? PageFactory.initElements(driver, getClass()) : page;
-		return page;
-	}
+//	@Override
+//	protected LeftNavigationPage getPage() {
+//		page = (page == null) ? PageFactory.initElements(driver, getClass()) : page;
+//		return page;
+//	}
 
 	@Override
 	public void clickLogIn() {
-		getPage().logIn.click();
+		getPage(getClass()).logIn.click();
 	}
 
 	@Override
 	public void clickSignUp() {
-		getPage().signUp.click();
+		initPage().signUp.click();
 	}
-
+	
+	@Override
+	public LeftNavigationPage initPage() {
+		return getPage(getClass());
+	}
 }
