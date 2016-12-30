@@ -26,9 +26,5 @@ public class LeftNavigationPage extends AbstractPage {
 		return new SignUpPage(driver);
 	}
 
-	@Override
-	protected void initPage() {
-		PageFactory.initElements(driver, this);
-	}
-
+	
 }

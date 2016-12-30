@@ -14,10 +14,7 @@ public class GreenTourismHeadPage extends AbstractPage {
 	public GreenTourismHeadPage(WebDriver driver) {
 		super(driver);
 	}
-	@Override
-	protected void initPage() {
-		PageFactory.initElements(driver, this);
-	}
+	
 
 	public LeftNavigationPage clickLeftNavButton() {
 		leftNavButton.click();
