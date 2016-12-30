@@ -53,21 +53,21 @@ public class FilterPlacesChrome{
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
-	
+		
 	@Test //01000
 	public void testFilter02ServicePlaces(){
 		boolean filter [] = {false,true,false,false,false};
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
-	
+		
 	@Test //00100
 	public void testFilter03HostelsPlaces(){
 		boolean filter [] = {false,false,true,false,false};
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
-	
+		
 	@Test //00010
 	public void testFilter04FeaturedPlaces(){
 		boolean filter [] = {false,false,false,true,false};
@@ -113,6 +113,41 @@ public class FilterPlacesChrome{
 	@Test //10001
 	public void testFilter10CampHealthcarePlaces(){
 		boolean filter [] = {true,false,false,false,true};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+
+	@Test //11100
+	public void testFilter11CampServicePlaces(){
+		boolean filter [] = {true,true,true,false,false};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //01110
+	public void testFilter12ServiceHostelsPlaces(){
+		boolean filter [] = {false,true,true,true,false};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //00111
+	public void testFilter13HostelsFeaturedPlaces(){
+		boolean filter [] = {false,false,true,true,true};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //10011
+	public void testFilter14FeaturedHealthcarePlaces(){
+		boolean filter [] = {true,false,false,true,true};
+		setFilters(filter);
+		Assert.assertTrue(checkFilter(filter));
+	}
+	
+	@Test //10101
+	public void testFilter15CampHealthcarePlaces(){
+		boolean filter [] = {true,false,true,false,true};
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
