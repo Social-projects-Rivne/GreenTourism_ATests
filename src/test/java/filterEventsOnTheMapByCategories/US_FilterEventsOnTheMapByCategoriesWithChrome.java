@@ -92,6 +92,10 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         meetingPlaceFilterName = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
         Assert.assertTrue(meetingPlaceFilterName.getText().contains("Meeting"));
     }
+    @Test
+    public void verifyClickThroughRateOfPlaceFilterGame(){
+        Assert.assertTrue(isElementClickable(gamePlaceFilter, gamePlaceFilterNameLocator));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
@@ -112,6 +116,16 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     }
     public boolean isElementEnabled(WebElement element){
         return element.isEnabled();
+    }
+    public boolean isElementClickable(WebElement element, By locator){
+        try{
+            WebElement clickableElement = element;
+            clickableElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+            return true;
+        }
+        catch(Exception exception){
+            return  false;
+        }
     }
 }
 
