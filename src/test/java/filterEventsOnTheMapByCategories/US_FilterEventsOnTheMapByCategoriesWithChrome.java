@@ -96,6 +96,10 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     public void verifyClickThroughRateOfPlaceFilterGame(){
         Assert.assertTrue(isElementClickable(gamePlaceFilter, gamePlaceFilterNameLocator));
     }
+    @Test
+    public void verifyClickThroughRateOfPlaceFilterFestival(){
+        Assert.assertTrue(isElementClickable(festivalPlaceFilter, festivalPlaceFilterNameLocator));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
@@ -124,7 +128,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
             return true;
         }
         catch(Exception exception){
-            return  false;
+            return false;
         }
     }
 }
