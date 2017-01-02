@@ -100,6 +100,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
     public void before() {
         FirefoxDriverManager.getInstance().setup();
         driver = new FirefoxDriver();
+        driver.manage().window().maximize();
         driver.get("https://green-tourism.herokuapp.com/#!/");
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);
