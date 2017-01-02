@@ -128,6 +128,13 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
         meetingPlaceFilter.click();
         Assert.assertTrue(isElementDisplayed(meetingBlueIconLocator));
     }
+    @Test
+    public void verifyClickThroughRateOfGameIcon(){
+        gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        gamePlaceFilter.click();
+        gameGreenIcon = wait.until(ExpectedConditions.presenceOfElementLocated(gameGreenIconLocator));
+        Assert.assertTrue(isElementClickable(gameGreenIcon, gameGreenIconLocator));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
