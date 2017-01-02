@@ -29,6 +29,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     private WebElement meetingPlaceFilterName;
     private WebElement gameGreenIcon;
     private WebElement festivalRedIcon;
+    private WebElement meetingBlueIcon;
 
     private By categoriesLocator;
     private By eventsLocator;
@@ -41,6 +42,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     private By meetingPlaceFilterNameLocator;
     private By gameGreenIconLocator;
     private By festivalRedIconLocator;
+    private By meetingBlueIconLocator;
 
     private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
@@ -120,6 +122,12 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         festivalPlaceFilter.click();
         Assert.assertTrue(isElementDisplayed(festivalRedIconLocator));
     }
+    @Test
+    public void verifyDisplayOfMeetingBlueIconOnMap(){
+        meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        meetingPlaceFilter.click();
+        Assert.assertTrue(isElementDisplayed(meetingBlueIconLocator));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
@@ -132,6 +140,8 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         meetingPlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]/a");
         gameGreenIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/green.png')]");
         festivalRedIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/red.png')]");
+        meetingBlueIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/blue.png')]");
+
     }
     public void setUpPreconditions(){
         driver.get(mapLink);
