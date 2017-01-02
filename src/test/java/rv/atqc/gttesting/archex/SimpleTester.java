@@ -30,7 +30,7 @@ public class SimpleTester {
 		driver.get("https://green-tourism.herokuapp.com");
 		GreenTourismHeadPage page = new GreenTourismHeadPage(driver);
 		SignUpPage signUpPage = page.clickLeftNavButton().clickSignUp();
-		String actual = signUpPage.setFirstName("").enableFocus().getFirstNameErrorMessage().getText();
+		String actual = signUpPage.setFirstName("").disableFocus().getFirstNameErrorMessage().getText();
 		Assert.assertEquals(actual, "First name is required", "Error");
 	}
 }

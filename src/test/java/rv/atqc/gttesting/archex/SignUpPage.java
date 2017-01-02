@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-public class SignUpPage extends AbstractPage {
+public class SignUpPage extends AbstractPage<SignUpPage> {
 	
 	@FindBy(how = How.CSS, using = "html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-pristine.ng-invalid.ng-invalid-required.ng-valid-minlength.ng-valid-maxlength.ng-valid-email.ng-valid-pattern.ng-valid-match")
 	private WebElement signUpForm;
@@ -145,10 +145,5 @@ public class SignUpPage extends AbstractPage {
 	
 	public WebElement getSignUpForm() {
 		return signUpForm;
-	}
-
-	@Override
-	public SignUpPage enableFocus() {
-		return (SignUpPage) super.enableFocus();
 	}
 }

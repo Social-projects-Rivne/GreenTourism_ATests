@@ -90,20 +90,20 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@Test(groups = "validation_first_name", dependsOnMethods = { "checkExistenceFirstNameInput" })
 	public void checkFirstNameToValidData() {
-		String actual = page.setFirstName(NAME_VALID).enableFocus().getFirstNameErrorMessage().getText();
+		String actual = page.setFirstName(NAME_VALID).disableFocus().getFirstNameErrorMessage().getText();
 		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
 
 	}
 
 	@Test(groups = "validation_first_name", dependsOnMethods = { "checkExistenceFirstNameInput" })
 	public void checkFirstNameToEmptyData() {
-		String actual = page.setFirstName(ABSENCE).enableFocus().getFirstNameErrorMessage().getText();
+		String actual = page.setFirstName(ABSENCE).disableFocus().getFirstNameErrorMessage().getText();
 		Assert.assertEquals(actual, "First name is required", "Error: system don't show error message for empty data");
 	}
 
 	@Test(groups = "validation_first_name", dependsOnMethods = { "checkExistenceFirstNameInput" })
 	public void checkFirstNameToInvaldData() {
-		String actual = page.setFirstName(NAME_INVALID).enableFocus().getFirstNameErrorMessage().getText();
+		String actual = page.setFirstName(NAME_INVALID).disableFocus().getFirstNameErrorMessage().getText();
 		Assert.assertEquals(actual, "First name is invalid", "Error: system don't show error message for invalid data");
 	}
 
@@ -114,19 +114,19 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@Test(groups = "validation_last_name", dependsOnMethods = { "checkExistenceLastNameInput" })
 	public void checkLastNameToValidData() {
-		String actual = page.setLastName(NAME_VALID).enableFocus().getLastNameErrorMessage().getText();
+		String actual = page.setLastName(NAME_VALID).disableFocus().getLastNameErrorMessage().getText();
 		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
 	}
 
 	@Test(groups = "validation_last_name", dependsOnMethods = { "checkExistenceLastNameInput" })
 	public void checkLastNameToEmptyData() {
-		String actual = page.setLastName(ABSENCE).enableFocus().getLastNameErrorMessage().getText();
+		String actual = page.setLastName(ABSENCE).disableFocus().getLastNameErrorMessage().getText();
 		Assert.assertEquals(actual, "Last name is required", "Error: system don't show error message for empty data");
 	}
 
 	@Test(groups = "validation_last_name", dependsOnMethods = { "checkExistenceLastNameInput" })
 	public void checkLastNameToInvaldData() {
-		String actual = page.setLastName(NAME_INVALID).enableFocus().getLastNameErrorMessage().getText();
+		String actual = page.setLastName(NAME_INVALID).disableFocus().getLastNameErrorMessage().getText();
 		Assert.assertEquals(actual, "Last name is invalid", "Error: system don't show error message for invalid data");
 	}
 
@@ -137,20 +137,20 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@Test(groups = "validation_email", dependsOnMethods = { "checkExistenceEmailInput" })
 	public void checkEmailToValidData() {
-		String actual = page.setEmail(EMAIL_VALID).enableFocus().getEmailErrorMessage().getText();
+		String actual = page.setEmail(EMAIL_VALID).disableFocus().getEmailErrorMessage().getText();
 		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
 
 	}
 
 	@Test(groups = "validation_email", dependsOnMethods = { "checkExistenceEmailInput" })
 	public void checkEmailToEmptyData() {
-		String actual = page.setEmail(ABSENCE).enableFocus().getEmailErrorMessage().getText();
+		String actual = page.setEmail(ABSENCE).disableFocus().getEmailErrorMessage().getText();
 		Assert.assertEquals(actual, "Email is required", "Error: system don't show error message for empty data");
 	}
 
 	@Test(groups = "validation_email", dependsOnMethods = { "checkExistenceEmailInput" })
 	public void checkEmailToInvalisData() {
-		String actual = page.setLastName(EMAIL_INVALID).enableFocus().getEmailErrorMessage().getText();
+		String actual = page.setLastName(EMAIL_INVALID).disableFocus().getEmailErrorMessage().getText();
 		Assert.assertEquals(actual, "Email name is invalid", "Error: system don't show error message for invalid data");
 	}
 
@@ -161,19 +161,19 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@Test(groups = "password_length", dependsOnMethods = { "checkExistencePasswordInput" })
 	public void checkPasswordToLess8s() {
-		String actual = page.setPassword(LESS_8_PASSWORD).enableFocus().getPasswordErrorMessage().getText();
+		String actual = page.setPassword(LESS_8_PASSWORD).disableFocus().getPasswordErrorMessage().getText();
 		Assert.assertEquals(actual, "Password should be longer than 8 characters", "Error: system don't show error message for invalid data");
 	}
 
 	@Test(groups = "password_length", dependsOnMethods = { "checkExistencePasswordInput" })
 	public void checkPasswordTo8s() {
-		String actual = page.setPassword(PASSWORD_8).enableFocus().getPasswordErrorMessage().getText();
+		String actual = page.setPassword(PASSWORD_8).disableFocus().getPasswordErrorMessage().getText();
 		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
 	}
 
 	@Test(groups = "password_length", dependsOnMethods = { "checkExistencePasswordInput" })
 	public void checkPasswordToEmpty() {
-		String actual = page.setPassword(ABSENCE).enableFocus().getPasswordErrorMessageForRequired().getText();
+		String actual = page.setPassword(ABSENCE).disableFocus().getPasswordErrorMessageForRequired().getText();
 		Assert.assertEquals(actual, "Password is required", "Error: system don't show error message for invalid data");
 	}
 
@@ -184,7 +184,7 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@Test(groups = "confirm_password_length", dependsOnMethods = { "checkExistenceConfitmPasswordInput" })
 	public void checkConfirmPasswordToLess8s() {
-		String actual = page.setPasswordConfirm(LESS_8_PASSWORD).enableFocus().getPasswordConfirmErrorMessage().getText();
+		String actual = page.setPasswordConfirm(LESS_8_PASSWORD).disableFocus().getPasswordConfirmErrorMessage().getText();
 		Assert.assertEquals(actual, "Passwords doesn't match", "Error: system don't show error message for invalid data");
 	}
 
@@ -195,13 +195,13 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@Test(groups = "confirm_password", dependsOnMethods = { "checkExistencePasswordInput", "checkExistenceConfitmPasswordInput" })
 	public void confirmPassword() {
-		String actual = page.setPassword(PASSWORD_8).setPasswordConfirm(PASSWORD_8).enableFocus().getPasswordConfirmErrorMessage().getText();
+		String actual = page.setPassword(PASSWORD_8).setPasswordConfirm(PASSWORD_8).disableFocus().getPasswordConfirmErrorMessage().getText();
 		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
 	}
 
 	@Test(groups = "confirm_password", dependsOnMethods = { "checkExistencePasswordInput", "checkExistenceConfitmPasswordInput" })
 	public void confirmPasswordNeg() {
-		String actual = page.setPassword(PASSWORD_8).setPasswordConfirm(PASSWORD_9).enableFocus().getPasswordConfirmErrorMessage().getText();
+		String actual = page.setPassword(PASSWORD_8).setPasswordConfirm(PASSWORD_9).disableFocus().getPasswordConfirmErrorMessage().getText();
 		Assert.assertEquals(actual, "Passwords doesn't match", "Error: system don't show error message for invalid data");
 	}
 
