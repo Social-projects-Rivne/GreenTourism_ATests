@@ -42,13 +42,12 @@ public class PossibilityToViewToolbarOnMapPageChrome {
     
     @Test
     public void checkNewItemDropdownListChrome() {
-    	driver.manage().window().maximize();
-        WebElement NewItemDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
-                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[3]/div/div[1]/button")));
+    	WebElement NewItemDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[1]/button")));
         Assert.assertTrue(NewItemDropdownList.isDisplayed());
     }
     
-  /*  @Test
+    @Test
     public void checkMapTypeDropdownListChrome() {
         WebElement MapTypeDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
                 (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[2]/button")));
@@ -60,7 +59,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         WebElement CategoriesDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
                 (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
         Assert.assertTrue(CategoriesDropdownList.isDisplayed());
-    }*/
+    }
     
     @Test
     public void checkSearchInputFieldChrome() {
@@ -101,6 +100,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
     public void beforeClass() {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get("https://green-tourism.herokuapp.com/#!/");
         clickOnDropdownButton();
         insertLogin(USER_LOGIN);

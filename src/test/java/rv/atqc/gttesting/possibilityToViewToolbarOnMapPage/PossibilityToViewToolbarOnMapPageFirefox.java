@@ -26,6 +26,76 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(ValueOfPlacesButton.isDisplayed());
     }
     
+    @Test
+    public void checkDefaultValueOfTracksButtonFirefox() {
+        WebElement ValueOfTracksButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[1]/a[2]/i")));
+        Assert.assertTrue(ValueOfTracksButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkDefaultValueOfEventsButtonFirefox() {
+        WebElement ValueOfEventsButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[1]/a[3]/i")));
+        Assert.assertTrue(ValueOfEventsButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkNewItemDropdownListFirefox() {
+    	WebElement NewItemDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[1]/button")));
+        Assert.assertTrue(NewItemDropdownList.isDisplayed());
+    }
+    
+    @Test
+    public void checkMapTypeDropdownListFirefox() {
+        WebElement MapTypeDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[2]/button")));
+        Assert.assertTrue(MapTypeDropdownList.isDisplayed());
+    }
+    
+    @Test
+    public void checkCategoriesDropdownListFirefox() {
+        WebElement CategoriesDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
+        Assert.assertTrue(CategoriesDropdownList.isDisplayed());
+    }
+    
+    @Test
+    public void checkSearchInputFieldFirefox() {
+        WebElement SearchInputField = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='search']/div/input")));
+        Assert.assertTrue(SearchInputField.isDisplayed());
+    }
+    
+    @Test
+    public void checkSearchButtonFirefox() {
+        WebElement SearchButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='search']/div/span[1]/button")));
+        Assert.assertTrue(SearchButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkPlacesInLocationButtonFirefox() {
+        WebElement PlacesInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='popularPlaces']")));
+        Assert.assertTrue(PlacesInLocationButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkTracksnLocationButtonFirefox() {
+        WebElement TracksInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='popularTracks']")));
+        Assert.assertTrue(TracksInLocationButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkEventsInLocationButtonFirefox() {
+        WebElement EventsInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='popularEvents']")));
+        Assert.assertTrue(EventsInLocationButton.isDisplayed());
+    }
+    
     @BeforeClass
     public void before() {
         FirefoxDriverManager.getInstance().setup();
