@@ -19,11 +19,82 @@ public class PossibilityToViewToolbarOnMapPageChrome {
     private WebDriverWait wait;
     private final int MAX_WAIT_TIME=10;
     
-   @Test
-   public void checkDefaultValueOfPlacesButtonChrome() {
+    @Test
+    public void checkDefaultValueOfPlacesButtonChrome() {
         WebElement ValueOfPlacesButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
                 (By.xpath("//html/body/main/div/place-list/div/div/div[1]/div[1]/a[1]/i")));
         Assert.assertTrue(ValueOfPlacesButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkDefaultValueOfTracksButtonChrome() {
+        WebElement ValueOfTracksButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[1]/a[2]/i")));
+        Assert.assertTrue(ValueOfTracksButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkDefaultValueOfEventsButtonChrome() {
+        WebElement ValueOfEventsButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[1]/a[3]/i")));
+        Assert.assertTrue(ValueOfEventsButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkNewItemDropdownListChrome() {
+    	driver.manage().window().maximize();
+        WebElement NewItemDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[3]/div/div[1]/button")));
+        Assert.assertTrue(NewItemDropdownList.isDisplayed());
+    }
+    
+  /*  @Test
+    public void checkMapTypeDropdownListChrome() {
+        WebElement MapTypeDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[2]/button")));
+        Assert.assertTrue(MapTypeDropdownList.isDisplayed());
+    }
+    
+    @Test
+    public void checkCategoriesDropdownListChrome() {
+        WebElement CategoriesDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
+        Assert.assertTrue(CategoriesDropdownList.isDisplayed());
+    }*/
+    
+    @Test
+    public void checkSearchInputFieldChrome() {
+        WebElement SearchInputField = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='search']/div/input")));
+        Assert.assertTrue(SearchInputField.isDisplayed());
+    }
+    
+    @Test
+    public void checkSearchButtonChrome() {
+        WebElement SearchButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='search']/div/span[1]/button")));
+        Assert.assertTrue(SearchButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkPlacesInLocationButtonChrome() {
+        WebElement PlacesInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='popularPlaces']")));
+        Assert.assertTrue(PlacesInLocationButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkTracksnLocationButtonChrome() {
+        WebElement TracksInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='popularTracks']")));
+        Assert.assertTrue(TracksInLocationButton.isDisplayed());
+    }
+    
+    @Test
+    public void checkEventsInLocationButtonChrome() {
+        WebElement EventsInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
+                (By.xpath(".//*[@id='popularEvents']")));
+        Assert.assertTrue(EventsInLocationButton.isDisplayed());
     }
     
     @BeforeClass
