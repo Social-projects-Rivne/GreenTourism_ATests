@@ -47,6 +47,7 @@ public class FilterPlacesFirefox {
 		driver.quit();
 	}
 		
+	
 	@Test //10000
 	public void testFilter01CampPlaces(){
 		boolean filter [] = {true,false,false,false,false};
@@ -182,9 +183,11 @@ public class FilterPlacesFirefox {
 	
 	@Test //00000
 	public void testFilter20AllPlacesDeselected(){
-		boolean filter [] = {false,false,false,false,false};
-		setFilters(filter);
-		Assert.assertTrue(checkFilter(filter));
+		Assert.assertTrue(	driver.findElements(CampPlace).isEmpty()
+						  &&driver.findElements(ServicePlace).isEmpty()
+						  &&driver.findElements(HostelsPlace).isEmpty()
+						  &&driver.findElements(FeaturedPlace).isEmpty()
+						  &&driver.findElements(HealthcarePlace).isEmpty());
 	}
 	
 	private void setFilters(boolean[] filter){

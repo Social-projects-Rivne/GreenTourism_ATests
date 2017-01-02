@@ -18,6 +18,7 @@ public class FilterPlacesChrome{
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private final int MAX_WAIT_TIME=30;
+	
 	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
 	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
 	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[5]");
@@ -46,7 +47,7 @@ public class FilterPlacesChrome{
 		driver.quit();
 	}
 	
-	
+
 	@Test //10000
 	public void testFilter01CampPlaces(){
 		boolean filter [] = {true,false,false,false,false};
@@ -172,7 +173,7 @@ public class FilterPlacesChrome{
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
-	
+
 	@Test //11111
 	public void testFilter19AllPlacesSelected(){
 		boolean filter [] = {true,true,true,true,true};
@@ -182,9 +183,11 @@ public class FilterPlacesChrome{
 	
 	@Test //00000
 	public void testFilter20AllPlacesDeselected(){
-		boolean filter [] = {false,false,false,false,false};
-		setFilters(filter);
-		Assert.assertTrue(checkFilter(filter));
+		Assert.assertTrue(	driver.findElements(CampPlace).isEmpty()
+						  &&driver.findElements(ServicePlace).isEmpty()
+						  &&driver.findElements(HostelsPlace).isEmpty()
+						  &&driver.findElements(FeaturedPlace).isEmpty()
+						  &&driver.findElements(HealthcarePlace).isEmpty());
 	}
 	
 	private void setFilters(boolean[] filter){
