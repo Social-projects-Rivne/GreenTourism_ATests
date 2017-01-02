@@ -13,8 +13,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public class PossibilityToViewToolbarOnMapPageChrome {
-
-	private WebDriver driver;
+    private WebDriver driver;
     private String USER_LOGIN = "test@test.com";
     private String USER_PASSWORD = "Test@123";
     private WebDriverWait wait;
