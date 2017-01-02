@@ -100,6 +100,10 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     public void verifyClickThroughRateOfPlaceFilterFestival(){
         Assert.assertTrue(isElementClickable(festivalPlaceFilter, festivalPlaceFilterNameLocator));
     }
+    @Test
+    public void verifyClickThroughRateOfPlaceFilterMeeting(){
+        Assert.assertTrue(isElementClickable(meetingPlaceFilter, meetingPlaceFilterNameLocator));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
