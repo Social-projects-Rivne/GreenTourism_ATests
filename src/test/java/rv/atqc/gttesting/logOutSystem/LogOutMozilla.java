@@ -111,7 +111,7 @@ public class LogOutMozilla {
     }
 
     private String getForgotPasswordText() {
-        return driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/p[1]/a")).getText();
+        return wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/p[1]/a"))).getText();
     }
 
     private void clickOnLogOutButton() {
