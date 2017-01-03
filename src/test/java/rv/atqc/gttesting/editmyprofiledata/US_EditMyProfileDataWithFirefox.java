@@ -50,6 +50,11 @@ public class US_EditMyProfileDataWithFirefox {
         editButton = wait.until(ExpectedConditions.presenceOfElementLocated(editButtonLocator));
         Assert.assertTrue(editButton.getText().contains("Edit"));
     }
+    @Test
+    public void verifyExistenceOfTheEditButton(){
+        editButton = wait.until(ExpectedConditions.presenceOfElementLocated(editButtonLocator));
+        Assert.assertTrue(editButton.isEnabled());
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
