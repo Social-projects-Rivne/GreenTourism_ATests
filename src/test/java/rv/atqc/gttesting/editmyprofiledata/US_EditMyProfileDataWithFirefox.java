@@ -27,6 +27,7 @@ public class US_EditMyProfileDataWithFirefox {
     private By passwordFieldLocator;
     private By loginButtonLocator;
     private By editButtonLocator;
+    private By editFormLocator;
 
     private final String siteLink = "http://green-tourism.herokuapp.com";
     private final String email = "godwearsgucci@ukr.net";
@@ -55,12 +56,19 @@ public class US_EditMyProfileDataWithFirefox {
         editButton = wait.until(ExpectedConditions.presenceOfElementLocated(editButtonLocator));
         Assert.assertTrue(editButton.isEnabled());
     }
+    @Test
+    public void verifyAppearanceOfFormplaceholdersAfterClickingEditButton(){
+        editButton = wait.until(ExpectedConditions.presenceOfElementLocated(editButtonLocator));
+        editButton.click();
+        Assert.assertTrue(isElementDisplayed(editFormLocator));
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
         passwordFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input");
         loginButtonLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/input");
         editButtonLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/h1/button[1]");
+        editFormLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form");
     }
     public void setUpPreconditions(){
         driver.get(siteLink);
@@ -86,6 +94,15 @@ public class US_EditMyProfileDataWithFirefox {
     public void clickLoginButton(){
         loginButton = wait.until(ExpectedConditions.presenceOfElementLocated(loginButtonLocator));
         loginButton.click();
+    }
+    public boolean isElementDisplayed(By locator){
+        try {
+            WebElement displayedElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return displayedElement.isDisplayed();
+        }
+        catch(Exception exception){
+            return false;
+        }
     }
 }
 
