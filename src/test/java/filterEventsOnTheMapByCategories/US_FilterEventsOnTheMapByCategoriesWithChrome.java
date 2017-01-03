@@ -56,7 +56,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         setUpPreconditions();
     }
     @AfterMethod
-    public void quitDriver() throws InterruptedException {
+    public void quitDriver(){
         driver.quit();
     }
     @Test
@@ -100,15 +100,15 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     }
     @Test
     public void verifyClickThroughRateOfPlaceFilterGame(){
-        Assert.assertTrue(isElementClickable(gamePlaceFilter, gamePlaceFilterNameLocator));
+        Assert.assertTrue(isElementClickable(gamePlaceFilterNameLocator));
     }
     @Test
     public void verifyClickThroughRateOfPlaceFilterFestival(){
-        Assert.assertTrue(isElementClickable(festivalPlaceFilter, festivalPlaceFilterNameLocator));
+        Assert.assertTrue(isElementClickable(festivalPlaceFilterNameLocator));
     }
     @Test
     public void verifyClickThroughRateOfPlaceFilterMeeting(){
-        Assert.assertTrue(isElementClickable(meetingPlaceFilter, meetingPlaceFilterNameLocator));
+        Assert.assertTrue(isElementClickable(meetingPlaceFilterNameLocator));
     }
     @Test
     public void verifyDisplayOfGameGreenIconOnMap(){
@@ -128,6 +128,24 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         meetingPlaceFilter.click();
         Assert.assertTrue(isElementDisplayed(meetingBlueIconLocator));
     }
+    @Test
+    public void verifyClickThroughRateOfGameIcon(){
+        gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        gamePlaceFilter.click();
+        Assert.assertTrue(isElementClickable(gameGreenIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfFestivalIcon(){
+        festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
+        festivalPlaceFilter.click();
+        Assert.assertTrue(isElementClickable(festivalRedIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfMeetingIcon(){
+        meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        meetingPlaceFilter.click();
+        Assert.assertTrue(isElementClickable(meetingBlueIconLocator));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
@@ -141,7 +159,6 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         gameGreenIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/green.png')]");
         festivalRedIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/red.png')]");
         meetingBlueIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/blue.png')]");
-
     }
     public void setUpPreconditions(){
         driver.get(mapLink);
@@ -153,19 +170,23 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     public boolean isElementEnabled(WebElement element){
         return element.isEnabled();
     }
-    public boolean isElementClickable(WebElement element, By locator){
+    public boolean isElementClickable(By locator){
         try{
-            WebElement clickableElement = element;
-            clickableElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
-            return true;
+            WebElement clickableElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+            return clickableElement != null;
         }
         catch(Exception exception){
             return false;
         }
     }
     public boolean isElementDisplayed(By locator){
-        WebElement displayedElement = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-        return displayedElement.isDisplayed();
+        try {
+            WebElement displayedElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return displayedElement.isDisplayed();
+        }
+        catch(Exception exception){
+            return false;
+        }
     }
 }
 
