@@ -91,5 +91,16 @@ public class PossibilityChangeMapTypeMozillaPC {
 						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='streets']")));
 	    Assert.assertTrue(streetsItem.isEnabled());
 	}
+	
+	@Test
+	public void checkExistenceOutdoorsItem() {
+		WebElement mapTypeButton = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//button[@type='button' and contains" + "(., 'Map Type')]")));
+		mapTypeButton.click();
+		WebElement outdoorsItem = wait.until(ExpectedConditions
+				.presenceOfElementLocated(By.xpath("//div[@class='col-lg-5 col-md-5 hidden-sm"
+						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='outdoors']")));
+	    Assert.assertTrue(outdoorsItem.isEnabled());
+	}
 
 }
