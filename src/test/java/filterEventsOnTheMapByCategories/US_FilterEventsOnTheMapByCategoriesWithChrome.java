@@ -56,7 +56,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         setUpPreconditions();
     }
     @AfterMethod
-    public void quitDriver() throws InterruptedException {
+    public void quitDriver(){
         driver.quit();
     }
     @Test
@@ -134,6 +134,13 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         gamePlaceFilter.click();
         gameGreenIcon = wait.until(ExpectedConditions.presenceOfElementLocated(gameGreenIconLocator));
         Assert.assertTrue(isElementClickable(gameGreenIcon, gameGreenIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfFestivalIcon(){
+        festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
+        festivalPlaceFilter.click();
+        festivalRedIcon = wait.until(ExpectedConditions.presenceOfElementLocated(festivalRedIconLocator));
+        Assert.assertTrue(isElementClickable(festivalRedIcon, festivalRedIconLocator));
     }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
