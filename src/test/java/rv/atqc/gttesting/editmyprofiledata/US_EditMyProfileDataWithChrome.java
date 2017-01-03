@@ -40,6 +40,7 @@ public class US_EditMyProfileDataWithChrome {
     private final String siteLink = "http://green-tourism.herokuapp.com";
     private final String email = "godwearsgucci@ukr.net";
     private final String password = "22121989";
+    private final String firstName = "Nick";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -73,6 +74,13 @@ public class US_EditMyProfileDataWithChrome {
     public void verifyEmptyFirstNameAndLastNamePlaceholders(){
         clickEditButton();
         clearFirstNameField();
+        clearLastNameField();
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledFirstNameAndEmptyLastNamePlaceholders(){
+        clickEditButton();
+        fillFirstNameField(firstName);
         clearLastNameField();
         Assert.assertFalse(isElementClickable(changeButtonLocator));
     }
@@ -123,6 +131,10 @@ public class US_EditMyProfileDataWithChrome {
     public void clearLastNameField(){
         lastNameField = wait.until(ExpectedConditions.presenceOfElementLocated(lastNameFieldLocator));
         lastNameField.clear();
+    }
+    public void fillFirstNameField(String firstName){
+        clearFirstNameField();
+        firstNameField.sendKeys(firstName);
     }
     public boolean isElementClickable(By locator){
         try{
