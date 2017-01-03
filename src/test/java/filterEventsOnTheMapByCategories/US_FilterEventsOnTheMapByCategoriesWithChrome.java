@@ -24,6 +24,12 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     private WebElement gamePlaceFilter;
     private WebElement festivalPlaceFilter;
     private WebElement meetingPlaceFilter;
+    private WebElement gamePlaceFilterName;
+    private WebElement festivalPlaceFilterName;
+    private WebElement meetingPlaceFilterName;
+    private WebElement gameGreenIcon;
+    private WebElement festivalRedIcon;
+    private WebElement meetingBlueIcon;
 
     private By categoriesLocator;
     private By eventsLocator;
@@ -31,6 +37,12 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     private By gamePlaceFilterLocator;
     private By festivalPlaceFilterLocator;
     private By meetingPlaceFilterLocator;
+    private By gamePlaceFilterNameLocator;
+    private By festivalPlaceFilterNameLocator;
+    private By meetingPlaceFilterNameLocator;
+    private By gameGreenIconLocator;
+    private By festivalRedIconLocator;
+    private By meetingBlueIconLocator;
 
     private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
@@ -44,12 +56,12 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         setUpPreconditions();
     }
     @AfterMethod
-    public void quitDriver() throws InterruptedException {
+    public void quitDriver(){
         driver.quit();
     }
     @Test
     public void verifyExistenceOfEventsDropdownList(){
-        Assert.assertTrue(existsElement(eventsDropdownList), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(eventsDropdownList), "This element doesn't exist");
     }
     @Test
     public void verifyTitleOfEventsDropdownList(){
@@ -59,17 +71,80 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
     @Test
     public void verifyExistenceOfPlaceFilterGame(){
         gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterLocator));
-        Assert.assertTrue(existsElement(gamePlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(gamePlaceFilter), "This element doesn't exist");
     }
     @Test
     public void verifyExistenceOfPlaceFilterFestival(){
         festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterLocator));
-        Assert.assertTrue(existsElement(festivalPlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(festivalPlaceFilter), "This element doesn't exist");
     }
     @Test
     public void verifyExistenceOfPlaceFilterMeeting(){
         meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterLocator));
-        Assert.assertTrue(existsElement(meetingPlaceFilter), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(meetingPlaceFilter), "This element doesn't exist");
+    }
+    @Test
+    public void verifyTitleOfPlaceFilterGame(){
+        gamePlaceFilterName = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        Assert.assertTrue(gamePlaceFilterName.getText().contains("Game"));
+    }
+    @Test
+    public void verifyTitleOfPlaceFilterFestival(){
+        festivalPlaceFilterName = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
+        Assert.assertTrue(festivalPlaceFilterName.getText().contains("Festival"));
+    }
+    @Test
+    public void verifyTitleOfPlaceFilterMeeting(){
+        meetingPlaceFilterName = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        Assert.assertTrue(meetingPlaceFilterName.getText().contains("Meeting"));
+    }
+    @Test
+    public void verifyClickThroughRateOfPlaceFilterGame(){
+        Assert.assertTrue(isElementClickable(gamePlaceFilterNameLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfPlaceFilterFestival(){
+        Assert.assertTrue(isElementClickable(festivalPlaceFilterNameLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfPlaceFilterMeeting(){
+        Assert.assertTrue(isElementClickable(meetingPlaceFilterNameLocator));
+    }
+    @Test
+    public void verifyDisplayOfGameGreenIconOnMap(){
+        gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        gamePlaceFilter.click();
+        Assert.assertTrue(isElementDisplayed(gameGreenIconLocator));
+    }
+    @Test
+    public void verifyDisplayOfFestivalRedIconOnMap(){
+        festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
+        festivalPlaceFilter.click();
+        Assert.assertTrue(isElementDisplayed(festivalRedIconLocator));
+    }
+    @Test
+    public void verifyDisplayOfMeetingBlueIconOnMap(){
+        meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        meetingPlaceFilter.click();
+        Assert.assertTrue(isElementDisplayed(meetingBlueIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfGameIcon(){
+        gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        gamePlaceFilter.click();
+        Assert.assertTrue(isElementClickable(gameGreenIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfFestivalIcon(){
+        festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
+        festivalPlaceFilter.click();
+        Assert.assertTrue(isElementClickable(festivalRedIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfMeetingIcon(){
+        meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        meetingPlaceFilter.click();
+        Assert.assertTrue(isElementClickable(meetingBlueIconLocator));
     }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
@@ -78,6 +153,12 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         gamePlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[3]/div/div[5]/ul/li[1]");
         festivalPlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]");
         meetingPlaceFilterLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]");
+        gamePlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[1]/a");
+        festivalPlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]/a");
+        meetingPlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]/a");
+        gameGreenIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/green.png')]");
+        festivalRedIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/red.png')]");
+        meetingBlueIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/blue.png')]");
     }
     public void setUpPreconditions(){
         driver.get(mapLink);
@@ -86,11 +167,26 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         eventsDropdownList = wait.until(ExpectedConditions.presenceOfElementLocated(eventsLocator));
         eventsDropdownList.click();
     }
-    public boolean existsElement(WebElement element){
-        if (!element.isEnabled()){
+    public boolean isElementEnabled(WebElement element){
+        return element.isEnabled();
+    }
+    public boolean isElementClickable(By locator){
+        try{
+            WebElement clickableElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+            return clickableElement != null;
+        }
+        catch(Exception exception){
             return false;
         }
-        return true;
+    }
+    public boolean isElementDisplayed(By locator){
+        try {
+            WebElement displayedElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return displayedElement.isDisplayed();
+        }
+        catch(Exception exception){
+            return false;
+        }
     }
 }
 
