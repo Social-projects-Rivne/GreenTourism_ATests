@@ -44,7 +44,7 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	@AfterClass
 	public void afterClass() {
-//		driver.close();
+		driver.close();
 	}
 
 	@Test(groups = "existence_of_signup")
@@ -234,11 +234,10 @@ public class PossibilitySignUpIntoSystemChrome {
 			.clickSignUp();
 		String url = headForLoggedUserPage.getCurrentUrl();
 		System.out.println(url);
-//		page = 	headForLoggedUserPage.clickLeftNavButton()
 		page = headForLoggedUserPage.clickLeftNavButton()
-		.clickLogOut()
-		.clickLeftNavButton()
-		.clickSignUp();
+			.clickLogOut()
+			.clickLeftNavButton()
+			.clickSignUp();
 		Assert.assertEquals(url, expected);;
 	}
 
