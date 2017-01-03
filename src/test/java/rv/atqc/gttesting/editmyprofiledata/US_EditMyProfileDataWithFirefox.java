@@ -90,6 +90,12 @@ public class US_EditMyProfileDataWithFirefox {
         fillLastNameField(lastName);
         Assert.assertFalse(isElementClickable(changeButtonLocator));
     }
+    @Test
+    public void verifyExistenceOfFirstNamePlaceholder(){
+        clickEditButton();
+        firstNameField = wait.until(ExpectedConditions.presenceOfElementLocated(firstNameFieldLocator));
+        Assert.assertTrue(firstNameField.isEnabled());
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
