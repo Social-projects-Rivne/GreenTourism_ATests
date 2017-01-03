@@ -142,6 +142,13 @@ public class US_FilterEventsOnTheMapByCategoriesWithChrome {
         festivalRedIcon = wait.until(ExpectedConditions.presenceOfElementLocated(festivalRedIconLocator));
         Assert.assertTrue(isElementClickable(festivalRedIcon, festivalRedIconLocator));
     }
+    @Test
+    public void verifyClickThroughRateOfMeetingIcon(){
+        meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        meetingPlaceFilter.click();
+        meetingBlueIcon = wait.until(ExpectedConditions.presenceOfElementLocated(meetingBlueIconLocator));
+        Assert.assertTrue(isElementClickable(meetingBlueIcon, meetingBlueIconLocator));
+    }
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
