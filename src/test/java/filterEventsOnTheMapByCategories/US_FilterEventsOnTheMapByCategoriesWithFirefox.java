@@ -27,6 +27,9 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     private WebElement gamePlaceFilterName;
     private WebElement festivalPlaceFilterName;
     private WebElement meetingPlaceFilterName;
+    private WebElement gameGreenIcon;
+    private WebElement festivalRedIcon;
+    private WebElement meetingBlueIcon;
 
     private By categoriesLocator;
     private By eventsLocator;
@@ -37,6 +40,9 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     private By gamePlaceFilterNameLocator;
     private By festivalPlaceFilterNameLocator;
     private By meetingPlaceFilterNameLocator;
+    private By gameGreenIconLocator;
+    private By festivalRedIconLocator;
+    private By meetingBlueIconLocator;
 
     private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
@@ -50,7 +56,7 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
         setUpPreconditions();
     }
     @AfterMethod
-    public void quitDriver() throws InterruptedException {
+    public void quitDriver(){
         driver.quit();
     }
     @Test
@@ -94,12 +100,52 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     }
     @Test
     public void verifyClickThroughRateOfPlaceFilterGame(){
-        Assert.assertTrue(isElementClickable(gamePlaceFilter, gamePlaceFilterNameLocator));
+        Assert.assertTrue(isElementClickable(gamePlaceFilterNameLocator));
     }
     @Test
     public void verifyClickThroughRateOfPlaceFilterFestival(){
-        Assert.assertTrue(isElementClickable(festivalPlaceFilter, festivalPlaceFilterNameLocator));
+        Assert.assertTrue(isElementClickable(festivalPlaceFilterNameLocator));
     }
+    @Test
+    public void verifyClickThroughRateOfPlaceFilterMeeting(){
+        Assert.assertTrue(isElementClickable(meetingPlaceFilterNameLocator));
+    }
+    @Test
+    public void verifyDisplayOfGameGreenIconOnMap(){
+        gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        gamePlaceFilter.click();
+        Assert.assertTrue(isElementDisplayed(gameGreenIconLocator));
+    }
+    @Test
+    public void verifyDisplayOfFestivalRedIconOnMap(){
+        festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
+        festivalPlaceFilter.click();
+        Assert.assertTrue(isElementDisplayed(festivalRedIconLocator));
+    }
+    @Test
+    public void verifyDisplayOfMeetingBlueIconOnMap(){
+        meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        meetingPlaceFilter.click();
+        Assert.assertTrue(isElementDisplayed(meetingBlueIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfGameIcon(){
+        gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterNameLocator));
+        gamePlaceFilter.click();
+        Assert.assertTrue(isElementClickable(gameGreenIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfFestivalIcon(){
+        festivalPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(festivalPlaceFilterNameLocator));
+        festivalPlaceFilter.click();
+        Assert.assertTrue(isElementClickable(festivalRedIconLocator));
+    }
+    @Test
+    public void verifyClickThroughRateOfMeetingIcon(){
+        meetingPlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(meetingPlaceFilterNameLocator));
+        meetingPlaceFilter.click();
+        Assert.assertTrue(isElementClickable(meetingBlueIconLocator));
+}
     public void initializeLocators(){
         categoriesLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]");
         eventsLocator = By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]");
@@ -110,6 +156,9 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
         gamePlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[1]/a");
         festivalPlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]/a");
         meetingPlaceFilterNameLocator = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]/a");
+        gameGreenIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/green.png')]");
+        festivalRedIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/red.png')]");
+        meetingBlueIconLocator = By.xpath("//img[contains(@src,'assets/img/events/marker/blue.png')]");
     }
     public void setUpPreconditions(){
         driver.get(mapLink);
@@ -121,11 +170,19 @@ public class US_FilterEventsOnTheMapByCategoriesWithFirefox {
     public boolean isElementEnabled(WebElement element){
         return element.isEnabled();
     }
-    public boolean isElementClickable(WebElement element, By locator){
+    public boolean isElementClickable(By locator){
         try{
-            WebElement clickableElement = element;
-            clickableElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
-            return true;
+            WebElement clickableElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+            return clickableElement != null;
+        }
+        catch(Exception exception){
+            return false;
+        }
+    }
+    public boolean isElementDisplayed(By locator){
+        try {
+            WebElement displayedElement = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            return displayedElement.isDisplayed();
         }
         catch(Exception exception){
             return false;
