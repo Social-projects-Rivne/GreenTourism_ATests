@@ -28,9 +28,9 @@ public class SimpleTester {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		driver.get("https://green-tourism.herokuapp.com");
-		GreenTourismHeadPage page = new GreenTourismHeadPage(driver);
-		SignUpPage signUpPage = page.clickLeftNavButton().clickSignUp();
-		String actual = signUpPage.setFirstName("").disableFocus().getFirstNameErrorMessage().getText();
-		Assert.assertEquals(actual, "First name is required", "Error");
+//		AbstractHeadPage page = new AbstractHeadPage(driver);
+//		SignUpPage signUpPage = page.clickLeftNavButton().clickSignUp();
+//		String actual = signUpPage.setFirstName("").disableFocus().getFirstNameErrorMessage().getText();
+//		Assert.assertEquals(actual, "First name is required", "Error");
 	}
 }

@@ -4,7 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public abstract class AbstractPage<T extends AbstractPage> {
+public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 	protected WebDriver driver;
 	protected JavascriptExecutor jse;
@@ -15,7 +15,7 @@ public abstract class AbstractPage<T extends AbstractPage> {
 		PageFactory.initElements(driver, this);
 	}
 
-	protected String getCurrentUrl() {
+	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
 
@@ -27,9 +27,4 @@ public abstract class AbstractPage<T extends AbstractPage> {
 		jse.executeScript(script);
 		return (T) this;
 	}
-
-	protected <T extends AbstractPage> T getNewPage(Class<T> type) {
-		return PageFactory.initElements(driver, type);
-	}
-
 }

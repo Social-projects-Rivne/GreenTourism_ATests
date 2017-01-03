@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
 public class SignUpPage extends AbstractPage<SignUpPage> {
 	
@@ -137,9 +136,9 @@ public class SignUpPage extends AbstractPage<SignUpPage> {
 		return passwordConfirmErrorMessage;
 	}
 
-	public ProfilePage clickSignUp() {
+	public HeadForLoggedUserPage clickSignUp() {
 		signUpButton.click();
-		return new ProfilePage(driver);
+		return new HeadForLoggedUserPage(driver);
 	}
 	
 	
