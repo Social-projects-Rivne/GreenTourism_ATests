@@ -10,7 +10,7 @@ public class HeadForGuestUserPage extends AbstractHeadPage<HeadForLoggedUserPage
 
 	@Override
 	public LeftNavigationForGuestUserPage clickLeftNavButton() {
-		getLeftNavButton().click();
+		leftNavButton.click();
 		return new LeftNavigationForGuestUserPage(driver);
 	}
 

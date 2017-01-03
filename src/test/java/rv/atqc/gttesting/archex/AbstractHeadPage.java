@@ -8,13 +8,13 @@ import org.openqa.selenium.support.How;
 public abstract class AbstractHeadPage<T extends AbstractHeadPage<T>> extends AbstractPage<T> {
 
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/a/i")
-	private WebElement leftNavButton;
+	protected WebElement leftNavButton;
 
-	public AbstractHeadPage(WebDriver driver) {
+	protected AbstractHeadPage(WebDriver driver) {
 		super(driver);
 	}
 
-	public abstract AbstractPage<?> clickLeftNavButton();
+	protected abstract AbstractPage<?> clickLeftNavButton();
 
 	public WebElement getLeftNavButton() {
 		return leftNavButton;

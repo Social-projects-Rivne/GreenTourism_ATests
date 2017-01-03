@@ -12,7 +12,7 @@ public class LeftNavigationForLoggedUserPage extends AbstractPage<LeftNavigation
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/ul/li[2]/a")
 	private WebElement logOut;
 	
-	protected LeftNavigationForLoggedUserPage(WebDriver driver) {
+	public LeftNavigationForLoggedUserPage(WebDriver driver) {
 		super(driver);
 	}
 	

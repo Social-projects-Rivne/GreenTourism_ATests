@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
 
 public class LeftNavigationForGuestUserPage extends AbstractPage<LeftNavigationForGuestUserPage> {
 
@@ -17,9 +16,9 @@ public class LeftNavigationForGuestUserPage extends AbstractPage<LeftNavigationF
 		super(driver);
 	}
 
-	public void clickLogIn() {
-		logIn.click();
-	}
+//	public LogInPage clickLogIn() {
+//		logIn.click();
+//	}
 
 	public SignUpPage clickSignUp() {
 		signUp.click();
