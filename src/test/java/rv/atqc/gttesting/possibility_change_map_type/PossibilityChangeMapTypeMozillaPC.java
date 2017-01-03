@@ -80,5 +80,16 @@ public class PossibilityChangeMapTypeMozillaPC {
 				.elementToBeClickable(By.xpath("//button[@type='button' and contains" + "(., 'Map Type')]")));
 		Assert.assertTrue(mapTypeButton.isEnabled());
 	}
+	
+	@Test
+	public void checkExistenceStreetsItem() {
+		WebElement mapTypeButton = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//button[@type='button' and contains" + "(., 'Map Type')]")));
+		mapTypeButton.click();
+		WebElement streetsItem = wait.until(ExpectedConditions
+				.presenceOfElementLocated(By.xpath("//div[@class='col-lg-5 col-md-5 hidden-sm"
+						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='streets']")));
+	    Assert.assertTrue(streetsItem.isEnabled());
+	}
 
 }
