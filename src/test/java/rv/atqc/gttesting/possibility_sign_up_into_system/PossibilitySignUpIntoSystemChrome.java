@@ -233,7 +233,6 @@ public class PossibilitySignUpIntoSystemChrome {
 			.setPasswordConfirm(PASSWORD_8)
 			.clickSignUp();
 		String url = headForLoggedUserPage.getCurrentUrl();
-		System.out.println(url);
 		page = headForLoggedUserPage.clickLeftNavButton()
 			.clickLogOut()
 			.clickLeftNavButton()
