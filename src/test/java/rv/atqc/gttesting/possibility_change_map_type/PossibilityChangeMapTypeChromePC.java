@@ -122,4 +122,15 @@ public class PossibilityChangeMapTypeChromePC {
 				.visibilityOfElementLocated(By.xpath("//img[contains(@src,'tile.osm.org')][1]")));
 	    Assert.assertTrue(mapImage.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilitySetOutdoorsMapType() {
+		WebElement outdoorsItem = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//div[@class='col-lg-5 col-md-5 hidden-sm"
+						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='outdoors']")));
+	    outdoorsItem.click();
+	    WebElement mapImage = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//img[contains(@src,'tile.thunderforest.com')][1]")));
+	    Assert.assertTrue(mapImage.isDisplayed());
+	}
 }
