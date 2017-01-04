@@ -23,6 +23,9 @@ public class US_EditMyProfileDataWithChrome {
     private WebElement passwordField;
     private WebElement loginButton;
     private WebElement editButton;
+    private WebElement firstNameField;
+    private WebElement lastNameField;
+    private WebElement changeButton;
 
     private By dropdownToggleLocator;
     private By emailFieldLocator;
@@ -30,10 +33,15 @@ public class US_EditMyProfileDataWithChrome {
     private By loginButtonLocator;
     private By editButtonLocator;
     private By editFormLocator;
+    private By firstNameFieldLocator;
+    private By lastNameFieldLocator;
+    private By changeButtonLocator;
 
     private final String siteLink = "http://green-tourism.herokuapp.com";
     private final String email = "godwearsgucci@ukr.net";
     private final String password = "22121989";
+    private final String firstName = "Nick";
+    private final String lastName = "Melnyk";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -60,9 +68,41 @@ public class US_EditMyProfileDataWithChrome {
     }
     @Test
     public void verifyAppearanceOfFormplaceholdersAfterClickingEditButton(){
-        editButton = wait.until(ExpectedConditions.presenceOfElementLocated(editButtonLocator));
-        editButton.click();
+        clickEditButton();
         Assert.assertTrue(isElementDisplayed(editFormLocator));
+    }
+    @Test
+    public void verifyEmptyFirstNameAndLastNamePlaceholders(){
+        clickEditButton();
+        clearFirstNameField();
+        clearLastNameField();
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledFirstNameAndEmptyLastNamePlaceholders(){
+        clickEditButton();
+        fillFirstNameField(firstName);
+        clearLastNameField();
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyEmptyFirstNameAndFilledLastNamePlaceholders(){
+        clickEditButton();
+        clearFirstNameField();
+        fillLastNameField(lastName);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyExistenceOfFirstNamePlaceholder(){
+        clickEditButton();
+        firstNameField = wait.until(ExpectedConditions.presenceOfElementLocated(firstNameFieldLocator));
+        Assert.assertTrue(firstNameField.isEnabled());
+    }
+    @Test
+    public void verifyExistenceOfLastNamePlaceholder(){
+        clickEditButton();
+        lastNameField = wait.until(ExpectedConditions.presenceOfElementLocated(lastNameFieldLocator));
+        Assert.assertTrue(lastNameField.isEnabled());
     }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
@@ -71,6 +111,9 @@ public class US_EditMyProfileDataWithChrome {
         loginButtonLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/input");
         editButtonLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/h1/button[1]");
         editFormLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form");
+        firstNameFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[1]/div[1]/div/input");
+        lastNameFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[1]/div[2]/div/input");
+        changeButtonLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/input");
     }
     public void setUpPreconditions(){
         driver.get(siteLink);
@@ -94,8 +137,37 @@ public class US_EditMyProfileDataWithChrome {
         passwordField.sendKeys(password);
     }
     public void clickLoginButton(){
-        loginButton = wait.until(ExpectedConditions.presenceOfElementLocated(loginButtonLocator));
+        loginButton = wait.until(ExpectedConditions.elementToBeClickable(loginButtonLocator));
         loginButton.click();
+    }
+    public void clickEditButton(){
+        editButton = wait.until(ExpectedConditions.elementToBeClickable(editButtonLocator));
+        editButton.click();
+    }
+    public void clearFirstNameField(){
+        firstNameField = wait.until(ExpectedConditions.presenceOfElementLocated(firstNameFieldLocator));
+        firstNameField.clear();
+    }
+    public void clearLastNameField(){
+        lastNameField = wait.until(ExpectedConditions.presenceOfElementLocated(lastNameFieldLocator));
+        lastNameField.clear();
+    }
+    public void fillFirstNameField(String firstName){
+        clearFirstNameField();
+        firstNameField.sendKeys(firstName);
+    }
+    public void fillLastNameField(String lastName){
+        clearLastNameField();
+        lastNameField.sendKeys(lastName);
+    }
+    public boolean isElementClickable(By locator){
+        try{
+            WebElement clickableElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+            return clickableElement != null;
+        }
+        catch(Exception exception){
+            return false;
+        }
     }
     public boolean isElementDisplayed(By locator){
         try {
