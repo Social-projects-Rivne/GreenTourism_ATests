@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class SignUpPage extends AbstractPage<SignUpPage> {
+public class SignUpPage extends LeftNavigationForGuestUserPage<SignUpPage> {
 	
 	@FindBy(how = How.CSS, using = "html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-pristine.ng-invalid.ng-invalid-required.ng-valid-minlength.ng-valid-maxlength.ng-valid-email.ng-valid-pattern.ng-valid-match")
 	private WebElement signUpForm;
@@ -136,7 +136,7 @@ public class SignUpPage extends AbstractPage<SignUpPage> {
 		return passwordConfirmErrorMessage;
 	}
 
-	public HeadForLoggedUserPage clickSignUp() {
+	public HeadForLoggedUserPage clickSignUpButton() {
 		signUpButton.click();
 		return new HeadForLoggedUserPage(driver);
 	}

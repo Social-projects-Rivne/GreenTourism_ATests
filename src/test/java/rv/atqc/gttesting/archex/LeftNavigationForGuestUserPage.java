@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class LeftNavigationForGuestUserPage extends AbstractPage<LeftNavigationForGuestUserPage> {
+public class LeftNavigationForGuestUserPage<T extends LeftNavigationForGuestUserPage<T>> extends AbstractPage<T> {
 
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[1]/h6/a[1]")
 	private WebElement logIn;
@@ -16,9 +16,10 @@ public class LeftNavigationForGuestUserPage extends AbstractPage<LeftNavigationF
 		super(driver);
 	}
 
-//	public LogInPage clickLogIn() {
-//		logIn.click();
-//	}
+	public LogInPage clickLogIn() {
+		logIn.click();
+		return new LogInPage(driver);
+	}
 
 	public SignUpPage clickSignUp() {
 		signUp.click();
