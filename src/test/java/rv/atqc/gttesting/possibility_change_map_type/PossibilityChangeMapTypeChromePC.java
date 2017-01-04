@@ -133,4 +133,15 @@ public class PossibilityChangeMapTypeChromePC {
 				.visibilityOfElementLocated(By.xpath("//img[contains(@src,'tile.thunderforest.com')][1]")));
 	    Assert.assertTrue(mapImage.isDisplayed());
 	}
+	
+	@Test
+	public void checkPossibilitySetSatelliteMapType() {
+		WebElement satelliteItem = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//div[@class='col-lg-5 col-md-5 hidden-sm"
+						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='satellite']")));
+	    satelliteItem.click();
+	    WebElement mapImage = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//img[contains(@src,'server.arcgisonline.com')][1]")));
+	    Assert.assertTrue(mapImage.isDisplayed());
+	}
 }
