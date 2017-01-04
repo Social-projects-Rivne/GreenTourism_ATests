@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 public class LogOutMozilla {
     private WebDriver driver;
     WebDriverWait wait;
+    private final int MAX_WAIT_TIME = 10;
     private String USER_LOGIN = "17141@rambler.ru";
     private String USER_PASSWORD = "12345678";
 
@@ -26,7 +27,7 @@ public class LogOutMozilla {
         FirefoxDriverManager.getInstance().setup();
         driver = new FirefoxDriver();
         driver.get("https://green-tourism.herokuapp.com/#!/");
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, MAX_WAIT_TIME);
     }
 
     @AfterMethod
