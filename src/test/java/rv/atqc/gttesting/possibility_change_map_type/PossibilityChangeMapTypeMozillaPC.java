@@ -113,5 +113,16 @@ public class PossibilityChangeMapTypeMozillaPC {
 						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='satellite']")));
 	    Assert.assertTrue(satelliteItem.isEnabled());
 	}
+	
+	@Test
+	public void checkPossibilitySetStreetsMapType() {
+		WebElement streetsItem = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//div[@class='col-lg-5 col-md-5 hidden-sm"
+						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='streets']")));
+	    streetsItem.click();
+	    WebElement mapImage = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//img[contains(@src,'tile.osm.org')][1]")));
+	    Assert.assertTrue(mapImage.isDisplayed());
+	}
 
 }
