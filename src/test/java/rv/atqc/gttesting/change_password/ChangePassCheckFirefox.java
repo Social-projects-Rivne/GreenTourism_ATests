@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
 public class ChangePassCheckFirefox {
+	
 	private static String MAIL = "romanukhaav@gmail.com";
 	private static String PASS = "123456789";
 	private static String SHORT_PASS = "123456";
@@ -24,6 +25,7 @@ public class ChangePassCheckFirefox {
 	public void before() {
 		FirefoxDriverManager.getInstance().setup();
 		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
 		driver.get("http://green-tourism.herokuapp.com/#!/");
 		clickOnLoginMenu();	
 		inputEmail(MAIL);
@@ -46,7 +48,6 @@ public class ChangePassCheckFirefox {
 		Assert.assertEquals(getTextFromFildNewPass(), "New password");
 	}
 	
-	
 	@Test
 	public void inputShortPasswords() {
 		clickOnChangePassButton();
@@ -54,7 +55,6 @@ public class ChangePassCheckFirefox {
 		inputPassFild2(SHORT_PASS);
 		Assert.assertEquals(getErrorText(), "Password should be longer than 8 characters");	
 	}
-	
 	
 	@Test
 	public void inputDifferentPasswords() {
@@ -64,11 +64,17 @@ public class ChangePassCheckFirefox {
 		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
 	}
 
-	
+	@Test
+	public void inputEmptyPasswords() {
+		clickOnChangePassButton();
+		inputPassFild1("");
+		inputPassFild2("");
+		Assert.assertEquals(getError3Text(), "Password required");
+	}
 			
 		  
 	private void clickOnLoginMenu() {
-        driver.findElement(By.cssSelector("ul.nav:nth-child(1) > li:nth-child(1) > a:nth-child(1) > i:nth-child(1)")).click();
+        driver.findElement(By.cssSelector("#navbar > ul:nth-child(1) > li")).click();
     }
 	
 	private void inputEmail(String eml) {
@@ -106,5 +112,10 @@ public class ChangePassCheckFirefox {
 	 private String getError2Text() {
 		 	clickOnLoginMenu();
 	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/div/p")).getText();
+	 }
+	 
+	 private String getError3Text() {
+		 	clickOnLoginMenu();
+	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[1]")).getText();
 	 }
 }

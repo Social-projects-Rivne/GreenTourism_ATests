@@ -25,6 +25,7 @@ public class ChangePassCheckChrome {
 	public void before() {
 		ChromeDriverManager.getInstance().setup();
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		driver.get("https://green-tourism.herokuapp.com/#!/");
 		clickOnLoginMenu();	
 		inputEmail(MAIL);
@@ -47,7 +48,6 @@ public class ChangePassCheckChrome {
 		Assert.assertEquals(getTextFromFildNewPass(), "New password");
 	}
 	
-	
 	@Test
 	public void inputShortPasswords() {
 		clickOnChangePassButton();
@@ -55,7 +55,6 @@ public class ChangePassCheckChrome {
 		inputPassFild2(SHORT_PASS);
 		Assert.assertEquals(getErrorText(), "Password should be longer than 8 characters");	
 	}
-	
 	
 	@Test
 	public void inputDifferentPasswords() {
@@ -65,7 +64,13 @@ public class ChangePassCheckChrome {
 		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
 	}
 
-	
+	@Test
+	public void inputEmptyPasswords() {
+		clickOnChangePassButton();
+		inputPassFild1("");
+		inputPassFild2("");
+		Assert.assertEquals(getError3Text(), "Password required");
+	}
 			
 		  
 	private void clickOnLoginMenu() {
@@ -108,14 +113,9 @@ public class ChangePassCheckChrome {
 		 	clickOnLoginMenu();
 	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/div/p")).getText();
 	 }
-	 	 
-	 private void clickOnChangeButton() { 
-			driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/input")).click();   
-		 }
-	
-	 private String isProfileActive() {
+	 
+	 private String getError3Text() {
 		 	clickOnLoginMenu();
-	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/p[1]/strong")).getText();
+	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[1]")).getText();
 	 }
-
 }
