@@ -23,7 +23,6 @@ public class US_EditMyProfileDataWithFirefox {
     private WebElement editButton;
     private WebElement firstNameField;
     private WebElement lastNameField;
-    private WebElement changeButton;
 
     private By dropdownToggleLocator;
     private By emailFieldLocator;
