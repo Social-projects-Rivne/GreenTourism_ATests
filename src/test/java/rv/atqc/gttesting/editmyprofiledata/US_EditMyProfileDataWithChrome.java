@@ -26,6 +26,7 @@ public class US_EditMyProfileDataWithChrome {
     private WebElement firstNameField;
     private WebElement lastNameField;
     private WebElement nicknameField;
+    private WebElement phoneNumberField;
 
     private By dropdownToggleLocator;
     private By emailFieldLocator;
@@ -37,6 +38,7 @@ public class US_EditMyProfileDataWithChrome {
     private By lastNameFieldLocator;
     private By changeButtonLocator;
     private By nicknameFieldLocator;
+    private By phoneNumberFieldLocator;
 
     private final String siteLink = "http://green-tourism.herokuapp.com";
     private final String email = "godwearsgucci@ukr.net";
@@ -111,6 +113,12 @@ public class US_EditMyProfileDataWithChrome {
         nicknameField = wait.until(ExpectedConditions.presenceOfElementLocated(nicknameFieldLocator));
         Assert.assertTrue(nicknameField.isEnabled());
     }
+    @Test
+    public void verifyExistenceOfPhoneNumberPlaceholder(){
+        clickEditButton();
+        phoneNumberField = wait.until(ExpectedConditions.presenceOfElementLocated(phoneNumberFieldLocator));
+        Assert.assertTrue(phoneNumberField.isEnabled());
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
@@ -122,6 +130,7 @@ public class US_EditMyProfileDataWithChrome {
         lastNameFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[1]/div[2]/div/input");
         changeButtonLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/input");
         nicknameFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[2]/input");
+        phoneNumberFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[3]/input");
     }
     public void setUpPreconditions(){
         driver.get(siteLink);
