@@ -29,6 +29,7 @@ public class US_EditMyProfileDataWithChrome {
     private WebElement phoneNumberField;
     private WebElement addressField;
     private WebElement changeButton;
+    private WebElement cancelButton;
 
     private By dropdownToggleLocator;
     private By emailFieldLocator;
@@ -42,6 +43,7 @@ public class US_EditMyProfileDataWithChrome {
     private By nicknameFieldLocator;
     private By phoneNumberFieldLocator;
     private By addressFieldLocator;
+    private By cancelButtonLocator;
 
     private final String siteLink = "http://green-tourism.herokuapp.com";
     private final String email = "godwearsgucci@ukr.net";
@@ -143,6 +145,12 @@ public class US_EditMyProfileDataWithChrome {
         clickEditButton();
         Assert.assertTrue(isElementClickable(changeButtonLocator));
     }
+    @Test
+    public void verifyExistenceOfTheCancelButton(){
+        clickEditButton();
+        cancelButton = wait.until(ExpectedConditions.presenceOfElementLocated(cancelButtonLocator));
+        Assert.assertTrue(cancelButton.isEnabled());
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
@@ -156,6 +164,7 @@ public class US_EditMyProfileDataWithChrome {
         nicknameFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[2]/input");
         phoneNumberFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[3]/input");
         addressFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[4]/input");
+        cancelButtonLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/button");
     }
     public void setUpPreconditions(){
         driver.get(siteLink);
