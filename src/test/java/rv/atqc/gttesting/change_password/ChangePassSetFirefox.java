@@ -11,8 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
-
-	public class ChangePassSetFirefox {
+public class ChangePassSetFirefox {
 
 		private static String MAIL = "romanukhaav@i.ua";
 		private static String OLD_PASS = "123456789";
@@ -25,6 +24,7 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 		public void before() {
 			FirefoxDriverManager.getInstance().setup();
 			driver = new FirefoxDriver();
+			driver.manage().window().maximize();
 			driver.get("http://green-tourism.herokuapp.com/#!/");
 			clickOnLoginMenu();	
 		}
@@ -57,8 +57,6 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 			Assert.assertEquals(isProfileActive(), "Email:");
 		}
 
-
-
 	  
 		private void clickOnLoginMenu() {
 	        driver.findElement(By.cssSelector("#navbar > ul:nth-child(1) > li")).click();
@@ -72,37 +70,37 @@ import io.github.bonigarcia.wdm.FirefoxDriverManager;
 			driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input")).sendKeys(pass);
 		}
 		
-		 private void clickOnLoginButton() {
+		private void clickOnLoginButton() {
 		    driver.findElement(By.cssSelector("#navbar > ul:nth-child(1) > li > ul > auth > div:nth-child(2) > div > form > input")).click();
-		 }
+		}
 		 
-		 private void clickOnChangePassButton() { 
+		private void clickOnChangePassButton() { 
 			driver.findElement(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-9 > div:nth-child(1) > h1 > button:nth-child(2)")).click();   
-		 }									
+		}									
 		   
-		 private void inputPassFild1(String pass) {
+		private void inputPassFild1(String pass) {
 		        driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")).sendKeys(pass);
-		 }
+		}
 		 
-		 private void inputPassFild2(String pass) {
+		private void inputPassFild2(String pass) {
 		        driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/input")).sendKeys(pass);
-		 }
+		}
 		 	 
-		 private void clickOnChangeButton() { 
+		private void clickOnChangeButton() { 
 				driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/input")).click();   
-			 }
+		}
 		
-		 private String isProfileActive() {
+		private String isProfileActive() {
 			 	clickOnLoginMenu();
 		        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/p[1]/strong")).getText();
-		 }
+		}
 		 
-		 private void logIn(String login, String password){
+		private void logIn(String login, String password){
 			 	inputEmail(login);
 				inputPass(password);
 				clickOnLoginButton();
 				wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 				wait.until(ExpectedConditions.presenceOfElementLocated
 							(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")));
-		 }
+		}
 }
