@@ -55,6 +55,7 @@ public class US_EditMyProfileDataWithChrome {
     private final String validPhoneNumber = "+380982305488";
     private final String invalidPhoneNumber = "380982305488";
     private final String invalidPhoneNumberWithLetters = "qwerty";
+    private final String invalidPhoneNumberWithSpecialCharacters = "+11!11#11@";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -189,6 +190,12 @@ public class US_EditMyProfileDataWithChrome {
     public void verifyFilledPhoneNumberPlaceholderWithLetters(){
         clickEditButton();
         inputPhoneNumber(invalidPhoneNumberWithLetters);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithSpecialCharacters(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumberWithSpecialCharacters);
         Assert.assertFalse(isElementClickable(changeButtonLocator));
     }
     public void initializeLocators(){
