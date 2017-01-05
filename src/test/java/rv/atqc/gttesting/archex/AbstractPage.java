@@ -4,6 +4,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import rv.atqc.gttesting.archex.helpers.Acting;
+
 public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 	protected WebDriver driver;
@@ -25,6 +27,11 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 	public T executeScript(String script) {
 		jse.executeScript(script);
+		return (T) this;
+	}
+	
+	public T act(Acting acting){
+		acting.act(driver);
 		return (T) this;
 	}
 }

@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import rv.atqc.gttesting.archex.helpers.Acting;
+
 public abstract class AbstractHeadPage<T extends AbstractHeadPage<T>> extends AbstractPage<T> {
 
 	@FindBy(how = How.XPATH, using = "/html/body/header/nav/div/div[2]/ul[1]/li/a/i")
@@ -29,4 +31,5 @@ public abstract class AbstractHeadPage<T extends AbstractHeadPage<T>> extends Ab
 	public WebElement getRightNavButton(){
 		return rightNavButton;
 	}
+	
 }
