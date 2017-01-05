@@ -114,6 +114,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 	    Assert.assertTrue(satelliteItem.isEnabled());
 	}
 	
+	//This test isn't recommended for automation
 	@Test
 	public void checkPossibilitySetStreetsMapType() {
 		WebElement streetsItem = wait.until(ExpectedConditions
@@ -125,6 +126,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 	    Assert.assertTrue(mapImage.isDisplayed());
 	}
 	
+	//This test isn't recommended for automation
 	@Test
 	public void checkPossibilitySetOutdoorsMapType() {
 		WebElement outdoorsItem = wait.until(ExpectedConditions
@@ -133,6 +135,18 @@ public class PossibilityChangeMapTypeMozillaPC {
 	    outdoorsItem.click();
 	    WebElement mapImage = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//img[contains(@src,'tile.thunderforest.com')][1]")));
+	    Assert.assertTrue(mapImage.isDisplayed());
+	}
+	
+	//This test isn't recommended for automation
+	@Test
+	public void checkPossibilitySetSatelliteMapType() {
+		WebElement satelliteItem = wait.until(ExpectedConditions
+				.elementToBeClickable(By.xpath("//div[@class='col-lg-5 col-md-5 hidden-sm"
+						+ " hidden-xs map-menu-buttons-wrapper']//a[@id='satellite']")));
+	    satelliteItem.click();
+	    WebElement mapImage = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//img[contains(@src,'server.arcgisonline.com')][1]")));
 	    Assert.assertTrue(mapImage.isDisplayed());
 	}
 
