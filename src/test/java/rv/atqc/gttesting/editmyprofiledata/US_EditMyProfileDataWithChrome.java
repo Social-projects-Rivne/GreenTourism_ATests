@@ -53,6 +53,7 @@ public class US_EditMyProfileDataWithChrome {
     private final String nicknameWithCharacters = "NICK";
     private final String nicknameWithSpecialCharacters = "!_!@`+()";
     private final String validPhoneNumber = "+380982305488";
+    private final String invalidPhoneNumber = "380982305488";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -176,6 +177,12 @@ public class US_EditMyProfileDataWithChrome {
         clickEditButton();
         inputPhoneNumber(validPhoneNumber);
         Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithInvalidNumber(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumber);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
     }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
