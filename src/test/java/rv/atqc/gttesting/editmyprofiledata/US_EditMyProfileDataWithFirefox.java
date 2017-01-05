@@ -52,6 +52,7 @@ public class US_EditMyProfileDataWithFirefox {
     private final String nicknameWithSpecialCharacters = "!_!@`+()";
     private final String validPhoneNumber = "+380982305488";
     private final String invalidPhoneNumber = "380982305488";
+    private final String invalidPhoneNumberWithLetters = "qwerty";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -180,6 +181,12 @@ public class US_EditMyProfileDataWithFirefox {
     public void verifyFilledPhoneNumberPlaceholderWithInvalidNumber(){
         clickEditButton();
         inputPhoneNumber(invalidPhoneNumber);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithLetters(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumberWithLetters);
         Assert.assertFalse(isElementClickable(changeButtonLocator));
     }
     public void initializeLocators(){
