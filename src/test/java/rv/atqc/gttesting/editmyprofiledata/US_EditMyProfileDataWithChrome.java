@@ -52,6 +52,7 @@ public class US_EditMyProfileDataWithChrome {
     private final String lastName = "Melnyk";
     private final String nicknameWithCharacters = "NICK";
     private final String nicknameWithSpecialCharacters = "!_!@`+()";
+    private final String validPhoneNumber = "+380982305488";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -161,13 +162,19 @@ public class US_EditMyProfileDataWithChrome {
     @Test
     public void verifyNicknamePlaceholderFilledWithCharacters(){
         clickEditButton();
-        inputNicknameField(nicknameWithCharacters);
+        inputNickname(nicknameWithCharacters);
         Assert.assertTrue(isElementClickable(changeButtonLocator));
     }
     @Test
     public void verifyNicknamePlaceholderFilledWithSpecialCharacters(){
         clickEditButton();
-        inputNicknameField(nicknameWithSpecialCharacters);
+        inputNickname(nicknameWithSpecialCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithValidNumber(){
+        clickEditButton();
+        inputPhoneNumber(validPhoneNumber);
         Assert.assertTrue(isElementClickable(changeButtonLocator));
     }
     public void initializeLocators(){
@@ -230,10 +237,15 @@ public class US_EditMyProfileDataWithChrome {
         clearLastNameField();
         lastNameField.sendKeys(lastName);
     }
-    public void inputNicknameField(String nickname){
+    public void inputNickname(String nickname){
         nicknameField = wait.until(ExpectedConditions.presenceOfElementLocated(nicknameFieldLocator));
         nicknameField.clear();
         nicknameField.sendKeys(nickname);
+    }
+    public void inputPhoneNumber(String phoneNumber){
+        phoneNumberField = wait.until(ExpectedConditions.presenceOfElementLocated(phoneNumberFieldLocator));
+        phoneNumberField.clear();
+        phoneNumberField.sendKeys(phoneNumber);
     }
     public boolean isElementClickable(By locator){
         try{
