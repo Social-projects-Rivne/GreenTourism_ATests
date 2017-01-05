@@ -28,6 +28,7 @@ public class US_EditMyProfileDataWithChrome {
     private WebElement nicknameField;
     private WebElement phoneNumberField;
     private WebElement addressField;
+    private WebElement changeButton;
 
     private By dropdownToggleLocator;
     private By emailFieldLocator;
@@ -130,6 +131,12 @@ public class US_EditMyProfileDataWithChrome {
     @Test
     public void VerifyClickThroughRateOfTheEditButton(){
         Assert.assertTrue(isElementClickable(editButtonLocator));
+    }
+    @Test
+    public void verifyExistenceOfTheChangeButton(){
+        clickEditButton();
+        changeButton = wait.until(ExpectedConditions.presenceOfElementLocated(changeButtonLocator));
+        Assert.assertTrue(changeButton.isEnabled());
     }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
