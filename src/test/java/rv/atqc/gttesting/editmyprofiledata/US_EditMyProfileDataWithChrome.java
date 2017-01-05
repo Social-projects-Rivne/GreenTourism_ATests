@@ -27,6 +27,7 @@ public class US_EditMyProfileDataWithChrome {
     private WebElement lastNameField;
     private WebElement nicknameField;
     private WebElement phoneNumberField;
+    private WebElement addressField;
 
     private By dropdownToggleLocator;
     private By emailFieldLocator;
@@ -39,6 +40,7 @@ public class US_EditMyProfileDataWithChrome {
     private By changeButtonLocator;
     private By nicknameFieldLocator;
     private By phoneNumberFieldLocator;
+    private By addressFieldLocator;
 
     private final String siteLink = "http://green-tourism.herokuapp.com";
     private final String email = "godwearsgucci@ukr.net";
@@ -119,6 +121,12 @@ public class US_EditMyProfileDataWithChrome {
         phoneNumberField = wait.until(ExpectedConditions.presenceOfElementLocated(phoneNumberFieldLocator));
         Assert.assertTrue(phoneNumberField.isEnabled());
     }
+    @Test
+    public void verifyExistenceOfAddressPlaceholder(){
+        clickEditButton();
+        addressField = wait.until(ExpectedConditions.presenceOfElementLocated(addressFieldLocator));
+        Assert.assertTrue(addressField.isEnabled());
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
@@ -131,6 +139,7 @@ public class US_EditMyProfileDataWithChrome {
         changeButtonLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/input");
         nicknameFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[2]/input");
         phoneNumberFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[3]/input");
+        addressFieldLocator = By.xpath("//*[@id=\"main\"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/div[4]/input");
     }
     public void setUpPreconditions(){
         driver.get(siteLink);
