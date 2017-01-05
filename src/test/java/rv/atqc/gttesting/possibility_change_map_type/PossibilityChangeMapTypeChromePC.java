@@ -112,6 +112,7 @@ public class PossibilityChangeMapTypeChromePC {
 	    Assert.assertTrue(satelliteItem.isEnabled());
 	}
 	
+	//This test isn't recommended for automation
 	@Test
 	public void checkPossibilitySetStreetsMapType() {
 		WebElement streetsItem = wait.until(ExpectedConditions
@@ -123,6 +124,7 @@ public class PossibilityChangeMapTypeChromePC {
 	    Assert.assertTrue(mapImage.isDisplayed());
 	}
 	
+	//This test isn't recommended for automation
 	@Test
 	public void checkPossibilitySetOutdoorsMapType() {
 		WebElement outdoorsItem = wait.until(ExpectedConditions
@@ -134,6 +136,7 @@ public class PossibilityChangeMapTypeChromePC {
 	    Assert.assertTrue(mapImage.isDisplayed());
 	}
 	
+	//This test isn't recommended for automation
 	@Test
 	public void checkPossibilitySetSatelliteMapType() {
 		WebElement satelliteItem = wait.until(ExpectedConditions
