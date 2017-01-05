@@ -14,4 +14,10 @@ public class HeadForGuestUserPage extends AbstractHeadPage<HeadForLoggedUserPage
 		return new LogInPage(driver);
 	}
 
+	@Override
+	public RightNavigationForGuestPage clickRightNavButton() {
+		rightNavButton.click();
+		return new RightNavigationForGuestPage(driver);
+	}
+
 }

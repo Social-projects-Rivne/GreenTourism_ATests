@@ -14,4 +14,10 @@ public class HeadForLoggedUserPage extends AbstractHeadPage<HeadForLoggedUserPag
 		return new LeftNavigationForLoggedUserPage(driver);
 	}
 
+	@Override
+	public MapHeadForLoggedUserPage clickRightNavButton() {
+		rightNavButton.click();
+		return new MapHeadForLoggedUserPage(driver);
+	}
+
 }
