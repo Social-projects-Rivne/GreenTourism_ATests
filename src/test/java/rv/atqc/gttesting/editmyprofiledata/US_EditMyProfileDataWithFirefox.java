@@ -49,6 +49,7 @@ public class US_EditMyProfileDataWithFirefox {
     private final String firstName = "Nick";
     private final String lastName = "Melnyk";
     private final String nicknameWithCharacters = "NICK";
+    private final String nicknameWithSpecialCharacters = "!_!@`+()";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -159,6 +160,12 @@ public class US_EditMyProfileDataWithFirefox {
     public void verifyNicknamePlaceholderFilledWithCharacters(){
         clickEditButton();
         inputNicknameField(nicknameWithCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyNicknamePlaceholderFilledWithSpecialCharacters(){
+        clickEditButton();
+        inputNicknameField(nicknameWithSpecialCharacters);
         Assert.assertTrue(isElementClickable(changeButtonLocator));
     }
     public void initializeLocators(){
