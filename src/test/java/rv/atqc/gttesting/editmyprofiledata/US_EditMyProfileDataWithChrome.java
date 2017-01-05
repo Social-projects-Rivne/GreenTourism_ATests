@@ -50,6 +50,7 @@ public class US_EditMyProfileDataWithChrome {
     private final String password = "22121989";
     private final String firstName = "Nick";
     private final String lastName = "Melnyk";
+    private final String nicknameWithCharacters = "NICK";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -156,6 +157,12 @@ public class US_EditMyProfileDataWithChrome {
         clickEditButton();
         Assert.assertTrue(isElementClickable(cancelButtonLocator));
     }
+    @Test
+    public void verifyNicknamePlaceholderFilledWithCharacters(){
+        clickEditButton();
+        inputNicknameField(nicknameWithCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
@@ -215,6 +222,11 @@ public class US_EditMyProfileDataWithChrome {
     public void fillLastNameField(String lastName){
         clearLastNameField();
         lastNameField.sendKeys(lastName);
+    }
+    public void inputNicknameField(String nickname){
+        nicknameField = wait.until(ExpectedConditions.presenceOfElementLocated(nicknameFieldLocator));
+        nicknameField.clear();
+        nicknameField.sendKeys(nickname);
     }
     public boolean isElementClickable(By locator){
         try{
