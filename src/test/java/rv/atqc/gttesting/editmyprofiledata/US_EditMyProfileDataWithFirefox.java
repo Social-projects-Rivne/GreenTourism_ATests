@@ -149,6 +149,11 @@ public class US_EditMyProfileDataWithFirefox {
         cancelButton = wait.until(ExpectedConditions.presenceOfElementLocated(cancelButtonLocator));
         Assert.assertTrue(cancelButton.isEnabled());
     }
+    @Test
+    public void VerifyClickThroughRateOfTheCancelButton(){
+        clickEditButton();
+        Assert.assertTrue(isElementClickable(cancelButtonLocator));
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
