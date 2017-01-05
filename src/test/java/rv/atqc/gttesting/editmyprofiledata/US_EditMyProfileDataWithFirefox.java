@@ -125,6 +125,10 @@ public class US_EditMyProfileDataWithFirefox {
         addressField = wait.until(ExpectedConditions.presenceOfElementLocated(addressFieldLocator));
         Assert.assertTrue(addressField.isEnabled());
     }
+    @Test
+    public void VerifyClickThroughRateOfTheEditButton(){
+        Assert.assertTrue(isElementClickable(editButtonLocator));
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
