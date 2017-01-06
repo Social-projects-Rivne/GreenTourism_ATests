@@ -52,6 +52,12 @@ public class US_EditMyProfileDataWithChrome {
     private final String lastName = "Melnyk";
     private final String nicknameWithCharacters = "NICK";
     private final String nicknameWithSpecialCharacters = "!_!@`+()";
+    private final String validPhoneNumber = "+380982305488";
+    private final String invalidPhoneNumber = "380982305488";
+    private final String invalidPhoneNumberWithLetters = "qwerty";
+    private final String invalidPhoneNumberWithSpecialCharacters = "+11!11#11@";
+    private final String addressWithCharacters = "Rivne(UA), Piece Avenue 77";
+    private final String addressWithSpecialCharacters = "!+Rivne``*/&%$";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -161,13 +167,49 @@ public class US_EditMyProfileDataWithChrome {
     @Test
     public void verifyNicknamePlaceholderFilledWithCharacters(){
         clickEditButton();
-        inputNicknameField(nicknameWithCharacters);
+        inputNickname(nicknameWithCharacters);
         Assert.assertTrue(isElementClickable(changeButtonLocator));
     }
     @Test
     public void verifyNicknamePlaceholderFilledWithSpecialCharacters(){
         clickEditButton();
-        inputNicknameField(nicknameWithSpecialCharacters);
+        inputNickname(nicknameWithSpecialCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithValidNumber(){
+        clickEditButton();
+        inputPhoneNumber(validPhoneNumber);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithInvalidNumber(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumber);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithLetters(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumberWithLetters);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithSpecialCharacters(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumberWithSpecialCharacters);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyAddressPlaceholderFilledWithCharacters(){
+        clickEditButton();
+        inputAddress(addressWithCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyAddressPlaceholderFilledWithSpecialCharacters(){
+        clickEditButton();
+        inputAddress(addressWithSpecialCharacters);
         Assert.assertTrue(isElementClickable(changeButtonLocator));
     }
     public void initializeLocators(){
@@ -230,10 +272,20 @@ public class US_EditMyProfileDataWithChrome {
         clearLastNameField();
         lastNameField.sendKeys(lastName);
     }
-    public void inputNicknameField(String nickname){
+    public void inputNickname(String nickname){
         nicknameField = wait.until(ExpectedConditions.presenceOfElementLocated(nicknameFieldLocator));
         nicknameField.clear();
         nicknameField.sendKeys(nickname);
+    }
+    public void inputPhoneNumber(String phoneNumber){
+        phoneNumberField = wait.until(ExpectedConditions.presenceOfElementLocated(phoneNumberFieldLocator));
+        phoneNumberField.clear();
+        phoneNumberField.sendKeys(phoneNumber);
+    }
+    public void inputAddress(String address){
+        addressField = wait.until(ExpectedConditions.presenceOfElementLocated(addressFieldLocator));
+        addressField.clear();
+        addressField.sendKeys(address);
     }
     public boolean isElementClickable(By locator){
         try{
