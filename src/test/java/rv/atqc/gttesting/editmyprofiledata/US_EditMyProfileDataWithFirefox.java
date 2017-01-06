@@ -48,6 +48,14 @@ public class US_EditMyProfileDataWithFirefox {
     private final String password = "22121989";
     private final String firstName = "Nick";
     private final String lastName = "Melnyk";
+    private final String nicknameWithCharacters = "NICK";
+    private final String nicknameWithSpecialCharacters = "!_!@`+()";
+    private final String validPhoneNumber = "+380982305488";
+    private final String invalidPhoneNumber = "380982305488";
+    private final String invalidPhoneNumberWithLetters = "qwerty";
+    private final String invalidPhoneNumberWithSpecialCharacters = "+11!11#11@";
+    private final String addressWithCharacters = "Rivne(UA), Piece Avenue 77";
+    private final String addressWithSpecialCharacters = "!+Rivne``*/&%$";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -149,6 +157,59 @@ public class US_EditMyProfileDataWithFirefox {
         cancelButton = wait.until(ExpectedConditions.presenceOfElementLocated(cancelButtonLocator));
         Assert.assertTrue(cancelButton.isEnabled());
     }
+    @Test
+    public void VerifyClickThroughRateOfTheCancelButton(){
+        clickEditButton();
+        Assert.assertTrue(isElementClickable(cancelButtonLocator));
+    }
+    @Test
+    public void verifyNicknamePlaceholderFilledWithCharacters(){
+        clickEditButton();
+        inputNickname(nicknameWithCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyNicknamePlaceholderFilledWithSpecialCharacters(){
+        clickEditButton();
+        inputNickname(nicknameWithSpecialCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithValidNumber(){
+        clickEditButton();
+        inputPhoneNumber(validPhoneNumber);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithInvalidNumber(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumber);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithLetters(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumberWithLetters);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyFilledPhoneNumberPlaceholderWithSpecialCharacters(){
+        clickEditButton();
+        inputPhoneNumber(invalidPhoneNumberWithSpecialCharacters);
+        Assert.assertFalse(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyAddressPlaceholderFilledWithCharacters(){
+        clickEditButton();
+        inputAddress(addressWithCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyAddressPlaceholderFilledWithSpecialCharacters(){
+        clickEditButton();
+        inputAddress(addressWithSpecialCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
     public void initializeLocators(){
         dropdownToggleLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/a/i");
         emailFieldLocator = By.xpath("//*[@id=\"navbar\"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input");
@@ -208,6 +269,21 @@ public class US_EditMyProfileDataWithFirefox {
     public void fillLastNameField(String lastName){
         clearLastNameField();
         lastNameField.sendKeys(lastName);
+    }
+    public void inputNickname(String nickname){
+        nicknameField = wait.until(ExpectedConditions.presenceOfElementLocated(nicknameFieldLocator));
+        nicknameField.clear();
+        nicknameField.sendKeys(nickname);
+    }
+    public void inputPhoneNumber(String phoneNumber){
+        phoneNumberField = wait.until(ExpectedConditions.presenceOfElementLocated(phoneNumberFieldLocator));
+        phoneNumberField.clear();
+        phoneNumberField.sendKeys(phoneNumber);
+    }
+    public void inputAddress(String address){
+        addressField = wait.until(ExpectedConditions.presenceOfElementLocated(addressFieldLocator));
+        addressField.clear();
+        addressField.sendKeys(address);
     }
     public boolean isElementClickable(By locator){
         try{
