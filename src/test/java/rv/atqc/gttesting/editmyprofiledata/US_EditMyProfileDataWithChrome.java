@@ -57,6 +57,7 @@ public class US_EditMyProfileDataWithChrome {
     private final String invalidPhoneNumberWithLetters = "qwerty";
     private final String invalidPhoneNumberWithSpecialCharacters = "+11!11#11@";
     private final String addressWithCharacters = "Rivne(UA), Piece Avenue 77";
+    private final String addressWithSpecialCharacters = "!+Rivne``*/&%$";
 
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
@@ -203,6 +204,12 @@ public class US_EditMyProfileDataWithChrome {
     public void verifyAddressPlaceholderFilledWithCharacters(){
         clickEditButton();
         inputAddress(addressWithCharacters);
+        Assert.assertTrue(isElementClickable(changeButtonLocator));
+    }
+    @Test
+    public void verifyAddressPlaceholderFilledWithSpecialCharacters(){
+        clickEditButton();
+        inputAddress(addressWithSpecialCharacters);
         Assert.assertTrue(isElementClickable(changeButtonLocator));
     }
     public void initializeLocators(){
