@@ -19,7 +19,8 @@ public class ChangePassSetFirefox {
 	private WebDriver driver;
 	private WebDriverWait wait;
 	private final int MAX_WAIT_TIME = 10;
-	
+  
+  
 	@BeforeMethod
 	public void before() {
 		FirefoxDriverManager.getInstance().setup();
@@ -29,7 +30,7 @@ public class ChangePassSetFirefox {
 		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 		clickOnLoginMenu();	
 	}
-	
+  
 	@AfterMethod
 	public void afterMethod() {
 		driver.close();
