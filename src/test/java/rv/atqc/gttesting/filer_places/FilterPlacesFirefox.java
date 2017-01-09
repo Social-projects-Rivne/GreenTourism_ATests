@@ -1,7 +1,5 @@
 package rv.atqc.gttesting.filer_places;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,7 +23,7 @@ public class FilterPlacesFirefox {
 		
 	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
 	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
-	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
+	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[2]");
 	private By FeaturedPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[5]");
 	private By HealthcarePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img");
 		
@@ -261,10 +259,5 @@ public class FilterPlacesFirefox {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(FeaturedPlace));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(HealthcarePlace));
 		CheckAllButton.click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(CampPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(ServicePlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(HostelsPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(FeaturedPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(HealthcarePlace));
 	}
 }

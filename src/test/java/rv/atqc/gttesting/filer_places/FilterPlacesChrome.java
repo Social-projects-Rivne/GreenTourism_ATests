@@ -1,12 +1,13 @@
 package rv.atqc.gttesting.filer_places;
 
-import java.util.concurrent.TimeUnit;
-
+import java.util.HashMap;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -15,17 +16,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 public class FilterPlacesChrome{
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME=10;
-	
+	private final int MAX_WAIT_TIME=20;
+
 	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
 	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
-	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[5]");
+	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[2]");
 	private By FeaturedPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[5]");
 	private By HealthcarePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img");
 	
@@ -39,10 +41,16 @@ public class FilterPlacesChrome{
 	@BeforeClass
 	public void beforeClass(){
 		ChromeDriverManager.getInstance().setup();
-		driver=new ChromeDriver();
+		HashMap<String, Object> prefs = new HashMap<>();
+		prefs.put("profile.default_content_setting_values.geolocation", 2);
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.setExperimentalOption("prefs", prefs);
+		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+		driver = new ChromeDriver(capabilities);
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
+		wait = new WebDriverWait(driver,MAX_WAIT_TIME);		
 	}
 	
 	@BeforeMethod
@@ -186,7 +194,7 @@ public class FilterPlacesChrome{
 	public void testFilter18PlacesWithoutCamps(){
 		boolean filter [] = {false,true,true,true,true};
 		setFilters(filter);
-		Assert.assertTrue(checkFilter(filter));
+		Assert.assertTrue(checkFilter(filter));        
 	}
 	
 	@Test //00000
@@ -204,7 +212,7 @@ public class FilterPlacesChrome{
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
-	
+
 
 	private void setFilters(boolean[] filter){
 		setPlacesFilter(CampPlacesFilter, filter[0]);
@@ -212,7 +220,6 @@ public class FilterPlacesChrome{
 		setPlacesFilter(HostelsPlacesFilter, filter[2]);
 		setPlacesFilter(FeaturedPlacesFilter, filter[3]);
 		setPlacesFilter(HealthcarePlacesFilter, filter[4]);
-
 	}
 	
 	private boolean checkFilter(boolean[] filter){
@@ -262,10 +269,5 @@ public class FilterPlacesChrome{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(FeaturedPlace));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(HealthcarePlace));
 		CheckAllButton.click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(CampPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(ServicePlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(HostelsPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(FeaturedPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(HealthcarePlace));
 	}
 }
