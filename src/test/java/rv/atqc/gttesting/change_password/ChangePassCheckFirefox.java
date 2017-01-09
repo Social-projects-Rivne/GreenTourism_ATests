@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
 public class ChangePassCheckFirefox {
+	
 	private static String MAIL = "romanukhaav@gmail.com";
 	private static String PASS = "123456789";
 	private static String SHORT_PASS = "123456";
@@ -25,12 +26,12 @@ public class ChangePassCheckFirefox {
 		FirefoxDriverManager.getInstance().setup();
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		driver.get("http://green-tourism.herokuapp.com/#!/");
+		driver.get("https://green-tourism.herokuapp.com/#!/");
+		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 		clickOnLoginMenu();	
 		inputEmail(MAIL);
 		inputPass(PASS);
 		clickOnLoginButton();
-		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 		wait.until(ExpectedConditions.presenceOfElementLocated
 					(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")));
 	}
@@ -47,65 +48,85 @@ public class ChangePassCheckFirefox {
 		Assert.assertEquals(getTextFromFildNewPass(), "New password");
 	}
 	
-	
 	@Test
 	public void inputShortPasswords() {
 		clickOnChangePassButton();
-		inputPassFild1(SHORT_PASS);
-		inputPassFild2(SHORT_PASS);
-		Assert.assertEquals(getErrorText(), "Password should be longer than 8 characters");	
+		inputPassField1(SHORT_PASS);
+		inputPassField2(SHORT_PASS);
+		Assert.assertEquals(getError1Text(), "Password should be longer than 8 characters");	
 	}
-	
 	
 	@Test
 	public void inputDifferentPasswords() {
 		clickOnChangePassButton();
-		inputPassFild1(PASS);
-		inputPassFild2(SHORT_PASS);
+		inputPassField1(PASS);
+		inputPassField2(SHORT_PASS);
 		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
 	}
 
-	
+	@Test
+	public void inputEmptyPasswords() {
+		clickOnChangePassButton();
+		inputPassField1("");
+		inputPassField2("");
+		Assert.assertEquals(getError3Text(), "Password required");
+	}
 			
 		  
 	private void clickOnLoginMenu() {
-        driver.findElement(By.cssSelector("ul.nav:nth-child(1) > li:nth-child(1) > a:nth-child(1) > i:nth-child(1)")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				"#navbar > ul:nth-child(1) > li"))).click();
     }
 	
 	private void inputEmail(String eml) {
-		 driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input")).sendKeys(eml);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				"/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input"))).sendKeys(eml);
     }
 	
 	private void inputPass(String pass) {
-		driver.findElement(By.xpath("/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input")).sendKeys(pass);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				"/html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input"))).sendKeys(pass);
 	}
 	
 	 private void clickOnLoginButton() {
-	    driver.findElement(By.cssSelector("#navbar > ul:nth-child(1) > li > ul > auth > div:nth-child(2) > div > form > input")).click();
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				 "#navbar > ul:nth-child(1) > li > ul > auth > div:nth-child(2) > div > form > input"))).click();
 	 }
 	 
-	 private void clickOnChangePassButton() { 
-		driver.findElement(By.cssSelector("#main > div > user-profile > div > div > section.col-sm-9 > div:nth-child(1) > h1 > button:nth-child(2)")).click();   
+	 private void clickOnChangePassButton() {
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(
+				 "#main > div > user-profile > div > div > section.col-sm-9 > div:nth-child(1) > h1 > button:nth-child(2)"))).click();   
 	 }									
 
 	 private String getTextFromFildNewPass() {
-	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")).getAttribute("placeholder");
+		 return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				 "//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input"))).getAttribute("placeholder");
 	 }
 	   
-	 private void inputPassFild1(String pass) {
-	        driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input")).sendKeys(pass);
+	 private void inputPassField1(String pass) {
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				 "//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/input"))).sendKeys(pass);
 	 }
 	 
-	 private void inputPassFild2(String pass) {
-	        driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/input")).sendKeys(pass);
+	 private void inputPassField2(String pass) {
+		 wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				 "//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/input"))).sendKeys(pass);
 	 }
 	 
-	 private String getErrorText() {
-	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[2]")).getText();
+	 private String getError1Text() {
+		 return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+				 "//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[2]"))).getText();
 	 }
 	 
 	 private String getError2Text() {
-		 	clickOnLoginMenu();
-	        return driver.findElement(By.xpath("//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/div/p")).getText();
+	 	clickOnLoginMenu();
+	 	return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+	 			"//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[2]/div/p"))).getText();
+	 }
+	 
+	 private String getError3Text() {
+	 	clickOnLoginMenu();
+	 	return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+	 			"//*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[3]/form/div[1]/div/p[1]"))).getText();
 	 }
 }
