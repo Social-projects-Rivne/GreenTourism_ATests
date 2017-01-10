@@ -1,5 +1,7 @@
 package rv.atqc.gttesting.possibility_change_map_type;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,14 +54,18 @@ public class PossibilityChangeMapTypeMozillaPC {
 						+ "required.ng-valid-email.ng-valid.ng-valid-pattern input.btn.btn-"
 						+ "success.btn-block.submit-btn")));
 		loginButton.click();
+		
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
 		WebElement menuItem = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//div[@id='navbar']//i[@class='fa fa-bars navtop']")));
 		menuItem.click();
-
-		WebElement menuItemMap = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Map")));
+		
+		WebElement menuItemMap = wait.until(ExpectedConditions.visibilityOfElementLocated(By
+				.xpath("//div[@id='navbar']//a[@href='#!/places']")));
 		menuItemMap.click();
-
+		
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 	}
 
 	@AfterClass
@@ -151,3 +157,4 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 
 }
+
