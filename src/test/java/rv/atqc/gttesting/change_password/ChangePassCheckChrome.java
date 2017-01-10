@@ -18,7 +18,7 @@ public class ChangePassCheckChrome {
 	private static String SHORT_PASS = "123456";
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME = 10;
+	private final int MAX_WAIT_TIME = 20;
 	
 	
 	@BeforeMethod
