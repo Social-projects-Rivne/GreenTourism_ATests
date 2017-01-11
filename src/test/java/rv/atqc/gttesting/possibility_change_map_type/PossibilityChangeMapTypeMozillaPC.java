@@ -1,11 +1,8 @@
 package rv.atqc.gttesting.possibility_change_map_type;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,8 +10,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
 public class PossibilityChangeMapTypeMozillaPC {
@@ -23,7 +18,8 @@ public class PossibilityChangeMapTypeMozillaPC {
 	private final int MAX_WAIT_TIME = 10;
 	private String USER_MAIL = "energmaxymys@gmail.com";
 	private String USER_PASSWORD = "12345678";
-
+	private String ProfileXpath=new String("//a[@ng-click='$ctrl.selectTab(1)']");
+	
 	@BeforeClass
 	public void before() {
 		FirefoxDriverManager.getInstance().setup();
@@ -55,7 +51,13 @@ public class PossibilityChangeMapTypeMozillaPC {
 						+ "success.btn-block.submit-btn")));
 		loginButton.click();
 		
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		WebElement ProfileElement = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath(ProfileXpath)));
+		Boolean isProfileElementDisplayed = ProfileElement.isDisplayed();
+		
+		if(!isProfileElementDisplayed){
+			throw new RuntimeException("User page isn't displayed correct");
+		}
 
 		WebElement menuItem = wait.until(ExpectedConditions
 				.visibilityOfElementLocated(By.xpath("//div[@id='navbar']//i[@class='fa fa-bars navtop']")));
@@ -64,8 +66,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 		WebElement menuItemMap = wait.until(ExpectedConditions.visibilityOfElementLocated(By
 				.xpath("//div[@id='navbar']//a[@href='#!/places']")));
 		menuItemMap.click();
-		
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 	}
 
 	@AfterClass
@@ -157,4 +157,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 
 }
+
+
 
