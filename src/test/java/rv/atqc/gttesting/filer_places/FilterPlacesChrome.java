@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -23,7 +22,7 @@ public class FilterPlacesChrome{
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME=20;
+	private final int MAX_WAIT_TIME=10;
 
 	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
 	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
@@ -50,21 +49,17 @@ public class FilterPlacesChrome{
 		driver = new ChromeDriver(capabilities);
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		wait = new WebDriverWait(driver,MAX_WAIT_TIME);		
+		wait = new WebDriverWait(driver,MAX_WAIT_TIME);	
+		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
+		CategoriesButton.click();	
 	}
 	
 	@BeforeMethod
 	public void beforeTest(){
 		openCategoryPlaces();
 	}
-	
-	@AfterMethod
-	public void afterTest(){
-		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
-		CategoriesButton.click();
-	}
-	
+
 	@AfterClass
 	public void afterClass(){		
 		driver.close();
@@ -249,11 +244,7 @@ public class FilterPlacesChrome{
 		return linkElement.isDisplayed();
 	}
 	
-	private void openCategoryPlaces(){
-		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
-		CategoriesButton.click();		
-		
+	private void openCategoryPlaces(){	
 		WebElement PlacesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]")));
 		Actions builder = new Actions(driver);
@@ -269,5 +260,10 @@ public class FilterPlacesChrome{
 		wait.until(ExpectedConditions.visibilityOfElementLocated(FeaturedPlace));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(HealthcarePlace));
 		CheckAllButton.click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(CampPlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(ServicePlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(HostelsPlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(FeaturedPlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(HealthcarePlace));
 	}
 }
