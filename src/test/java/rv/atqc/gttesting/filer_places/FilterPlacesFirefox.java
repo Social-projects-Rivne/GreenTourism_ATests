@@ -18,13 +18,19 @@ public class FilterPlacesFirefox {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME=10;	
+	private final int MAX_WAIT_TIME=20;	
 		
 	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
 	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
 	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[2]");
 	private By FeaturedPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[5]");
 	private By HealthcarePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img");
+	
+	private By CampPlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]/a/span");
+	private By ServicePlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]/a/span");
+	private By HostelsPlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[3]/a/span");
+	private By FeaturedPlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]/a/span");
+	private By HealthcarePlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]/a/span");
 		
 	private By CampPlacesFilter  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]");
 	private By ServicePlacesFilter = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]");
@@ -252,10 +258,10 @@ public class FilterPlacesFirefox {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(FeaturedPlace));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(HealthcarePlace));
 		CheckAllButton.click();
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(CampPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(ServicePlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(HostelsPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(FeaturedPlace));
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(HealthcarePlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(CampPlaceLable));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(ServicePlaceLable));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(HostelsPlaceLable));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(FeaturedPlaceLable));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(HealthcarePlaceLable));
 	}
 }
