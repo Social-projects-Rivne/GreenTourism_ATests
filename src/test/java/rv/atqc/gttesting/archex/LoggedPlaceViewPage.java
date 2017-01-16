@@ -23,5 +23,11 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		newComment.sendKeys(text);
 		return this;
 	}
+	
+	public LoggedPlaceViewPage scrollToNewComment(){
+//		executeScript("document.evaluate('/html/body/main/div/place-detail/div/div/div[3]/div/comment/div/div[1]/div[2]/div[1]/textarea', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.scrollIntoView();");
+		scroll(newComment);
+		return this;
+	}
 
 }

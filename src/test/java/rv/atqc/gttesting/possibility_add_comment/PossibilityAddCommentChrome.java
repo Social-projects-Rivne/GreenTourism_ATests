@@ -28,9 +28,14 @@ public class PossibilityAddCommentChrome {
 				.clickLogInButton();
 		driver.get(" http://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3");
 		
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		new LoggedPlaceViewPage(driver)
 		.timeout(3, TimeUnit.SECONDS)
-		.executeScript("window.scrollBy(0,250)")
+		.scrollToNewComment()
 		.timeout(3, TimeUnit.SECONDS)
 		.setNewComment("new Comment\n shdjfsdjdvjbvs");
 		try {
