@@ -12,7 +12,6 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 	protected WebDriver driver;
 	protected JavascriptExecutor jse;
-	T t;
 
 	protected AbstractPage(WebDriver driver) {
 		this.driver = driver;
