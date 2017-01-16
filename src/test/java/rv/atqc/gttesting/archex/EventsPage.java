@@ -40,6 +40,9 @@ public class EventsPage extends AbstractPage<EventsPage> {
     public WebElement getEventsDropdownList(){
         return eventsDropdownList;
     }
+    public WebElement getEventsName(){
+        return eventsName;
+    }
     public EventsPage clickGame(){
         gamePlaceFilter.click();
         return this;

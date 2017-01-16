@@ -14,8 +14,11 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import rv.atqc.gttesting.archex.CategoriesPage;
+import rv.atqc.gttesting.archex.EventsPage;
+import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 
-public class FilterEventsOnTheMapByCategoriesWithChrome {
+public class FilterEventsOnTheMapByCategoriesPageObjectWithChrome {
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -33,13 +36,19 @@ public class FilterEventsOnTheMapByCategoriesWithChrome {
 
     private final String mapLink = "http://green-tourism.herokuapp.com/#!/places";
 
+    CategoriesPage categoriesPage;
+    EventsPage eventsPage;
+    MapHeadPageForGuestUserPage mapHeadPageForGuestUserPage;
+
     @BeforeMethod
     public void setUpDriverAndPreconditions() {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver,MAX_WAIT_TIME);
-        setUpPreconditions();
+        // wait = new WebDriverWait(driver,MAX_WAIT_TIME);
+        /*setUpPreconditions();*/
+        driver.get(mapLink);
+        eventsPage = new MapHeadPageForGuestUserPage(driver).clickCategories().clickEvents();
     }
     @AfterMethod
     public void quitDriver(){
@@ -47,14 +56,14 @@ public class FilterEventsOnTheMapByCategoriesWithChrome {
     }
     @Test
     public void verifyExistenceOfEventsDropdownList(){
-        Assert.assertTrue(isElementEnabled(eventsDropdownList), "This element doesn't exist");
+        Assert.assertTrue(isElementEnabled(eventsPage.getEventsDropdownList()), "This element doesn't exist");
     }
     @Test
     public void verifyTitleOfEventsDropdownList(){
-        eventsName = wait.until(ExpectedConditions.presenceOfElementLocated(eventsNameLocator));
-        Assert.assertTrue(eventsName.getText().equalsIgnoreCase("Events"));
+        //eventsName = wait.until(ExpectedConditions.presenceOfElementLocated(eventsNameLocator));
+        Assert.assertTrue(eventsPage.getEventsName().getText().equalsIgnoreCase("Events"));
     }
-    @Test
+    /*@Test
     public void verifyExistenceOfPlaceFilterGame(){
         gamePlaceFilter = wait.until(ExpectedConditions.presenceOfElementLocated(gamePlaceFilterLocator));
         Assert.assertTrue(isElementEnabled(gamePlaceFilter), "This element doesn't exist");
@@ -135,11 +144,12 @@ public class FilterEventsOnTheMapByCategoriesWithChrome {
 
     public void setUpPreconditions(){
         driver.get(mapLink);
-        categoriesDropdownList = wait.until(ExpectedConditions.presenceOfElementLocated(categoriesLocator));
+        *//*categoriesDropdownList = wait.until(ExpectedConditions.presenceOfElementLocated(categoriesLocator));
         categoriesDropdownList.click();
         eventsDropdownList = wait.until(ExpectedConditions.presenceOfElementLocated(eventsLocator));
-        eventsDropdownList.click();
-    }
+        eventsDropdownList.click();*//*
+        mapHeadPageForGuestUserPage.clickCategories().clickEvents();
+    }*/
     public boolean isElementEnabled(WebElement element){
         return element.isEnabled();
     }

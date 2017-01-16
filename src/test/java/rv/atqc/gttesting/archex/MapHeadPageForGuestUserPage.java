@@ -7,10 +7,10 @@ import org.openqa.selenium.support.How;
 
 public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPageForGuestUserPage>{
 
-	@FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]")
-	private WebElement categories;
+	@FindBy(how = How.XPATH, using = "html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
+	public WebElement categories;
 
-	protected MapHeadPageForGuestUserPage(WebDriver driver) {
+	public MapHeadPageForGuestUserPage(WebDriver driver) {
 		super(driver);
 	}
 
