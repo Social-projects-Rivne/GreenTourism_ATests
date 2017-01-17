@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class R {
+public class Resources {
 
 	public static class UserTestData {
 		private static Properties properties = init("user-information-test-data.properties");
@@ -36,10 +36,10 @@ public class R {
 		Properties properties = new Properties();
 		InputStream input = null;
 		try {
-			input = R.class.getClassLoader().getResourceAsStream(propertiesTitle);
+			input = Resources.class.getClassLoader().getResourceAsStream(propertiesTitle);
 			properties.load(input);
 		} catch (IOException ex) {
-			ex.printStackTrace();
+			throw new RuntimeException();
 		} finally {
 			closeSafely(input);
 		}
