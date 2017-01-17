@@ -10,7 +10,7 @@ public class CategoriesPage extends AbstractPage<CategoriesPage>{
 	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[2]/a")
 	protected WebElement tracks;
 	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/a")
-	public WebElement events;
+	protected WebElement events;
 	
 	protected CategoriesPage(WebDriver driver) {
 		super(driver);

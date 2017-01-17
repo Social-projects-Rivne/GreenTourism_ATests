@@ -5,21 +5,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-/**
- * Created by Никита on 12.01.2017.
- */
 public class EventsPage extends AbstractPage<EventsPage> {
 
     @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]")
     private WebElement eventsDropdownList;
     @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/a")
     private WebElement eventsName;
-    /*@FindBy(how = How.XPATH, using = "/*//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[3]/div/div[5]/ul/li[1]")
-    private WebElement gamePlaceFilter;
-    @FindBy(how = How.XPATH, using = "/*//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]")
-    private WebElement festivalPlaceFilter;
-    @FindBy(how = How.XPATH, using = "/*//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[3]")
-    private WebElement meetingPlaceFilter;*/
     @FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[1]/a")
     private WebElement gamePlaceFilter;
     @FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/ul/li[2]/a")
@@ -55,18 +46,6 @@ public class EventsPage extends AbstractPage<EventsPage> {
         meetingPlaceFilter.click();
         return this;
     }
-    public EventsPage clickGameGreenIcon(){
-        gameGreenIcon.click();
-        return this;
-    }
-    public EventsPage clickFestivalRedIcon(){
-        festivalRedIcon.click();
-        return this;
-    }
-    public EventsPage clickMeetingBlueIcon(){
-        meetingBlueIcon.click();
-        return this;
-    }
     public WebElement getGameFilter(){
         return gamePlaceFilter;
     }
@@ -76,9 +55,7 @@ public class EventsPage extends AbstractPage<EventsPage> {
     public WebElement getMeetingFilter(){
         return meetingPlaceFilter;
     }
-    public WebElement getGameGreenIcon(){
-        return gameGreenIcon;
-    }
+    public WebElement getGameGreenIcon(){ return gameGreenIcon; }
     public WebElement getFestivalRedIcon(){
         return festivalRedIcon;
     }
