@@ -1,5 +1,7 @@
 package rv.atqc.gttesting.archex;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -34,4 +36,10 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 		acting.act(driver);
 		return (T) this;
 	}
+	
+	public T timeout(long time, TimeUnit timeUnit){
+		driver.manage().timeouts().implicitlyWait(time, timeUnit);
+		return (T) this;
+	}
+	
 }
