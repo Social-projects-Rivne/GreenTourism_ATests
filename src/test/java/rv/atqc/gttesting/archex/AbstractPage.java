@@ -41,7 +41,7 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 	}
 
 
-	public T waitToVisibilityOfElement(WebElement webEl) {
+	public T waitForVisibilityOfElement(WebElement webEl) {
 		wait.until(ExpectedConditions.visibilityOf(webEl));
 		return (T) this;
 	}
