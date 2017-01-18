@@ -32,6 +32,10 @@ public class Resources {
 		public static String PASSWORD_NO_MATCH  = properties.getProperty("password-no-match");
 	}
 
+	public static class LogInMessage {
+
+	}
+
 	private static Properties init(String propertiesTitle) {
 		Properties properties = new Properties();
 		InputStream input = null;

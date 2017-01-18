@@ -31,13 +31,13 @@ public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
     }
 
     public LogInPage clickOnLeftTopGreenButton() {
-        waitToVisibilityOfElement(leftTopGreenButton);
+        waitForVisibilityOfElement(leftTopGreenButton);
         leftTopGreenButton.click();
         return this;
     }
 
     private LogInPage insertEmail() {
-        waitToVisibilityOfElement(emailField);
+        waitForVisibilityOfElement(emailField);
         emailField.sendKeys(mail);
         return this;
     }
