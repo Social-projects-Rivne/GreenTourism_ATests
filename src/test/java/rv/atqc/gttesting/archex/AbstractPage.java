@@ -1,11 +1,10 @@
 package rv.atqc.gttesting.archex;
 
-import org.openqa.selenium.By;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import rv.atqc.gttesting.archex.helpers.Acting;
@@ -41,9 +40,19 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 		return (T) this;
 	}
 
+
 	public T waitToVisibilityOfElement(WebElement webEl) {
 		wait.until(ExpectedConditions.visibilityOf(webEl));
 		return (T) this;
 	}
 
+
+
+	
+	public T timeout(long time, TimeUnit timeUnit){
+		driver.manage().timeouts().implicitlyWait(time, timeUnit);
+		return (T) this;
+	}
+	
 }
+
