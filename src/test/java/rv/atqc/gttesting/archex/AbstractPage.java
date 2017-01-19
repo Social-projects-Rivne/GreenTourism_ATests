@@ -39,12 +39,13 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
     }
 
     public T waitForVisibilityOfElement(WebElement webElement, int timeout) {
-        WebDriverWait wait =  new WebDriverWait(driver, timeout);
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.visibilityOf(webElement));
         return (T) this;
     }
+
     public T waitForElementToBeClickable(WebElement webElement, int timeout)    {
-        WebDriverWait wait =  new WebDriverWait(driver, timeout);
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
         return (T) this;
     }
