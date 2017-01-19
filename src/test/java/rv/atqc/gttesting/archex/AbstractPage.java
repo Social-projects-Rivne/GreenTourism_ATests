@@ -13,11 +13,9 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 
     protected WebDriver driver;
     protected JavascriptExecutor jse;
-    protected WebDriverWait wait;
 
     protected AbstractPage(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 10);
         this.jse = (JavascriptExecutor) driver;
         PageFactory.initElements(driver, this);
     }
@@ -40,12 +38,14 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
         return (T) this;
     }
 
-    public T waitForVisibilityOfElement(WebElement webEl) {
-        wait.until(ExpectedConditions.visibilityOf(webEl));
+    public T waitForVisibilityOfElement(WebElement webElement, int timeout) {
+        WebDriverWait wait =  new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.visibilityOf(webElement));
         return (T) this;
     }
-    public T waitForElementToBeClickable(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+    public T waitForElementToBeClickable(WebElement webElement, int timeout)    {
+        WebDriverWait wait =  new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
         return (T) this;
     }
 
