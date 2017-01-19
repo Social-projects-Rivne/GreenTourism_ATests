@@ -3,11 +3,9 @@ package rv.atqc.gttesting.archex;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import rv.atqc.gttesting.res.Resources;
 
 public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
-
-    private final String mail = "17141@rambler.ru";
-    private final String ps = "12345678";
 
     @FindBy(css = "html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-dirty.ng-valid-parse.ng-valid-required.ng-valid-email.ng-valid.ng-valid-pattern input.btn.btn-success.btn-block.submit-btn")
     private WebElement loginButton;
@@ -38,12 +36,12 @@ public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
 
     private LogInPage insertEmail() {
         waitForVisibilityOfElement(emailField);
-        emailField.sendKeys(mail);
+        emailField.sendKeys(Resources.LogInMessage.USER_EMAIL);
         return this;
     }
 
     private LogInPage insertPassword() {
-        passwordField.sendKeys(ps);
+        passwordField.sendKeys(Resources.LogInMessage.USER_PASSWORD);
         return this;
     }
 

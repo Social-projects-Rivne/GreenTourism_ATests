@@ -33,6 +33,9 @@ public class Resources {
 	}
 
 	public static class LogInMessage {
+		private static Properties properties = init("logInUser.properties");
+		public static String USER_EMAIL    = properties.getProperty("email");
+		public static String USER_PASSWORD = properties.getProperty("password");
 
 	}
 

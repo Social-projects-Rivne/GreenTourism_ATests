@@ -14,7 +14,7 @@ public class EditAvartarPage extends LogInPage  {
     }
 
     public   String getChangeButtonText() {
-        waitToVisibilityOfElement(chengeButton);
+        waitForVisibilityOfElement(chengeButton);
         return chengeButton.getText();
     }
 }
