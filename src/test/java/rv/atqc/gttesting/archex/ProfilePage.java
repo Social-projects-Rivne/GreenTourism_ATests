@@ -7,5 +7,8 @@ public class ProfilePage extends AbstractPage<ProfilePage> {
 	public ProfilePage(WebDriver driver) {
 		super(driver);
 	}
-
+	
+	public HeadForLoggedUserPage getHeadForLoggedUserPage(){
+		return new HeadForLoggedUserPage(driver);
+	}
 }
