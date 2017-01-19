@@ -2,7 +2,7 @@ package rv.atqc.gttesting.archex;
 
 import org.openqa.selenium.WebDriver;
 
-public class RightNavigationForLoggedUserPage extends AbstractRightNavigation<RightNavigationForGuestPage> {
+public class RightNavigationForLoggedUserPage extends AbstractRightNavigation<RightNavigationForLoggedUserPage> {
 
 	
 	
