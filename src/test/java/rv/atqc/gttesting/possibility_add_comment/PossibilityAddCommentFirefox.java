@@ -2,24 +2,24 @@ package rv.atqc.gttesting.possibility_add_comment;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 
-public class PossibilityAddCommentChrome {
+public class PossibilityAddCommentFirefox {
 	
-	private WebDriver driver;
+private WebDriver driver;
 	
 	@BeforeMethod
 	public void before(){
-		ChromeDriverManager.getInstance().setup();
-		driver = new ChromeDriver();
+		FirefoxDriverManager.getInstance().setup();
+		driver = new FirefoxDriver();
 		driver.get(" http://green-tourism.herokuapp.com");
 		driver.manage().window().maximize();
 		new HeadForGuestUserPage(driver)

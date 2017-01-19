@@ -6,6 +6,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Function;
 
 import rv.atqc.gttesting.archex.helpers.Acting;
 
@@ -13,9 +18,11 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 	protected WebDriver driver;
 	protected JavascriptExecutor jse;
+	protected WebDriverWait wait;
 
 	protected AbstractPage(WebDriver driver) {
 		this.driver = driver;
+		wait = new WebDriverWait(driver, 10);
 		this.jse = (JavascriptExecutor) driver;
 		PageFactory.initElements(driver, this);
 	}
@@ -38,6 +45,16 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 		return (T) this;
 	}
 	
+	
+	public WebElement waitForVisibilityOfElement(WebElement element) {
+		return wait.until(ExpectedConditions.visibilityOf(element));
+	}
+	
+	public WebElement waitForElementToBeClickable(WebElement element) {
+		return wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+	
+	
 	public T act(Acting acting){
 		acting.act(driver);
 		return (T) this;
@@ -49,6 +66,12 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 	}
 	
 	public void scroll(WebElement we){
+		wait.until(new Function<WebDriver, Boolean>() {
+			@Override
+			public Boolean apply(WebDriver arg0) {
+				return (Boolean)jse.executeScript("return document.documentElement.scrollHeight>document.documentElement.clientHeight;");
+			}	
+		});
 		executeScript("arguments[0].scrollIntoView()", we);
 	}
 	
