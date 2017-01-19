@@ -14,7 +14,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
@@ -53,10 +52,6 @@ public class FilterPlacesChrome{
 		wait = new WebDriverWait(driver,MAX_WAIT_TIME);		
 	}
 	
-	@BeforeMethod
-	public void beforeTest(){
-		openCategoryPlaces();
-	}
 	
 	@AfterMethod
 	public void afterTest(){
@@ -199,6 +194,7 @@ public class FilterPlacesChrome{
 	
 	@Test //00000
 	public void testFilter19AllPlacesDeselected(){
+		openCategoryPlaces();
 		Assert.assertTrue(	driver.findElements(CampPlace).isEmpty()
 						  &&driver.findElements(ServicePlace).isEmpty()
 						  &&driver.findElements(HostelsPlace).isEmpty()
@@ -215,6 +211,7 @@ public class FilterPlacesChrome{
 
 
 	private void setFilters(boolean[] filter){
+		openCategoryPlaces();
 		setPlacesFilter(CampPlacesFilter, filter[0]);
 		setPlacesFilter(ServicePlacesFilter, filter[1]);
 		setPlacesFilter(HostelsPlacesFilter, filter[2]);

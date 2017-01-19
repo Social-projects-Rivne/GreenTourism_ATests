@@ -4,7 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import rv.atqc.gttesting.archex.helpers.Acting;
 
@@ -12,6 +15,7 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 	protected WebDriver driver;
 	protected JavascriptExecutor jse;
+	private WebDriverWait wait;
 
 	protected AbstractPage(WebDriver driver) {
 		this.driver = driver;
@@ -42,4 +46,13 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 		return (T) this;
 	}
 	
+	public boolean isPlacesDisplayed(WebElement element){
+		try{
+			wait.until(ExpectedConditions.visibilityOf(element));
+			return element.isDisplayed();
+		}
+		catch(Exception exception){
+			return false;
+		}
+	}
 }
