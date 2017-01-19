@@ -54,5 +54,6 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 		driver.manage().timeouts().implicitlyWait(time, timeUnit);
 		return (T) this;
 	}
+
 }
 
