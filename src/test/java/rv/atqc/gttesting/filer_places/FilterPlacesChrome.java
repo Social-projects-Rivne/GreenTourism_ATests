@@ -14,7 +14,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 
 public class FilterPlacesChrome{
@@ -54,7 +53,7 @@ public class FilterPlacesChrome{
 		driver = new ChromeDriver(capabilities);
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		wait = new WebDriverWait(driver,MAX_WAIT_TIME);	
+    wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]")));
 		CategoriesButton.click();	

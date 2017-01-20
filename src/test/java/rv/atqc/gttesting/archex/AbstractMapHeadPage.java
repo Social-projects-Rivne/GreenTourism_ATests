@@ -18,7 +18,7 @@ public abstract class AbstractMapHeadPage<T extends AbstractMapHeadPage<T>> exte
 	protected AbstractMapHeadPage(WebDriver driver) {
 		super(driver);
 	}
-
+	
 	public CategoriesPage clickCategories(){
 		categories.click();
 		return new CategoriesPage(driver);
