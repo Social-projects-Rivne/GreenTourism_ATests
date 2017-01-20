@@ -20,7 +20,7 @@ public class FilterPlacesFirefoxPO {
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		page = new PlacesPage(driver).clickCategories().clickPlaces();
+		page = new PlacesPage(driver).openCategories();
 	}
 
 	@AfterClass

@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public abstract class CategoriesPage<T> extends AbstractPage<CategoriesPage<T>>{
+public class CategoriesPage extends AbstractPage<CategoriesPage>{
 	
 	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
 	protected WebElement categories;
@@ -20,7 +20,7 @@ public abstract class CategoriesPage<T> extends AbstractPage<CategoriesPage<T>>{
 		super(driver);
 	}
 	
-	public CategoriesPage<T> clickCategories(){
+	public CategoriesPage clickCategories(){
 		categories.click();
 		return this;
 	}

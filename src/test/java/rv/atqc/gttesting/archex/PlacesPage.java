@@ -9,9 +9,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class PlacesPage extends CategoriesPage<PlacesPage>{
+public class PlacesPage extends AbstractPage<PlacesPage>{
 
-	private final int MAX_WAIT_TIME = 10;
+	private final int MAX_WAIT_TIME = 5;
 	
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[1]")
 	private WebElement campPlace;
@@ -41,8 +41,12 @@ public class PlacesPage extends CategoriesPage<PlacesPage>{
 	private ArrayList <WebElement> filterList = new ArrayList<WebElement>(Arrays.asList(
 			campPlacesFilter, servicePlacesFilter, hostelsPlacesFilter, featuredPlacesFilter, healthcarePlacesFilter));
 	
+	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
+	protected WebElement categoriesButton;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")
 	private WebElement checkAllButton;
+	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]")
+	protected WebElement placesButton;
 	
 	
 	public PlacesPage(WebDriver driver) {
@@ -69,7 +73,7 @@ public class PlacesPage extends CategoriesPage<PlacesPage>{
 
 	public boolean isPlacesDisplayed(WebElement webElement, int timeout){
 		try{
-			waitForVisibilityOfElement(webElement, 20);
+			waitForVisibilityOfElement(webElement, MAX_WAIT_TIME);
 			return webElement.isDisplayed();
 		}
 		catch(Exception exception){
@@ -77,8 +81,15 @@ public class PlacesPage extends CategoriesPage<PlacesPage>{
 		}
     }
 	
+	public PlacesPage openCategories(){
+		this.waitForVisibilityOfElement(categoriesButton, MAX_WAIT_TIME);
+		categoriesButton.click();
+		return this;
+	}
+	
 	public PlacesPage openCategoryPlaces(){
-		this.waitForVisibilityOfElement(placesButton, 20);
+	
+		this.waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
 		Actions builder = new Actions(driver);
 		builder.moveToElement(placesButton).perform();
 		

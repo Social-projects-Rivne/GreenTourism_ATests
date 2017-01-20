@@ -19,6 +19,11 @@ public abstract class AbstractMapHeadPage<T extends AbstractMapHeadPage<T>> exte
 		super(driver);
 	}
 	
+	public CategoriesPage clickCategories(){
+		categories.click();
+		return new CategoriesPage(driver);
+	}
+	
 	public MapTypeMenuPage clickMapTypeMenu(){
 		mapType.click();
 		return new MapTypeMenuPage(driver);

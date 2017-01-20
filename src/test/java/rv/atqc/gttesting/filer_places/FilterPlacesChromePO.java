@@ -29,7 +29,7 @@ public class FilterPlacesChromePO {
 		driver = new ChromeDriver(capabilities);
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		page = new PlacesPage(driver).clickCategories().clickPlaces();
+		page = new PlacesPage(driver).openCategories();
 	}
 	
 	@AfterClass
