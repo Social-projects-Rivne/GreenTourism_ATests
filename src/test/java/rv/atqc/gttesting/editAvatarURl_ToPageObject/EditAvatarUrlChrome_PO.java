@@ -10,10 +10,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import rv.atqc.gttesting.archex.EditAvartarPage;
 import rv.atqc.gttesting.archex.LogInPage;
+import rv.atqc.gttesting.archex.ProfilePage;
+import rv.atqc.gttesting.res.Resources;
 
 
 public class EditAvatarUrlChrome_PO {
-    private EditAvartarPage page;
+    private ProfilePage profilePage;
     private WebDriver driver;
 
     @BeforeMethod
@@ -21,7 +23,7 @@ public class EditAvatarUrlChrome_PO {
         ChromeDriverManager.getInstance().setup();
         driver = new ChromeDriver();
         driver.get("https://green-tourism.herokuapp.com/");
-        page = new LogInPage(driver).loging();
+        profilePage = new LogInPage(driver).loging();
     }
 
     @AfterMethod
@@ -31,8 +33,11 @@ public class EditAvatarUrlChrome_PO {
 
     @Test
     public void checkChangeButtonTitleInChrome() {
-        System.out.println(page.getClass());
-        Assert.assertEquals(page.getChangeButtonText(), "Change");
-       //System.out.println(Resources.LogInMessage.USER_EMAIL);
+        Assert.assertEquals(profilePage.getChangeButtonText(), Resources.LogInConstants.EXPECTED_CHANGE_BUTTON_TEXT);
+    }
+
+    @Test
+    public void checkCancelButtonTitleInChrome() {
+        Assert.assertEquals(profilePage.getEditAvatarPage().getCancelButtonText(), Resources.LogInConstants.EXPECTED_CANCEL_BUTTON_TEXT);
     }
 }

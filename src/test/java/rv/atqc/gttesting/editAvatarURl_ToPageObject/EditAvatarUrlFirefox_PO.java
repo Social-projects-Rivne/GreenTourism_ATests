@@ -9,9 +9,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import rv.atqc.gttesting.archex.EditAvartarPage;
 import rv.atqc.gttesting.archex.LogInPage;
+import rv.atqc.gttesting.archex.ProfilePage;
+import rv.atqc.gttesting.res.Resources;
 
 public class EditAvatarUrlFirefox_PO {
-    private EditAvartarPage page;
+    private ProfilePage profilePage;
     private WebDriver driver;
 
     @BeforeMethod
@@ -19,7 +21,7 @@ public class EditAvatarUrlFirefox_PO {
         FirefoxDriverManager.getInstance().setup();
         driver = new FirefoxDriver();
         driver.get("https://green-tourism.herokuapp.com/");
-        page = new LogInPage(driver).loging();
+        profilePage = new LogInPage(driver).loging();
     }
 
     @AfterMethod
@@ -29,7 +31,7 @@ public class EditAvatarUrlFirefox_PO {
 
     @Test
     public void checkChangeButtonTitleInChrome() {
-        System.out.println(page.getClass());
-        Assert.assertEquals(page.getChangeButtonText(), "Change");
+        System.out.println(profilePage.getClass());
+        Assert.assertEquals(profilePage.getChangeButtonText(), Resources.LogInConstants.EXPECTED_CHANGE_BUTTON_TEXT);
     }
 }

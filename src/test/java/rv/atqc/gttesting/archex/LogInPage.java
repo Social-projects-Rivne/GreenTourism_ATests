@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import rv.atqc.gttesting.res.Resources;
 
-public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
+public class LogInPage extends AbstractPage {
 
     @FindBy(css = "html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-dirty.ng-valid-parse.ng-valid-required.ng-valid-email.ng-valid.ng-valid-pattern input.btn.btn-success.btn-block.submit-btn")
     private WebElement loginButton;
@@ -20,28 +20,28 @@ public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
         super(driver);
     }
 
-    public EditAvartarPage loging() {
+    public ProfilePage loging() {
         clickOnLeftTopGreenButton();
         insertEmail();
         insertPassword();
         clickOnLoginButton();
-        return new EditAvartarPage(driver);
+        return new ProfilePage(driver);
     }
 
     public LogInPage clickOnLeftTopGreenButton() {
-        waitForVisibilityOfElement(leftTopGreenButton);
+        waitForVisibilityOfElement(leftTopGreenButton, 10);
         leftTopGreenButton.click();
         return this;
     }
 
     private LogInPage insertEmail() {
-        waitForVisibilityOfElement(emailField);
-        emailField.sendKeys(Resources.LogInMessage.USER_EMAIL);
+        waitForVisibilityOfElement(emailField, 10);
+        emailField.sendKeys(Resources.LogInConstants.USER_EMAIL);
         return this;
     }
 
     private LogInPage insertPassword() {
-        passwordField.sendKeys(Resources.LogInMessage.USER_PASSWORD);
+        passwordField.sendKeys(Resources.LogInConstants.USER_PASSWORD);
         return this;
     }
 
