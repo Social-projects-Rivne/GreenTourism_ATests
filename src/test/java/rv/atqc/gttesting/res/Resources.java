@@ -31,6 +31,12 @@ public class Resources {
 		public static String PASSWORD_IS_EMPTY  = properties.getProperty("password-is-empty");
 		public static String PASSWORD_NO_MATCH  = properties.getProperty("password-no-match");
 	}
+	
+	public static class LogInMessage {
+		private static Properties properties = init("user-information-test-data.properties");
+		public static String USER_EMAIL    = properties.getProperty("email");
+		public static String USER_PASSWORD = properties.getProperty("password");
+	}
 
 	private static Properties init(String propertiesTitle) {
 		Properties properties = new Properties();
