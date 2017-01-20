@@ -1,20 +1,17 @@
 package rv.atqc.gttesting.archex;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
+public class PlacesPage extends CategoriesPage<PlacesPage>{
 
-public class PlacesPage extends CategoriesPage{
-
-	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME = 20;
-	private ArrayList <WebElement> placesList = new ArrayList<WebElement>();
+	private final int MAX_WAIT_TIME = 10;
 	
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[1]")
 	private WebElement campPlace;
@@ -27,6 +24,9 @@ public class PlacesPage extends CategoriesPage{
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img")
 	private WebElement healthcarePlace;
 	
+	private ArrayList <WebElement> placesList = new ArrayList<WebElement>(Arrays.asList(
+			campPlace, servicePlace, hostelsPlace, featuredPlace, healthcarePlace));
+	
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]")
 	private WebElement campPlacesFilter;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]")
@@ -36,10 +36,10 @@ public class PlacesPage extends CategoriesPage{
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]")
 	private WebElement featuredPlacesFilter;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]")
-	private WebElement healthcarePlacesFilter;
-		
-	@FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
-	private WebElement categoriesButton;	
+	private WebElement healthcarePlacesFilter;	
+	
+	private ArrayList <WebElement> filterList = new ArrayList<WebElement>(Arrays.asList(
+			campPlacesFilter, servicePlacesFilter, hostelsPlacesFilter, featuredPlacesFilter, healthcarePlacesFilter));
 	
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")
 	private WebElement checkAllButton;
@@ -47,86 +47,46 @@ public class PlacesPage extends CategoriesPage{
 	
 	public PlacesPage(WebDriver driver) {
 		super(driver);
-		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 	}
 	
-	private PlacesPage setPlacesFilter(WebElement element, boolean select){
-		if (select == true)	element.click();
-		return this;
-	 }
-	
-	public PlacesPage clickOnCategoriesButton(){
-		categoriesButton.click();
-		return this;
-	}
-	
-	public WebElement getCampPlace() {
-		return campPlace;
-	}
-
-	public WebElement getServicePlace() {
-		return servicePlace;
-	}
-
-	public WebElement getHostelsPlace() {
-		return hostelsPlace;
-	}
-
-	public WebElement getFeaturedPlace() {
-		return featuredPlace;
-	}
-
-	public WebElement getHealthcarePlace() {
-		return healthcarePlace;
-	}
-
 	public void setFilters(boolean[] filter){
 		openCategoryPlaces();
-		setPlacesFilter(campPlacesFilter, filter[0]);
-		setPlacesFilter(servicePlacesFilter, filter[1]);
-		setPlacesFilter(hostelsPlacesFilter, filter[2]);
-		setPlacesFilter(featuredPlacesFilter, filter[3]);
-		setPlacesFilter(healthcarePlacesFilter, filter[4]);
+		for (int i=0; i<5; i++){
+			if (filter[i] == true){
+				filterList.get(i).click();
+			}
+		}
 	}
 	
 	public boolean checkFilter(boolean[] filter){
 		boolean isVisiableElements = true;
-		if (filter[0] == true)
-			isVisiableElements = isVisiableElements && isPlacesDisplayed(campPlace);
-		if (filter[1] == true)
-			isVisiableElements = isVisiableElements && isPlacesDisplayed(servicePlace);
-		if (filter[2] == true)
-			isVisiableElements = isVisiableElements && isPlacesDisplayed(hostelsPlace);			
-		if (filter[3] == true)
-			isVisiableElements = isVisiableElements && isPlacesDisplayed(featuredPlace);		
-		if (filter[4] == true)
-			isVisiableElements = isVisiableElements && isPlacesDisplayed(healthcarePlace);
+		for (int i=0; i<5; i++){
+			if (filter[i] == true)
+				isVisiableElements = isVisiableElements && isPlacesDisplayed(placesList.get(i), MAX_WAIT_TIME);
+		}
 		return isVisiableElements;
 	}
-		
-	public boolean isPlacesDisplayed(WebElement element){
+
+	public boolean isPlacesDisplayed(WebElement webElement, int timeout){
 		try{
-			wait.until(ExpectedConditions.visibilityOf(element));
-			return element.isDisplayed();
+			waitForVisibilityOfElement(webElement, 20);
+			return webElement.isDisplayed();
 		}
 		catch(Exception exception){
 			return false;
 		}
-	}	
+    }
 	
-	public PlacesPage openCategoryPlaces(){	
-		this.hoverPlacesButton();
-		placesList.add(campPlace);
-		placesList.add(servicePlace);
-		placesList.add(hostelsPlace);
-		placesList.add(featuredPlace);
-		placesList.add(healthcarePlace);
+	public PlacesPage openCategoryPlaces(){
+		this.waitForVisibilityOfElement(placesButton, 20);
+		Actions builder = new Actions(driver);
+		builder.moveToElement(placesButton).perform();
 		
 		//deselect all places
 		checkAllButton.click();	
-		wait.until(ExpectedConditions.visibilityOfAllElements(placesList));
+		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		checkAllButton.click();
-		wait.until(ExpectedConditions.invisibilityOfAllElements(placesList));
+		waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		return this;
 	}	
 }

@@ -2,20 +2,27 @@ package rv.atqc.gttesting.archex;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class CategoriesPage extends AbstractPage<CategoriesPage>{
-
+public abstract class CategoriesPage<T> extends AbstractPage<CategoriesPage<T>>{
+	
+	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
+	protected WebElement categories;
+	
 	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[2]/a")
 	protected WebElement tracks;
 	
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]")
-	protected WebElement places;
+	protected WebElement placesButton;
 	
-	protected CategoriesPage(WebDriver driver) {
+	public CategoriesPage(WebDriver driver) {
 		super(driver);
+	}
+	
+	public CategoriesPage<T> clickCategories(){
+		categories.click();
+		return this;
 	}
 	
 	public TracksPage clickTracks(){
@@ -23,10 +30,9 @@ public class CategoriesPage extends AbstractPage<CategoriesPage>{
 		return new TracksPage(driver);
 	}
 	
-	public PlacesPage hoverPlacesButton(){
-		Actions builder = new Actions(driver);
-		builder.moveToElement(places).perform();
+	public PlacesPage clickPlaces(){
+		placesButton.click();
 		return new PlacesPage(driver);
 	}
-
+	
 }
