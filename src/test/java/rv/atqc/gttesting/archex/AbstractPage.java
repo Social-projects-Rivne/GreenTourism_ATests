@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import rv.atqc.gttesting.archex.helpers.Acting;
 
 public abstract class AbstractPage<T extends AbstractPage<T>> {
+
     protected WebDriver driver;
     protected JavascriptExecutor jse;
 
