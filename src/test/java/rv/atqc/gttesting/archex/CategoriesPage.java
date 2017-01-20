@@ -21,6 +21,7 @@ public class CategoriesPage extends AbstractPage<CategoriesPage>{
 		return new TracksPage(driver);
 	}
 	public EventsPage clickEvents(){
+		waitForElementToBeClickable(events, 10);
 		events.click();
 		return new EventsPage(driver);
 	}

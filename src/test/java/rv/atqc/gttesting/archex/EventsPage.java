@@ -29,20 +29,25 @@ public class EventsPage extends AbstractPage<EventsPage> {
     }
 
     public WebElement getEventsDropdownList(){
+        waitForVisibilityOfElement(eventsDropdownList, 10);
         return eventsDropdownList;
     }
     public WebElement getEventsName(){
+        waitForVisibilityOfElement(eventsName, 10);
         return eventsName;
     }
     public EventsPage clickGame(){
+        waitForElementToBeClickable(gamePlaceFilter, 5);
         gamePlaceFilter.click();
         return this;
     }
     public EventsPage clickFestival(){
+        waitForElementToBeClickable(festivalPlaceFilter, 5);
         festivalPlaceFilter.click();
         return this;
     }
     public EventsPage clickMeeting(){
+        waitForElementToBeClickable(meetingPlaceFilter, 5);
         meetingPlaceFilter.click();
         return this;
     }
@@ -55,7 +60,9 @@ public class EventsPage extends AbstractPage<EventsPage> {
     public WebElement getMeetingFilter(){
         return meetingPlaceFilter;
     }
-    public WebElement getGameGreenIcon(){ return gameGreenIcon; }
+    public WebElement getGameGreenIcon(){
+        return gameGreenIcon;
+    }
     public WebElement getFestivalRedIcon(){
         return festivalRedIcon;
     }

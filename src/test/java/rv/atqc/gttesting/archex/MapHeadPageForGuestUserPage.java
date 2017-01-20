@@ -15,6 +15,7 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 	}
 
 	public CategoriesPage clickCategories(){
+		waitForElementToBeClickable(categories, 10);
 		categories.click();
 		return new CategoriesPage(driver);
 	}
