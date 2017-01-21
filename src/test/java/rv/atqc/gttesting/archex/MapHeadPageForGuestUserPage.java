@@ -9,6 +9,8 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 
 	@FindBy(how = How.XPATH, using = "html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
 	private WebElement categories;
+	@FindBy(how = How.XPATH, using = "//*[@id=\"popularPlaces\"]")
+	private WebElement popularPlacesInLocation;
 
 	public MapHeadPageForGuestUserPage(WebDriver driver) {
 		super(driver);
@@ -18,5 +20,10 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 		waitForElementToBeClickable(categories, 10);
 		categories.click();
 		return new CategoriesPage(driver);
+	}
+	public PopularPlacesInLocationPage clickPopularPlacesInLocation(){
+		waitForElementToBeClickable(popularPlacesInLocation, 10);
+		popularPlacesInLocation.click();
+		return new PopularPlacesInLocationPage(driver);
 	}
 }
