@@ -7,6 +7,8 @@ import org.openqa.selenium.support.How;
 
 public class PopularPlacesInLocationPage extends AbstractPage<PopularPlacesInLocationPage> {
 
+    @FindBy(how = How.XPATH, using = "//*[@id=\"popularPlaces\"]")
+    protected WebElement popularPlacesButton;
     @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[7]/div")
     protected WebElement popularPlacesForm;
     @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[7]/a/i")
@@ -22,6 +24,9 @@ public class PopularPlacesInLocationPage extends AbstractPage<PopularPlacesInLoc
         super(driver);
     }
 
+    public WebElement getPopularPlacesButton(){
+        return popularPlacesButton;
+    }
     public WebElement getPopularPlacesForm(){
         return popularPlacesForm;
     }
