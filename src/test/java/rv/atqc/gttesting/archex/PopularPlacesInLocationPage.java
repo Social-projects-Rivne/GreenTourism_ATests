@@ -20,9 +20,9 @@ public class PopularPlacesInLocationPage extends AbstractPage<PopularPlacesInLoc
     protected WebElement imageInPopularPlacesForm;
     @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button")
     protected WebElement detailsButton;
-    @FindBy(how = How.CSS, using = ".popup.center-block>h3")
-            //"html/body/main/div/place-list/div/div/div[2]/div[2]/div/div[1]/div[2]/div[4]/div/div[1]/div/div/h3")
-    protected WebElement detailsWindowHeader;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[7]/div/location-places/div[1]/div/a[2]")
+    //*[@id="main"]/div/place-list/div/div/div[2]/div[7]/div/location-places/div[1]/div/a[4]
+    protected WebElement imageHeader;
 
 
     public PopularPlacesInLocationPage(WebDriver driver){
@@ -47,17 +47,17 @@ public class PopularPlacesInLocationPage extends AbstractPage<PopularPlacesInLoc
     public WebElement getDetailsButton(){
         return detailsButton;
     }
-    public WebElement getDetailsWindowHeader(){
-        return detailsWindowHeader;
+    public WebElement getImageHeader(){
+        return imageHeader;
     }
     public PopularPlacesInLocationPage clickPopularPlacesIcon(){
         waitForElementToBeClickable(popularPlacesIcon, 10);
         popularPlacesIcon.click();
         return this;
     }
-    public BigPopularPlacesInLocationPage clickDetailsButton(){
-        waitForElementToBeClickable(detailsButton, 10);
-        detailsButton.click();
+    public BigPopularPlacesInLocationPage clickImageInPopularPlacesForm(){
+        waitForElementToBeClickable(imageInPopularPlacesForm, 10);
+        imageInPopularPlacesForm.click();
         return new BigPopularPlacesInLocationPage(driver);
     }
 }

@@ -1,9 +1,9 @@
 package rv.atqc.gttesting.possibilityToViewPopularPlacesInCurrentLocation;
 
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -104,8 +104,12 @@ public class PossibilityViewPopularPlacesInCurrentLocationFirefox {
     }
     @BeforeMethod(groups = {POPULAR_PLACES})
     public void placeCursorOverImageInPopularPlacesForm(){
-        Actions actions = new Actions(driver);
-        actions.moveToElement(popularPlacesInLocationPage.getImageInPopularPlacesForm()).build().perform();
+        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
+                "evObj.initMouseEvent(\"mouseover\"," +
+                "true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
+                "arguments[0].dispatchEvent(evObj);";
+        ((JavascriptExecutor)driver)
+                .executeScript(javaScript, popularPlacesInLocationPage.getImageInPopularPlacesForm());
     }
     @Test(groups = {POPULAR_PLACES}, dependsOnMethods = { "verifyClickThroughRateOfImageInPopularPlacesForm" })
     public void verifyExistenceOfPopularPlacesIcon(){
@@ -144,15 +148,13 @@ public class PossibilityViewPopularPlacesInCurrentLocationFirefox {
     }
     @Test(groups = {POPULAR_PLACES}, dependsOnMethods = { "verifyClickThroughRateOfDetailsButton" })
     public void verifyHeadersAfterClickingDetailsButton(){
-        popularPlacesInLocationPage.clickPopularPlacesIcon();
-        String headerOfPopularPlaceIcon = popularPlacesInLocationPage
-                .getDetailsWindowHeader().getText();
-        System.out.println("header " + headerOfPopularPlaceIcon);
-        bigPopularPlacesInLocationPage = popularPlacesInLocationPage.clickDetailsButton();
+        String headerOfPopularPlaceImage = popularPlacesInLocationPage
+                .getImageHeader().getText();
+        System.out.println("header_Image " + headerOfPopularPlaceImage);
+        bigPopularPlacesInLocationPage = popularPlacesInLocationPage.clickImageInPopularPlacesForm();
         String headerOfBigPopularPlacesInLocationPage = bigPopularPlacesInLocationPage
                 .getHeaderOfPage().getText();
         System.out.println(headerOfBigPopularPlacesInLocationPage);
-
-        Assert.assertTrue(headerOfPopularPlaceIcon.equalsIgnoreCase(headerOfBigPopularPlacesInLocationPage));
+        Assert.assertTrue(headerOfPopularPlaceImage.equalsIgnoreCase(headerOfBigPopularPlacesInLocationPage));
     }
 }

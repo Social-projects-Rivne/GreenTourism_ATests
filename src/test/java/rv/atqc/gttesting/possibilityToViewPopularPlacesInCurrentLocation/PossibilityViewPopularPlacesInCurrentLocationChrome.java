@@ -141,16 +141,14 @@ public class PossibilityViewPopularPlacesInCurrentLocationChrome {
                 .getDetailsButton().isEnabled());
     }
     @Test(groups = {POPULAR_PLACES}, dependsOnMethods = { "verifyClickThroughRateOfDetailsButton" })
-    public void verifyHeadersAfterClickingDetailsButton(){
-        popularPlacesInLocationPage.clickPopularPlacesIcon();
-        String headerOfPopularPlaceIcon = popularPlacesInLocationPage
-                .getDetailsWindowHeader().getText();
-        System.out.println("header " + headerOfPopularPlaceIcon);
-        bigPopularPlacesInLocationPage = popularPlacesInLocationPage.clickDetailsButton();
+    public void verifyHeadersAfterClickingImage(){
+        String headerOfPopularPlaceImage = popularPlacesInLocationPage
+                .getImageHeader().getText();
+        System.out.println("header_Image " + headerOfPopularPlaceImage);
+        bigPopularPlacesInLocationPage = popularPlacesInLocationPage.clickImageInPopularPlacesForm();
         String headerOfBigPopularPlacesInLocationPage = bigPopularPlacesInLocationPage
                 .getHeaderOfPage().getText();
         System.out.println(headerOfBigPopularPlacesInLocationPage);
-
-        Assert.assertTrue(headerOfPopularPlaceIcon.equalsIgnoreCase(headerOfBigPopularPlacesInLocationPage));
+        Assert.assertTrue(headerOfPopularPlaceImage.equalsIgnoreCase(headerOfBigPopularPlacesInLocationPage));
     }
 }
