@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.testng.annotations.AfterMethod;
 
 public class LeftNavigationForGuestUserPage<T extends LeftNavigationForGuestUserPage<T>> extends AbstractPage<T> {
 
@@ -26,5 +27,8 @@ public class LeftNavigationForGuestUserPage<T extends LeftNavigationForGuestUser
 		return new SignUpPage(driver);
 	}
 
-	
+	@AfterMethod
+	public void after(){
+		driver.quit();
+	}
 }
