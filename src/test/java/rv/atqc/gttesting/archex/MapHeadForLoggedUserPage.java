@@ -7,6 +7,8 @@ import org.openqa.selenium.support.How;
 
 public class MapHeadForLoggedUserPage extends AbstractMapHeadPage<MapHeadPageForGuestUserPage> {
 
+	private final int MAX_WAIT_TIME=10;
+	
 	@FindBy(how = How.XPATH, using = "//button[@type='button'"
 			                       + " and contains" + "(., 'Map Type')]")
 	protected WebElement mapTypeButton;
@@ -36,63 +38,63 @@ public class MapHeadForLoggedUserPage extends AbstractMapHeadPage<MapHeadPageFor
 	}
 	
 	public WebElement getElementMapTypeButton(){
-		waitForVisibilityOfElement(mapTypeButton,10);
-		waitForElementToBeClickable(mapTypeButton,10);
+		waitForVisibilityOfElement(mapTypeButton,MAX_WAIT_TIME);
+		waitForElementToBeClickable(mapTypeButton,MAX_WAIT_TIME);
 		return mapTypeButton;
 	}
 	
     public WebElement getValueOfPlacesButton(){
-        waitForVisibilityOfElement(valueOfPlacesButton, 10);
+        waitForVisibilityOfElement(valueOfPlacesButton, MAX_WAIT_TIME);
         return valueOfPlacesButton;
     }
     
     public WebElement getValueOfTracksButton(){
-        waitForVisibilityOfElement(valueOfTracksButton, 10);
+        waitForVisibilityOfElement(valueOfTracksButton, MAX_WAIT_TIME);
         return valueOfTracksButton;
     }
     
     public WebElement getValueOfEventsButton(){
-        waitForVisibilityOfElement(valueOfEventsButton, 10);
+        waitForVisibilityOfElement(valueOfEventsButton, MAX_WAIT_TIME);
         return valueOfEventsButton;
     }
     
     public WebElement getNewItemDropdownList(){
-        waitForVisibilityOfElement(newItemDropdownList, 10);
+        waitForVisibilityOfElement(newItemDropdownList, MAX_WAIT_TIME);
         return newItemDropdownList;
     }
     
     public WebElement getCategoriesDropdownList(){
-        waitForVisibilityOfElement(categoriesDropdownList, 10);
+        waitForVisibilityOfElement(categoriesDropdownList, MAX_WAIT_TIME);
         return categoriesDropdownList;
     }
     
     public WebElement getSearchInputField(){
-        waitForVisibilityOfElement(searchInputField, 10);
+        waitForVisibilityOfElement(searchInputField, MAX_WAIT_TIME);
         return searchInputField;
     }
     
     public WebElement getSearchButton(){
-        waitForVisibilityOfElement(searchButton, 10);
+        waitForVisibilityOfElement(searchButton, MAX_WAIT_TIME);
         return searchButton;
     }
     
     public WebElement getPlacesInLocationButton(){
-        waitForVisibilityOfElement(placesInLocationButton, 10);
+        waitForVisibilityOfElement(placesInLocationButton, MAX_WAIT_TIME);
         return placesInLocationButton;
     }
     
     public WebElement getTracksInLocationButton(){
-        waitForVisibilityOfElement(tracksInLocationButton, 10);
+        waitForVisibilityOfElement(tracksInLocationButton, MAX_WAIT_TIME);
         return tracksInLocationButton;
     }
     
     public WebElement getEventsInLocationButton(){
-        waitForVisibilityOfElement(eventsInLocationButton, 10);
+        waitForVisibilityOfElement(eventsInLocationButton, MAX_WAIT_TIME);
         return eventsInLocationButton;
     }
 	
 	public MapTypeMenuPage clickMapTypeButton(){
-		waitForElementToBeClickable(mapTypeButton,10);
+		waitForElementToBeClickable(mapTypeButton, MAX_WAIT_TIME);
 		mapTypeButton.click();
 		return new MapTypeMenuPage(driver);
 	}
