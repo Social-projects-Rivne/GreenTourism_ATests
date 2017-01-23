@@ -38,7 +38,6 @@ public class Resources {
         public static String USER_PASSWORD = properties.getProperty("password");
         public static String EXPECTED_CHANGE_BUTTON_TEXT = properties.getProperty("changeButtonText");
         public static String EXPECTED_CANCEL_BUTTON_TEXT = properties.getProperty("cancelButtonText");
-
     }
 
     private static Properties init(String propertiesTitle) {
