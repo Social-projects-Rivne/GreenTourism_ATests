@@ -30,8 +30,9 @@ public abstract class AbstractMapHeadPage<T extends AbstractMapHeadPage<T>> exte
 		return new MapTypeMenuPage(driver);
 	}
 
-	public void clickZoomOutButton(){
-		waitForElementToBeClickable(zoomOutButton, 8);
+	public void ClickZoomOutButton(){
+		waitForElementToBeClickable(zoomOutButton, 10);
 		zoomOutButton.click();
 	}
+
 }

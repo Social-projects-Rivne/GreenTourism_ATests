@@ -21,8 +21,8 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 		categories.click();
 		return new CategoriesPage(driver);
 	}
-	public PopularPlacesInLocationPage clickPopularPlacesInLocation(){
-		clickZoomOutButton();
+	public PopularPlacesInLocationPage clickPopularPlacesInLocationWithZoomOut(){
+		ClickZoomOutButton();
 		waitForElementToBeClickable(popularPlacesInLocation, 10);
 		popularPlacesInLocation.click();
 		return new PopularPlacesInLocationPage(driver);
