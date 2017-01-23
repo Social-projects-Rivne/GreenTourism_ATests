@@ -46,6 +46,12 @@ public class Resources {
 		public static int MIN_TIMEOUT = Integer.valueOf(properties.getProperty("min-timeout"));
 		
 	}
+	
+	public static class EditCommit {
+		private static Properties properties = init("user-information-test-data.properties");
+		public static String TEXT_BEFORE_EDIT    = properties.getProperty("textBeforeEdit");
+		public static String TEXT_AFTER_EDIT = properties.getProperty("textAfterEdit");
+	}
 
 	private static Properties init(String propertiesTitle) {
 		Properties properties = new Properties();

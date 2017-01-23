@@ -7,6 +7,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -77,6 +78,18 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 	public T waitForInVisibilityOfAll(ArrayList<WebElement> elements, int timeout) {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOfAllElements(elements));
+		return (T) this;
+	}
+	
+	public T waitForPageLoad() {
+		ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
+			public Boolean apply(WebDriver driver) {
+				return ((JavascriptExecutor) driver).executeScript("return document.readyState")
+						                            .equals("complete");
+			}
+		};
+		WebDriverWait wait = new WebDriverWait(driver,MAX_TIME_WAIT);
+		wait.until(pageLoadCondition);
 		return (T) this;
 	}
 
