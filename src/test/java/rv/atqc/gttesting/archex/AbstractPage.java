@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,6 +37,12 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 	
 	public T act(Acting acting){
 		acting.act(driver);
+		return (T) this;
+	}
+	
+	public T hoverElement(WebElement webElement){
+		Actions builder = new Actions(driver);
+		builder.moveToElement(webElement).perform();
 		return (T) this;
 	}
 	
