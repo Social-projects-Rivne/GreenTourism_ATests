@@ -1,6 +1,5 @@
 package rv.atqc.gttesting.archex;
 
-import org.eclipse.jetty.util.resource.Resource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,16 +21,19 @@ public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
 	}
 
 	public LogInPage setLoginField(CharSequence text) {
+		waitForVisibilityOfElement(loginField, MAX_TIME_WAIT);
 		loginField.sendKeys(text);
 		return this;
 	}
 
 	public LogInPage setPasswordField(CharSequence text) {
+		waitForVisibilityOfElement(passwordField, MAX_TIME_WAIT);
 		passwordField.sendKeys(text);
 		return this;
 	}
 
 	public HeadForLoggedUserPage clickLogInButton() {
+		waitForElementToBeClickable(logInButton, MAX_TIME_WAIT);
 		logInButton.click();
 		return new HeadForLoggedUserPage(driver);
 	}
