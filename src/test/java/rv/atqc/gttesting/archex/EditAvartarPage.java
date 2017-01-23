@@ -6,9 +6,10 @@ import org.openqa.selenium.support.FindBy;
 
 public class EditAvartarPage extends ProfilePage {
 
+    private final int MAX_WAIT_TIME = 10;
+
     @FindBy(xpath = "//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/button/span[1]")
     private WebElement chengeButton;
-
     @FindBy(css = "#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(2)")
     private WebElement cancelButton;
 
@@ -18,12 +19,12 @@ public class EditAvartarPage extends ProfilePage {
     }
 
     public String getChangeButtonText() {
-        waitForVisibilityOfElement(chengeButton, 10);
+        waitForVisibilityOfElement(chengeButton, MAX_WAIT_TIME);
         return chengeButton.getText();
     }
 
     public String getCancelButtonText() {
-        waitForVisibilityOfElement(cancelButton, 10);
+        waitForVisibilityOfElement(cancelButton, MAX_WAIT_TIME);
         return cancelButton.getText();
     }
 
