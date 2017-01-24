@@ -7,6 +7,7 @@ import java.util.Properties;
 
 public class Resources {
 
+<<<<<<< HEAD
     public static class UserTestData {
         private static Properties properties = init("user-information-test-data.properties");
         public static String VALID_NAME = properties.getProperty("valid-name");
@@ -68,4 +69,75 @@ public class Resources {
             }
         }
     }
+=======
+	public static class UserTestData {
+		private static Properties properties = init("user-information-test-data.properties");
+		public static String VALID_NAME    = properties.getProperty("valid-name");
+		public static String INVALID_NAME  = properties.getProperty("invalid-name");
+		public static String EMPTY         = properties.getProperty("empty");
+		public static String VALID_EMAIL   = properties.getProperty("valid-email");
+		public static String INVALID_EMAIL = properties.getProperty("invalid-email");
+		public static String PASSWORD7     = properties.getProperty("password-7");
+		public static String PASSWORD8     = properties.getProperty("password-8");
+		public static String PASSWORD9     = properties.getProperty("password-9");
+	} 
+	
+	public static class SignUpErrorMessage {
+		private static Properties properties = init("signup-error-message.properties");
+		public static String FIRST_NAME_INVALID = properties.getProperty("first-name-invalid");
+		public static String FIRST_NAME_EMPTY   = properties.getProperty("first-name-is-empty");
+		public static String LAST_NAME_INVALID  = properties.getProperty("last-name-invalid");
+		public static String LAST_NAME_EMPTY    = properties.getProperty("last-name-is-empty");
+		public static String EMAIL_INVALID      = properties.getProperty("email-invalid");
+		public static String EMAIL_EMPTY        = properties.getProperty("email-is-empty");
+		public static String PASSWORD_LONGER    = properties.getProperty("password-longer");
+		public static String PASSWORD_IS_EMPTY  = properties.getProperty("password-is-empty");
+		public static String PASSWORD_NO_MATCH  = properties.getProperty("password-no-match");
+	}
+	
+	public static class LogInMessage {
+		private static Properties properties = init("user-information-test-data.properties");
+		public static String USER_EMAIL    = properties.getProperty("email");
+		public static String USER_PASSWORD = properties.getProperty("password");
+	}
+	
+	public static class GloblaConfig {
+		private static Properties properties = init("global-config.properties");
+		public static int MAX_TIME_WAIT = Integer.valueOf(properties.getProperty("max-time-wait"));
+		public static int MIN_TIME_WAIT = Integer.valueOf(properties.getProperty("min-time-wait"));
+		public static int MAX_TIMEOUT = Integer.valueOf(properties.getProperty("max-timeout"));
+		public static int MIN_TIMEOUT = Integer.valueOf(properties.getProperty("min-timeout"));
+		
+	}
+	
+	public static class EditCommit {
+		private static Properties properties = init("user-information-test-data.properties");
+		public static String TEXT_BEFORE_EDIT    = properties.getProperty("textBeforeEdit");
+		public static String TEXT_AFTER_EDIT = properties.getProperty("textAfterEdit");
+	}
+
+	private static Properties init(String propertiesTitle) {
+		Properties properties = new Properties();
+		InputStream input = null;
+		try {
+			input = Resources.class.getClassLoader().getResourceAsStream(propertiesTitle);
+			properties.load(input);
+		} catch (IOException ex) {
+			throw new RuntimeException();
+		} finally {
+			closeSafely(input);
+		}
+		return properties;
+	}
+
+	private static void closeSafely(Closeable close) {
+		if (close != null) {
+			try {
+				close.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+>>>>>>> origin/dev
 }
