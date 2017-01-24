@@ -23,6 +23,7 @@ public class PossibilityChangeMapTypeMozillaPageObject {
 		driver.get("https://green-tourism.herokuapp.com/");
 		driver.manage().window().maximize();
 		MapHeadPage=new LogInPage(driver).loging()
+				                         .waitForPageLoad()
 										 .getHeadForLoggedUserPage()
 										 .clickRightNavButton()
 										 .clickMap();
