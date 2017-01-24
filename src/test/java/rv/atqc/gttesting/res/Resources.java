@@ -8,15 +8,23 @@ import java.util.Properties;
 public class Resources {
 
 	public static class UserTestData {
-		private static Properties properties = init("user-information-test-data.properties");
-		public static String VALID_NAME    = properties.getProperty("valid-name");
-		public static String INVALID_NAME  = properties.getProperty("invalid-name");
-		public static String EMPTY         = properties.getProperty("empty");
-		public static String VALID_EMAIL   = properties.getProperty("valid-email");
-		public static String INVALID_EMAIL = properties.getProperty("invalid-email");
-		public static String PASSWORD7     = properties.getProperty("password-7");
-		public static String PASSWORD8     = properties.getProperty("password-8");
-		public static String PASSWORD9     = properties.getProperty("password-9");
+		private static Properties properties 					= init("user-information-test-data.properties");
+		public static String VALID_NAME      					= properties.getProperty("valid-name");
+		public static String INVALID_NAME    					= properties.getProperty("invalid-name");
+		public static String EMPTY           					= properties.getProperty("empty");
+		public static String VALID_EMAIL     					= properties.getProperty("valid-email");
+		public static String INVALID_EMAIL  		 			= properties.getProperty("invalid-email");
+		public static String PASSWORD7      	 				= properties.getProperty("password-7");
+		public static String PASSWORD8       					= properties.getProperty("password-8");
+		public static String PASSWORD9       					= properties.getProperty("password-9");
+		public static String VALID_NICK_NAME 					= properties.getProperty("valid-nick-name");
+		public static String INVALID_NICK_NAME     				= properties.getProperty("invalid-nick-name");
+		public static String VALID_PHONE	     				= properties.getProperty("valid-phone");
+		public static String INVALID_PHONE		   				= properties.getProperty("invalid-phone");
+		public static String INVALID_PHONE_WITH_LETTERS 		= properties.getProperty("invalid-phone-with-letters");
+		public static String INVALID_PHONE_WITH_SPECIAL_SYMBOL 	= properties.getProperty("invalid-phone-with-special-symbol");
+		public static String ADDRESS     						= properties.getProperty("address");
+		public static String ADDRESS_WITH_SPECIAL_SYMBOL		= properties.getProperty("address-with-special-symbol");
 	} 
 	
 	public static class SignUpErrorMessage {

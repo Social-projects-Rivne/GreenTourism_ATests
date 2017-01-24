@@ -3,6 +3,7 @@ package rv.atqc.gttesting.archex;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +22,8 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 	protected JavascriptExecutor jse;
 	protected int MAX_TIME_WAIT = Resources.GloblaConfig.MAX_TIME_WAIT;
 	protected int MAX_TIMEOUT = Resources.GloblaConfig.MAX_TIMEOUT;
+	protected int MIN_TIME_WAIT = Resources.GloblaConfig.MIN_TIME_WAIT;
+	protected int MIN_TIMEOUT = Resources.GloblaConfig.MIN_TIMEOUT;
 
 	protected AbstractPage(WebDriver driver) {
 		this.driver = driver;
@@ -91,6 +94,17 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 		executeScript("arguments[0].scrollIntoView(); scroll(0,52)", we);
 	}
+
+	public boolean isElementClickable(WebElement locator, long time){
+        try{
+            WebElement clickableElement = new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
+            return clickableElement != null;
+        }
+        catch(Exception exception){
+            return false;
+        }
+    }
+
 
 
     public void placeCursorOverElement(WebElement element){
