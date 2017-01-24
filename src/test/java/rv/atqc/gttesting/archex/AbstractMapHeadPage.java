@@ -16,6 +16,8 @@ public abstract class AbstractMapHeadPage<T extends AbstractMapHeadPage<T>> exte
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[2]/div[1]/div/a[2]")
 	protected WebElement zoomOutButton;
 
+	private final int MAX_WAIT_TIME = 10;
+
 	protected AbstractMapHeadPage(WebDriver driver) {
 		super(driver);
 	}
@@ -31,8 +33,7 @@ public abstract class AbstractMapHeadPage<T extends AbstractMapHeadPage<T>> exte
 	}
 
 	public void ClickZoomOutButton(){
-		waitForElementToBeClickable(zoomOutButton, 10);
+		waitForElementToBeClickable(zoomOutButton, MAX_WAIT_TIME);
 		zoomOutButton.click();
 	}
-
 }

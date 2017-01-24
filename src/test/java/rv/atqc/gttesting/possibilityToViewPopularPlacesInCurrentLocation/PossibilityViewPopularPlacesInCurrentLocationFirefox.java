@@ -1,14 +1,10 @@
 package rv.atqc.gttesting.possibilityToViewPopularPlacesInCurrentLocation;
 
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import rv.atqc.gttesting.archex.BigPopularPlacesInLocationPage;
 import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 import rv.atqc.gttesting.archex.PopularPlacesInLocationPage;
@@ -18,7 +14,7 @@ public class PossibilityViewPopularPlacesInCurrentLocationFirefox {
 
     private final String MAP_LINK = "http://green-tourism.herokuapp.com/#!/places";
     private static final String POPULAR_PLACES = "Popular places";
-    private final int MAX_WAIT_TIME = 20;
+    private final int MAX_WAIT_TIME = 15;
 
     PopularPlacesInLocationPage popularPlacesInLocationPage;
     BigPopularPlacesInLocationPage bigPopularPlacesInLocationPage;
@@ -104,12 +100,8 @@ public class PossibilityViewPopularPlacesInCurrentLocationFirefox {
     }
     @BeforeMethod(groups = {POPULAR_PLACES})
     public void placeCursorOverImageInPopularPlacesForm(){
-        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
-                "evObj.initMouseEvent(\"mouseover\"," +
-                "true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
-                "arguments[0].dispatchEvent(evObj);";
-        ((JavascriptExecutor)driver)
-                .executeScript(javaScript, popularPlacesInLocationPage.getImageInPopularPlacesForm());
+        popularPlacesInLocationPage
+                .placeCursorOverElement(popularPlacesInLocationPage.getImageInPopularPlacesForm());
     }
     @Test(groups = {POPULAR_PLACES}, dependsOnMethods = { "verifyClickThroughRateOfImageInPopularPlacesForm" })
     public void verifyExistenceOfPopularPlacesIcon(){
@@ -147,14 +139,12 @@ public class PossibilityViewPopularPlacesInCurrentLocationFirefox {
                 .getDetailsButton().isEnabled());
     }
     @Test(groups = {POPULAR_PLACES}, dependsOnMethods = { "verifyClickThroughRateOfDetailsButton" })
-    public void verifyHeadersAfterClickingDetailsButton(){
+    public void verifyHeadersAfterClickingImage(){
         String headerOfPopularPlaceImage = popularPlacesInLocationPage
                 .getImageHeader().getText();
-        System.out.println("header_Image " + headerOfPopularPlaceImage);
         bigPopularPlacesInLocationPage = popularPlacesInLocationPage.clickImageInPopularPlacesForm();
         String headerOfBigPopularPlacesInLocationPage = bigPopularPlacesInLocationPage
                 .getHeaderOfPage().getText();
-        System.out.println(headerOfBigPopularPlacesInLocationPage);
         Assert.assertTrue(headerOfPopularPlaceImage.equalsIgnoreCase(headerOfBigPopularPlacesInLocationPage));
     }
 }

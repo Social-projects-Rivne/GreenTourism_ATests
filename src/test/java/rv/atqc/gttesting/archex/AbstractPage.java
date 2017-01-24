@@ -62,4 +62,12 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 		 wait.until(ExpectedConditions.invisibilityOfAllElements(elements));
 		 return (T) this;
 	}
+
+    public void placeCursorOverElement(WebElement element){
+        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
+                "evObj.initMouseEvent(\"mouseover\"," +
+                "true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
+                "arguments[0].dispatchEvent(evObj);";
+                jse.executeScript(javaScript, element);
+    }
 }   

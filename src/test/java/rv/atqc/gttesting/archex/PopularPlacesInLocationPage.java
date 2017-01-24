@@ -20,10 +20,11 @@ public class PopularPlacesInLocationPage extends AbstractPage<PopularPlacesInLoc
     protected WebElement imageInPopularPlacesForm;
     @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button")
     protected WebElement detailsButton;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[7]/div/location-places/div[1]/div/a[2]")
-    //*[@id="main"]/div/place-list/div/div/div[2]/div[7]/div/location-places/div[1]/div/a[4]
+    @FindBy(how = How.XPATH, using =
+            "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[7]/div/location-places/div[1]/div/a[2]")
     protected WebElement imageHeader;
 
+    private final int MAX_WAIT_TIME = 10;
 
     public PopularPlacesInLocationPage(WebDriver driver){
         super(driver);
@@ -51,12 +52,12 @@ public class PopularPlacesInLocationPage extends AbstractPage<PopularPlacesInLoc
         return imageHeader;
     }
     public PopularPlacesInLocationPage clickPopularPlacesIcon(){
-        waitForElementToBeClickable(popularPlacesIcon, 10);
+        waitForElementToBeClickable(popularPlacesIcon, MAX_WAIT_TIME);
         popularPlacesIcon.click();
         return this;
     }
     public BigPopularPlacesInLocationPage clickImageInPopularPlacesForm(){
-        waitForElementToBeClickable(imageInPopularPlacesForm, 10);
+        waitForElementToBeClickable(imageInPopularPlacesForm, MAX_WAIT_TIME);
         imageInPopularPlacesForm.click();
         return new BigPopularPlacesInLocationPage(driver);
     }
