@@ -23,10 +23,4 @@ public class ProfilePage extends AbstractPage {
         chengeButton.click();
         return new EditAvartarPage(driver);
     }
-
-
-
-
-
-
 }
