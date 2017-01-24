@@ -7,6 +7,7 @@ import rv.atqc.gttesting.res.Resources;
 
 public class EditAvartarPage extends ProfilePage {
 
+    private final int MAX_WAIT_TIME = 10;
     @FindBy(xpath = "//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/input")
     private WebElement confirmButton;
     @FindBy(css = "#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(2)")
@@ -37,59 +38,59 @@ public class EditAvartarPage extends ProfilePage {
     }
 
     public String getChangeButtonText() {
-        waitForVisibilityOfElement(chengeButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(chengeButton, MAX_WAIT_TIME);
         return chengeButton.getText();
     }
 
     public String getCancelButtonText() {
-        waitForVisibilityOfElement(cancelButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(cancelButton, MAX_WAIT_TIME);
         return cancelButton.getText();
     }
 
     public WebElement getConfirmButton() {
-        waitForVisibilityOfElement(confirmButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(confirmButton, MAX_WAIT_TIME);
         return confirmButton;
     }
 
     public WebElement getAvatarUrlField() {
-        waitForVisibilityOfElement(avatarUrlField, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(avatarUrlField, MAX_WAIT_TIME);
         return avatarUrlField;
     }
 
     public WebElement getDefAvatarImage() {
-        waitForElementToBeClickable(confirmButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForElementToBeClickable(confirmButton, MAX_WAIT_TIME);
         confirmButton.click();
-        waitForVisibilityOfElement(defAvatar, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(defAvatar, MAX_WAIT_TIME);
         return defAvatar;
     }
 
     public void insertURL(String url) {
-        waitForVisibilityOfElement(urlField, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(urlField, MAX_WAIT_TIME);
         urlField.sendKeys(url);
-        waitForElementToBeClickable(confirmButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForElementToBeClickable(confirmButton, MAX_WAIT_TIME);
         confirmButton.click();
 
     }
 
     public WebElement getJPGAvatar() {
-        waitForVisibilityOfElement(gpgUrl, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(gpgUrl, MAX_WAIT_TIME);
         return gpgUrl;
     }
 
     public WebElement getJPEGAvatar() {
-        waitForVisibilityOfElement(gpegUrl, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(gpegUrl, MAX_WAIT_TIME);
         return gpegUrl;
     }
 
     public WebElement getPNGAvatar() {
-        waitForVisibilityOfElement(pngUrl, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(pngUrl, MAX_WAIT_TIME);
         return pngUrl;
     }
 
     public void clickOnLogOutButton() {
-        waitForElementToBeClickable(leftTopGreenButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForElementToBeClickable(leftTopGreenButton, MAX_WAIT_TIME);
         leftTopGreenButton.click();
-        waitForVisibilityOfElement(logOutButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
+        waitForVisibilityOfElement(logOutButton, MAX_WAIT_TIME);
         logOutButton.click();
     }
 }
