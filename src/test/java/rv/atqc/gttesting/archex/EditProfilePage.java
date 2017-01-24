@@ -128,10 +128,10 @@ public class EditProfilePage extends AbstractPage<EditProfilePage>{
 		return cancel;
 	}
 	
-	public boolean isChangeClicable(){
+	public boolean isChangeClickable(){
 		return isElementClickable(change, MIN_TIME_WAIT);
 	}
-	public boolean isCancelClicable(){
+	public boolean isCancelClickable(){
 		return isElementClickable(cancel, MIN_TIME_WAIT);
 	}
 
