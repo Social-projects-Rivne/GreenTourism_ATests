@@ -7,15 +7,28 @@ import org.openqa.selenium.support.How;
 
 public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPageForGuestUserPage> {
 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[3]/div/div[2]/button")
-    private WebElement logIn;
 
-    public MapHeadPageForGuestUserPage(WebDriver driver) {
-        super(driver);
-    }
-    public void clickOn () {
 
-        logIn.click();
-    }
+	@FindBy(how = How.XPATH, using = "html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
+	private WebElement categories;
+	@FindBy(how = How.XPATH, using = "//*[@id=\"popularPlaces\"]")
+	private WebElement popularPlacesInLocation;
 
+	private final int MAX_WAIT_TIME = 10;
+
+	public MapHeadPageForGuestUserPage(WebDriver driver) {
+		super(driver);
+	}
+
+	public CategoriesPage clickCategories(){
+		waitForElementToBeClickable(categories, MAX_WAIT_TIME);
+		categories.click();
+		return new CategoriesPage(driver);
+	}
+	public PopularPlacesInLocationPage clickPopularPlacesInLocationWithZoomOut(){
+		ClickZoomOutButton();
+		waitForElementToBeClickable(popularPlacesInLocation, MAX_WAIT_TIME);
+		popularPlacesInLocation.click();
+		return new PopularPlacesInLocationPage(driver);
+	}
 }

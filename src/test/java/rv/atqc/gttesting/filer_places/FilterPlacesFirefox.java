@@ -9,9 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
@@ -19,13 +17,19 @@ public class FilterPlacesFirefox {
 
 	private WebDriver driver;
 	private WebDriverWait wait;
-	private final int MAX_WAIT_TIME=20;	
+	private final int MAX_WAIT_TIME=10;	
 		
 	private By CampPlace  =  By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[1]");
 	private By ServicePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[7]");
 	private By HostelsPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[3]/img[2]");
 	private By FeaturedPlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img[5]");
 	private By HealthcarePlace = By.xpath("//*[@id='map']/div[1]/div[2]/div[1]/img");
+	
+	private By CampPlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]/a/span");
+	private By ServicePlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]/a/span");
+	private By HostelsPlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[3]/a/span");
+	private By FeaturedPlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]/a/span");
+	private By HealthcarePlaceLable  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]/a/span");
 		
 	private By CampPlacesFilter  =  By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]");
 	private By ServicePlacesFilter = By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]");
@@ -41,20 +45,12 @@ public class FilterPlacesFirefox {
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
 		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
-	}
-	
-	@BeforeMethod
-	public void beforeTest(){
-		openCategoryPlaces();
-	}
-	
-	@AfterMethod
-	public void afterTest(){
 		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
+                (By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]")));
 		CategoriesButton.click();
 	}
 	
+
 	@AfterClass
 	public void afterClass(){		
 		driver.close();
@@ -184,11 +180,12 @@ public class FilterPlacesFirefox {
 	public void testFilter18PlacesWithoutCamps(){
 		boolean filter [] = {false,true,true,true,true};
 		setFilters(filter);
-		Assert.assertTrue(checkFilter(filter));
+		Assert.assertTrue(checkFilter(filter));        
 	}
 	
 	@Test //00000
 	public void testFilter19AllPlacesDeselected(){
+		openCategoryPlaces();
 		Assert.assertTrue(	driver.findElements(CampPlace).isEmpty()
 						  &&driver.findElements(ServicePlace).isEmpty()
 						  &&driver.findElements(HostelsPlace).isEmpty()
@@ -202,9 +199,10 @@ public class FilterPlacesFirefox {
 		setFilters(filter);
 		Assert.assertTrue(checkFilter(filter));
 	}
-	
+
 
 	private void setFilters(boolean[] filter){
+		openCategoryPlaces();
 		setPlacesFilter(CampPlacesFilter, filter[0]);
 		setPlacesFilter(ServicePlacesFilter, filter[1]);
 		setPlacesFilter(HostelsPlacesFilter, filter[2]);
@@ -239,13 +237,10 @@ public class FilterPlacesFirefox {
 		return linkElement.isDisplayed();
 	}
 	
-	private void openCategoryPlaces(){
-		WebElement CategoriesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")));
-		CategoriesButton.click();		
-		
+	private void openCategoryPlaces(){	
 		WebElement PlacesButton = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]")));
+		PlacesButton.click();
 		Actions builder = new Actions(driver);
 		builder.moveToElement(PlacesButton).perform();
 		
@@ -259,5 +254,10 @@ public class FilterPlacesFirefox {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(FeaturedPlace));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(HealthcarePlace));
 		CheckAllButton.click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(CampPlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(ServicePlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(HostelsPlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(FeaturedPlace));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(HealthcarePlace));
 	}
 }
