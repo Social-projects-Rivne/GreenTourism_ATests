@@ -11,8 +11,14 @@ import org.openqa.selenium.support.How;
 
 public class PlacesPage extends AbstractPage<PlacesPage>{
 
-	private final int MAX_WAIT_TIME = 5;
+	private final int MAX_WAIT_TIME = 15;
+	private final String PLACES_PAGE_URL = "https://green-tourism.herokuapp.com/#!/places";
+	private final String VISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3";
+	private final String INVISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd";
+	private final String  NO_ITEM_MESSAGE = "There are no such places and tracks, try else please";
 	
+	
+
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[1]")
 	private WebElement campPlace;
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[7]")
@@ -23,10 +29,10 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	private WebElement featuredPlace;
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img")
 	private WebElement healthcarePlace;
-	
+
 	private ArrayList <WebElement> placesList = new ArrayList<WebElement>(Arrays.asList(
 			campPlace, servicePlace, hostelsPlace, featuredPlace, healthcarePlace));
-	
+
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]")
 	private WebElement campPlacesFilter;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]")
@@ -36,21 +42,100 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]")
 	private WebElement featuredPlacesFilter;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]")
-	private WebElement healthcarePlacesFilter;	
-	
+	private WebElement healthcarePlacesFilter;
+
 	private ArrayList <WebElement> filterList = new ArrayList<WebElement>(Arrays.asList(
 			campPlacesFilter, servicePlacesFilter, hostelsPlacesFilter, featuredPlacesFilter, healthcarePlacesFilter));
-	
-	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
-	protected WebElement categoriesButton;
+
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")
 	private WebElement checkAllButton;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]")
 	protected WebElement placesButton;
 	
+	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/input")
+	protected WebElement searchField;
+	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[1]/button")
+    private WebElement searchButton;
 	
-	public PlacesPage(WebDriver driver) {
+	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[3]")
+	private WebElement failedRequestField;	
+    @FindBy(how = How.XPATH, using = "//*[@id=\"searchPlaces\"]/ul")
+    private WebElement itemSearchResults;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"searchPlaces\"]/h3")
+    private WebElement textSearchResults;    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a")
+    private WebElement foundResultForVisibleItem;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"584e7ef0b61f280400d36ebd\"]/button/h3/a")
+    private WebElement foundResultForInvisibleItem;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[3]/img[1]")
+    private WebElement foundItem;
+    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button/a")
+    private WebElement item1Details;
+    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i")
+    private WebElement closeResultsButton;
+    
+  
+
+	public PlacesPage(WebDriver driver){
 		super(driver);
+	}
+	
+	public String getNoItemMessage(){
+		return NO_ITEM_MESSAGE;
+	}
+	
+	public String getVisibleItemDetailsUrl(){
+		return VISIBLE_ITEM_DETAILS_URL;
+	}
+	
+	public String getInisibleItemDetailsUrl(){
+		return INVISIBLE_ITEM_DETAILS_URL;
+	}
+	
+	public WebElement getInvisibleItemFoundResults(){
+		waitForVisibilityOfElement(foundResultForInvisibleItem, MAX_WAIT_TIME);
+		return foundResultForInvisibleItem;
+	}
+	
+	public WebElement getFailedRequestField(){
+		waitForVisibilityOfElement(failedRequestField, MAX_WAIT_TIME);
+		return failedRequestField;
+	}
+
+	public WebElement getTextSearchResults(){
+		waitForVisibilityOfElement(textSearchResults, MAX_WAIT_TIME);
+		return textSearchResults;
+	}
+
+	public WebElement getFoundItem(){
+		waitForVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
+		this.hoverElement(itemSearchResults);
+		waitForElementToBeClickable(foundItem,MAX_WAIT_TIME);
+		return foundItem;
+	}
+
+	public WebElement getFoundResults(){
+		waitForVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
+		return itemSearchResults;
+	}
+	
+	public PlacesPage closeResults(){
+		waitForVisibilityOfElement(closeResultsButton, MAX_WAIT_TIME);
+		closeResultsButton.click();
+		waitForInVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
+		return this;
+	}
+	
+	public PlacesPage lookForItem(String searchWord){
+		driver.get(PLACES_PAGE_URL);
+		waitForVisibilityOfElement(featuredPlace,MAX_WAIT_TIME);
+		searchField.clear();
+		searchField.sendKeys(searchWord);
+		waitForVisibilityOfElement(searchButton, MAX_WAIT_TIME);
+		searchButton.click();
+		return this;
 	}
 	
 	public void setFilters(boolean[] filter){
@@ -80,21 +165,14 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 			return false;
 		}
     }
-	
-	public PlacesPage openCategories(){
-		this.waitForVisibilityOfElement(categoriesButton, MAX_WAIT_TIME);
-		categoriesButton.click();
-		return this;
-	}
-	
+
 	public PlacesPage openCategoryPlaces(){
-	
 		this.waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
 		Actions builder = new Actions(driver);
 		builder.moveToElement(placesButton).perform();
 		
 		//deselect all places
-		checkAllButton.click();	
+		checkAllButton.click();
 		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		checkAllButton.click();
 		waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
