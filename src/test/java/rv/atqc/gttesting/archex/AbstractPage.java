@@ -1,12 +1,14 @@
 package rv.atqc.gttesting.archex;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import rv.atqc.gttesting.archex.helpers.Acting;
@@ -51,10 +53,16 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
         wait.until(ExpectedConditions.visibilityOf(webElement));
         return (T) this;
     }
-
+    
     public T waitForElementToBeClickable(WebElement webElement, int timeout)  {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        return (T) this;
+    }
+    
+    public T waitForInVisibilityOfElement(WebElement webElement, int timeout) {
+        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        wait.until(ExpectedConditions.invisibilityOfAllElements(new ArrayList<WebElement>(Arrays.asList(webElement))));
         return (T) this;
     }
     
@@ -68,5 +76,6 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		 wait.until(ExpectedConditions.invisibilityOfAllElements(elements));
 		 return (T) this;
-	}
+	} 
+	
 }   

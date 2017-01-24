@@ -4,12 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import rv.atqc.gttesting.archex.LogInPage;
-import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 import rv.atqc.gttesting.archex.PlacesPage;
 
 public class FindItemByNameFirefox {
@@ -27,43 +26,54 @@ public class FindItemByNameFirefox {
 		placesPage = new PlacesPage(driver);
 		driver.get("https://green-tourism.herokuapp.com/#!/places");		
 	}
-	@BeforeMethod
-	public void beforeMethod(){
-		placesPage.getSearchField().clear();
+	@AfterMethod
+	public void afterMethod(){
+		driver.get("https://green-tourism.herokuapp.com/#!/places");
 	}
-
 	@AfterClass
-	    public void quitDriver(){
-	 //       driver.quit();
-	    }
+	public void quitDriver(){
+	    driver.quit();
+	}
     
-
-	
-  	@Test//перевірити захищеність від виконання javascript
-	public void checkSearchInptFieldSecurity(){
-  		Assert.assertTrue(placesPage.waitForVisibilityOfElement(placesPage.lookForPlace("<script>alert( 'Привет, Мир!' );</script>").getSearchField(),10));
-  }
-	/*
-		@Test//перевірити наявність поля "результати пошуку"
+	@Test
 	public void checkSearchResultsField(){
-    	placesPage.lookForPlace("");      
-    } 
-	 
-	@Test //перевірити роботу пошуку для неіснуючого місця
-    public void checkFailedPlace(){
-    	placesPage.lookForPlace("FAILED_PLACE");       
-    }
+		Assert.assertTrue(placesPage.lookForItem("ASdazxc").getTextSearchResults().isDisplayed());    
+	}
 	
+  	@Test
+	public void checkSearchInptFieldSecurity(){
+  		Assert.assertEquals(placesPage.lookForItem("<script>alert( 'Hello, World!' );</script>"). getTextSearchResults().getText(), placesPage.getNoItemMessage());
+    }
+    
+    @Test
+    public void checkFailedRequestSearch(){
+		Assert.assertTrue(placesPage.lookForItem("1").getFailedRequestField().isDisplayed());
+    }
+    
+    @Test
+    public void checkFailedPlaceSearch(){
+		Assert.assertEquals(placesPage.lookForItem("FAILED_PLACE"). getTextSearchResults().getText(), placesPage.getNoItemMessage());
+    }
+    
+    @Test
+    public void checkSearchResultsFromVisibleRegion(){
+		placesPage.lookForItem("ASdazxc").getFoundResults().click();
+    	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getVisibleItemDetailsUrl());
+    }
+    
+    @Test
+    public void checkSearchResultsFromInvisibleRegion(){
+		placesPage.lookForItem("Hight Castle").getInvisibleItemFoundResults().click();
+    	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getInisibleItemDetailsUrl());
+	}
+    
+    @Test
+    public void checkItemFromVisibleRegion(){
+		Assert.assertTrue(placesPage.lookForItem("ASdazxc").getFoundItem().isDisplayed());
+	}
 	
-    @Test //перевірити Місця з видимої зони
-    public void checkPlaceFromVisibleRegion(){
-    	placesPage.lookForPlace("ASdazxc");
-    }
-
-    @Test //перевірити Місця з віддаленої зони
-    public void checkPlaceFromInvisibleRegion(){
-    	placesPage.lookForPlace("Hight Castle");
-    }
-    */
-
+	@Test
+    public void checkItemFromInisibleRegion(){
+		Assert.assertTrue(placesPage.lookForItem("Hight Castle").getFoundItem().isDisplayed());
+	}
 }

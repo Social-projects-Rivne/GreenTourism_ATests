@@ -9,12 +9,16 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import rv.atqc.gttesting.res.Resources;
-
 public class PlacesPage extends AbstractPage<PlacesPage>{
 
-	private final int MAX_WAIT_TIME = 5;
+	private final int MAX_WAIT_TIME = 15;
+	private final String PLACES_PAGE_URL = "https://green-tourism.herokuapp.com/#!/places";
+	private final String VISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3";
+	private final String INVISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd";
+	private final String  NO_ITEM_MESSAGE = "There are no such places and tracks, try else please";
 	
+	
+
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[1]")
 	private WebElement campPlace;
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[7]")
@@ -25,10 +29,10 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	private WebElement featuredPlace;
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img")
 	private WebElement healthcarePlace;
-	
+
 	private ArrayList <WebElement> placesList = new ArrayList<WebElement>(Arrays.asList(
 			campPlace, servicePlace, hostelsPlace, featuredPlace, healthcarePlace));
-	
+
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]")
 	private WebElement campPlacesFilter;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]")
@@ -38,11 +42,11 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]")
 	private WebElement featuredPlacesFilter;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]")
-	private WebElement healthcarePlacesFilter;	
-	
+	private WebElement healthcarePlacesFilter;
+
 	private ArrayList <WebElement> filterList = new ArrayList<WebElement>(Arrays.asList(
 			campPlacesFilter, servicePlacesFilter, hostelsPlacesFilter, featuredPlacesFilter, healthcarePlacesFilter));
-	
+
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")
 	private WebElement checkAllButton;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]")
@@ -50,47 +54,88 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	
 	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/input")
 	protected WebElement searchField;
-	//@FindBy(how = How.CSS, using = "#search > div > span.input-group-btn")
-	//@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[1]/button/text()")
-	//protected WebElement searchButton;
-    @FindBy(how = How.XPATH, using = ".//*[@id='search']/div/span[1]/button")
+	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[1]/button")
     private WebElement searchButton;
 	
+	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[3]")
+	private WebElement failedRequestField;	
     @FindBy(how = How.XPATH, using = "//*[@id=\"searchPlaces\"]/ul")
-    private WebElement searchResults;
-
+    private WebElement itemSearchResults;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"searchPlaces\"]/h3")
+    private WebElement textSearchResults;    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a")
+    private WebElement foundResultForVisibleItem;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"584e7ef0b61f280400d36ebd\"]/button/h3/a")
+    private WebElement foundResultForInvisibleItem;
+    @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[3]/img[1]")
+    private WebElement foundItem;
     
-	
-	public PlacesPage(WebDriver driver) {
+    @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button/a")
+    private WebElement item1Details;
+    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i")
+    private WebElement closeResultsButton;
+    
+  
+
+	public PlacesPage(WebDriver driver){
 		super(driver);
 	}
 	
-	public WebElement getСampPlace(){
-		waitForVisibilityOfElement(campPlace, MAX_WAIT_TIME);
-		return campPlace;
+	public String getNoItemMessage(){
+		return NO_ITEM_MESSAGE;
 	}
 	
-	public WebElement getSearchField(){
-		waitForVisibilityOfElement(searchField, MAX_WAIT_TIME);
-		return searchField;
+	public String getVisibleItemDetailsUrl(){
+		return VISIBLE_ITEM_DETAILS_URL;
 	}
 	
-	public PlacesPage hoverSearchResults(){
-		this.waitForVisibilityOfElement(searchResults, MAX_WAIT_TIME);
-		Actions builder = new Actions(driver);
-		builder.moveToElement(searchResults).perform();
+	public String getInisibleItemDetailsUrl(){
+		return INVISIBLE_ITEM_DETAILS_URL;
+	}
+	
+	public WebElement getInvisibleItemFoundResults(){
+		waitForVisibilityOfElement(foundResultForInvisibleItem, MAX_WAIT_TIME);
+		return foundResultForInvisibleItem;
+	}
+	
+	public WebElement getFailedRequestField(){
+		waitForVisibilityOfElement(failedRequestField, MAX_WAIT_TIME);
+		return failedRequestField;
+	}
+
+	public WebElement getTextSearchResults(){
+		waitForVisibilityOfElement(textSearchResults, MAX_WAIT_TIME);
+		return textSearchResults;
+	}
+
+	public WebElement getFoundItem(){
+		waitForVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
+		this.hoverElement(itemSearchResults);
+		waitForElementToBeClickable(foundItem,MAX_WAIT_TIME);
+		return foundItem;
+	}
+
+	public WebElement getFoundResults(){
+		waitForVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
+		return itemSearchResults;
+	}
+	
+	public PlacesPage closeResults(){
+		waitForVisibilityOfElement(closeResultsButton, MAX_WAIT_TIME);
+		closeResultsButton.click();
+		waitForInVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
 		return this;
 	}
 	
-	public PlacesPage lookForPlace(String searchword){
-			waitForVisibilityOfElement(searchField,10);
-			searchField.sendKeys(searchword);
-			waitForElementToBeClickable(searchButton,10);
-			this.disableFocus().hoverElement(searchButton);
-			searchButton.click();
-			waitForElementToBeClickable(searchResults,10);
-			this.hoverElement(searchResults);
-			return this;
+	public PlacesPage lookForItem(String searchWord){
+		driver.get(PLACES_PAGE_URL);
+		waitForVisibilityOfElement(featuredPlace,MAX_WAIT_TIME);
+		searchField.clear();
+		searchField.sendKeys(searchWord);
+		waitForVisibilityOfElement(searchButton, MAX_WAIT_TIME);
+		searchButton.click();
+		return this;
 	}
 	
 	public void setFilters(boolean[] filter){
@@ -127,7 +172,7 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		builder.moveToElement(placesButton).perform();
 		
 		//deselect all places
-		checkAllButton.click();	
+		checkAllButton.click();
 		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		checkAllButton.click();
 		waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
