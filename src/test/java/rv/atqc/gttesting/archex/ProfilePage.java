@@ -3,6 +3,7 @@ package rv.atqc.gttesting.archex;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import rv.atqc.gttesting.res.Resources;
 
 public class ProfilePage extends AbstractPage {
 
@@ -14,12 +15,12 @@ public class ProfilePage extends AbstractPage {
     }
 
     public String getChangeButtonText() {
-        waitForVisibilityOfElement(chengeButton, 20);
+        waitForVisibilityOfElement(chengeButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
         return chengeButton.getText();
     }
 
     public EditAvartarPage getEditAvatarPage () {
-        waitForVisibilityOfElement(chengeButton, 20);
+        waitForVisibilityOfElement(chengeButton, Integer.valueOf(Resources.LogInConstants.MAX_WAIT_TIME));
         chengeButton.click();
         return new EditAvartarPage(driver);
     }
