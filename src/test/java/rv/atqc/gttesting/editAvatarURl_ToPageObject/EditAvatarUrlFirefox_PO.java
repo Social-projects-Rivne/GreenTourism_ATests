@@ -34,4 +34,14 @@ public class EditAvatarUrlFirefox_PO {
         System.out.println(profilePage.getClass());
         Assert.assertEquals(profilePage.getChangeButtonText(), Resources.LogInConstants.EXPECTED_CHANGE_BUTTON_TEXT);
     }
+
+    @Test
+    public void checkCancelButtonTitleInChrome() {
+        Assert.assertEquals(profilePage.getEditAvatarPage().getCancelButtonText(), Resources.LogInConstants.EXPECTED_CANCEL_BUTTON_TEXT);
+    }
+    
+    @Test
+    public void checkConfirmButtonInEditAvSystChrome() {
+        Assert.assertTrue(profilePage.getEditAvatarPage().getConfirmButton().isDisplayed());
+    }
 }

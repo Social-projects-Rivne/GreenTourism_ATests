@@ -40,4 +40,9 @@ public class EditAvatarUrlChrome_PO {
     public void checkCancelButtonTitleInChrome() {
         Assert.assertEquals(profilePage.getEditAvatarPage().getCancelButtonText(), Resources.LogInConstants.EXPECTED_CANCEL_BUTTON_TEXT);
     }
+
+    @Test
+    public void checkConfirmButtonInEditAvSystChrome() {
+        Assert.assertTrue(profilePage.getEditAvatarPage().getConfirmButton().isDisplayed());
+    }
 }
