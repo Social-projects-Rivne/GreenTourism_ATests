@@ -26,6 +26,4 @@ public class LeftNavigationForGuestUserPage<T extends LeftNavigationForGuestUser
         signUp.click();
         return new SignUpPage(driver);
     }
-
-
 }
