@@ -94,7 +94,7 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 
 		executeScript("arguments[0].scrollIntoView(); scroll(0,52)", we);
 	}
-	
+
 	public boolean isElementClickable(WebElement locator, long time){
         try{
             WebElement clickableElement = new WebDriverWait(driver, time).until(ExpectedConditions.elementToBeClickable(locator));
@@ -104,4 +104,15 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
             return false;
         }
     }
-}
+
+
+
+    public void placeCursorOverElement(WebElement element){
+        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
+                "evObj.initMouseEvent(\"mouseover\"," +
+                "true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
+                "arguments[0].dispatchEvent(evObj);";
+                jse.executeScript(javaScript, element);
+    }
+}   
+
