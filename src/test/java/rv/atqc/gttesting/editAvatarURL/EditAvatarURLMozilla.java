@@ -99,6 +99,7 @@ public class EditAvatarURLMozilla {
     }
 
     @Test
+
     public void checkPresentJPEGAvatarInEditAvSystChrome() {
         clickOnLeftTopGreenButton();
         insertLogin(USER_LOGIN);
@@ -121,7 +122,6 @@ public class EditAvatarURLMozilla {
         clickOnConfirmButton();
         Assert.assertTrue(getPNGAvatar().isDisplayed());
     }
-
     @Test
     public void checkSavingJPGAvatarInEditAvSystMozilla() {
         clickOnLeftTopGreenButton();

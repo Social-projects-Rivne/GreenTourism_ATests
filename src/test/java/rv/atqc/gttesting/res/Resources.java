@@ -38,6 +38,11 @@ public class Resources {
         public static String USER_PASSWORD = properties.getProperty("password");
         public static String EXPECTED_CHANGE_BUTTON_TEXT = properties.getProperty("changeButtonText");
         public static String EXPECTED_CANCEL_BUTTON_TEXT = properties.getProperty("cancelButtonText");
+        public static String JPG_URL = properties.getProperty("JpgUrl");
+        public static String JPEG_URL = properties.getProperty("JpegUrl");
+        public static String PNG_URL = properties.getProperty("PngUrl");
+        public static String MAX_WAIT_TIME = properties.getProperty("maxWaitTime");
+
     }
 
     private static Properties init(String propertiesTitle) {

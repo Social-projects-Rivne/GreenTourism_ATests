@@ -14,13 +14,19 @@ public class ProfilePage extends AbstractPage {
     }
 
     public String getChangeButtonText() {
-        waitForVisibilityOfElement(chengeButton, 10);
+        waitForVisibilityOfElement(chengeButton, 20);
         return chengeButton.getText();
     }
 
     public EditAvartarPage getEditAvatarPage () {
-        waitForVisibilityOfElement(chengeButton, 10);
+        waitForVisibilityOfElement(chengeButton, 20);
         chengeButton.click();
         return new EditAvartarPage(driver);
     }
+
+
+
+
+
+
 }

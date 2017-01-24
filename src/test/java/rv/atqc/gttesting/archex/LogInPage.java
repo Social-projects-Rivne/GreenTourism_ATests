@@ -7,7 +7,7 @@ import rv.atqc.gttesting.res.Resources;
 
 public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
 
-    private final int MAX_WAIT_TIME = 10;
+    private final int MAX_WAIT_TIME = 20;
 
     @FindBy(css = "html.ng-scope body header nav.navbar.navbar-default.navbar-fixed-top.navbar-style.ng-scope div.container.nav-padding div#navbar.collapse.navbar-collapse ul.nav.navbar-nav li.dropdown.open ul.dropdown-menu.dropdown-auth.nav-ul auth.ng-isolate-scope div.ng-scope div.container.registration.ng-scope form.ng-dirty.ng-valid-parse.ng-valid-required.ng-valid-email.ng-valid.ng-valid-pattern input.btn.btn-success.btn-block.submit-btn")
     private WebElement loginButton;
@@ -31,7 +31,7 @@ public class LogInPage extends LeftNavigationForGuestUserPage<LogInPage> {
     }
 
     public LogInPage clickOnLeftTopGreenButton() {
-        waitForVisibilityOfElement(leftTopGreenButton, MAX_WAIT_TIME);
+        waitForElementToBeClickable(leftTopGreenButton, MAX_WAIT_TIME);
         leftTopGreenButton.click();
         return this;
     }
