@@ -7,6 +7,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 import rv.atqc.gttesting.archex.PlacesPage;
 
 public class FilterPlacesFirefoxPO {
@@ -20,11 +21,11 @@ public class FilterPlacesFirefoxPO {
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		page = new PlacesPage(driver).openCategories();
+		page = new MapHeadPageForGuestUserPage(driver).clickCategories().clickPlaces();
 	}
 
 	@AfterClass
-	public void afterClass(){		
+	public void afterClass(){
 		driver.close();
 	}
 
