@@ -13,6 +13,11 @@ import rv.atqc.gttesting.archex.PlacesPage;
 public class SearchOnMapPageChrome {
 	private WebDriver driver;
 	private PlacesPage placesPage;
+	private String EXISTING_PLACE = "Basiv Kyt";
+	private String EXISTING_TRACK = "AWESOME";
+	private String NON_EXISTING_ITEM = "bla-bla";
+	private String SHORT_REQUEST = "12";
+	private String SCRIPT = "<script>alert( 'Hello, World!' );</script>";
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -34,27 +39,27 @@ public class SearchOnMapPageChrome {
 	
 	@Test
 	public void searchForExistingPlace(){
-		Assert.assertTrue(placesPage.lookForItem("Basiv Kyt").getTextSearchResults().isDisplayed());    
+		Assert.assertTrue(placesPage.lookForItem(EXISTING_PLACE).getTextSearchResults().isDisplayed());    
 	}
 	
 	@Test
 	public void searchForExistingTrack(){
-		Assert.assertTrue(placesPage.lookForItem("AWESOME").getTextSearchResults().isDisplayed());    
+		Assert.assertTrue(placesPage.lookForItem(EXISTING_TRACK).getTextSearchResults().isDisplayed());    
 	}
 	
     @Test
     public void shortSeacthRequest(){
-		Assert.assertTrue(placesPage.lookForItem("12").getFailedRequestField().isDisplayed());
+		Assert.assertTrue(placesPage.lookForItem(SHORT_REQUEST).getFailedRequestField().isDisplayed());
     }
 	
     @Test
     public void searchForNonExistingItem(){
-		Assert.assertEquals(placesPage.lookForItem("bla-bla"). getTextSearchResults().getText(), placesPage.getNoItemMessage());
+		Assert.assertEquals(placesPage.lookForItem(NON_EXISTING_ITEM). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
 	
   	@Test
 	public void checkSearchInputFieldSecurity(){
-  		Assert.assertEquals(placesPage.lookForItem("<script>alert( 'Hello, World!' );</script>"). getTextSearchResults().getText(), placesPage.getNoItemMessage());
+  		Assert.assertEquals(placesPage.lookForItem(SCRIPT). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
      
 }
