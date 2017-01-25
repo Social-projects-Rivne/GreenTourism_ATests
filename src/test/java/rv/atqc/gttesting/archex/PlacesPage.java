@@ -12,15 +12,12 @@ import org.openqa.selenium.support.How;
 
 public class PlacesPage extends AbstractPage<PlacesPage>{
 
-	private final int MAX_WAIT_TIME = 10;
-
-	
+	private final int MAX_WAIT_TIME = 15;
+	private final String PLACES_PAGE_URL = "https://green-tourism.herokuapp.com/#!/places";
 	private final String VISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3";
 	private final String INVISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd";
-	private final String NO_ITEM_MESSAGE = "There are no such places and tracks, try else please";
-	public final String PLACES_PAGE_URL = "https://green-tourism.herokuapp.com/#!/places";
+	private final String  NO_ITEM_MESSAGE = "There are no such places and tracks, try else please";
 
-	
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[1]")
 	private WebElement campPlace;
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[7]")
@@ -58,6 +55,7 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	protected WebElement searchField;
 	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[1]/button")
     private WebElement searchButton;
+
     @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i")
     private WebElement closeResultsButton;
 	
@@ -69,15 +67,17 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
     private WebElement textSearchResults;    
     @FindBy(how = How.XPATH, using = "//*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a")
     private WebElement foundResultForVisibleItem;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a")
-    private WebElement foundResultForSecondVisibleItem;
-    @FindBy(how = How.XPATH, using = "//*[@id=\"584e7ef0b61f280400d36ebd\"]/button/h3")
+
+    @FindBy(how = How.XPATH, using = "//*[@id=\"584e7ef0b61f280400d36ebd\"]/button/h3/a")
     private WebElement foundResultForInvisibleItem;
     @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[3]/img[1]")
-    private WebElement foundItem; 
-    @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button")
-    private WebElement itemDetails;
-    	
+    private WebElement foundItem;
+    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button/a")
+    private WebElement item1Details;
+    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i")
+    private WebElement closeResultsButton;
 
 	public PlacesPage(WebDriver driver){
 		super(driver);
@@ -95,6 +95,9 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		return VISIBLE_ITEM_DETAILS_URL;
 	}
 	
+	public String getInisibleItemDetailsUrl(){
+		return INVISIBLE_ITEM_DETAILS_URL;
+
 	public WebElement getItemDetails(){
 		waitForVisibilityOfElement(itemDetails, MAX_WAIT_TIME);
 		return itemDetails;
@@ -108,6 +111,7 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	public WebElement getVisibleItemFoundSecondResult(){
 		waitForVisibilityOfElement(foundResultForSecondVisibleItem, MAX_WAIT_TIME);
 		return foundResultForSecondVisibleItem;
+
 	}
 	
 	public WebElement getInvisibleItemFoundResults(){
@@ -134,6 +138,7 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		waitForVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
 		hoverElement(itemSearchResults);
 		timeout(2,TimeUnit.SECONDS);
+
 		waitForElementToBeClickable(foundItem,MAX_WAIT_TIME);
 		return foundItem;
 	}
