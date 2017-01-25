@@ -2,6 +2,7 @@ package rv.atqc.gttesting.archex;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,8 +17,6 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	private final String VISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3";
 	private final String INVISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd";
 	private final String  NO_ITEM_MESSAGE = "There are no such places and tracks, try else please";
-	
-	
 
 	@FindBy(how = How.XPATH, using = "//*[@id='map']/div[1]/div[2]/div[1]/img[1]")
 	private WebElement campPlace;
@@ -56,6 +55,9 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	protected WebElement searchField;
 	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[1]/button")
     private WebElement searchButton;
+
+    @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i")
+    private WebElement closeResultsButton;
 	
 	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/span[3]")
 	private WebElement failedRequestField;	
@@ -65,6 +67,7 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
     private WebElement textSearchResults;    
     @FindBy(how = How.XPATH, using = "//*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a")
     private WebElement foundResultForVisibleItem;
+
     @FindBy(how = How.XPATH, using = "//*[@id=\"584e7ef0b61f280400d36ebd\"]/button/h3/a")
     private WebElement foundResultForInvisibleItem;
     @FindBy(how = How.XPATH, using = "//*[@id=\"map\"]/div[1]/div[2]/div[3]/img[1]")
@@ -75,8 +78,6 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
     
     @FindBy(how = How.XPATH, using = "//*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i")
     private WebElement closeResultsButton;
-    
-  
 
 	public PlacesPage(WebDriver driver){
 		super(driver);
@@ -86,12 +87,31 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		return NO_ITEM_MESSAGE;
 	}
 	
+	public String getInvisibleItemDetailsUrl(){
+		return INVISIBLE_ITEM_DETAILS_URL;
+	}
+
 	public String getVisibleItemDetailsUrl(){
 		return VISIBLE_ITEM_DETAILS_URL;
 	}
 	
 	public String getInisibleItemDetailsUrl(){
 		return INVISIBLE_ITEM_DETAILS_URL;
+
+	public WebElement getItemDetails(){
+		waitForVisibilityOfElement(itemDetails, MAX_WAIT_TIME);
+		return itemDetails;
+	}
+		
+	public WebElement getVisibleItemFoundResults(){
+		waitForVisibilityOfElement(foundResultForVisibleItem, MAX_WAIT_TIME);
+		return foundResultForVisibleItem;
+	}
+	
+	public WebElement getVisibleItemFoundSecondResult(){
+		waitForVisibilityOfElement(foundResultForSecondVisibleItem, MAX_WAIT_TIME);
+		return foundResultForSecondVisibleItem;
+
 	}
 	
 	public WebElement getInvisibleItemFoundResults(){
@@ -108,10 +128,17 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		waitForVisibilityOfElement(textSearchResults, MAX_WAIT_TIME);
 		return textSearchResults;
 	}
-
+	
+	public PlacesPage timeout(long time, TimeUnit timeUnit) {
+		driver.manage().timeouts().implicitlyWait(time, timeUnit);
+		return this;
+	}
+	
 	public WebElement getFoundItem(){
 		waitForVisibilityOfElement(itemSearchResults, MAX_WAIT_TIME);
-		this.hoverElement(itemSearchResults);
+		hoverElement(itemSearchResults);
+		timeout(2,TimeUnit.SECONDS);
+
 		waitForElementToBeClickable(foundItem,MAX_WAIT_TIME);
 		return foundItem;
 	}
