@@ -1,11 +1,9 @@
 package rv.atqc.gttesting.archex;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import rv.atqc.gttesting.res.Resources;
-
 
 public class ProfilePage extends AbstractPage {
 
