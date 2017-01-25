@@ -18,6 +18,13 @@ public class FindItemByNameChrome {
 	private WebDriver driver;
 	private PlacesPage placesPage;
 	
+	private final String VISIBLE_ITEM_NAME = "ASdazxc";
+	private final String INVISIBLE_ITEM_NAME = "Hight Castle";
+	private final String FAILED_PLACE_NAME = "FAILED_PLACE";
+	private final String DOUBLE_ITEM_NAME = "sda";
+	private final String ERROR_ITEM_NAME = "1";
+	private final String SCRIPT = "<script>alert( 'Hello, World!' );</script>";
+	
 	@BeforeClass
 	public void beforeClass() {
 		ChromeDriverManager.getInstance().setup();
@@ -37,53 +44,62 @@ public class FindItemByNameChrome {
 	}
 	@AfterMethod
 	public void afterMethod(){
-		driver.get("https://green-tourism.herokuapp.com/#!/places");
+		driver.get(placesPage.PLACES_PAGE_URL);
 	}
 	@AfterClass
 	public void quitDriver(){
-	      driver.quit();
+		driver.quit();
 	}
-	
+
 	@Test
 	public void checkSearchResultsField(){
-		Assert.assertTrue(placesPage.lookForItem("ASdazxc").getTextSearchResults().isDisplayed());    
+		Assert.assertTrue(placesPage.lookForItem(VISIBLE_ITEM_NAME).getTextSearchResults().isDisplayed());    
 	}
-	
-  	@Test
+	@Test
 	public void checkSearchInptFieldSecurity(){
-  		Assert.assertEquals(placesPage.lookForItem("<script>alert( 'Hello, World!' );</script>"). getTextSearchResults().getText(), placesPage.getNoItemMessage());
+  		Assert.assertEquals(placesPage.lookForItem(SCRIPT). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
-    
     @Test
     public void checkFailedRequestSearch(){
-		Assert.assertTrue(placesPage.lookForItem("1").getFailedRequestField().isDisplayed());
+		Assert.assertTrue(placesPage.lookForItem(ERROR_ITEM_NAME).getFailedRequestField().isDisplayed());
     }
-    
     @Test
     public void checkFailedPlaceSearch(){
-		Assert.assertEquals(placesPage.lookForItem("FAILED_PLACE"). getTextSearchResults().getText(), placesPage.getNoItemMessage());
+		Assert.assertEquals(placesPage.lookForItem(FAILED_PLACE_NAME). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
-    
     @Test
     public void checkSearchResultsFromVisibleRegion(){
-		placesPage.lookForItem("ASdazxc").getFoundResults().click();
+		placesPage.lookForItem(VISIBLE_ITEM_NAME).getFoundResults().click();
     	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getVisibleItemDetailsUrl());
     }
-    
     @Test
     public void checkSearchResultsFromInvisibleRegion(){
-		placesPage.lookForItem("Hight Castle").getInvisibleItemFoundResults().click();
-    	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getInisibleItemDetailsUrl());
+		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getInvisibleItemFoundResults().click();
+    	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getInvisibleItemDetailsUrl());
 	}
-    
-    @Test
-    public void checkItemFromVisibleRegion(){
-		Assert.assertTrue(placesPage.lookForItem("ASdazxc").getFoundItem().isDisplayed());
-	}
-	
 	@Test
-    public void checkItemFromInisibleRegion(){
-		Assert.assertTrue(placesPage.lookForItem("Hight Castle").getFoundItem().isDisplayed());
+    public void checkItemFromVisibleRegion(){
+		Assert.assertTrue(placesPage.lookForItem(VISIBLE_ITEM_NAME).getFoundItem().isDisplayed());
 	}
- 
+	@Test
+    public void checkItemFromInvisibleRegion(){
+		Assert.assertTrue(placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().isDisplayed());
+	}
+	@Test
+    public void checkItemDetailsFromInvisibleRegion(){
+    	placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
+    	Assert.assertTrue(placesPage.getItemDetails().isDisplayed());
+    }
+	@Test
+    public void checkItemDetailsUrlFromInvsibleRegion(){
+		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
+		placesPage.getItemDetails().click();
+    	Assert.assertEquals(driver.getCurrentUrl(),placesPage.getInvisibleItemDetailsUrl());
+    }
+	@Test
+    public void checkSearchResultsForTwoPlaces(){
+		placesPage.lookForItem(DOUBLE_ITEM_NAME);
+    	Assert.assertTrue(placesPage.getFoundResults().isDisplayed()&&placesPage.getVisibleItemFoundSecondResult().isDisplayed());
+    }
+	
 }
