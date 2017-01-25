@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import rv.atqc.gttesting.res.Resources;
 
-public class ProfilePage extends AbstractPage {
+public class ProfilePage extends AbstractPage <ProfilePage> {
 
     @FindBy(css = "#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(1)")
     private WebElement chengeButton;
