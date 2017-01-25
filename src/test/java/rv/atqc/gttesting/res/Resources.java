@@ -37,6 +37,21 @@ public class Resources {
 		public static String USER_EMAIL    = properties.getProperty("email");
 		public static String USER_PASSWORD = properties.getProperty("password");
 	}
+	
+	public static class GloblaConfig {
+		private static Properties properties = init("global-config.properties");
+		public static int MAX_TIME_WAIT = Integer.valueOf(properties.getProperty("max-time-wait"));
+		public static int MIN_TIME_WAIT = Integer.valueOf(properties.getProperty("min-time-wait"));
+		public static int MAX_TIMEOUT = Integer.valueOf(properties.getProperty("max-timeout"));
+		public static int MIN_TIMEOUT = Integer.valueOf(properties.getProperty("min-timeout"));
+		
+	}
+	
+	public static class EditCommit {
+		private static Properties properties = init("user-information-test-data.properties");
+		public static String TEXT_BEFORE_EDIT    = properties.getProperty("textBeforeEdit");
+		public static String TEXT_AFTER_EDIT = properties.getProperty("textAfterEdit");
+	}
 
 	private static Properties init(String propertiesTitle) {
 		Properties properties = new Properties();
