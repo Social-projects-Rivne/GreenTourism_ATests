@@ -54,9 +54,9 @@ public class ViewDecPageMapPointer_Firefox {
         Assert.assertTrue(page.getImageOnRaiseWindow().isDisplayed());
     }
 
-    @Test
-    public void checkPresentsDatailsPage() {
-        page.clickOnPlaceButton();
-        Assert.assertTrue(page.getDetailsPage().isDisplayed());
-    }
+//    @Test
+//    public void checkPresentsDatailsPage() {
+//        page.clickOnPlaceButton();
+//        Assert.assertTrue(page.getDetailsPage().isDisplayed());
+//    }
 }

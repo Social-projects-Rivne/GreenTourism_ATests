@@ -22,6 +22,16 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 	private WebElement exitButtonOnRaiseWindow;
 	@FindBy(xpath = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/a[1]/img")
 	private WebElement imageOnRaiseWindow;
+	@FindBy(xpath = "//*[@id=\"main\"]/div/place-detail/div/div/div[2]/div[1]/div/h2")
+	private WebElement titleOnDeskPage;
+	@FindBy(xpath = "//*[@id=\"firstimg\"]/img")
+	private WebElement imageOnDeskPage;
+	@FindBy(xpath = "/html/body/main/div/place-detail/div/div/div[2]/div[2]/div[2]/div[2]")
+	private WebElement mapOnDeskPage;
+	@FindBy(xpath = "//*[@id=\"close\"]")
+	private WebElement closeButtonOnDeskPage;
+	@FindBy(xpath = "//*[@id=\"search\"]/div/span[1]/button")
+	private WebElement searchButtonOnMapPage;
 
 	private final int MAX_WAIT_TIME = 20;
 
@@ -68,10 +78,36 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 		return imageOnRaiseWindow;
 	}
 
-	public WebElement getDetailsPage () {
+	public void getDetailsPage () {
 		waitForElementToBeClickable(detailButton, MAX_WAIT_TIME);
 		detailButton.click();
-		waitForVisibilityOfElement(detailPage, MAX_WAIT_TIME);
-		return detailPage;
+//		waitForVisibilityOfElement(detailPage, MAX_WAIT_TIME);
+//		return detailPage;
 	}
+
+	public WebElement getTitleOnDeskPage (){
+		waitForVisibilityOfElement(titleOnDeskPage, MAX_WAIT_TIME);
+		return titleOnDeskPage;
+	}
+
+	public WebElement getImageOnDeskPage (){
+		waitForVisibilityOfElement(imageOnDeskPage, MAX_WAIT_TIME);
+		return imageOnDeskPage;
+	}
+
+	public WebElement getMapOnDeskPage (){
+		waitForVisibilityOfElement(mapOnDeskPage, MAX_WAIT_TIME);
+		return mapOnDeskPage;
+	}
+	public WebElement getCloseButtonOnDeskPage (){
+		waitForVisibilityOfElement(closeButtonOnDeskPage, MAX_WAIT_TIME);
+		return closeButtonOnDeskPage;
+	}
+
+	public WebElement getMapPage (){
+		waitForVisibilityOfElement(searchButtonOnMapPage, MAX_WAIT_TIME);
+		return searchButtonOnMapPage;
+	}
+
+
 }

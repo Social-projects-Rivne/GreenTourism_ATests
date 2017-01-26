@@ -51,8 +51,48 @@ public class ViewDecPageMapPointer_Chrome {
     }
 
     @Test
-    public void checkPresentsDatailsPage() {
+    public void checkPresentTitleOnDatailsPage() {
         page.clickOnPlaceButton();
-        Assert.assertTrue(page.getDetailsPage().isDisplayed());
+        page.getDetailsPage();
+        Assert.assertTrue(page.getTitleOnDeskPage().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentImageOnDatailsPage() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        Assert.assertTrue(page.getTitleOnDeskPage().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentMapOnDatailsPage() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        Assert.assertTrue(page.getMapOnDeskPage().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentCloseButtonOnDatailsPage() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        Assert.assertTrue(page.getCloseButtonOnDeskPage().isDisplayed());
+    }
+
+    @Test
+    public void checkWorkingCloseButtonOnDatailsPage() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        page.getCloseButtonOnDeskPage().click();
+        Assert.assertTrue(page.getMapPage().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentElementsOnDatailsPage() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        Assert.assertTrue(page.getTitleOnDeskPage().isDisplayed());
+        Assert.assertTrue(page.getTitleOnDeskPage().isDisplayed());
+        Assert.assertTrue(page.getMapOnDeskPage().isDisplayed());
+        Assert.assertTrue(page.getCloseButtonOnDeskPage().isDisplayed());
     }
 }
