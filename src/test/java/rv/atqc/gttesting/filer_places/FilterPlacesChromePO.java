@@ -10,6 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 import rv.atqc.gttesting.archex.PlacesPage;
 
 public class FilterPlacesChromePO {
@@ -29,7 +30,7 @@ public class FilterPlacesChromePO {
 		driver = new ChromeDriver(capabilities);
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		page = new PlacesPage(driver).openCategories();
+		page = new MapHeadPageForGuestUserPage(driver).clickCategories().clickPlaces();
 	}
 	
 	@AfterClass
