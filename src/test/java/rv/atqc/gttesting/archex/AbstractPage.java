@@ -64,7 +64,13 @@ public T hoverElement(WebElement webElement){
         driver.manage().timeouts().implicitlyWait(time, timeUnit);
         return (T) this;
     }
-     
+    
+ public T waitForVisibilityOfElement(WebElement webElement, int timeout) {
+		WebDriverWait wait = new WebDriverWait(driver, timeout);
+		wait.until(ExpectedConditions.visibilityOf(webElement));
+		return (T) this;
+	}
+ 
     public T waitForInVisibilityOfElement(WebElement webElement, int timeout) {
         WebDriverWait wait = new WebDriverWait(driver, timeout);
         wait.until(ExpectedConditions.invisibilityOfAllElements(new ArrayList<WebElement>(Arrays.asList(webElement))));
