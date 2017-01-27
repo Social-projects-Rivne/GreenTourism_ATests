@@ -1,7 +1,5 @@
 package rv.atqc.gttesting.possibility_add_comment;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,6 +11,7 @@ import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
+import rv.atqc.gttesting.res.Resources;
 
 public class PossibilityAddCommentChrome {
 	
@@ -27,8 +26,8 @@ public class PossibilityAddCommentChrome {
 		new HeadForGuestUserPage(driver)
 				.clickLeftNavButton()
 				.clickLogIn()
-				.setLoginField("juger@juger.juger")
-				.setPasswordField("11111111")
+				.setLoginField(Resources.LogInMessage.USER_EMAIL)
+				.setPasswordField(Resources.LogInMessage.USER_PASSWORD)
 				.clickLogInButton();
 		driver.get("http://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3");
 	}
