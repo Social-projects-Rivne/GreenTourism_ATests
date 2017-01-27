@@ -16,7 +16,7 @@ public class EditAvartarPage extends ProfilePage {
     private WebElement chengeButton;
     @FindBy(xpath = "//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input")
     private WebElement avatarUrlField;
-    @FindBy(xpath = "//img[@src='https://secure.gravatar.com/avatar/76e697227c50567bdb5c23f3165cde7f?s=480']")
+    @FindBy(xpath = "//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/img")
     private WebElement defAvatar;
     @FindBy(xpath = "//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/div/input")
     private WebElement urlField;
@@ -60,6 +60,7 @@ public class EditAvartarPage extends ProfilePage {
     public WebElement getDefAvatarImage() {
         waitForElementToBeClickable(confirmButton, MAX_WAIT_TIME);
         confirmButton.click();
+        waitForElementToBeClickable(chengeButton, MAX_WAIT_TIME);
         waitForVisibilityOfElement(defAvatar, MAX_WAIT_TIME);
         return defAvatar;
     }
