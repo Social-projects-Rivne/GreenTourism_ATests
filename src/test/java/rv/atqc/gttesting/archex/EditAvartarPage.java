@@ -7,7 +7,7 @@ import rv.atqc.gttesting.res.Resources;
 
 public class EditAvartarPage extends ProfilePage {
 
-    private final int MAX_WAIT_TIME = 10;
+    private final int MAX_WAIT_TIME = 20;
     @FindBy(xpath = "//*[@id=\"main\"]/div/user-profile/div/div/section[1]/div[1]/form/input")
     private WebElement confirmButton;
     @FindBy(css = "#main > div > user-profile > div > div > section.col-sm-3 > div.user-page__avatar > button > span:nth-child(2)")
