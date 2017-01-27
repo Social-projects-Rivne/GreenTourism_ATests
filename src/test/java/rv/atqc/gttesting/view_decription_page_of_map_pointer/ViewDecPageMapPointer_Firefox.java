@@ -1,9 +1,7 @@
 package rv.atqc.gttesting.view_decription_page_of_map_pointer;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -11,9 +9,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 
-/**
- * Created by roman on 25.01.17.
- */
 public class ViewDecPageMapPointer_Firefox {
     private MapHeadPageForGuestUserPage page;
     private WebDriver driver;
@@ -32,31 +27,49 @@ public class ViewDecPageMapPointer_Firefox {
     }
 
     @Test
-    public void checkPresentPlasesOnMap_Chrome() {
+    public void checkPresentPlasesOnMap_Firefox() {
         Assert.assertTrue(page.getPlasesOnMapChrome().isDisplayed());
     }
 
     @Test
-    public void checkPresentButtonDetailsOnRaiseWindow_Chrome() {
+    public void checkPresentButtonDetailsOnRaiseWindow_Firefox() {
         page.clickOnPlaceButton();
         Assert.assertTrue(page.getDetailsButton().isDisplayed());
     }
 
     @Test
-    public void checkPresentButtonExitOnRaiseWindow_Chrome() {
+    public void checkPresentTitleOnDatailsPage_Firefox() {
         page.clickOnPlaceButton();
-        Assert.assertTrue(page.getExitButtonOnRaiseWindow().isDisplayed());
+        page.getDetailsPage();
+        Assert.assertTrue(page.getTitleOnDeskPage().isDisplayed());
     }
 
     @Test
-    public void checkPresentImageOnRaiseWindow_Chrome() {
+    public void checkPresentImageOnDatailsPage_Firefox() {
         page.clickOnPlaceButton();
-        Assert.assertTrue(page.getImageOnRaiseWindow().isDisplayed());
+        page.getDetailsPage();
+        Assert.assertTrue(page.getImageOnDeskPage().isDisplayed());
     }
 
-//    @Test
-//    public void checkPresentsDatailsPage() {
-//        page.clickOnPlaceButton();
-//        Assert.assertTrue(page.getDetailsPage().isDisplayed());
-//    }
+    @Test
+    public void checkPresentMapOnDatailsPage_Firefox() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        Assert.assertTrue(page.getMapOnDeskPage().isDisplayed());
+    }
+
+    @Test
+    public void checkPresentCloseButtonOnDatailsPage_Firefox() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        Assert.assertTrue(page.getCloseButtonOnDeskPage().isDisplayed());
+    }
+
+    @Test
+    public void checkWorkingCloseButtonOnDatailsPage_Firefox() {
+        page.clickOnPlaceButton();
+        page.getDetailsPage();
+        page.getCloseButtonOnDeskPage().click();
+        Assert.assertTrue(page.getMapPage().isDisplayed());
+    }
 }

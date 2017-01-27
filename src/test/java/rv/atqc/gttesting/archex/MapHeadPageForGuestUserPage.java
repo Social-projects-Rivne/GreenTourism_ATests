@@ -12,16 +12,12 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 	private WebElement categories;
 	@FindBy(how = How.XPATH, using = "//*[@id=\"popularPlaces\"]")
 	private WebElement popularPlacesInLocation;
-	@FindBy(css = ".leaflet-marker-icon")
+	@FindBy(xpath = "//*[@id=\"map\"]/div[1]/div[2]/div[3]/img[1]")
 	private WebElement place;
 	@FindBy(xpath = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/a[2]")
 	private WebElement detailButton;
 	@FindBy(xpath = "//*[@id=\"main\"]/div/place-detail/div")
 	private WebElement detailPage;
-	@FindBy(xpath = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/a")
-	private WebElement exitButtonOnRaiseWindow;
-	@FindBy(xpath = "//*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/a[1]/img")
-	private WebElement imageOnRaiseWindow;
 	@FindBy(xpath = "//*[@id=\"main\"]/div/place-detail/div/div/div[2]/div[1]/div/h2")
 	private WebElement titleOnDeskPage;
 	@FindBy(xpath = "//*[@id=\"firstimg\"]/img")
@@ -62,27 +58,14 @@ public class MapHeadPageForGuestUserPage extends AbstractMapHeadPage<MapHeadPage
 		place.click();
 	}
 
-	public WebElement getExitButtonOnRaiseWindow () {
-		waitForElementToBeClickable(exitButtonOnRaiseWindow, MAX_WAIT_TIME);
-		return exitButtonOnRaiseWindow;
-	}
-
-
 	public WebElement getDetailsButton () {
 		waitForElementToBeClickable(detailButton, MAX_WAIT_TIME);
 		return detailButton;
 	}
 
-	public WebElement getImageOnRaiseWindow () {
-		waitForElementToBeClickable(imageOnRaiseWindow, MAX_WAIT_TIME);
-		return imageOnRaiseWindow;
-	}
-
 	public void getDetailsPage () {
 		waitForElementToBeClickable(detailButton, MAX_WAIT_TIME);
 		detailButton.click();
-//		waitForVisibilityOfElement(detailPage, MAX_WAIT_TIME);
-//		return detailPage;
 	}
 
 	public WebElement getTitleOnDeskPage (){
