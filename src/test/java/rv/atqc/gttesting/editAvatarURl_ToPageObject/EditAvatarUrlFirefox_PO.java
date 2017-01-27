@@ -27,53 +27,53 @@ public class EditAvatarUrlFirefox_PO {
         profilePage = new LogInPage(driver).loging();
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        driver.quit();
-    }
+//    @AfterMethod
+//    public void afterMethod() {
+//        driver.quit();
+//    }
 
-    @Test
-    public void checkChangeButtonTitleIn_Firefox() {
-        Assert.assertEquals(profilePage.getChangeButtonText(), Resources.LogInConstants.EXPECTED_CHANGE_BUTTON_TEXT);
-    }
-
-    @Test
-    public void checkCancelButtonTitleIn_Firefox() {
-        Assert.assertEquals(profilePage.getEditAvatarPage().getCancelButtonText(), Resources.LogInConstants.EXPECTED_CANCEL_BUTTON_TEXT);
-    }
-
-    @Test
-    public void checkConfirmButtonInEditAvSyst_Firefox() {
-        Assert.assertTrue(profilePage.getEditAvatarPage().getConfirmButton().isDisplayed());
-    }
-
-    @Test
-    public void checkPresentFieldAvatarURLInEditAvSyst_Firefox() {
-        Assert.assertTrue(profilePage.getEditAvatarPage().getAvatarUrlField().isDisplayed());
-    }
-
-    @Test
-    public void checkPresentDefaultAvatarInEditAvSyst_Firefox() {
-        Assert.assertTrue(profilePage.getEditAvatarPage().getDefAvatarImage().isDisplayed());
-    }
-
-    @Test
-    public void checkPresentJPGAvatarInEditAvSyst_Firefox() {
-        profilePage.getEditAvatarPage().insertURL(JPG_URL);
-        Assert.assertTrue(profilePage.getEditAvatarPage().getJPGAvatar().isDisplayed());
-    }
-
-    @Test
-    public void checkPresentJPEGAvatarInEditAvSyst_Firefox() {
-        profilePage.getEditAvatarPage().insertURL(JPEG_URL);
-        Assert.assertTrue(profilePage.getEditAvatarPage().getJPEGAvatar().isDisplayed());
-    }
-
-    @Test
-    public void checkPresentPNGAvatarInEditAvSyst_Firefox() {
-        profilePage.getEditAvatarPage().insertURL(PNG_URL);
-        Assert.assertTrue(profilePage.getEditAvatarPage().getPNGAvatar().isDisplayed());
-    }
+//    @Test
+//    public void checkChangeButtonTitleIn_Firefox() {
+//        Assert.assertEquals(profilePage.getChangeButtonText(), Resources.LogInConstants.EXPECTED_CHANGE_BUTTON_TEXT);
+//    }
+//
+//    @Test
+//    public void checkCancelButtonTitleIn_Firefox() {
+//        Assert.assertEquals(profilePage.getEditAvatarPage().getCancelButtonText(), Resources.LogInConstants.EXPECTED_CANCEL_BUTTON_TEXT);
+//    }
+//
+//    @Test
+//    public void checkConfirmButtonInEditAvSyst_Firefox() {
+//        Assert.assertTrue(profilePage.getEditAvatarPage().getConfirmButton().isDisplayed());
+//    }
+//
+//    @Test
+//    public void checkPresentFieldAvatarURLInEditAvSyst_Firefox() {
+//        Assert.assertTrue(profilePage.getEditAvatarPage().getAvatarUrlField().isDisplayed());
+//    }
+//
+//    @Test
+//    public void checkPresentDefaultAvatarInEditAvSyst_Firefox() {
+//        Assert.assertTrue(profilePage.getEditAvatarPage().getDefAvatarImage().isDisplayed());
+//    }
+//
+//    @Test
+//    public void checkPresentJPGAvatarInEditAvSyst_Firefox() {
+//        profilePage.getEditAvatarPage().insertURL(JPG_URL);
+//        Assert.assertTrue(profilePage.getEditAvatarPage().getJPGAvatar().isDisplayed());
+//    }
+//
+//    @Test
+//    public void checkPresentJPEGAvatarInEditAvSyst_Firefox() {
+//        profilePage.getEditAvatarPage().insertURL(JPEG_URL);
+//        Assert.assertTrue(profilePage.getEditAvatarPage().getJPEGAvatar().isDisplayed());
+//    }
+//
+//    @Test
+//    public void checkPresentPNGAvatarInEditAvSyst_Firefox() {
+//        profilePage.getEditAvatarPage().insertURL(PNG_URL);
+//        Assert.assertTrue(profilePage.getEditAvatarPage().getPNGAvatar().isDisplayed());
+//    }
 
     @Test
     public void checkSavingJPGAvatarInEditAvSyst_Firefox() {

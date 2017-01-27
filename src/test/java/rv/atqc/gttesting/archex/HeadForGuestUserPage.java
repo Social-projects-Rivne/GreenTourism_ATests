@@ -10,6 +10,7 @@ public class HeadForGuestUserPage extends AbstractHeadPage<HeadForLoggedUserPage
 
     @Override
     public LogInPage clickLeftNavButton() {
+        waitForElementToBeClickable(leftNavButton, MAX_TIME_WAIT);
         leftNavButton.click();
         return new LogInPage(driver);
     }
