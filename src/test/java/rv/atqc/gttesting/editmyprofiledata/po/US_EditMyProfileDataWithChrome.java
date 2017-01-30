@@ -99,7 +99,7 @@ public class US_EditMyProfileDataWithChrome {
 	
 	@Test
     public void VerifyClickThroughRateOfTheEditButton(){
-        Assert.assertTrue(pageProfile.isEditClicable());
+        Assert.assertTrue(pageProfile.isEditClickable());
     }
 	
 	@Test
