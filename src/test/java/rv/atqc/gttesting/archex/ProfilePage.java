@@ -43,7 +43,7 @@ public class ProfilePage extends AbstractPage <ProfilePage> {
 		return new HeadForLoggedUserPage(driver);
 	}
 	
-	public boolean isEditClicable(){
+	public boolean isEditClickable(){
 		return isElementClickable(edit, MIN_TIME_WAIT);
 	}
 }
