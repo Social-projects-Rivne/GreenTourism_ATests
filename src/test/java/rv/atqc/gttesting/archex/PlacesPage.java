@@ -148,7 +148,7 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	
 	public PlacesPage lookForItem(String searchWord){
 		driver.get(PLACES_PAGE_URL);
-		waitForVisibilityOfElement(featuredPlace,MAX_WAIT_TIME);
+		waitForVisibilityOfElement(searchField,MAX_WAIT_TIME);
 		searchField.clear();
 		searchField.sendKeys(searchWord);
 		waitForVisibilityOfElement(searchButton, MAX_WAIT_TIME);

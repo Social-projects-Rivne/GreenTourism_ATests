@@ -18,6 +18,8 @@ public class SearchOnMapPageChrome {
 	private String NON_EXISTING_ITEM = "bla-bla";
 	private String SHORT_REQUEST = "12";
 	private String SCRIPT = "<script>alert( 'Hello, World!' );</script>";
+	private final String INVISIBLE_ITEM_NAME = "Hight Castle";
+	private final String DOUBLE_ITEM_NAME = "sda";
 	
 	@BeforeClass
 	public void beforeClass() {
@@ -60,6 +62,25 @@ public class SearchOnMapPageChrome {
   	@Test
 	public void checkSearchInputFieldSecurity(){
   		Assert.assertEquals(placesPage.lookForItem(SCRIPT). getTextSearchResults().getText(), placesPage.getNoItemMessage());
+    }
+  	
+	@Test
+    public void checkItemDetailsFromInvisibleRegion(){
+    	placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
+    	Assert.assertTrue(placesPage.getItemDetails().isDisplayed());
+    }
+	
+	@Test
+    public void checkItemDetailsUrlFromInvsibleRegion(){
+		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
+		placesPage.getItemDetails().click();
+    	Assert.assertEquals(driver.getCurrentUrl(),placesPage.getInvisibleItemDetailsUrl());
+    }
+	
+	@Test
+    public void checkSearchResultsForTwoPlaces(){
+		placesPage.lookForItem(DOUBLE_ITEM_NAME);
+    	Assert.assertTrue(placesPage.getFoundResults().isDisplayed()&&placesPage.getVisibleItemFoundSecondResult().isDisplayed());
     }
      
 }
