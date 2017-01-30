@@ -3,6 +3,7 @@ package rv.atqc.gttesting.possibility_sign_up_into_system;
 import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterGroups;
@@ -14,6 +15,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
 import rv.atqc.gttesting.archex.HeadForLoggedUserPage;
 import rv.atqc.gttesting.archex.SignUpPage;
+import rv.atqc.gttesting.res.Resources;
 
 public class PossibilitySignUpIntoSystemChrome {
 
@@ -30,17 +32,9 @@ public class PossibilitySignUpIntoSystemChrome {
 	private static final String PASSWORD_CONFIRM = "password_confirm";
 	private static final String SIGNUP_FUNCTIONALITY = "signup_functionality";
 	
-	private static final String NAME_VALID = "Anonym";
-	private static final String ABSENCE = "";
-	private static final String NAME_INVALID = "An786m";
-	private static final String EMAIL_VALID = "first.last@domain.com";
-	private static final String EMAIL_INVALID = "email@11111.222";
-	private static final String LESS_8_PASSWORD = "1234567";
-	private static final String PASSWORD_8 = "12345678";
-	private static final String PASSWORD_9 = "123456789";
-	
 
-	@BeforeGroups(groups={EXISTENCE_OF_SIGNUP, FIRST_NAME_VALIDATION, LAST_NAME_VALIDATION, EMAIL_VALIDATION, PASSWORD_VALIDATION, PASSWORD_CONFIRM_VALIDATION, PASSWORD_CONFIRM, SIGNUP_FUNCTIONALITY})
+	@BeforeGroups(groups = {EXISTENCE_OF_SIGNUP, FIRST_NAME_VALIDATION, LAST_NAME_VALIDATION, 
+							EMAIL_VALIDATION, PASSWORD_VALIDATION, PASSWORD_CONFIRM_VALIDATION, PASSWORD_CONFIRM, SIGNUP_FUNCTIONALITY})
 	public void beforeExistenceOfSignUp() {
 		ChromeDriverManager.getInstance().setup();
 		driver = new ChromeDriver();
@@ -51,48 +45,53 @@ public class PossibilitySignUpIntoSystemChrome {
 				.clickSignUp();
 	}
 
-	@AfterGroups(groups={EXISTENCE_OF_SIGNUP, FIRST_NAME_VALIDATION, LAST_NAME_VALIDATION, EMAIL_VALIDATION, PASSWORD_VALIDATION, PASSWORD_CONFIRM_VALIDATION, PASSWORD_CONFIRM, SIGNUP_FUNCTIONALITY})
+	@AfterGroups(groups = {EXISTENCE_OF_SIGNUP, FIRST_NAME_VALIDATION, LAST_NAME_VALIDATION, 
+							EMAIL_VALIDATION, PASSWORD_VALIDATION, PASSWORD_CONFIRM_VALIDATION, PASSWORD_CONFIRM, SIGNUP_FUNCTIONALITY})
 	public void afterClass() {
 		driver.quit();
 	}
 
 	@Test(groups = {EXISTENCE_OF_SIGNUP})
-	public void checkExistenceSignUpForm() {
-		Assert.assertTrue(page.getSignUpForm().isDisplayed(), "Signup form is not exist!!!");
+	public void verifyExistenceOfSignUpForm() {
+		WebElement signUpForm = page.getSignUpForm();
+		Assert.assertTrue(signUpForm.isDisplayed());
 	}
 
-	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = { "checkExistenceSignUpForm" })
-	public void checkExistenceFirstNameInput() {
-		Assert.assertTrue(page.getFirstName().isDisplayed(), "First name input is not exist!!!");
+	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
+	public void verifyExistenceOfFirstNameInput() {
+		WebElement firstName = page.getFirstName();
+		Assert.assertTrue(firstName.isDisplayed());
 	}
 
-	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = { "checkExistenceSignUpForm" })
-	public void checkExistenceLastNameInput() {
-		Assert.assertTrue(page.getLastName().isDisplayed(), "Last name input is not exist!!!");
-
+	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
+	public void verifyExistenceOfLastNameInput() {
+		WebElement lastName = page.getLastName();
+		Assert.assertTrue(lastName.isDisplayed());
 	}
 
-	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = { "checkExistenceSignUpForm" })
-	public void checkExistenceEmailInput() {
-		Assert.assertTrue(page.getEmail().isDisplayed(), "Email name input is not exist!!!");
-
+	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
+	public void verifyExistenceOfEmailInput() {
+		WebElement email = page.getEmail();
+		Assert.assertTrue(email.isDisplayed());
 	}
 
-	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = { "checkExistenceSignUpForm" })
-	public void checkExistencePasswordInput() {
-		Assert.assertTrue(page.getPassword().isDisplayed(), "Password input is not exist!!!");
-
-	}
-
-	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = { "checkExistenceSignUpForm" })
-	public void checkExistenceConfitmPasswordInput() {
-		Assert.assertTrue(page.getPasswordConfirm().isDisplayed(), "Confirm password input is not exist!!!");
+	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
+	public void verifyExistenceOfPasswordInput() {
+		WebElement password = page.getPassword();
+		Assert.assertTrue(password.isDisplayed());
 
 	}
 
-	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = { "checkExistenceSignUpForm" })
-	public void checkExistenceSignUpButton() {
-		Assert.assertTrue(page.getSignUpButton().isDisplayed(), "SignUp button is not exist!!!");
+	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
+	public void verifyExistenceOfConfitmPasswordInput() {
+		WebElement confirmPassword = page.getPasswordConfirm();
+		Assert.assertTrue(confirmPassword.isDisplayed());
+	}
+
+	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
+	public void verifyExistenceOfSignUpButton() {
+		WebElement signUpButton = page.getSignUpButton();
+		Assert.assertTrue(signUpButton.isDisplayed());
 	}
 	
 	@BeforeMethod(groups = {FIRST_NAME_VALIDATION})
@@ -100,23 +99,32 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearFirstName();
 	}
 
-	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = { "checkExistenceFirstNameInput" })
-	public void checkFirstNameToValidData() {
-		String actual = page.setFirstName(NAME_VALID).disableFocus().getFirstNameErrorMessage().getText();
-		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
+	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = {"verifyExistenceOfFirstNameInput"})
+	public void verifyFirstNameInputToValidData() {
+		String actual = page.setFirstName(Resources.UserTestData.VALID_NAME)
+				.disableFocus()
+				.getFirstNameErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 
 	}
 
-	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = { "checkExistenceFirstNameInput" })
-	public void checkFirstNameToEmptyData() {
-		String actual = page.setFirstName(ABSENCE).disableFocus().getFirstNameErrorMessage().getText();
-		Assert.assertEquals(actual, "First name is required", "Error: system don't show error message for empty data");
+	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfFirstNameInput" })
+	public void verifyFirstNameInputToEmptyData() {
+		String actual = page.setFirstName(Resources.UserTestData.EMPTY)
+				.disableFocus()
+				.getFirstNameErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.FIRST_NAME_EMPTY);
 	}
 
-	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = { "checkExistenceFirstNameInput" })
-	public void checkFirstNameToInvaldData() {
-		String actual = page.setFirstName(NAME_INVALID).disableFocus().getFirstNameErrorMessage().getText();
-		Assert.assertEquals(actual, "First name is invalid", "Error: system don't show error message for invalid data");
+	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfFirstNameInput" })
+	public void verifyFirstNameInputToInvaldData() {
+		String actual = page.setFirstName(Resources.UserTestData.INVALID_NAME)
+				.disableFocus()
+				.getFirstNameErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.FIRST_NAME_INVALID);
 	}
 
 	@BeforeMethod(groups = {LAST_NAME_VALIDATION})
@@ -124,22 +132,31 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearLastName();
 	}
 
-	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "checkExistenceLastNameInput" })
-	public void checkLastNameToValidData() {
-		String actual = page.setLastName(NAME_VALID).disableFocus().getLastNameErrorMessage().getText();
-		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
+	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfLastNameInput" })
+	public void verifyLastNameInputToValidData() {
+		String actual = page.setLastName(Resources.UserTestData.VALID_NAME)
+				.disableFocus()
+				.getLastNameErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
-	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "checkExistenceLastNameInput" })
-	public void checkLastNameToEmptyData() {
-		String actual = page.setLastName(ABSENCE).disableFocus().getLastNameErrorMessage().getText();
-		Assert.assertEquals(actual, "Last name is required", "Error: system don't show error message for empty data");
+	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfLastNameInput" })
+	public void verifyLastNameInputToEmptyData() {
+		String actual = page.setLastName(Resources.UserTestData.EMPTY)
+				.disableFocus()
+				.getLastNameErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.LAST_NAME_EMPTY);
 	}
 
-	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "checkExistenceLastNameInput" })
-	public void checkLastNameToInvaldData() {
-		String actual = page.setLastName(NAME_INVALID).disableFocus().getLastNameErrorMessage().getText();
-		Assert.assertEquals(actual, "Last name is invalid", "Error: system don't show error message for invalid data");
+	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfLastNameInput" })
+	public void verifyLastNameInputToInvalidData() {
+		String actual = page.setLastName(Resources.UserTestData.INVALID_NAME)
+				.disableFocus()
+				.getLastNameErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.LAST_NAME_INVALID);
 	}
 
 	@BeforeMethod(groups = {EMAIL_VALIDATION})
@@ -147,22 +164,31 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearEmail();
 	}
 
-	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "checkExistenceEmailInput" })
-	public void checkEmailToValidData() {
-		String actual = page.setEmail(EMAIL_VALID).disableFocus().getEmailErrorMessage().getText();
-		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
+	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "verifyExistenceOfEmailInput" })
+	public void verifyEmailInputToValidData() {
+		String actual = page.setEmail(Resources.UserTestData.VALID_EMAIL)
+				.disableFocus()
+				.getEmailErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
-	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "checkExistenceEmailInput" })
-	public void checkEmailToEmptyData() {
-		String actual = page.setEmail(ABSENCE).disableFocus().getEmailErrorMessage().getText();
-		Assert.assertEquals(actual, "Email is required", "Error: system don't show error message for empty data");
+	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "verifyExistenceOfEmailInput" })
+	public void verifyEmailInputToEmptyData() {
+		String actual = page.setEmail(Resources.UserTestData.EMPTY)
+				.disableFocus()
+				.getEmailErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.EMAIL_EMPTY);
 	}
 
-	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "checkExistenceEmailInput" })
-	public void checkEmailToInvalisData() {
-		String actual = page.setLastName(EMAIL_INVALID).disableFocus().getEmailErrorMessage().getText();
-		Assert.assertEquals(actual, "Email name is invalid", "Error: system don't show error message for invalid data");
+	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "verifyExistenceOfEmailInput" })
+	public void verifyEmailInputToInvalidData() {
+		String actual = page.setLastName(Resources.UserTestData.INVALID_EMAIL)
+				.disableFocus()
+				.getEmailErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.EMAIL_INVALID);
 	}
 	
 	@BeforeMethod(groups = {PASSWORD_VALIDATION})
@@ -170,22 +196,31 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearPassword();
 	}
 
-	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "checkExistencePasswordInput" })
-	public void checkPasswordToLess8s() {
-		String actual = page.setPassword(LESS_8_PASSWORD).disableFocus().getPasswordErrorMessage().getText();
-		Assert.assertEquals(actual, "Password should be longer than 8 characters", "Error: system don't show error message for invalid data");
+	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "verifyExistenceOfPasswordInput" })
+	public void verifyPasswordInputToPasswordLess8Symbols() {
+		String actual = page.setPassword(Resources.UserTestData.PASSWORD7)
+				.disableFocus()
+				.getPasswordErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.PASSWORD_LONGER);
 	}
 
-	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "checkExistencePasswordInput" })
-	public void checkPasswordTo8s() {
-		String actual = page.setPassword(PASSWORD_8).disableFocus().getPasswordErrorMessage().getText();
-		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
+	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "verifyExistenceOfPasswordInput" })
+	public void verifyPasswordInputToPassword8Symbols() {
+		String actual = page.setPassword(Resources.UserTestData.PASSWORD8)
+				.disableFocus()
+				.getPasswordErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
-	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "checkExistencePasswordInput" })
-	public void checkPasswordToEmpty() {
-		String actual = page.setPassword(ABSENCE).disableFocus().getPasswordErrorMessageForRequired().getText();
-		Assert.assertEquals(actual, "Password is required", "Error: system don't show error message for invalid data");
+	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "verifyExistenceOfPasswordInput" })
+	public void verifyPasswordInputToEmptyPassword() {
+		String actual = page.setPassword(Resources.UserTestData.EMPTY)
+				.disableFocus()
+				.getPasswordErrorMessageForRequired()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.PASSWORD_IS_EMPTY);
 	}
 	
 	@BeforeMethod(groups = {PASSWORD_CONFIRM_VALIDATION})
@@ -193,11 +228,14 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearPasswordConfirm();
 	}
 
-	@Test(groups = {PASSWORD_CONFIRM_VALIDATION}, dependsOnMethods = { "checkExistenceConfitmPasswordInput" })
-	public void checkConfirmPasswordToLess8s() {
+	@Test(groups = {PASSWORD_CONFIRM_VALIDATION}, dependsOnMethods = { "verifyExistenceOfConfitmPasswordInput" })
+	public void verifyConfirmPasswordInputToPasswordLess8Symbols() {
 		clearConfirmPassword();
-		String actual = page.setPasswordConfirm(LESS_8_PASSWORD).disableFocus().getPasswordConfirmErrorMessage().getText();
-		Assert.assertEquals(actual, "Passwords doesn't match", "Error: system don't show error message for invalid data");
+		String actual = page.setPasswordConfirm(Resources.UserTestData.PASSWORD7)
+				.disableFocus()
+				.getPasswordConfirmErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.PASSWORD_NO_MATCH);
 	}
 	
 	@BeforeMethod(groups = {PASSWORD_CONFIRM})
@@ -205,16 +243,24 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearPasswordConfirm().clearPassword();
 	}
 
-	@Test(groups = {PASSWORD_CONFIRM}, dependsOnMethods = { "checkExistencePasswordInput", "checkExistenceConfitmPasswordInput" })
-	public void confirmPassword() {
-		String actual = page.setPassword(PASSWORD_8).setPasswordConfirm(PASSWORD_8).disableFocus().getPasswordConfirmErrorMessage().getText();
-		Assert.assertEquals(actual, "", "Error: system shows error message for valid data");
+	@Test(groups = {PASSWORD_CONFIRM}, dependsOnMethods = { "verifyExistenceOfPasswordInput", "verifyExistenceOfConfitmPasswordInput" })
+	public void verifyPasswordsAndConfirmPasswordInputsToEqualsPasswords() {
+		String actual = page.setPassword(Resources.UserTestData.PASSWORD8)
+				.setPasswordConfirm(Resources.UserTestData.PASSWORD8)
+				.disableFocus()
+				.getPasswordConfirmErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
-	@Test(groups = {PASSWORD_CONFIRM}, dependsOnMethods = { "checkExistencePasswordInput", "checkExistenceConfitmPasswordInput" })
-	public void confirmPasswordNeg() {
-		String actual = page.setPassword(PASSWORD_8).setPasswordConfirm(PASSWORD_9).disableFocus().getPasswordConfirmErrorMessage().getText();
-		Assert.assertEquals(actual, "Passwords doesn't match", "Error: system don't show error message for invalid data");
+	@Test(groups = {PASSWORD_CONFIRM}, dependsOnMethods = { "verifyExistenceOfPasswordInput", "verifyExistenceOfConfitmPasswordInput" })
+	public void verifyPasswordsAndConfirmPasswordInputsToNoEqualsPasswords() {
+		String actual = page.setPassword(Resources.UserTestData.PASSWORD8)
+				.setPasswordConfirm(Resources.UserTestData.PASSWORD9)
+				.disableFocus()
+				.getPasswordConfirmErrorMessage()
+				.getText();
+		Assert.assertEquals(actual, Resources.SignUpErrorMessage.PASSWORD_NO_MATCH);
 	}
 	
 	@BeforeMethod(groups = {SIGNUP_FUNCTIONALITY})
@@ -226,14 +272,14 @@ public class PossibilitySignUpIntoSystemChrome {
 			.clearPasswordConfirm();
 	}
 
-	@Test(groups = {SIGNUP_FUNCTIONALITY}, dependsOnMethods = {"checkExistenceSignUpForm", "checkExistenceFirstNameInput", "checkExistenceLastNameInput", "checkExistenceEmailInput", "checkExistencePasswordInput", "checkExistenceConfitmPasswordInput"})
-	public void checkSignUp() {
+	@Test(groups = {SIGNUP_FUNCTIONALITY}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
+	public void verifySignUpSystem() {
 		String expected = "https://green-tourism.herokuapp.com/#!/profile";
 		HeadForLoggedUserPage headForLoggedUserPage = page.setFirstName(nameGenerator())
 			.setLastName(nameGenerator())
 			.setEmail(emailGenerator())
-			.setPassword(PASSWORD_8)
-			.setPasswordConfirm(PASSWORD_8)
+			.setPassword(Resources.UserTestData.PASSWORD8)
+			.setPasswordConfirm(Resources.UserTestData.PASSWORD8)
 			.clickSignUpButton();
 		String url = headForLoggedUserPage.getCurrentUrl();
 		Assert.assertEquals(url, expected);

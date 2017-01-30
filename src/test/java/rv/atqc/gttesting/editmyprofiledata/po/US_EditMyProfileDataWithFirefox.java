@@ -1,6 +1,7 @@
 package rv.atqc.gttesting.editmyprofiledata.po;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -33,73 +34,92 @@ public class US_EditMyProfileDataWithFirefox {
 
 	@Test
 	public void verifyNameOfEditButton() {
-		Assert.assertTrue(pageProfile.getEditButton().getText().contains("Edit"));
+		String editTitle = pageProfile.getEditButton().getText();
+		Assert.assertTrue(editTitle.contains("Edit"));
 	}
 
 	@Test
 	public void verifyExistenceOfTheEditButton() {
-		Assert.assertTrue(pageProfile.getEditButton().isEnabled());
+		WebElement editButton = pageProfile.getEditButton();
+		Assert.assertTrue(editButton.isEnabled());
 	}
 
 	@Test
 	public void verifyAppearanceOfFormplaceholdersAfterClickingEditButton() {
-		Assert.assertTrue(page.getEditForm().isDisplayed());
+		WebElement editForm = page.getEditForm();
+		Assert.assertTrue(editForm.isDisplayed());
 	}
 
 	@Test
 	public void verifyEmptyFirstNameAndLastNamePlaceholders() {
-		Assert.assertFalse(page.clearFirstName().clearLastName().isChangeClickable());
+		boolean isChangeClickable = page.clearFirstName()
+										.clearLastName()
+										.isChangeClickable();
+		Assert.assertFalse(isChangeClickable);
 	}
 
 	@Test
 	public void verifyFilledFirstNameAndEmptyLastNamePlaceholders() {
-		Assert.assertFalse(page.clearFirstName().setFirstName(Resources.UserTestData.VALID_NAME).clearLastName()
-				.isChangeClickable());
+		boolean isChangeClickable = page.clearFirstName()
+										.setFirstName(Resources.UserTestData.VALID_NAME)
+										.clearLastName()
+										.isChangeClickable();
+		Assert.assertFalse(isChangeClickable);
 	}
 
 	@Test
 	public void verifyEmptyFirstNameAndFilledLastNamePlaceholders() {
-		Assert.assertFalse(page.clearFirstName().clearLastName().setLastName(Resources.UserTestData.VALID_NAME)
-				.isChangeClickable());
+		boolean isChangeClickable = page.clearFirstName()
+										.clearLastName()
+										.setLastName(Resources.UserTestData.VALID_NAME)
+										.isChangeClickable();
+		Assert.assertFalse(isChangeClickable);
 	}
 
 	@Test
 	public void verifyExistenceOfFirstNamePlaceholder() {
-		Assert.assertTrue(page.getFirstName().isDisplayed());
+		WebElement firstName = page.getFirstName();
+		Assert.assertTrue(firstName.isDisplayed());
 	}
 
 	@Test
 	public void verifyExistenceOfLastNamePlaceholder() {
-		Assert.assertTrue(page.getLastName().isDisplayed());
+		WebElement lastName = page.getLastName();
+		Assert.assertTrue(lastName.isDisplayed());
 	}
 
 	@Test
     public void verifyExistenceOfNicknamePlaceholder(){
-		Assert.assertTrue(page.getNick().isDisplayed());
+		WebElement nick = page.getNick();
+		Assert.assertTrue(nick.isDisplayed());
     }
 	
 	@Test
     public void verifyExistenceOfPhoneNumberPlaceholder(){
-		Assert.assertTrue(page.getPhone().isDisplayed());
+		WebElement phone = page.getPhone();
+		Assert.assertTrue(phone.isDisplayed());
     }
 	
 	@Test
     public void verifyExistenceOfAddressPlaceholder(){
-		Assert.assertTrue(page.getAddress().isDisplayed());
+		WebElement address = page.getAddress();
+		Assert.assertTrue(address.isDisplayed());
     }
 	
 	@Test
     public void verifyExistenceOfTheChangeButton(){
-		Assert.assertTrue(page.getChange().isDisplayed());
+		WebElement changeButton = page.getChange();
+		Assert.assertTrue(changeButton.isDisplayed());
     }
 	@Test
     public void verifyExistenceOfTheCancelButton(){
-		Assert.assertTrue(page.getCancel().isDisplayed());
+		WebElement cancel = page.getCancel();
+		Assert.assertTrue(cancel.isDisplayed());
     }
 	
 	@Test
-    public void VerifyClickThroughRateOfTheEditButton(){
-        Assert.assertTrue(pageProfile.isEditClickable());
+    public void verifyClickThroughRateOfTheEditButton(){
+		Assert.assertTrue(pageProfile.isEditClickable());
     }
 	
 	@Test
@@ -114,38 +134,66 @@ public class US_EditMyProfileDataWithFirefox {
 	
 	@Test
     public void verifyNicknamePlaceholderFilledWithCharacters(){
-		Assert.assertTrue(page.clearNick().setNick(Resources.UserTestData.VALID_NICK_NAME).isChangeClickable());
+		boolean isChangeClickable = page.clearNick()
+										.setNick(Resources.UserTestData.VALID_NICK_NAME)
+										.isChangeClickable();
+		Assert.assertTrue(isChangeClickable);
     }
 	
 	@Test
     public void verifyNicknamePlaceholderFilledWithSpecialCharacters(){
-		Assert.assertTrue(page.clearNick().setNick(Resources.UserTestData.INVALID_NICK_NAME).isChangeClickable());
+		boolean isChangeClickable = page.clearNick()
+										.setNick(Resources.UserTestData.INVALID_NICK_NAME)
+										.isChangeClickable();
+		Assert.assertTrue(isChangeClickable);
     }
 	
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithValidNumber(){
-		Assert.assertTrue(page.clearPhone().setPhone(Resources.UserTestData.VALID_PHONE).isChangeClickable());
+		boolean isChangeClickable = page.clearPhone()
+				.setPhone(Resources.UserTestData.VALID_PHONE)
+				.isChangeClickable();
+		Assert.assertTrue(isChangeClickable);
     }
+	
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithInvalidNumber(){
-        Assert.assertFalse(page.clearPhone().setPhone(Resources.UserTestData.INVALID_PHONE).isChangeClickable());
+        boolean isChangeClickable = page.clearPhone().setPhone(Resources.UserTestData.INVALID_PHONE).isChangeClickable();
+		Assert.assertFalse(isChangeClickable);
     }
+	
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithLetters(){
-        Assert.assertFalse(page.clearPhone().setPhone(Resources.UserTestData.INVALID_PHONE_WITH_LETTERS).isChangeClickable());
+        boolean isChangeClickable = page.clearPhone()
+        								.setPhone(Resources.UserTestData.INVALID_PHONE_WITH_LETTERS)
+        								.isChangeClickable();
+		Assert.assertFalse(isChangeClickable);
     }
+	
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithSpecialCharacters(){
-        Assert.assertFalse(page.clearPhone().setPhone(Resources.UserTestData.INVALID_PHONE_WITH_SPECIAL_SYMBOL).isChangeClickable());
+        boolean isChangeClickable = page.clearPhone()
+        								.setPhone(Resources.UserTestData.INVALID_PHONE_WITH_SPECIAL_SYMBOL)
+        								.isChangeClickable();
+		Assert.assertFalse(isChangeClickable);
     }
+	
 	@Test
     public void verifyAddressPlaceholderFilledWithCharacters(){
-        Assert.assertTrue(page.clearAddress().setAddress(Resources.UserTestData.ADDRESS).isChangeClickable());
+        boolean isChangeClickable = page.clearAddress()
+        								.setAddress(Resources.UserTestData.ADDRESS)
+        								.isChangeClickable();
+		Assert.assertTrue(isChangeClickable);
     }
+	
 	@Test
     public void verifyAddressPlaceholderFilledWithSpecialCharacters(){
-        Assert.assertTrue(page.clearAddress().setAddress(Resources.UserTestData.ADDRESS_WITH_SPECIAL_SYMBOL).isChangeClickable());
+        boolean isChangeClickable = page.clearAddress()
+        								.setAddress(Resources.UserTestData.ADDRESS_WITH_SPECIAL_SYMBOL)
+        								.isChangeClickable();
+		Assert.assertTrue(isChangeClickable);
     }
+	
 	@AfterMethod
 	public void after() {
 		driver.quit();

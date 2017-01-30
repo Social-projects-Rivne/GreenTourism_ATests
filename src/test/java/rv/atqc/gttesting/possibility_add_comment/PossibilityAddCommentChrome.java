@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
+import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
 
@@ -23,54 +24,9 @@ public class PossibilityAddCommentChrome {
 		driver = new ChromeDriver();
 		driver.get(" http://green-tourism.herokuapp.com");
 		driver.manage().window().maximize();
-		new HeadForGuestUserPage(driver)
-				.clickLeftNavButton()
-				.clickLogIn()
-				.setLoginField(Resources.LogInMessage.USER_EMAIL)
-				.setPasswordField(Resources.LogInMessage.USER_PASSWORD)
-				.clickLogInButton();
+		new LogInPage(driver)
+				.loging();
 		driver.get("http://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3");
-	}
-	
-	@Test
-	public void existenceOfTextArea() {
-		WebElement we = new LoggedPlaceViewPage(driver)
-		.scrollToNewComment()
-		.getNewComment();
-		Assert.assertTrue(we.isDisplayed(), "Text area for new comment is not exist!!!");
-		
-	}
-	
-	@Test
-	public void existenceOfPostButton() {
-		WebElement we = new LoggedPlaceViewPage(driver)
-		.scrollToNewComment()
-		.setNewComment("s")
-		.getPostButton();
-		Assert.assertTrue(we.isDisplayed(), "Post button for new comment is not exist!!!");
-		
-	}
-	
-	@Test
-	public void existenceOfLastAddedComment() {
-		String newComment = "New comment";
-		WebElement we = new LoggedPlaceViewPage(driver)
-		.scrollToNewComment()
-		.setNewComment(newComment)
-		.clickPostButton()
-		.getLastComment();
-		Assert.assertTrue(we.getText().contains(newComment), "New comment is not exist!!!");
-	}
-	
-	@Test
-	public void checkFormatOfLastAddedComment() {
-		String newComment = "New\n comment";
-		WebElement we = new LoggedPlaceViewPage(driver)
-		.scrollToNewComment()
-		.setNewComment(newComment)
-		.clickPostButton()
-		.getLastComment();
-		Assert.assertTrue(we.getText().contains("<br>") || we.getText().contains("</br>"), "New comment is not formating!!!");
 	}
 	
 	@AfterMethod
@@ -78,4 +34,43 @@ public class PossibilityAddCommentChrome {
 		driver.quit();
 	}
 	
+	@Test
+	public void verifyExistenceOfTextAreaForNewComment() {
+		WebElement we = new LoggedPlaceViewPage(driver)
+		.scrollToNewComment()
+		.getNewComment();
+		Assert.assertTrue(we.isDisplayed());
+		
+	}
+	
+	@Test
+	public void verifyExistenceOfPostButton() {
+		WebElement we = new LoggedPlaceViewPage(driver)
+		.scrollToNewComment()
+		.getPostButton();
+		Assert.assertTrue(we.isDisplayed());
+		
+	}
+	
+	@Test
+	public void verifyExistenceOfLastAddedComment() {
+		String newComment = Resources.Comment.SIMPLE_COMMENT;
+		WebElement we = new LoggedPlaceViewPage(driver)
+		.scrollToNewComment()
+		.setNewComment(newComment)
+		.clickPostButton()
+		.getLastComment();
+		Assert.assertTrue(we.getText().contains(newComment));
+	}
+	
+	@Test
+	public void verifyFormatOfLastAddedComment() {
+		String newComment = Resources.Comment.FORMATING_COMMENT;
+		WebElement we = new LoggedPlaceViewPage(driver)
+		.scrollToNewComment()
+		.setNewComment(newComment)
+		.clickPostButton()
+		.getLastComment();
+		Assert.assertTrue(we.getText().contains("<br>") || we.getText().contains("</br>"));
+	}
 }
