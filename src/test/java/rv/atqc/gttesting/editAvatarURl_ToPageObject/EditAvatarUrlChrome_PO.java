@@ -31,50 +31,50 @@ public class EditAvatarUrlChrome_PO {
     }
 
     @Test
-    public void checkChangeButtonTitleInChrome() {
+    public void checkChangeButtonTitleIn_Chrome() {
         Assert.assertEquals(profilePage.getChangeButtonText(), Resources.LogInConstants.EXPECTED_CHANGE_BUTTON_TEXT);
     }
 
     @Test
-    public void checkCancelButtonTitleInChrome() {
+    public void checkCancelButtonTitleIn_Chrome() {
         Assert.assertEquals(profilePage.getEditAvatarPage().getCancelButtonText(), Resources.LogInConstants.EXPECTED_CANCEL_BUTTON_TEXT);
     }
 
     @Test
-    public void checkConfirmButtonInEditAvSystChrome() {
+    public void checkConfirmButtonInEditAvSyst_Chrome() {
         Assert.assertTrue(profilePage.getEditAvatarPage().getConfirmButton().isDisplayed());
     }
 
     @Test
-    public void checkPresentFieldAvatarURLInEditAvSystChrome() {
+    public void checkPresentFieldAvatarURLInEditAvSyst_Chrome() {
         Assert.assertTrue(profilePage.getEditAvatarPage().getAvatarUrlField().isDisplayed());
     }
 
     @Test
-    public void checkPresentDefaultAvatarInEditAvSystChrome() {
+    public void checkPresentDefaultAvatarInEditAvSyst_Chrome() {
         Assert.assertTrue(profilePage.getEditAvatarPage().getDefAvatarImage().isDisplayed());
     }
 
     @Test
-    public void checkPresentJPGAvatarInEditAvSystChrome() {
+    public void checkPresentJPGAvatarInEditAvSyst_Chrome() {
         profilePage.getEditAvatarPage().insertURL(JPG_URL);
         Assert.assertTrue(profilePage.getEditAvatarPage().getJPGAvatar().isDisplayed());
     }
 
     @Test
-    public void checkPresentJPEGAvatarInEditAvSystChrome() {
+    public void checkPresentJPEGAvatarInEditAvSyst_Chrome() {
         profilePage.getEditAvatarPage().insertURL(JPEG_URL);
         Assert.assertTrue(profilePage.getEditAvatarPage().getJPEGAvatar().isDisplayed());
     }
 
     @Test
-    public void checkPresentPNGAvatarInEditAvSystChrome() {
+    public void checkPresentPNGAvatarInEditAvSyst_Chrome() {
         profilePage.getEditAvatarPage().insertURL(PNG_URL);
         Assert.assertTrue(profilePage.getEditAvatarPage().getPNGAvatar().isDisplayed());
     }
 
     @Test
-    public void checkSavingJPGAvatarInEditAvSystChrome() {
+    public void checkSavingJPGAvatarInEditAvSyst_Chrome() {
         profilePage.getEditAvatarPage().insertURL(PNG_URL);
         profilePage.getEditAvatarPage().clickOnLogOutButton();
         profilePage = new LogInPage(driver).loging();
