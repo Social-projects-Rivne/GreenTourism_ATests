@@ -16,6 +16,8 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithChrome {
 
     private final String MAP_LINK = "http://green-tourism.herokuapp.com/#!/places";
 
+    private final int MAX_WAIT_TIME = 10;
+
     EventsPage eventsPage;
 
     @BeforeClass
@@ -26,94 +28,139 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithChrome {
         driver.manage().window().maximize();
         eventsPage = new MapHeadPageForGuestUserPage(driver).clickCategories().clickEvents();
     }
+
     @AfterClass
     public void quitDriver(){
         driver.quit();
     }
+
     @Test
     public void verifyExistenceOfEventsDropdownList(){
         Assert.assertTrue(eventsPage.getEventsDropdownList().isEnabled(), "This element doesn't exist");
     }
+
     @Test
     public void verifyTitleOfEventsDropdownList(){
         Assert.assertTrue(eventsPage.getEventsName().getText().equalsIgnoreCase("Events"));
     }
+
     @Test
     public void verifyExistenceOfPlaceFilterGame(){
         Assert.assertTrue(eventsPage.getGameFilter().isEnabled(),"This element doesn't exist");
     }
+
     @Test
     public void verifyExistenceOfPlaceFilterFestival(){
         Assert.assertTrue(eventsPage.getFestivalFilter().isEnabled(), "This element doesn't exist");
     }
+
     @Test
     public void verifyExistenceOfPlaceFilterMeeting(){
         Assert.assertTrue(eventsPage.getMeetingFilter().isEnabled(), "This element doesn't exist");
     }
+
     @Test
     public void verifyTitleOfPlaceFilterGame(){
-        Assert.assertTrue(eventsPage.waitForVisibilityOfElement(eventsPage.getGameFilter(), 5)
-                .getGameFilter().getText().contains("Game"));
+        Assert.assertTrue(eventsPage
+                .waitForVisibilityOfElement(eventsPage.getGameFilter(), MAX_WAIT_TIME)
+                .getGameFilter()
+                .getText()
+                .contains("Game"));
     }
+
     @Test
     public void verifyTitleOfPlaceFilterFestival(){
-        Assert.assertTrue(eventsPage.waitForVisibilityOfElement(eventsPage.getFestivalFilter(), 5)
-                .getFestivalFilter().getText().contains("Festival"));
+        Assert.assertTrue(eventsPage
+                .waitForVisibilityOfElement(eventsPage.getFestivalFilter(), MAX_WAIT_TIME)
+                .getFestivalFilter()
+                .getText()
+                .contains("Festival"));
     }
+
     @Test
     public void verifyTitleOfPlaceFilterMeeting(){
-        Assert.assertTrue(eventsPage.waitForVisibilityOfElement(eventsPage.getMeetingFilter(), 5)
-                .getMeetingFilter().getText().contains("Meeting"));
+        Assert.assertTrue(eventsPage
+                .waitForVisibilityOfElement(eventsPage.getMeetingFilter(), MAX_WAIT_TIME)
+                .getMeetingFilter()
+                .getText()
+                .contains("Meeting"));
     }
+
     @Test
     public void verifyClickThroughRateOfPlaceFilterGame(){
-        Assert.assertTrue(eventsPage.waitForElementToBeClickable(eventsPage.getGameFilter(), 5)
-                .getGameFilter().isEnabled());
+        Assert.assertTrue(eventsPage
+                .waitForElementToBeClickable(eventsPage.getGameFilter(), MAX_WAIT_TIME)
+                .getGameFilter()
+                .isEnabled());
     }
+
     @Test
     public void verifyClickThroughRateOfPlaceFilterFestival(){
-        Assert.assertTrue(eventsPage.waitForElementToBeClickable(eventsPage.getFestivalFilter(), 5)
-                .getFestivalFilter().isEnabled());
+        Assert.assertTrue(eventsPage
+                .waitForElementToBeClickable(eventsPage.getFestivalFilter(), MAX_WAIT_TIME)
+                .getFestivalFilter()
+                .isEnabled());
     }
+
     @Test
     public void verifyClickThroughRateOfPlaceFilterMeeting(){
-        Assert.assertTrue(eventsPage.waitForElementToBeClickable(eventsPage.getMeetingFilter(), 5)
-                .getMeetingFilter().isEnabled());
+        Assert.assertTrue(eventsPage
+                .waitForElementToBeClickable(eventsPage.getMeetingFilter(), MAX_WAIT_TIME)
+                .getMeetingFilter()
+                .isEnabled());
     }
+
     @Test
     public void verifyDisplayOfGameGreenIconOnMap(){
         eventsPage.clickGame();
-        Assert.assertTrue(eventsPage.waitForVisibilityOfElement(eventsPage.getGameGreenIcon(), 5)
-                .getGameGreenIcon().isDisplayed());
+        Assert.assertTrue(eventsPage
+                .waitForVisibilityOfElement(eventsPage.getGameGreenIcon(), MAX_WAIT_TIME)
+                .getGameGreenIcon()
+                .isDisplayed());
     }
+
     @Test
     public void verifyDisplayOfFestivalRedIconOnMap(){
         eventsPage.clickFestival();
-        Assert.assertTrue(eventsPage.waitForVisibilityOfElement(eventsPage.getFestivalRedIcon(), 5)
-                .getFestivalRedIcon().isDisplayed());
+        Assert.assertTrue(eventsPage
+                .waitForVisibilityOfElement(eventsPage.getFestivalRedIcon(), MAX_WAIT_TIME)
+                .getFestivalRedIcon()
+                .isDisplayed());
     }
+
     @Test
     public void verifyDisplayOfMeetingBlueIconOnMap(){
         eventsPage.clickMeeting();
-        Assert.assertTrue((eventsPage.waitForVisibilityOfElement(eventsPage.getMeetingBlueIcon(), 5)
-                .getMeetingBlueIcon().isDisplayed()));
+        Assert.assertTrue(eventsPage
+                .waitForVisibilityOfElement(eventsPage.getMeetingBlueIcon(), MAX_WAIT_TIME)
+                .getMeetingBlueIcon()
+                .isDisplayed());
     }
+
     @Test
     public void verifyClickThroughRateOfGameIcon(){
         eventsPage.clickGame();
-        Assert.assertTrue(eventsPage.waitForElementToBeClickable(eventsPage.getGameGreenIcon(), 5)
-                .getGameGreenIcon().isEnabled());
+        Assert.assertTrue(eventsPage
+                .waitForElementToBeClickable(eventsPage.getGameGreenIcon(), MAX_WAIT_TIME)
+                .getGameGreenIcon()
+                .isEnabled());
     }
+
     @Test
     public void verifyClickThroughRateOfFestivalIcon(){
         eventsPage.clickFestival();
-        Assert.assertTrue(eventsPage.waitForElementToBeClickable(eventsPage.getFestivalRedIcon(), 5)
-                .getFestivalRedIcon().isEnabled());
+        Assert.assertTrue(eventsPage
+                .waitForElementToBeClickable(eventsPage.getFestivalRedIcon(), MAX_WAIT_TIME)
+                .getFestivalRedIcon()
+                .isEnabled());
     }
+
     @Test
     public void verifyClickThroughRateOfMeetingIcon(){
         eventsPage.clickMeeting();
-        Assert.assertTrue(eventsPage.waitForElementToBeClickable(eventsPage.getMeetingBlueIcon(), 5)
-                .getMeetingBlueIcon().isEnabled());
+        Assert.assertTrue(eventsPage
+                .waitForElementToBeClickable(eventsPage.getMeetingBlueIcon(), MAX_WAIT_TIME)
+                .getMeetingBlueIcon()
+                .isEnabled());
     }
 }
