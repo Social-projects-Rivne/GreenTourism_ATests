@@ -47,6 +47,11 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		scroll(newComment, MAX_TIME_WAIT);
 		return this;
 	}
+	
+	public LoggedPlaceViewPage scrollToLastComment() {
+		scroll(lastComment, MAX_TIME_WAIT);
+		return this;
+	}
 
 	public WebElement getNewComment() {
 		waitForVisibilityOfElement(newComment, MAX_TIME_WAIT);
@@ -65,11 +70,6 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 	}
 
 	public WebElement getLastComment() {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		return lastComment;
 	}
 

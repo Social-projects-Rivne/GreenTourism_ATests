@@ -135,5 +135,10 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 				+ "arguments[0].dispatchEvent(evObj);";
 		jse.executeScript(javaScript, element);
 	}
+	
+	public T refresh(){
+		driver.navigate().refresh();
+		return (T) this;
+	}
 
 }

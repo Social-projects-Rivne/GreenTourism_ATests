@@ -63,6 +63,8 @@ private WebDriver driver;
 		.scrollToNewComment()
 		.setNewComment(newComment)
 		.clickPostButton()
+		.refresh()
+		.scrollToLastComment()
 		.getLastComment();
 		Assert.assertTrue(we.getText().contains(newComment));
 	}
@@ -74,6 +76,8 @@ private WebDriver driver;
 		.scrollToNewComment()
 		.setNewComment(newComment)
 		.clickPostButton()
+		.refresh()
+		.scrollToLastComment()
 		.getLastComment();
 		Assert.assertTrue(we.getText().contains("<br>") || we.getText().contains("</br>"));
 	}
