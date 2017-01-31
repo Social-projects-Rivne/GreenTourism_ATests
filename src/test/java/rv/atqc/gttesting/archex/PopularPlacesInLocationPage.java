@@ -33,29 +33,37 @@ public class PopularPlacesInLocationPage extends AbstractPage<PopularPlacesInLoc
     public WebElement getPopularPlacesButton(){
         return popularPlacesButton;
     }
+
     public WebElement getPopularPlacesForm(){
         return popularPlacesForm;
     }
+
     public WebElement getClosePopularPlacesFormButton(){
         return closePopularPlacesFormButton;
     }
+
     public WebElement getPopularPlacesIcon(){
         return popularPlacesIcon;
     }
+
     public WebElement getImageInPopularPlacesForm(){
         return imageInPopularPlacesForm;
     }
+
     public WebElement getDetailsButton(){
         return detailsButton;
     }
+
     public WebElement getImageHeader(){
         return imageHeader;
     }
+
     public PopularPlacesInLocationPage clickPopularPlacesIcon(){
         waitForElementToBeClickable(popularPlacesIcon, MAX_WAIT_TIME);
         popularPlacesIcon.click();
         return this;
     }
+
     public BigPopularPlacesInLocationPage clickImageInPopularPlacesForm(){
         waitForElementToBeClickable(imageInPopularPlacesForm, MAX_WAIT_TIME);
         imageInPopularPlacesForm.click();
