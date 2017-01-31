@@ -186,14 +186,13 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 
 	public PlacesPage openCategoryPlaces(){
 		waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
-		this.hoverElement(placesButton);		
+		hoverElement(placesButton);	
+		waitForVisibilityOfElement(campPlacesFilter, MAX_WAIT_TIME);
+		
 		//deselect all places
 		checkAllButton.click();
 		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
-
 		checkAllButton.click();
-		timeout(3,TimeUnit.SECONDS);
-		//waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		return this;
 	}	
 }
