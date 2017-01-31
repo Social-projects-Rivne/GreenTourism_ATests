@@ -44,35 +44,35 @@ public class PossibilityEditMyCommentChrome {
 	
 	@Test
 	public void checkPossibilityViewTextarea() {
-		PlacePage.clickEditButton();
+		PlacePage.clickEditButton().waitForPageLoad();
 		Assert.assertTrue(PlacePage.getTextarea().isDisplayed());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityViewCloseButton() {
-		PlacePage.clickEditButton();
+		PlacePage.clickEditButton().waitForPageLoad();
 		Assert.assertTrue(PlacePage.getCloseButton().isDisplayed());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityClickCloseButton() {
-		PlacePage.clickEditButton();
+		PlacePage.clickEditButton().waitForPageLoad();
 		Assert.assertTrue(PlacePage.getCloseButton().isEnabled());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityViewUpdateButton() {
-		PlacePage.clickEditButton();
+		PlacePage.clickEditButton().waitForPageLoad();
 		Assert.assertTrue(PlacePage.getUpdateButton().isDisplayed());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityClickUpdateButton() {
-		PlacePage.clickEditButton();
+		PlacePage.clickEditButton().waitForPageLoad();
 		Assert.assertTrue(PlacePage.getUpdateButton().isEnabled());
 		PlacePage.clickCloseButton();
 	}
@@ -96,7 +96,7 @@ public class PossibilityEditMyCommentChrome {
 	
 	@Test
 	public void checkDisablingOfButtonUpdate() {
-		PlacePage.clickEditButton();
+		PlacePage.clickEditButton().waitForPageLoad();
 		PlacePage.getTextarea().clear();
 		Assert.assertFalse(PlacePage.getDisabledUpdateButton().isEnabled());
 		PlacePage.clickCloseButton();
