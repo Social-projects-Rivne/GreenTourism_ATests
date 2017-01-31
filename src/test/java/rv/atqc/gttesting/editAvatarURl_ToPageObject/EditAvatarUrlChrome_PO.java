@@ -77,7 +77,8 @@ public class EditAvatarUrlChrome_PO {
     public void checkSavingJPGAvatarInEditAvSyst_Chrome() {
         profilePage.getEditAvatarPage().insertURL(PNG_URL);
         profilePage.getEditAvatarPage().clickOnLogOutButton();
-        profilePage = new LogInPage(driver).loging();
+        driver.quit();
+        before();
         Assert.assertTrue(profilePage.getEditAvatarPage().getPNGAvatar().isDisplayed());
     }
 }
