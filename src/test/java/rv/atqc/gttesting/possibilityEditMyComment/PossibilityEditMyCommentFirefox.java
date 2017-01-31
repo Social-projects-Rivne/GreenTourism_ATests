@@ -45,30 +45,35 @@ public class PossibilityEditMyCommentFirefox {
 	
 	@Test
 	public void checkPossibilityViewTextarea() {
+		PlacePage.clickEditButton();
 		Assert.assertTrue(PlacePage.getTextarea().isDisplayed());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityViewCloseButton() {
+		PlacePage.clickEditButton();
 		Assert.assertTrue(PlacePage.getCloseButton().isDisplayed());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityClickCloseButton() {
+		PlacePage.clickEditButton();
 		Assert.assertTrue(PlacePage.getCloseButton().isEnabled());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityViewUpdateButton() {
+		PlacePage.clickEditButton();
 		Assert.assertTrue(PlacePage.getUpdateButton().isDisplayed());
 		PlacePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityClickUpdateButton() {
+		PlacePage.clickEditButton();
 		Assert.assertTrue(PlacePage.getUpdateButton().isEnabled());
 		PlacePage.clickCloseButton();
 	}
@@ -92,6 +97,7 @@ public class PossibilityEditMyCommentFirefox {
 	
 	@Test
 	public void checkDisablingOfButtonUpdate() {
+		PlacePage.clickEditButton();
 		PlacePage.getTextarea().clear();
 		Assert.assertFalse(PlacePage.getDisabledUpdateButton().isEnabled());
 		PlacePage.clickCloseButton();
