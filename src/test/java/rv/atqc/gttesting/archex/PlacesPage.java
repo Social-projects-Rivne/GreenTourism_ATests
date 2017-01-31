@@ -185,15 +185,15 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
     }
 
 	public PlacesPage openCategoryPlaces(){
-		this.waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
-		Actions builder = new Actions(driver);
-		builder.moveToElement(placesButton).perform();
-		
+		waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
+		this.hoverElement(placesButton);		
 		//deselect all places
 		checkAllButton.click();
 		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
+
 		checkAllButton.click();
-		waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
+		timeout(3,TimeUnit.SECONDS);
+		//waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		return this;
 	}	
 }

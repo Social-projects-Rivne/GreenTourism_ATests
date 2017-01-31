@@ -21,6 +21,8 @@ public class FilterPlacesChromePO {
 	@BeforeClass
 	public void beforeClass(){
 		ChromeDriverManager.getInstance().setup();
+		
+		//disable geolocation
 		HashMap<String, Object> prefs = new HashMap<>();
 		prefs.put("profile.default_content_setting_values.geolocation", 2);
 		ChromeOptions chromeOptions = new ChromeOptions();
@@ -28,6 +30,7 @@ public class FilterPlacesChromePO {
 		DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 		driver = new ChromeDriver(capabilities);
+		
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
 		page = new MapHeadPageForGuestUserPage(driver).clickCategories().clickPlaces();
