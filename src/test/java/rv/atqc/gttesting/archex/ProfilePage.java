@@ -30,7 +30,7 @@ public class ProfilePage extends AbstractPage <ProfilePage> {
     }
     
 	public EditProfilePage clickEdit(){
-		waitForVisibilityOfElement(edit, MAX_TIME_WAIT);
+		waitForElementToBeClickable(edit, MAX_TIME_WAIT);
 		edit.click();
 		return new EditProfilePage(driver);
 	}

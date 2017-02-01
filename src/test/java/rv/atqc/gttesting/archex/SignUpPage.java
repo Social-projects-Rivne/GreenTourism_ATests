@@ -141,8 +141,10 @@ public class SignUpPage extends LeftNavigationForGuestUserPage<SignUpPage> {
 		return new HeadForLoggedUserPage(driver);
 	}
 	
-	
 	public WebElement getSignUpForm() {
 		return signUpForm;
 	}
+	
+	
+	
 }

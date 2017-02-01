@@ -3,7 +3,7 @@ package rv.atqc.gttesting.archex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
-import com.google.common.base.Function;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.base.Function;
+
 import rv.atqc.gttesting.archex.helpers.Acting;
 import rv.atqc.gttesting.res.Resources;
 
@@ -131,6 +134,11 @@ public abstract class AbstractPage<T extends AbstractPage<T>> {
 				+ "true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);"
 				+ "arguments[0].dispatchEvent(evObj);";
 		jse.executeScript(javaScript, element);
+	}
+	
+	public T refresh(){
+		driver.navigate().refresh();
+		return (T) this;
 	}
 
 }
