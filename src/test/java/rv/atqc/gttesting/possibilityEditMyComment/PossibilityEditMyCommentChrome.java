@@ -13,9 +13,8 @@ import rv.atqc.gttesting.res.Resources;
 
 public class PossibilityEditMyCommentChrome {
 	private WebDriver driver;
-	private LoggedPlaceViewPage PlacePage;
+	private LoggedPlaceViewPage placePage;
 	
-
 	@BeforeClass
 	public void before() {
 		ChromeDriverManager.getInstance().setup();
@@ -24,7 +23,7 @@ public class PossibilityEditMyCommentChrome {
 		driver.manage().window().maximize();
 		new LogInPage(driver).loging().waitForPageLoad();
 		driver.get("https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd");	
-	    PlacePage = new LoggedPlaceViewPage(driver);
+	    placePage = new LoggedPlaceViewPage(driver);
 	}
 
 	@AfterClass
@@ -34,61 +33,61 @@ public class PossibilityEditMyCommentChrome {
 
 	@Test
 	public void checkPossibilityViewEditButton() {
-		Assert.assertTrue(PlacePage.getEditButton().isDisplayed());
+		Assert.assertTrue(placePage.getEditButton().isDisplayed());
 	}
 	
 	@Test
 	public void checkPossibilityClickEditButton() {
-		Assert.assertTrue(PlacePage.getEditButton().isEnabled());
+		Assert.assertTrue(placePage.getEditButton().isEnabled());
 	}
 	
 	@Test
 	public void checkPossibilityViewTextarea() {
-		PlacePage.clickEditButton().waitForPageLoad();
-		Assert.assertTrue(PlacePage.getTextarea().isDisplayed());
-		PlacePage.clickCloseButton();
+		placePage.clickEditButton().waitForPageLoad();
+		Assert.assertTrue(placePage.getTextarea().isDisplayed());
+		placePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityViewCloseButton() {
-		PlacePage.clickEditButton().waitForPageLoad();
-		Assert.assertTrue(PlacePage.getCloseButton().isDisplayed());
-		PlacePage.clickCloseButton();
+		placePage.clickEditButton().waitForPageLoad();
+		Assert.assertTrue(placePage.getCloseButton().isDisplayed());
+		placePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityClickCloseButton() {
-		PlacePage.clickEditButton().waitForPageLoad();
-		Assert.assertTrue(PlacePage.getCloseButton().isEnabled());
-		PlacePage.clickCloseButton();
+		placePage.clickEditButton().waitForPageLoad();
+		Assert.assertTrue(placePage.getCloseButton().isEnabled());
+		placePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityViewUpdateButton() {
-		PlacePage.clickEditButton().waitForPageLoad();
-		Assert.assertTrue(PlacePage.getUpdateButton().isDisplayed());
-		PlacePage.clickCloseButton();
+		placePage.clickEditButton().waitForPageLoad();
+		Assert.assertTrue(placePage.getUpdateButton().isDisplayed());
+		placePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityClickUpdateButton() {
-		PlacePage.clickEditButton().waitForPageLoad();
-		Assert.assertTrue(PlacePage.getUpdateButton().isEnabled());
-		PlacePage.clickCloseButton();
+		placePage.clickEditButton().waitForPageLoad();
+		Assert.assertTrue(placePage.getUpdateButton().isEnabled());
+		placePage.clickCloseButton();
 	}
 	
 	@Test
 	public void checkPossibilityEditMyComment() {
-		Assert.assertTrue(PlacePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
+		Assert.assertTrue(placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
 		                           .getComment()
 		                           .getText()
 		                           .contentEquals(Resources.EditCommit.TEXT_AFTER_EDIT));
-		PlacePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_BEFORE_EDIT);
+		placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_BEFORE_EDIT);
 	}
 	
 	@Test
 	public void checkPossibilityCancelEditMyComment() {
-		Assert.assertFalse(PlacePage.notSetNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
+		Assert.assertFalse(placePage.notSetNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
 		                            .getComment()
 		                            .getText()
 		                            .contentEquals(Resources.EditCommit.TEXT_AFTER_EDIT));
@@ -96,9 +95,9 @@ public class PossibilityEditMyCommentChrome {
 	
 	@Test
 	public void checkDisablingOfButtonUpdate() {
-		PlacePage.clickEditButton().waitForPageLoad();
-		PlacePage.getTextarea().clear();
-		Assert.assertFalse(PlacePage.getDisabledUpdateButton().isEnabled());
-		PlacePage.clickCloseButton();
+		placePage.clickEditButton().waitForPageLoad();
+		placePage.getTextarea().clear();
+		Assert.assertFalse(placePage.getDisabledUpdateButton().isEnabled());
+		placePage.clickCloseButton();
 	}
 }
