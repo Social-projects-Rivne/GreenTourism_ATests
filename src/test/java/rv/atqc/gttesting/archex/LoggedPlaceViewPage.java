@@ -79,10 +79,9 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return editButton;
 	}
 
-	public WebElement getTextarea() {
-		waitForElementToBeClickable(editButton, MAX_TIME_WAIT);
-		editButton.click();
-		waitForVisibilityOfElement(editTextarea, MAX_TIME_WAIT);
+	
+	public WebElement getTextarea(){
+		waitForVisibilityOfElement(editTextarea,MAX_TIME_WAIT);
 		return editTextarea;
 	}
 
@@ -92,11 +91,10 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return this;
 	}
 
-	public WebElement getCloseButton() {
-		waitForElementToBeClickable(editButton, MAX_TIME_WAIT);
-		editButton.click();
-		waitForVisibilityOfElement(closeButton, MAX_TIME_WAIT);
-		waitForElementToBeClickable(closeButton, MAX_TIME_WAIT);
+	
+	public WebElement getCloseButton(){
+		waitForVisibilityOfElement(closeButton,MAX_TIME_WAIT);
+		waitForElementToBeClickable(closeButton,MAX_TIME_WAIT);
 		return closeButton;
 	}
 
@@ -106,11 +104,10 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return this;
 	}
 
-	public WebElement getUpdateButton() {
-		waitForElementToBeClickable(editButton, MAX_TIME_WAIT);
-		editButton.click();
-		waitForVisibilityOfElement(updateButton, MAX_TIME_WAIT);
-		waitForElementToBeClickable(updateButton, MAX_TIME_WAIT);
+
+	public WebElement getUpdateButton(){
+		waitForVisibilityOfElement(updateButton,MAX_TIME_WAIT);
+		waitForElementToBeClickable(updateButton,MAX_TIME_WAIT);
 		return updateButton;
 	}
 
