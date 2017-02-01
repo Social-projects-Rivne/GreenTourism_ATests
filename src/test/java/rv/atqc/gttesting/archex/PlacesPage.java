@@ -3,6 +3,8 @@ package rv.atqc.gttesting.archex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -11,7 +13,7 @@ import org.openqa.selenium.support.How;
 
 public class PlacesPage extends AbstractPage<PlacesPage>{
 
-	private final int MAX_WAIT_TIME = 10;	
+	private final int MAX_WAIT_TIME = 30;	
 	private final String VISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3";
 	private final String INVISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd";
 	private final String NO_ITEM_MESSAGE = "There are no such places and tracks, try else please";
@@ -44,6 +46,20 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 
 	private ArrayList <WebElement> filterList = new ArrayList<WebElement>(Arrays.asList(
 			campPlacesFilter, servicePlacesFilter, hostelsPlacesFilter, featuredPlacesFilter, healthcarePlacesFilter));
+	
+	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]/a/span")
+	private WebElement CampPlaceLable;
+	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]/a/span")
+	private WebElement ServicePlaceLable;
+	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[3]/a/span")
+	private WebElement HostelsPlaceLable;
+	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]/a/span")
+	private WebElement FeaturedPlaceLable;
+	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]/a/span")
+	private WebElement HealthcarePlaceLable;
+
+	private ArrayList <WebElement> lableList = new ArrayList<WebElement>(Arrays.asList(
+			CampPlaceLable, ServicePlaceLable, HostelsPlaceLable, FeaturedPlaceLable, HealthcarePlaceLable));
 
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")
 	private WebElement checkAllButton;
@@ -161,6 +177,8 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		for (int i=0; i<5; i++){
 			if (filter[i] == true){
 				filterList.get(i).click();
+				waitForVisibilityOfElement(lableList.get(i), MAX_WAIT_TIME);
+				waitForVisibilityOfElement(placesList.get(i), MAX_WAIT_TIME);
 			}
 		}
 	}
@@ -188,11 +206,15 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
 		hoverElement(placesButton);	
 		waitForVisibilityOfElement(campPlacesFilter, MAX_WAIT_TIME);
+		//waitForVisibilityOfElement(servicePlacesFilter, MAX_WAIT_TIME);
 		
 		//deselect all places
 		checkAllButton.click();
-		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
+		waitForVisibilityOfElement(campPlace, MAX_WAIT_TIME);
+		//waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		checkAllButton.click();
+		//waitForInVisibilityOfElement(campPlace, MAX_WAIT_TIME);
+		//waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		return this;
 	}	
 }
