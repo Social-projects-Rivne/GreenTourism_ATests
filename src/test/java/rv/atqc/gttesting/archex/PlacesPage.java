@@ -193,8 +193,8 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		waitForVisibilityOfElement(checkAllButton,MAX_WAIT_TIME);
 		checkAllButton.click();
 		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
-		timeout(2,TimeUnit.SECONDS);
 		checkAllButton.click();
+		timeout(2,TimeUnit.SECONDS);
 		return this;
 	}	
 }
