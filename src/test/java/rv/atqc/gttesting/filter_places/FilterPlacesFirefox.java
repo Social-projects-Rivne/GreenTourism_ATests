@@ -1,4 +1,4 @@
-package rv.atqc.gttesting.filer_places;
+package rv.atqc.gttesting.filter_places;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

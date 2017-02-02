@@ -1,4 +1,4 @@
-package rv.atqc.gttesting.filer_places;
+package rv.atqc.gttesting.filter_places;
 
 import java.util.HashMap;
 import org.openqa.selenium.WebDriver;
@@ -30,152 +30,145 @@ public class FilterPlacesChromePO {
 		driver = new ChromeDriver(capabilities);
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		page = new MapHeadPageForGuestUserPage(driver).clickCategories().clickPlaces().openCategoryPlaces();
+		page = new MapHeadPageForGuestUserPage(driver)
+				.clickCategories()
+				.clickPlaces();
+		page.hoverElement(page.getPlacesButton());
 	}
-	
+
 	@AfterClass
 	public void afterClass(){		
 		driver.close();
 	}
+		
+	@Test
+	public void testExistenceOfPlacesButton() {
+		Assert.assertTrue(page.getPlacesButton().isDisplayed());
+	}
+	
+	@Test
+	public void testExistenceOfCheckAllButton() {
+		Assert.assertTrue(page.getCheckAllButton().isDisplayed());
+	}
+	
+	@Test
+	public void testExistenceOfFilters() {
+		Assert.assertTrue(page.getCampPlacesFilter().isDisplayed() && page.getFeaturedPlacesFilter().isDisplayed());
+	}
 
-
+	@Test
+	public void testExistenceOfPlace() {
+		Assert.assertTrue(page.getFeaturedPlace().isDisplayed());
+	}
+	
+	@Test
+	public void testExistenceOfPlaceLable() {
+		Assert.assertTrue(page.getFeaturedPlaceLable().isDisplayed());
+	}
+	
+	@Test //00000
+	public void testFilter01AllPlacesDeselected(){
+		boolean filter [] = {true,true,true,true,true};
+		page.openCategoryPlaces().deselectPlaces();
+		Assert.assertFalse(page.checkFilter(filter));
+	}
+	
 	@Test //10000
-	public void testFilter01CampPlaces(){
+	public void testFilter02CampPlaces(){
 		boolean filter [] = {true,false,false,false,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //01000
-	public void testFilter02ServicePlaces(){
+	public void testFilter03ServicePlaces(){
 		boolean filter [] = {false,true,false,false,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //00100
-	public void testFilter03HostelsPlaces(){
+	public void testFilter04HostelsPlaces(){
 		boolean filter [] = {false,false,true,false,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //00010
-	public void testFilter04FeaturedPlaces(){
+	public void testFilter05FeaturedPlaces(){
 		boolean filter [] = {false,false,false,true,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //00001
-	public void testFilter05HealthcarePlaces(){
+	public void testFilter06HealthcarePlaces(){
 		boolean filter [] = {false,false,false,false,true};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //11000
-	public void testFilter06CampServicePlaces(){
+	public void testFilter07CampServicePlaces(){
 		boolean filter [] = {true,true,false,false,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //01100
-	public void testFilter07ServiceHostelsPlaces(){
+	public void testFilter08ServiceHostelsPlaces(){
 		boolean filter [] = {false,true,true,false,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //00110
-	public void testFilter08HostelsFeaturedPlaces(){
+	public void testFilter09HostelsFeaturedPlaces(){
 		boolean filter [] = {false,false,true,true,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //00011
-	public void testFilter09FeaturedHealthcarePlaces(){
+	public void testFilter10FeaturedHealthcarePlaces(){
 		boolean filter [] = {false,false,false,true,true};
-		page.setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //10001
-	public void testFilter10CampHealthcarePlaces(){
-		boolean filter [] = {true,false,false,false,true};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //11100
 	public void testFilter11PlacesWithoutFeaturedHealthcare(){
 		boolean filter [] = {true,true,true,false,false};
-		page.setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //01110
-	public void testFilter12PlacesWithoutCampHealthcare(){
-		boolean filter [] = {false,true,true,true,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //00111
-	public void testFilter13PlacesWithoutCampService(){
+	public void testFilter12PlacesWithoutCampService(){
 		boolean filter [] = {false,false,true,true,true};
-		page.setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //10011
-	public void testFilter14PlacesWithoutServiceHostels(){
-		boolean filter [] = {true,false,false,true,true};
-		page.setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //11001
-	public void testFilter15PlacesWithoutHostelsFeatured(){
-		boolean filter [] = {true,true,false,false,true};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //10101
-	public void testFilter16PlacesWithoutServicesFeatured(){
+	public void testFilter13PlacesWithoutServicesFeatured(){
 		boolean filter [] = {true,false,true,false,true};
-		page.setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //11110
-	public void testFilter17PlacesWithoutHealthcare(){
-		boolean filter [] = {true,true,true,true,false};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //01111
-	public void testFilter18PlacesWithoutCamps(){
+	public void testFilter14PlacesWithoutCamps(){
 		boolean filter [] = {false,true,true,true,true};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));        
 	}
 	
-	@Test //00000
-	public void testFilter19AllPlacesDeselected(){
-		boolean filter [] = {true,true,true,true,true};
-		page.openCategoryPlaces(); 
-		Assert.assertFalse(page.checkFilter(filter));
-	}
-	
 	@Test //11111
-	public void testFilter20AllPlacesSelected(){
+	public void testFilter15AllPlacesSelected(){
 		boolean filter [] = {true,true,true,true,true};
-		page.setFilters(filter);
+		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
+	
 }
