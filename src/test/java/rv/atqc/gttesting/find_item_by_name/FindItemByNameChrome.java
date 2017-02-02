@@ -42,10 +42,12 @@ public class FindItemByNameChrome {
 		new LogInPage(driver).loging();
 		placesPage = new PlacesPage(driver);
 	}
+	
 	@AfterMethod
 	public void afterMethod(){
 		driver.get(placesPage.PLACES_PAGE_URL);
 	}
+	
 	@AfterClass
 	public void quitDriver(){
 		driver.quit();
@@ -55,51 +57,62 @@ public class FindItemByNameChrome {
 	public void checkSearchResultsField(){
 		Assert.assertTrue(placesPage.lookForItem(VISIBLE_ITEM_NAME).getTextSearchResults().isDisplayed());    
 	}
+	
 	@Test
 	public void checkSearchInptFieldSecurity(){
   		Assert.assertEquals(placesPage.lookForItem(SCRIPT). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
+	
     @Test
     public void checkFailedRequestSearch(){
 		Assert.assertTrue(placesPage.lookForItem(ERROR_ITEM_NAME).getFailedRequestField().isDisplayed());
     }
+    
     @Test
     public void checkFailedPlaceSearch(){
 		Assert.assertEquals(placesPage.lookForItem(FAILED_PLACE_NAME). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
+    
     @Test
     public void checkSearchResultsFromVisibleRegion(){
 		placesPage.lookForItem(VISIBLE_ITEM_NAME).getFoundResults().click();
     	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getVisibleItemDetailsUrl());
     }
+    
     @Test
     public void checkSearchResultsFromInvisibleRegion(){
 		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getInvisibleItemFoundResults().click();
     	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getInvisibleItemDetailsUrl());
 	}
+    
 	@Test
     public void checkItemFromVisibleRegion(){
 		Assert.assertTrue(placesPage.lookForItem(VISIBLE_ITEM_NAME).getFoundItem().isDisplayed());
 	}
+	
 	@Test
     public void checkItemFromInvisibleRegion(){
 		Assert.assertTrue(placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().isDisplayed());
 	}
+	
 	@Test
     public void checkItemDetailsFromInvisibleRegion(){
     	placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
     	Assert.assertTrue(placesPage.getItemDetails().isDisplayed());
     }
+	
 	@Test
     public void checkItemDetailsUrlFromInvsibleRegion(){
 		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
 		placesPage.getItemDetails().click();
     	Assert.assertEquals(driver.getCurrentUrl(),placesPage.getInvisibleItemDetailsUrl());
     }
+	
 	@Test
     public void checkSearchResultsForTwoPlaces(){
 		placesPage.lookForItem(DOUBLE_ITEM_NAME);
     	Assert.assertTrue(placesPage.getFoundResults().isDisplayed()&&placesPage.getVisibleItemFoundSecondResult().isDisplayed());
     }
+	
 	
 }

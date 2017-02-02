@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -157,10 +156,12 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	}
 	
 	public void setFilters(boolean[] filter){
+		waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
 		openCategoryPlaces();
 		for (int i=0; i<5; i++){
 			if (filter[i] == true){
 				filterList.get(i).click();
+				waitForVisibilityOfElement(placesList.get(i), MAX_WAIT_TIME);
 			}
 		}
 	}
@@ -185,15 +186,15 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
     }
 
 	public PlacesPage openCategoryPlaces(){
-		this.waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
-		Actions builder = new Actions(driver);
-		builder.moveToElement(placesButton).perform();
+		waitForVisibilityOfElement(placesButton,MAX_WAIT_TIME);
+		hoverElement(placesButton);
 		
 		//deselect all places
+		waitForVisibilityOfElement(checkAllButton,MAX_WAIT_TIME);
 		checkAllButton.click();
 		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
 		checkAllButton.click();
-		waitForInVisibilityOfAll(placesList, MAX_WAIT_TIME);
+		timeout(2,TimeUnit.SECONDS);
 		return this;
 	}	
 }

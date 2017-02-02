@@ -30,7 +30,7 @@ public class FilterPlacesChromePO {
 		driver = new ChromeDriver(capabilities);
 		driver.manage().window().maximize();		
 		driver.get("https://green-tourism.herokuapp.com/#!/places");
-		page = new MapHeadPageForGuestUserPage(driver).clickCategories().clickPlaces();
+		page = new MapHeadPageForGuestUserPage(driver).clickCategories().clickPlaces().openCategoryPlaces();
 	}
 	
 	@AfterClass
@@ -168,7 +168,7 @@ public class FilterPlacesChromePO {
 	@Test //00000
 	public void testFilter19AllPlacesDeselected(){
 		boolean filter [] = {true,true,true,true,true};
-		page.openCategoryPlaces();
+		page.openCategoryPlaces(); 
 		Assert.assertFalse(page.checkFilter(filter));
 	}
 	
