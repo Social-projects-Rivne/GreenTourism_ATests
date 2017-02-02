@@ -168,7 +168,7 @@ public class FilterPlacesChromePO {
 	@Test //00000
 	public void testFilter19AllPlacesDeselected(){
 		boolean filter [] = {true,true,true,true,true};
-		page.openCategoryPlaces();
+		page.openCategoryPlaces(); 
 		Assert.assertFalse(page.checkFilter(filter));
 	}
 	

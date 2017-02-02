@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -187,12 +186,14 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
     }
 
 	public PlacesPage openCategoryPlaces(){
+		waitForVisibilityOfElement(placesButton,MAX_WAIT_TIME);
 		hoverElement(placesButton);
 		
 		//deselect all places
 		waitForVisibilityOfElement(checkAllButton,MAX_WAIT_TIME);
 		checkAllButton.click();
 		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
+		timeout(2,TimeUnit.SECONDS);
 		checkAllButton.click();
 		return this;
 	}	
