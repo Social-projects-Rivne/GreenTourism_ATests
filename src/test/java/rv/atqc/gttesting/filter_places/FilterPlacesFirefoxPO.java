@@ -56,110 +56,54 @@ public class FilterPlacesFirefoxPO {
 	public void testExistenceOfPlaceLable() {
 		Assert.assertTrue(page.getFeaturedPlaceLable().isDisplayed());
 	}
-	
-	@Test //00000
-	public void testFilter01AllPlacesDeselected(){
-		boolean filter [] = {true,true,true,true,true};
-		page.openCategoryPlaces().deselectPlaces();
-		Assert.assertFalse(page.checkFilter(filter));
-	}
-	
+		
 	@Test //10000
-	public void testFilter02CampPlaces(){
+	public void testFilter01CampPlaces(){
 		boolean filter [] = {true,false,false,false,false};
 		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //01000
-	public void testFilter03ServicePlaces(){
+	public void testFilter02ServicePlaces(){
 		boolean filter [] = {false,true,false,false,false};
 		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
-	@Test //00100
-	public void testFilter04HostelsPlaces(){
-		boolean filter [] = {false,false,true,false,false};
-		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //00010
-	public void testFilter05FeaturedPlaces(){
-		boolean filter [] = {false,false,false,true,false};
-		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //00001
-	public void testFilter06HealthcarePlaces(){
-		boolean filter [] = {false,false,false,false,true};
-		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //11000
-	public void testFilter07CampServicePlaces(){
+	@Test //10100
+	public void testFilter03CampHostelsPlaces(){
 		boolean filter [] = {true,true,false,false,false};
 		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
-	@Test //01100
-	public void testFilter08ServiceHostelsPlaces(){
-		boolean filter [] = {false,true,true,false,false};
-		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
-	@Test //00110
-	public void testFilter09HostelsFeaturedPlaces(){
-		boolean filter [] = {false,false,true,true,false};
-		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
 	@Test //00011
-	public void testFilter10FeaturedHealthcarePlaces(){
+	public void testFilter04FeaturedHealthcarePlaces(){
 		boolean filter [] = {false,false,false,true,true};
 		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //11100
-	public void testFilter11PlacesWithoutFeaturedHealthcare(){
+	public void testFilter05PlacesWithoutFeaturedHealthcare(){
 		boolean filter [] = {true,true,true,false,false};
 		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
-	@Test //00111
-	public void testFilter12PlacesWithoutCampService(){
-		boolean filter [] = {false,false,true,true,true};
-		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
-	}
-	
 	@Test //10101
-	public void testFilter13PlacesWithoutServicesFeatured(){
+	public void testFilter06PlacesWithoutServicesFeatured(){
 		boolean filter [] = {true,false,true,false,true};
 		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));
 	}
 	
 	@Test //01111
-	public void testFilter14PlacesWithoutCamps(){
+	public void testFilter07PlacesWithoutCamps(){
 		boolean filter [] = {false,true,true,true,true};
 		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
 		Assert.assertTrue(page.checkFilter(filter));        
-	}
-	
-	@Test //11111
-	public void testFilter15AllPlacesSelected(){
-		boolean filter [] = {true,true,true,true,true};
-		page.openCategoryPlaces().deselectPlaces().setFilters(filter);
-		Assert.assertTrue(page.checkFilter(filter));
 	}
 
 }
