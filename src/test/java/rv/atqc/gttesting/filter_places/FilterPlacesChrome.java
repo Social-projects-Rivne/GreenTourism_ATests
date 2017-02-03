@@ -1,4 +1,4 @@
-package rv.atqc.gttesting.filer_places;
+package rv.atqc.gttesting.filter_places;
 
 import java.util.HashMap;
 import org.openqa.selenium.By;

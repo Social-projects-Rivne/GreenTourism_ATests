@@ -3,6 +3,7 @@ package rv.atqc.gttesting.archex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.How;
 
 public class PlacesPage extends AbstractPage<PlacesPage>{
 
-	private final int MAX_WAIT_TIME = 10;	
+	private final int MAX_WAIT_TIME = 20;	
 	private final String VISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3";
 	private final String INVISIBLE_ITEM_DETAILS_URL = "https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd";
 	private final String NO_ITEM_MESSAGE = "There are no such places and tracks, try else please";
@@ -43,11 +44,15 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 
 	private ArrayList <WebElement> filterList = new ArrayList<WebElement>(Arrays.asList(
 			campPlacesFilter, servicePlacesFilter, hostelsPlacesFilter, featuredPlacesFilter, healthcarePlacesFilter));
-
+	
+	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]/a/span")
+	protected WebElement featuredPlaceLable;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6]")
 	private WebElement checkAllButton;
 	@FindBy(how = How.XPATH, using = "//*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]")
 	protected WebElement placesButton;
+	@FindBy(how = How.XPATH, using = "html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button")
+	private WebElement categoriesButton;
 	
 	@FindBy(how = How.XPATH, using = "//*[@id=\"search\"]/div/input")
 	protected WebElement searchField;
@@ -90,11 +95,41 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 		return VISIBLE_ITEM_DETAILS_URL;
 	}
 	
+	public WebElement getCheckAllButton(){
+		waitForVisibilityOfElement(checkAllButton, MAX_WAIT_TIME);
+		return checkAllButton;
+	}
+	
+	public WebElement getPlacesButton(){
+		waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
+		return placesButton;
+	}
+	
+	public WebElement getFeaturedPlace(){
+		waitForVisibilityOfElement(featuredPlace, MAX_WAIT_TIME);
+		return featuredPlace;
+	}
+	
+	public WebElement getFeaturedPlaceLable(){
+		waitForVisibilityOfElement(featuredPlaceLable, MAX_WAIT_TIME);
+		return featuredPlaceLable;
+	}
+	
+	public WebElement getCampPlacesFilter(){
+		waitForVisibilityOfElement(campPlacesFilter, MAX_WAIT_TIME);
+		return campPlacesFilter;
+	}
+	
+	public WebElement getFeaturedPlacesFilter(){
+		waitForVisibilityOfElement(featuredPlacesFilter, MAX_WAIT_TIME);
+		return featuredPlacesFilter;
+	}
+	
 	public WebElement getItemDetails(){
 		waitForVisibilityOfElement(itemDetails, MAX_WAIT_TIME);
 		return itemDetails;
 	}
-		
+	
 	public WebElement getVisibleItemFoundResults(){
 		waitForVisibilityOfElement(foundResultForVisibleItem, MAX_WAIT_TIME);
 		return foundResultForVisibleItem;
@@ -157,7 +192,6 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
 	
 	public void setFilters(boolean[] filter){
 		waitForVisibilityOfElement(placesButton, MAX_WAIT_TIME);
-		openCategoryPlaces();
 		for (int i=0; i<5; i++){
 			if (filter[i] == true){
 				filterList.get(i).click();
@@ -186,15 +220,20 @@ public class PlacesPage extends AbstractPage<PlacesPage>{
     }
 
 	public PlacesPage openCategoryPlaces(){
+		refresh();
+		waitForVisibilityOfElement(featuredPlace,MAX_WAIT_TIME);
+		waitForVisibilityOfElement(categoriesButton,MAX_WAIT_TIME);
+		categoriesButton.click();
 		waitForVisibilityOfElement(placesButton,MAX_WAIT_TIME);
 		hoverElement(placesButton);
-		
-		//deselect all places
-		waitForVisibilityOfElement(checkAllButton,MAX_WAIT_TIME);
-		checkAllButton.click();
-		waitForVisibilityOfAll(placesList, MAX_WAIT_TIME);
-		checkAllButton.click();
-		timeout(2,TimeUnit.SECONDS);
 		return this;
-	}	
+	}
+	
+	public PlacesPage deselectPlaces(){
+		waitForVisibilityOfElement(featuredPlace,MAX_WAIT_TIME);
+		featuredPlacesFilter.click();
+		return this;
+	}
+	
+
 }
