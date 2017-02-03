@@ -3,12 +3,16 @@ package rv.atqc.gttesting.filterEventsOnTheMapByCategoriesPageObject;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import rv.atqc.gttesting.archex.EventsPage;
 import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
+
+import java.util.HashMap;
 
 public class FilterEventsOnTheMapByCategoriesPageObjectWithChrome {
 
@@ -23,7 +27,13 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithChrome {
     @BeforeClass
     public void setUpDriverAndPreconditions() {
         ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+        HashMap<String, Object> prefs = new HashMap<>();
+        prefs.put("profile.default_content_setting_values.geolocation", 2);
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.setExperimentalOption("prefs", prefs);
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+        driver = new ChromeDriver(capabilities);
         driver.get(MAP_LINK);
         driver.manage().window().maximize();
         eventsPage = new MapHeadPageForGuestUserPage(driver).clickCategories().clickEvents();
