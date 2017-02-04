@@ -1,7 +1,5 @@
 package rv.atqc.gttesting.archex;
 
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,7 +16,7 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-detail/div/div/div[3]/div/comment/div/div[2]/div[2]/p[1]")
 	private WebElement lastComment;
 
-	@FindBy(how = How.XPATH, using = "//h5[contains(text(),'Maks Kovalets')]/following-sibling::a[@title='Edit']")
+	@FindBy(how = How.XPATH, using = "//h5[contains(text(),'Maks Kovalets')]/following-sibling::a[@title='Edit']/i")
 	private WebElement editButton;
 
 	@FindBy(how = How.XPATH, using = "//h5[contains(text(),'Maks Kovalets')]/following-sibling::div/textarea")
@@ -74,7 +72,6 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 	}
 
 	public WebElement getEditButton() {
-		waitForVisibilityOfElement(editButton, MAX_TIME_WAIT);
 		waitForElementToBeClickable(editButton, MAX_TIME_WAIT);
 		return editButton;
 	}
@@ -93,7 +90,6 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 
 	
 	public WebElement getCloseButton(){
-		waitForVisibilityOfElement(closeButton,MAX_TIME_WAIT);
 		waitForElementToBeClickable(closeButton,MAX_TIME_WAIT);
 		return closeButton;
 	}
@@ -106,7 +102,6 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 
 
 	public WebElement getUpdateButton(){
-		waitForVisibilityOfElement(updateButton,MAX_TIME_WAIT);
 		waitForElementToBeClickable(updateButton,MAX_TIME_WAIT);
 		return updateButton;
 	}
