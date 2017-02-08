@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import ru.yandex.qatools.allure.annotations.Step;
+
 public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPage> {
 
 	@FindBy(how = How.XPATH, using = "/html/body/main/div/place-detail/div/div/div[3]/div/comment/div/div[1]/div[2]/div[1]/textarea")
@@ -82,6 +84,7 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return editTextarea;
 	}
 
+	@Step("Edit button was clicked")
 	public LoggedPlaceViewPage clickEditButton() {
 		waitForElementToBeClickable(editButton, MAX_TIME_WAIT);
 		editButton.click();
@@ -94,6 +97,7 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return closeButton;
 	}
 
+	@Step("Close button was clicked")
 	public LoggedPlaceViewPage clickCloseButton() {
 		waitForElementToBeClickable(closeButton, MAX_TIME_WAIT);
 		closeButton.click();
@@ -106,6 +110,7 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return updateButton;
 	}
 
+	@Step("New text: ( {0} ) was set in a changed comment")
 	public LoggedPlaceViewPage setNewTextToEditedComment(CharSequence newText) {
 		waitForElementToBeClickable(editButton, MAX_TIME_WAIT);
 		editButton.click();
@@ -122,6 +127,7 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return comment;
 	}
 
+	@Step("New text ( {0} ) was not set in a changed comment")
 	public LoggedPlaceViewPage notSetNewTextToEditedComment(CharSequence newText) {
 		waitForElementToBeClickable(editButton, MAX_TIME_WAIT);
 		editButton.click();

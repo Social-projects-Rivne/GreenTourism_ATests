@@ -162,7 +162,12 @@
 			<plugin>
 				<groupId>ru.yandex.qatools.allure</groupId>
 				<artifactId>allure-maven-plugin</artifactId>
-				<version>2.2</version>
+				<version>2.5</version>
+				<configuration>
+					<properties>
+						<allure.tests.management.pattern>http://ssu-jira.softserveinc.com/browse/%s</allure.tests.management.pattern>					
+					</properties>
+				</configuration>
 			</plugin>
 		</plugins>
 	</reporting>
