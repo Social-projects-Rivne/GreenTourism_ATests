@@ -15,6 +15,8 @@ import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 import ru.yandex.qatools.allure.annotations.TestCaseId;
 
+@Features("Checking possibility to change map type")
+@Stories("Mozilla Firefox browser")
 public class PossibilityChangeMapTypeMozillaPC {
 	private WebDriver driver;
 	private WebDriverWait wait;
@@ -77,8 +79,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 
 	@TestCaseId("RVAT-793")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewMapTypeButton() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -87,8 +87,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 	
 	@TestCaseId("RVAT-794")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityClickMapTypeButton() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -97,8 +95,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 	
 	@TestCaseId("RVAT-795")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkExistenceStreetsItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -111,8 +107,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 	
 	@TestCaseId("RVAT-796")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkExistenceOutdoorsItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -125,8 +119,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 	
 	@TestCaseId("RVAT-797")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkExistenceSatelliteItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -140,8 +132,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	
 	//This test isn't recommended for automation
 	@TestCaseId("RVAT-798")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilitySetStreetsMapType() {
 		WebElement streetsItem = wait.until(ExpectedConditions
@@ -155,8 +145,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	
 	//This test isn't recommended for automation
 	@TestCaseId("RVAT-799")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilitySetOutdoorsMapType() {
 		WebElement outdoorsItem = wait.until(ExpectedConditions
@@ -170,8 +158,6 @@ public class PossibilityChangeMapTypeMozillaPC {
 	
 	//This test isn't recommended for automation
 	@TestCaseId("RVAT-800")
-	@Features("Checking possibility to change map type")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilitySetSatelliteMapType() {
 		WebElement satelliteItem = wait.until(ExpectedConditions

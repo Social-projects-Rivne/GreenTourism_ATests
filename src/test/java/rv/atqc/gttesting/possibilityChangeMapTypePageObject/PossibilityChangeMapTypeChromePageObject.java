@@ -13,6 +13,8 @@ import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.MapHeadForLoggedUserPage;
 
+@Features("Checking possibility to change map type (Page Object)")
+@Stories("Chrome browser")
 public class PossibilityChangeMapTypeChromePageObject {
 	private WebDriver driver;
 	private MapHeadForLoggedUserPage MapHeadPage;
@@ -38,24 +40,18 @@ public class PossibilityChangeMapTypeChromePageObject {
 	}
 
 	@TestCaseId("RVAT-746")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewMapTypeButton() {
 		Assert.assertTrue(MapHeadPage.getElementMapTypeButton().isDisplayed());
 	}
 	
 	@TestCaseId("RVAT-751")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickMapTypeButton() {
 		Assert.assertTrue(MapHeadPage.getElementMapTypeButton().isEnabled());
 	}
 	
 	@TestCaseId("RVAT-761")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkExistenceStreetsItem() {
 		Assert.assertTrue(MapHeadPage.clickMapTypeButton()
@@ -65,8 +61,6 @@ public class PossibilityChangeMapTypeChromePageObject {
 	}
 	
 	@TestCaseId("RVAT-764")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkExistenceOutdoorsItem() {
 		Assert.assertTrue(MapHeadPage.clickMapTypeButton()
@@ -76,8 +70,6 @@ public class PossibilityChangeMapTypeChromePageObject {
 	}
 	
 	@TestCaseId("RVAT-767")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkExistenceSatelliteItem() {
 		Assert.assertTrue(MapHeadPage.clickMapTypeButton()
@@ -88,8 +80,6 @@ public class PossibilityChangeMapTypeChromePageObject {
 	
 	//This test isn't recommended for automation
 	@TestCaseId("RVAT-782")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilitySetStreetsMapType() {
 		Assert.assertTrue(MapHeadPage.clickMapTypeButton()
@@ -101,8 +91,6 @@ public class PossibilityChangeMapTypeChromePageObject {
 	
 	//This test isn't recommended for automation
 	@TestCaseId("RVAT-783")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilitySetOutdoorsMapType() {
 		Assert.assertTrue(MapHeadPage.clickMapTypeButton()
@@ -114,8 +102,6 @@ public class PossibilityChangeMapTypeChromePageObject {
 	
 	//This test isn't recommended for automation
 	@TestCaseId("RVAT-784")
-	@Features("Checking possibility to change map type (Page Object)")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilitySetSatelliteMapType() {
 		Assert.assertTrue(MapHeadPage.clickMapTypeButton()

@@ -17,6 +17,8 @@ import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
 
+@Features("Checking possibility to edit my comment")
+@Stories("Mozilla Firefox browser")
 public class PossibilityEditMyCommentFirefox {
 	private WebDriver driver;
 	private LoggedPlaceViewPage placePage;
@@ -53,24 +55,18 @@ public class PossibilityEditMyCommentFirefox {
 	}
 
 	@TestCaseId("RVAT-931")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isDisplayed());
 	}
 	
 	@TestCaseId("RVAT-932")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityClickEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isEnabled());
 	}
 	
 	@TestCaseId("RVAT-933")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewTextarea() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -80,8 +76,6 @@ public class PossibilityEditMyCommentFirefox {
 	}
 	
 	@TestCaseId("RVAT-934")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -91,8 +85,6 @@ public class PossibilityEditMyCommentFirefox {
 	}
 	
 	@TestCaseId("RVAT-935")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityClickCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -102,8 +94,6 @@ public class PossibilityEditMyCommentFirefox {
 	}
 	
 	@TestCaseId("RVAT-936")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -113,8 +103,6 @@ public class PossibilityEditMyCommentFirefox {
 	}
 	
 	@TestCaseId("RVAT-937")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityClickUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -124,8 +112,6 @@ public class PossibilityEditMyCommentFirefox {
 	}
 	
 	@TestCaseId("RVAT-938")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityEditMyComment() {
 		Assert.assertTrue(placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -136,8 +122,6 @@ public class PossibilityEditMyCommentFirefox {
 	}
 	
 	@TestCaseId("RVAT-939")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityCancelEditMyComment() {
 		Assert.assertFalse(placePage.notSetNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -147,8 +131,6 @@ public class PossibilityEditMyCommentFirefox {
 	}
 	
 	@TestCaseId("RVAT-940")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkDisablingOfButtonUpdate() {
 		placePage.clickEditButton().waitForPageLoad();

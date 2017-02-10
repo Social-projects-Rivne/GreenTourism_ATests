@@ -16,6 +16,8 @@ import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
 
+@Features("Checking possibility to edit my comment")
+@Stories("Chrome browser")
 public class PossibilityEditMyCommentChrome {
 	private WebDriver driver;
 	private LoggedPlaceViewPage placePage;
@@ -52,24 +54,18 @@ public class PossibilityEditMyCommentChrome {
 	}
 
 	@TestCaseId("RVAT-921")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isDisplayed());
 	}
 	
 	@TestCaseId("RVAT-922")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isEnabled());
 	}
 	
 	@TestCaseId("RVAT-923")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewTextarea() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -79,8 +75,6 @@ public class PossibilityEditMyCommentChrome {
 	}
 	
 	@TestCaseId("RVAT-924")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -90,8 +84,6 @@ public class PossibilityEditMyCommentChrome {
 	}
 	
 	@TestCaseId("RVAT-925")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -101,8 +93,6 @@ public class PossibilityEditMyCommentChrome {
 	}
 	
 	@TestCaseId("RVAT-926")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -112,8 +102,6 @@ public class PossibilityEditMyCommentChrome {
 	}
 	
 	@TestCaseId("RVAT-927")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
@@ -123,8 +111,6 @@ public class PossibilityEditMyCommentChrome {
 	}
 	
 	@TestCaseId("RVAT-928")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityEditMyComment() {
 		Assert.assertTrue(placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -135,8 +121,6 @@ public class PossibilityEditMyCommentChrome {
 	}
 	
 	@TestCaseId("RVAT-929")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityCancelEditMyComment() {
 		Assert.assertFalse(placePage.notSetNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -146,8 +130,6 @@ public class PossibilityEditMyCommentChrome {
 	}
 	
 	@TestCaseId("RVAT-930")
-	@Features("Checking possibility to edit my comment")
-	@Stories("Chrome browser")
 	@Test
 	public void checkDisablingOfButtonUpdate() {
 		placePage.clickEditButton().waitForPageLoad();
