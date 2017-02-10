@@ -9,6 +9,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
@@ -45,89 +49,83 @@ public class PossibilityEditMyCommentFirefox {
 	 */
 	@BeforeMethod
 	public void beforeMethod() {
-		try{
-			Thread.sleep(afterMethodWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterMethodWaitTime);
 	}
 
+	@TestCaseId("RVAT-931")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-932")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityClickEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isEnabled());
 	}
 	
+	@TestCaseId("RVAT-933")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewTextarea() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getTextarea().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-934")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getCloseButton().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-935")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityClickCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getCloseButton().isEnabled());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-936")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityViewUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getUpdateButton().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-937")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityClickUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getUpdateButton().isEnabled());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-938")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityEditMyComment() {
 		Assert.assertTrue(placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -137,6 +135,9 @@ public class PossibilityEditMyCommentFirefox {
 		placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_BEFORE_EDIT);
 	}
 	
+	@TestCaseId("RVAT-939")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkPossibilityCancelEditMyComment() {
 		Assert.assertFalse(placePage.notSetNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -145,17 +146,25 @@ public class PossibilityEditMyCommentFirefox {
 		                            .contentEquals(Resources.EditCommit.TEXT_AFTER_EDIT));
 	}
 	
+	@TestCaseId("RVAT-940")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Mozilla Firefox browser")
 	@Test
 	public void checkDisablingOfButtonUpdate() {
 		placePage.clickEditButton().waitForPageLoad();
+		pause(afterClickWaitTime);
+		placePage.getTextarea().clear();
+		Assert.assertFalse(placePage.getDisabledUpdateButton().isEnabled());
+		placePage.clickCloseButton();
+	}
+	
+	@Step("Pause was made")
+	private void pause(int timeToWait){
 		try{
-			Thread.sleep(afterClickWaitTime);
+			Thread.sleep(timeToWait);
 			}
 		catch (InterruptedException exception){
 			exception.printStackTrace();
 			} 
-		placePage.getTextarea().clear();
-		Assert.assertFalse(placePage.getDisabledUpdateButton().isEnabled());
-		placePage.clickCloseButton();
 	}
 }

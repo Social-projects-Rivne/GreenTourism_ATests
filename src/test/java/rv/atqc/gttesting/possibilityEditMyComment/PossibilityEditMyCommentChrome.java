@@ -8,6 +8,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
@@ -44,89 +48,83 @@ public class PossibilityEditMyCommentChrome {
 	 */
 	@BeforeMethod
 	public void beforeMethod() {
-		try{
-			Thread.sleep(afterMethodWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterMethodWaitTime);
 	}
 
+	@TestCaseId("RVAT-921")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-922")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isEnabled());
 	}
 	
+	@TestCaseId("RVAT-923")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewTextarea() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getTextarea().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-924")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getCloseButton().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-925")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getCloseButton().isEnabled());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-926")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getUpdateButton().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-927")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getUpdateButton().isEnabled());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-928")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityEditMyComment() {
 		Assert.assertTrue(placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -136,6 +134,9 @@ public class PossibilityEditMyCommentChrome {
 		placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_BEFORE_EDIT);
 	}
 	
+	@TestCaseId("RVAT-929")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityCancelEditMyComment() {
 		Assert.assertFalse(placePage.notSetNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -144,17 +145,25 @@ public class PossibilityEditMyCommentChrome {
 		                            .contentEquals(Resources.EditCommit.TEXT_AFTER_EDIT));
 	}
 	
+	@TestCaseId("RVAT-930")
+	@Features("Checking possibility to edit my comment")
+	@Stories("Chrome browser")
 	@Test
 	public void checkDisablingOfButtonUpdate() {
 		placePage.clickEditButton().waitForPageLoad();
+		pause(afterClickWaitTime);
+		placePage.getTextarea().clear();
+		Assert.assertFalse(placePage.getDisabledUpdateButton().isEnabled());
+		placePage.clickCloseButton();
+	}
+	
+	@Step("Pause was made")
+	private void pause(int timeToWait){
 		try{
-			Thread.sleep(afterClickWaitTime);
+			Thread.sleep(timeToWait);
 			}
 		catch (InterruptedException exception){
 			exception.printStackTrace();
 			} 
-		placePage.getTextarea().clear();
-		Assert.assertFalse(placePage.getDisabledUpdateButton().isEnabled());
-		placePage.clickCloseButton();
 	}
 }

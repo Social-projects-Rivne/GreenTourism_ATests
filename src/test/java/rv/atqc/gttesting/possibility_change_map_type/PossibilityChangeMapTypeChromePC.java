@@ -12,6 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
 public class PossibilityChangeMapTypeChromePC {
 	private WebDriver driver;
@@ -65,6 +68,9 @@ public class PossibilityChangeMapTypeChromePC {
 		driver.quit();
 	}
 
+	@TestCaseId("RVAT-746")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityViewMapTypeButton() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -72,6 +78,9 @@ public class PossibilityChangeMapTypeChromePC {
 		Assert.assertTrue(mapTypeButton.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-751")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilityClickMapTypeButton() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -79,6 +88,9 @@ public class PossibilityChangeMapTypeChromePC {
 		Assert.assertTrue(mapTypeButton.isEnabled());
 	}
 	
+	@TestCaseId("RVAT-761")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkExistenceStreetsItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -90,6 +102,9 @@ public class PossibilityChangeMapTypeChromePC {
 	    Assert.assertTrue(streetsItem.isEnabled());
 	}
 	
+	@TestCaseId("RVAT-764")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkExistenceOutdoorsItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -101,6 +116,9 @@ public class PossibilityChangeMapTypeChromePC {
 	    Assert.assertTrue(outdoorsItem.isEnabled());
 	}
 	
+	@TestCaseId("RVAT-767")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkExistenceSatelliteItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -113,6 +131,9 @@ public class PossibilityChangeMapTypeChromePC {
 	}
 	
 	//This test isn't recommended for automation
+	@TestCaseId("RVAT-782")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilitySetStreetsMapType() {
 		WebElement streetsItem = wait.until(ExpectedConditions
@@ -125,6 +146,9 @@ public class PossibilityChangeMapTypeChromePC {
 	}
 	
 	//This test isn't recommended for automation
+	@TestCaseId("RVAT-783")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilitySetOutdoorsMapType() {
 		WebElement outdoorsItem = wait.until(ExpectedConditions
@@ -137,6 +161,9 @@ public class PossibilityChangeMapTypeChromePC {
 	}
 	
 	//This test isn't recommended for automation
+	@TestCaseId("RVAT-784")
+	@Features("Checking possibility to change map type")
+	@Stories("Chrome browser")
 	@Test
 	public void checkPossibilitySetSatelliteMapType() {
 		WebElement satelliteItem = wait.until(ExpectedConditions
