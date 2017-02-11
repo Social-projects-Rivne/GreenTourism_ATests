@@ -80,6 +80,16 @@ public class Resources {
 		public static String SIMPLE_COMMENT = properties.getProperty("simple-comment");
 		public static String FORMATING_COMMENT = properties.getProperty("formating-comment");
 	}
+	
+	public static class FindPlace {
+		private static Properties properties = init("find-places.properties");
+		public static String VISIBLE_ITEM_NAME = properties.getProperty("visibleItemName");
+		public static String INVISIBLE_ITEM_NAME = properties.getProperty("invisibleItemName");
+		public static String FAILED_PLACE_NAME = properties.getProperty("failedItemName");
+		public static String DOUBLE_ITEM_NAME = properties.getProperty("doubleItemName");
+		public static String ERROR_ITEM_NAME = properties.getProperty("errorItemName");
+		public static String SCRIPT = properties.getProperty("errorScriptItemName");
+	}
 
 	private static Properties init(String propertiesTitle) {
 		Properties properties = new Properties();
