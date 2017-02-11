@@ -11,10 +11,16 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.PlacesPage;
 
+@Features("Checking possibility to find item by name")
+@Stories("Chrome browser")
 public class FindItemByNameChrome {
+	
 	private WebDriver driver;
 	private PlacesPage placesPage;
 	
@@ -53,54 +59,64 @@ public class FindItemByNameChrome {
 		driver.quit();
 	}
 
+	@TestCaseId("RVAT-993") 
 	@Test
 	public void checkSearchResultsField(){
 		Assert.assertTrue(placesPage.lookForItem(VISIBLE_ITEM_NAME).getTextSearchResults().isDisplayed());    
 	}
 	
+	@TestCaseId("RVAT-995")
 	@Test
 	public void checkSearchInptFieldSecurity(){
   		Assert.assertEquals(placesPage.lookForItem(SCRIPT). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
 	
+	@TestCaseId("RVAT-997")
     @Test
     public void checkFailedRequestSearch(){
 		Assert.assertTrue(placesPage.lookForItem(ERROR_ITEM_NAME).getFailedRequestField().isDisplayed());
     }
     
+	@TestCaseId("RVAT-999")
     @Test
     public void checkFailedPlaceSearch(){
 		Assert.assertEquals(placesPage.lookForItem(FAILED_PLACE_NAME). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
     
+	@TestCaseId("RVAT-1001")
     @Test
     public void checkSearchResultsFromVisibleRegion(){
 		placesPage.lookForItem(VISIBLE_ITEM_NAME).getFoundResults().click();
     	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getVisibleItemDetailsUrl());
     }
     
+	@TestCaseId("RVAT-1003")
     @Test
     public void checkSearchResultsFromInvisibleRegion(){
 		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getInvisibleItemFoundResults().click();
     	Assert.assertEquals( driver.getCurrentUrl(), placesPage.getInvisibleItemDetailsUrl());
 	}
     
+	@TestCaseId("RVAT-1005")
 	@Test
     public void checkItemFromVisibleRegion(){
 		Assert.assertTrue(placesPage.lookForItem(VISIBLE_ITEM_NAME).getFoundItem().isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-1007")
 	@Test
     public void checkItemFromInvisibleRegion(){
 		Assert.assertTrue(placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-1009")
 	@Test
     public void checkItemDetailsFromInvisibleRegion(){
     	placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
     	Assert.assertTrue(placesPage.getItemDetails().isDisplayed());
     }
 	
+	@TestCaseId("RVAT-1011")
 	@Test
     public void checkItemDetailsUrlFromInvsibleRegion(){
 		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
@@ -108,6 +124,7 @@ public class FindItemByNameChrome {
     	Assert.assertEquals(driver.getCurrentUrl(),placesPage.getInvisibleItemDetailsUrl());
     }
 	
+	@TestCaseId("RVAT-1013")
 	@Test
     public void checkSearchResultsForTwoPlaces(){
 		placesPage.lookForItem(DOUBLE_ITEM_NAME);
