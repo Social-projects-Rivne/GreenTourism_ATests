@@ -88,7 +88,6 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		return this;
 	}
 
-	
 	public WebElement getCloseButton(){
 		waitForElementToBeClickable(closeButton,MAX_TIME_WAIT);
 		return closeButton;
@@ -99,7 +98,6 @@ public class LoggedPlaceViewPage extends AbstractPlaceViewPage<LoggedPlaceViewPa
 		closeButton.click();
 		return this;
 	}
-
 
 	public WebElement getUpdateButton(){
 		waitForElementToBeClickable(updateButton,MAX_TIME_WAIT);

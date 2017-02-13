@@ -9,10 +9,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
 
+@Features("Checking possibility to edit my comment")
+@Stories("Mozilla Firefox browser")
 public class PossibilityEditMyCommentFirefox {
 	private WebDriver driver;
 	private LoggedPlaceViewPage placePage;
@@ -45,89 +51,67 @@ public class PossibilityEditMyCommentFirefox {
 	 */
 	@BeforeMethod
 	public void beforeMethod() {
-		try{
-			Thread.sleep(afterMethodWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterMethodWaitTime);
 	}
 
+	@TestCaseId("RVAT-931")
 	@Test
 	public void checkPossibilityViewEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-932")
 	@Test
 	public void checkPossibilityClickEditButton() {
 		Assert.assertTrue(placePage.getEditButton().isEnabled());
 	}
 	
+	@TestCaseId("RVAT-933")
 	@Test
 	public void checkPossibilityViewTextarea() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getTextarea().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-934")
 	@Test
 	public void checkPossibilityViewCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getCloseButton().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-935")
 	@Test
 	public void checkPossibilityClickCloseButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getCloseButton().isEnabled());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-936")
 	@Test
 	public void checkPossibilityViewUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getUpdateButton().isDisplayed());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-937")
 	@Test
 	public void checkPossibilityClickUpdateButton() {
 		placePage.clickEditButton().waitForPageLoad();
-		try{
-			Thread.sleep(afterClickWaitTime);
-			}
-		catch (InterruptedException exception){
-			exception.printStackTrace();
-			} 
+		pause(afterClickWaitTime);
 		Assert.assertTrue(placePage.getUpdateButton().isEnabled());
 		placePage.clickCloseButton();
 	}
 	
+	@TestCaseId("RVAT-938")
 	@Test
 	public void checkPossibilityEditMyComment() {
 		Assert.assertTrue(placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -137,6 +121,7 @@ public class PossibilityEditMyCommentFirefox {
 		placePage.setNewTextToEditedComment(Resources.EditCommit.TEXT_BEFORE_EDIT);
 	}
 	
+	@TestCaseId("RVAT-939")
 	@Test
 	public void checkPossibilityCancelEditMyComment() {
 		Assert.assertFalse(placePage.notSetNewTextToEditedComment(Resources.EditCommit.TEXT_AFTER_EDIT)
@@ -145,17 +130,23 @@ public class PossibilityEditMyCommentFirefox {
 		                            .contentEquals(Resources.EditCommit.TEXT_AFTER_EDIT));
 	}
 	
+	@TestCaseId("RVAT-940")
 	@Test
 	public void checkDisablingOfButtonUpdate() {
 		placePage.clickEditButton().waitForPageLoad();
+		pause(afterClickWaitTime);
+		placePage.getTextarea().clear();
+		Assert.assertFalse(placePage.getDisabledUpdateButton().isEnabled());
+		placePage.clickCloseButton();
+	}
+	
+	@Step("Pause was made")
+	private void pause(int timeToWait){
 		try{
-			Thread.sleep(afterClickWaitTime);
+			Thread.sleep(timeToWait);
 			}
 		catch (InterruptedException exception){
 			exception.printStackTrace();
 			} 
-		placePage.getTextarea().clear();
-		Assert.assertFalse(placePage.getDisabledUpdateButton().isEnabled());
-		placePage.clickCloseButton();
 	}
 }

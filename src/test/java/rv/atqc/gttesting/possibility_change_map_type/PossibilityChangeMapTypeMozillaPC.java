@@ -11,7 +11,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
+@Features("Checking possibility to change map type")
+@Stories("Mozilla Firefox browser")
 public class PossibilityChangeMapTypeMozillaPC {
 	private WebDriver driver;
 	private WebDriverWait wait;
@@ -73,6 +78,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 		driver.quit();
 	}
 
+	@TestCaseId("RVAT-793")
 	@Test
 	public void checkPossibilityViewMapTypeButton() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -80,6 +86,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 		Assert.assertTrue(mapTypeButton.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-794")
 	@Test
 	public void checkPossibilityClickMapTypeButton() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -87,6 +94,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 		Assert.assertTrue(mapTypeButton.isEnabled());
 	}
 	
+	@TestCaseId("RVAT-795")
 	@Test
 	public void checkExistenceStreetsItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -98,6 +106,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 	    Assert.assertTrue(streetsItem.isEnabled());
 	}
 	
+	@TestCaseId("RVAT-796")
 	@Test
 	public void checkExistenceOutdoorsItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -109,6 +118,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 	    Assert.assertTrue(outdoorsItem.isEnabled());
 	}
 	
+	@TestCaseId("RVAT-797")
 	@Test
 	public void checkExistenceSatelliteItem() {
 		WebElement mapTypeButton = wait.until(ExpectedConditions
@@ -121,6 +131,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 	
 	//This test isn't recommended for automation
+	@TestCaseId("RVAT-798")
 	@Test
 	public void checkPossibilitySetStreetsMapType() {
 		WebElement streetsItem = wait.until(ExpectedConditions
@@ -133,6 +144,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 	
 	//This test isn't recommended for automation
+	@TestCaseId("RVAT-799")
 	@Test
 	public void checkPossibilitySetOutdoorsMapType() {
 		WebElement outdoorsItem = wait.until(ExpectedConditions
@@ -145,6 +157,7 @@ public class PossibilityChangeMapTypeMozillaPC {
 	}
 	
 	//This test isn't recommended for automation
+	@TestCaseId("RVAT-800")
 	@Test
 	public void checkPossibilitySetSatelliteMapType() {
 		WebElement satelliteItem = wait.until(ExpectedConditions

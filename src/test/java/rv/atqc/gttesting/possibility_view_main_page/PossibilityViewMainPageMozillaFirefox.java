@@ -13,7 +13,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
+@Features("Checking possibility to view main page")
+@Stories("Mozilla Firefox browser")
 public class PossibilityViewMainPageMozillaFirefox {
 	
 	private WebDriver driver;
@@ -33,6 +38,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		driver.quit();
 	}
 	
+	@TestCaseId("RVAT-593")
 	@Test
 	public void checkPossibilityViewTheTitle(){
 		WebElement titleElement = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -40,6 +46,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(titleElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-594")
 	@Test
 	public void checkPossibilityViewMenuItem(){
 		WebElement menuElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -47,6 +54,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(menuElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-595")
 	@Test
 	public void checkPossibilityViewLoginOrSignupItem(){
 		WebElement loginOrSignupItem = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -54,6 +62,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(loginOrSignupItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-596")
 	@Test
 	public void checkPossibilityViewGreenTourismLink1(){
 		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -61,6 +70,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-597")
 	@Test
 	public void checkPossibilityViewNavigationItem(){
 		WebElement navigationItem = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -68,6 +78,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(navigationItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-598")
 	@Test
 	public void checkPossibilityViewElementWithBackgroundImage(){
 		WebElement backgroundImageElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -75,6 +86,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(backgroundImageElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-599")
 	@Test
 	public void checkPossibilityViewImage1(){
 		WebElement imageElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -82,6 +94,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(imageElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-600")
 	@Test
 	public void checkPossibilityViewImage2(){
 		WebElement imageElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -89,6 +102,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(imageElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-601")
 	@Test
 	public void checkPossibilityViewImage3(){
 		WebElement imageElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -96,6 +110,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(imageElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-602")
 	@Test
 	public void checkPossibilityViewLinkItemFindPlace(){
 		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -103,6 +118,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-603")
 	@Test
 	public void checkPossibilityViewLinkItemPlanYourTrack(){
 		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -110,6 +126,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-604")
 	@Test
 	public void checkPossibilityViewLinkItemFunOnEvents(){
 		WebElement linkItem = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -117,6 +134,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-605")
 	@Test
 	public void checkPossibilityViewTextBlock1(){
 		String TextBlock1xpath="//div[@class='row'][1]/div[@class='col-md-6 "
@@ -127,6 +145,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(textBlock1.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-606")
 	@Test
 	public void checkPossibilityViewTextBlock2(){
 		String TextBlock2xpath="//div[@class='col-md-6 col-md-pull-6 "
@@ -137,6 +156,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(textBlock2.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-607")
 	@Test
 	public void checkPossibilityViewTextBlock3(){
 		String TextBlock3xpath="//div[@class='row'][3]/div[@class='col-md-6 "
@@ -147,6 +167,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(textBlock3.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-608")
 	@Test
 	public void checkPossibilityViewLinkItemGoToSearch1(){
 		String linkItemXpath="//div[@class='row'][1]/div[@class='col-md-6 welcome-"
@@ -156,6 +177,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-609")
 	@Test
 	public void checkPossibilityViewLinkItemGoToSearch2(){
 		String linkItemXpath="//div[@class='row']/div[@class='col-md-6 col-md-pull-6 "
@@ -165,6 +187,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-610")
 	@Test
 	public void checkPossibilityViewLinkItemGoToSearch3(){
 		String linkItemXpath="//div[@class='row'][3]/div[@class='col-md-6 welcome-"
@@ -174,6 +197,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkItem.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-611")
 	@Test
 	public void checkPossibilityViewGreenTourismLink2(){
 		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -181,6 +205,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-612")
 	@Test
 	public void checkPossibilityViewTheGreenTourismTeamLink(){
 		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -188,6 +213,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-613")
 	@Test
 	public void checkPossibilityViewTwitterLink(){
 		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -195,6 +221,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-614")
 	@Test
 	public void checkPossibilityViewGooglePlusLink(){
 		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
@@ -202,6 +229,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		Assert.assertTrue(linkElement.isDisplayed());
 	}
 	
+	@TestCaseId("RVAT-615")
 	@Test
 	public void checkPossibilityViewFacebookLink(){
 		WebElement linkElement = wait.until(ExpectedConditions.visibilityOfElementLocated
