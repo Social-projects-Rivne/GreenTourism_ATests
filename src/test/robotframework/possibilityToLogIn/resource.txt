@@ -22,7 +22,7 @@ Open Browser To Main Page
     Main Page Should Be Open
 
 Main Page Should Be Open
-    Location Should Be    https://green-tourism.herokuapp.com/#!/
+    Location Should Be    ${HOME URL}
     
 Click Dropdown Button    
     Click Element    xpath=${DROPDOWNBUTTON XPATH}
