@@ -3,12 +3,16 @@ Documentation     A resource file with reusable keywords and variables.
 Library           Selenium2Library
 
 *** Variables ***
-${HOME URL}         https://green-tourism.herokuapp.com/#!/
-${BROWSER}        Chrome
-${DELAY}          5
-${VALID USER}     test@test.com
-${VALID PASSWORD}    Test@123
-${WELCOME URL}    https://green-tourism.herokuapp.com/#!/profile
+${HOME URL}                https://green-tourism.herokuapp.com/#!/
+${BROWSER}                 Chrome
+${DELAY}                   5
+${VALID USER}              test@test.com
+${VALID PASSWORD}          Test@123
+${WELCOME URL}             https://green-tourism.herokuapp.com/#!/profile
+${DROPDOWNBUTTON XPATH}    //*[@id='navbar']/ul[1]/li/a/i
+${USERNAME XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input
+${PASSWORD XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input
+${LOGIN BUTTON XPATH}      //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
 
 *** Keywords ***
 Open Browser To Main Page
@@ -21,18 +25,18 @@ Main Page Should Be Open
     Location Should Be    https://green-tourism.herokuapp.com/#!/
     
 Click Dropdown Button    
-    Click Element    xpath=//*[@id='navbar']/ul[1]/li/a/i
+    Click Element    xpath=${DROPDOWNBUTTON XPATH}
 
 Input Username
     [Arguments]    ${username}
-    Input Text    xpath=//*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input    ${username}
+    Input Text    xpath=${USERNAME XPATH}    ${username}
 
 Input Password
     [Arguments]    ${password}
-    Input Text    xpath=//*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input    ${password}
+    Input Text    xpath=${PASSWORD XPATH}    ${password}
 
 Submit Credentials
-    Click Element         xpath=//*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
+    Click Element         xpath=${LOGIN BUTTON XPATH}
 
 Profile Page Should Be Open
     Location Should Be    ${WELCOME URL}

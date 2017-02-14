@@ -188,10 +188,6 @@
 				<mainClass>org.robotframework.RobotFramework</mainClass>
 				<classpathScope>test</classpathScope>
 				<arguments>
-				    <argument>-l</argument>
-				    <argument>NONE</argument>
-				    <argument>-r</argument>
-				    <argument>NONE</argument>
 				    <argument>src/test/robotframework/</argument>
 				</arguments>
 			    </configuration>
