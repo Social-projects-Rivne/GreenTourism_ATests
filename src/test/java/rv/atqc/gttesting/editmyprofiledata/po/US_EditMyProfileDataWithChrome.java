@@ -9,11 +9,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.EditProfilePage;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
 import rv.atqc.gttesting.archex.ProfilePage;
 import rv.atqc.gttesting.res.Resources;
 
+
+@Features("Checking possibility to edit my profile data")
+@Stories("Chrome browser")
 public class US_EditMyProfileDataWithChrome {
 
 	private WebDriver driver;
@@ -37,24 +43,28 @@ public class US_EditMyProfileDataWithChrome {
 		page = pageProfile.clickEdit();
 	}
 
+	@TestCaseId("RVAT-547")
 	@Test
 	public void verifyNameOfEditButton() {
 		String editTitle = pageProfile.getEditButton().getText();
 		Assert.assertTrue(editTitle.contains("Edit"));
 	}
 
+	@TestCaseId("RVAT-557")
 	@Test
 	public void verifyExistenceOfTheEditButton() {
 		WebElement editButton = pageProfile.getEditButton();
 		Assert.assertTrue(editButton.isEnabled());
 	}
 
+	@TestCaseId("RVAT-559")
 	@Test
 	public void verifyAppearanceOfFormplaceholdersAfterClickingEditButton() {
 		WebElement editForm = page.getEditForm();
 		Assert.assertTrue(editForm.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-561")
 	@Test
 	public void verifyEmptyFirstNameAndLastNamePlaceholders() {
 		boolean isChangeClickable = page.clearFirstName()
@@ -63,6 +73,7 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertFalse(isChangeClickable);
 	}
 
+	@TestCaseId("RVAT-563")
 	@Test
 	public void verifyFilledFirstNameAndEmptyLastNamePlaceholders() {
 		boolean isChangeClickable = page.clearFirstName()
@@ -72,6 +83,7 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertFalse(isChangeClickable);
 	}
 
+	@TestCaseId("RVAT-565")
 	@Test
 	public void verifyEmptyFirstNameAndFilledLastNamePlaceholders() {
 		boolean isChangeClickable = page.clearFirstName()
@@ -81,62 +93,74 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertFalse(isChangeClickable);
 	}
 
+	@TestCaseId("RVAT-647")
 	@Test
 	public void verifyExistenceOfFirstNamePlaceholder() {
 		WebElement firstName = page.getFirstName();
 		Assert.assertTrue(firstName.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-649")
 	@Test
 	public void verifyExistenceOfLastNamePlaceholder() {
 		WebElement lastName = page.getLastName();
 		Assert.assertTrue(lastName.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-651")
 	@Test
     public void verifyExistenceOfNicknamePlaceholder(){
 		WebElement nick = page.getNick();
 		Assert.assertTrue(nick.isDisplayed());
     }
 	
+	@TestCaseId("RVAT-653")
 	@Test
     public void verifyExistenceOfPhoneNumberPlaceholder(){
 		WebElement phone = page.getPhone();
 		Assert.assertTrue(phone.isDisplayed());
     }
 	
+	@TestCaseId("RVAT-655")
 	@Test
     public void verifyExistenceOfAddressPlaceholder(){
 		WebElement address = page.getAddress();
 		Assert.assertTrue(address.isDisplayed());
     }
 	
+	@TestCaseId("RVAT-833")
 	@Test
     public void verifyExistenceOfTheChangeButton(){
 		WebElement changeButton = page.getChange();
 		Assert.assertTrue(changeButton.isDisplayed());
     }
+	
+	@TestCaseId("RVAT-837")
 	@Test
     public void verifyExistenceOfTheCancelButton(){
 		WebElement cancel = page.getCancel();
 		Assert.assertTrue(cancel.isDisplayed());
     }
 	
+	@TestCaseId("RVAT-831")
 	@Test
     public void verifyClickThroughRateOfTheEditButton(){
 		Assert.assertTrue(pageProfile.isEditClickable());
     }
 	
+	@TestCaseId("RVAT-835")
 	@Test
     public void verifyClickThroughRateOfTheChangeButton(){
 		Assert.assertTrue(page.isChangeClickable());
     }
 	
+	@TestCaseId("RVAT-839")
 	@Test
     public void VerifyClickThroughRateOfTheCancelButton(){
 		Assert.assertTrue(page.isCancelClickable());
     }
 	
+	@TestCaseId("RVAT-841")
 	@Test
     public void verifyNicknamePlaceholderFilledWithCharacters(){
 		boolean isChangeClickable = page.clearNick()
@@ -145,6 +169,7 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertTrue(isChangeClickable);
     }
 	
+	@TestCaseId("RVAT-843")
 	@Test
     public void verifyNicknamePlaceholderFilledWithSpecialCharacters(){
 		boolean isChangeClickable = page.clearNick()
@@ -153,6 +178,7 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertTrue(isChangeClickable);
     }
 	
+	@TestCaseId("RVAT-845")
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithValidNumber(){
 		boolean isChangeClickable = page.clearPhone()
@@ -161,12 +187,14 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertTrue(isChangeClickable);
     }
 	
+	@TestCaseId("RVAT-847")
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithInvalidNumber(){
         boolean isChangeClickable = page.clearPhone().setPhone(Resources.UserTestData.INVALID_PHONE).isChangeClickable();
 		Assert.assertFalse(isChangeClickable);
     }
 	
+	@TestCaseId("RVAT-849")
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithLetters(){
         boolean isChangeClickable = page.clearPhone()
@@ -175,6 +203,7 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertFalse(isChangeClickable);
     }
 	
+	@TestCaseId("RVAT-851")
 	@Test
     public void verifyFilledPhoneNumberPlaceholderWithSpecialCharacters(){
         boolean isChangeClickable = page.clearPhone()
@@ -183,6 +212,7 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertFalse(isChangeClickable);
     }
 	
+	@TestCaseId("RVAT-853")
 	@Test
     public void verifyAddressPlaceholderFilledWithCharacters(){
         boolean isChangeClickable = page.clearAddress()
@@ -191,6 +221,7 @@ public class US_EditMyProfileDataWithChrome {
 		Assert.assertTrue(isChangeClickable);
     }
 	
+	@TestCaseId("RVAT-855")
 	@Test
     public void verifyAddressPlaceholderFilledWithSpecialCharacters(){
         boolean isChangeClickable = page.clearAddress()

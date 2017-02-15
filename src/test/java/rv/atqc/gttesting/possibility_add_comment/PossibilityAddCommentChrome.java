@@ -9,11 +9,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
 import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
 
+@Features("Checking possibility to add my comment")
+@Stories("Chrome browser")
 public class PossibilityAddCommentChrome {
 	
 	private WebDriver driver;
@@ -34,6 +39,7 @@ public class PossibilityAddCommentChrome {
 		driver.quit();
 	}
 	
+	@TestCaseId("RVAT-913")
 	@Test
 	public void verifyExistenceOfTextAreaForNewComment() {
 		WebElement we = new LoggedPlaceViewPage(driver)
@@ -43,6 +49,7 @@ public class PossibilityAddCommentChrome {
 		
 	}
 	
+	@TestCaseId("RVAT-914")
 	@Test
 	public void verifyExistenceOfPostButton() {
 		WebElement we = new LoggedPlaceViewPage(driver)
@@ -52,6 +59,7 @@ public class PossibilityAddCommentChrome {
 		
 	}
 	
+	@TestCaseId("RVAT-915")
 	@Test
 	public void verifyExistenceOfLastAddedComment() {
 		String newComment = Resources.Comment.SIMPLE_COMMENT;
@@ -64,7 +72,7 @@ public class PossibilityAddCommentChrome {
 		.getLastComment();
 		Assert.assertTrue(we.getText().contains(newComment));
 	}
-	
+	@TestCaseId("RVAT-916")
 	@Test
 	public void verifyFormatOfLastAddedComment() {
 		String newComment = Resources.Comment.FORMATING_COMMENT;
