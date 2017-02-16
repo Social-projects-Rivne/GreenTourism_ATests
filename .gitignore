@@ -6,3 +6,23 @@
 *.class
 /target/
 /bin/
+*.*~
+*~
+*.pyc
+*.swp
+*.swo
+log.html
+output.xml
+debug.txt
+report.html
+~*
+.DS_Store
+htmlcov
+.coverage
+build/
+# ignore eclipse files
+.settings
+.project
+*ipr
+*iws
+/.DS_Store

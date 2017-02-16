@@ -1,0 +1,13 @@
+*** Settings ***
+Documentation     A test suite with a single test for valid login.
+Resource          resource.txt
+
+*** Test Cases ***
+Valid Login
+    Open Browser To Main Page
+    Click Dropdown Button
+    Input Username    test@test.com
+    Input Password    Test@123
+    Submit Credentials
+    Profile Page Should Be Open
+    [Teardown]    Close Browser
