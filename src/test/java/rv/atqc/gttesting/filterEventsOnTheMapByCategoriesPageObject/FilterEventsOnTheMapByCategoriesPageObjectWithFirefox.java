@@ -7,9 +7,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.EventsPage;
 import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 
+@Features("Verify possibility to filter events on the map by categories")
+@Stories("Firefox browser")
 public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
 
     private WebDriver driver;
@@ -34,31 +39,37 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
         driver.quit();
     }
 
+    @TestCaseId("RVAT-880")
     @Test
     public void verifyExistenceOfEventsDropdownList(){
         Assert.assertTrue(eventsPage.getEventsDropdownList().isEnabled(), "This element doesn't exist");
     }
 
+    @TestCaseId("RVAT-882")
     @Test
     public void verifyTitleOfEventsDropdownList(){
         Assert.assertTrue(eventsPage.getEventsName().getText().equalsIgnoreCase("Events"));
     }
 
+    @TestCaseId("RVAT-884")
     @Test
     public void verifyExistenceOfPlaceFilterGame(){
         Assert.assertTrue(eventsPage.getGameFilter().isEnabled(),"This element doesn't exist");
     }
 
+    @TestCaseId("RVAT-886")
     @Test
     public void verifyExistenceOfPlaceFilterFestival(){
         Assert.assertTrue(eventsPage.getFestivalFilter().isEnabled(), "This element doesn't exist");
     }
 
+    @TestCaseId("RVAT-888")
     @Test
     public void verifyExistenceOfPlaceFilterMeeting(){
         Assert.assertTrue(eventsPage.getMeetingFilter().isEnabled(), "This element doesn't exist");
     }
 
+    @TestCaseId("RVAT-890")
     @Test
     public void verifyTitleOfPlaceFilterGame(){
         Assert.assertTrue(eventsPage
@@ -68,6 +79,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .contains("Game"));
     }
 
+    @TestCaseId("RVAT-892")
     @Test
     public void verifyTitleOfPlaceFilterFestival(){
         Assert.assertTrue(eventsPage
@@ -77,6 +89,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .contains("Festival"));
     }
 
+    @TestCaseId("RVAT-894")
     @Test
     public void verifyTitleOfPlaceFilterMeeting(){
         Assert.assertTrue(eventsPage
@@ -86,6 +99,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .contains("Meeting"));
     }
 
+    @TestCaseId("RVAT-902")
     @Test
     public void verifyClickThroughRateOfPlaceFilterGame(){
         Assert.assertTrue(eventsPage
@@ -94,6 +108,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isEnabled());
     }
 
+    @TestCaseId("RVAT-904")
     @Test
     public void verifyClickThroughRateOfPlaceFilterFestival(){
         Assert.assertTrue(eventsPage
@@ -102,6 +117,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isEnabled());
     }
 
+    @TestCaseId("RVAT-906")
     @Test
     public void verifyClickThroughRateOfPlaceFilterMeeting(){
         Assert.assertTrue(eventsPage
@@ -110,6 +126,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isEnabled());
     }
 
+    @TestCaseId("RVAT-908")
     @Test
     public void verifyDisplayOfGameGreenIconOnMap(){
         eventsPage.clickGame();
@@ -119,6 +136,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isDisplayed());
     }
 
+    @TestCaseId("RVAT-910")
     @Test
     public void verifyDisplayOfFestivalRedIconOnMap(){
         eventsPage.clickFestival();
@@ -128,6 +146,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isDisplayed());
     }
 
+    @TestCaseId("RVAT-912")
     @Test
     public void verifyDisplayOfMeetingBlueIconOnMap(){
         eventsPage.clickMeeting();
@@ -137,6 +156,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isDisplayed());
     }
 
+    @TestCaseId("RVAT-896")
     @Test
     public void verifyClickThroughRateOfGameIcon(){
         eventsPage.clickGame();
@@ -146,6 +166,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isEnabled());
     }
 
+    @TestCaseId("RVAT-898")
     @Test
     public void verifyClickThroughRateOfFestivalIcon(){
         eventsPage.clickFestival();
@@ -155,6 +176,7 @@ public class FilterEventsOnTheMapByCategoriesPageObjectWithFirefox {
                 .isEnabled());
     }
 
+    @TestCaseId("RVAT-900")
     @Test
     public void verifyClickThroughRateOfMeetingIcon(){
         eventsPage.clickMeeting();
