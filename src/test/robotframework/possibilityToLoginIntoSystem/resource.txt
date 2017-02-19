@@ -1,0 +1,59 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${HOME URL}                http://green-tourism.herokuapp.com/
+${DELAY}                   10
+${VALID USER}              test@test.com
+${VALID PASSWORD}          Test@123
+${INVALID PASSWORD}        111
+${TWO AT SIGNS LOGIN}      test@@test.com
+${NO DOMAIN LOGIN}         test@
+${WELCOME URL}             https://green-tourism.herokuapp.com/#!/profile
+${DROPDOWNBUTTON XPATH}    //*[@id='navbar']/ul[1]/li/a/i
+${USERNAME XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input
+${PASSWORD XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input
+${LOGIN BUTTON XPATH}      //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
+${INVALID MAIL OR PASSWORD XPATH}   //*[@id='main']/div[1]
+${TEXT FOR INVALID MAIL OR PASSWORD}    Invalid email or password!
+${INVALID MAIL XPATH}      //*[@id="navbar"]/ul[1]/li/ul/auth/div[2]/div/form/div[1]/p[1]
+${TEXT FOR INVALID MAIL}   Invalid email
+
+*** Keywords ***
+Open Browser To Main Page
+    [Arguments]     ${BROWSER}
+    Open Browser    ${HOME URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Main Page Should Be Open
+
+Main Page Should Be Open
+    Location Should Be    ${HOME URL}
+
+Click Dropdown Button
+    Wait Until Element Is Clickable      xpath=${DROPDOWNBUTTON XPATH}
+    Click Element    xpath=${DROPDOWNBUTTON XPATH}
+
+Input Username
+    Wait Until Element Is Visible    xpath=${USERNAME XPATH}
+    [Arguments]    ${username}
+    Input Text    xpath=${USERNAME XPATH}    ${username}
+
+Input Password
+    Wait Until Element Is Visible    xpath=${PASSWORD XPATH}
+    [Arguments]    ${password}
+    Input Text    xpath=${PASSWORD XPATH}    ${password}
+
+Submit Credentials
+    Wait Until Element Is Clickable      xpath=${LOGIN BUTTON XPATH}
+    Click Element         xpath=${LOGIN BUTTON XPATH}
+
+Profile Page Should Be Open
+    Location Should Be    ${WELCOME URL}
+
+Invalid Mail Or Password Text
+    Element Should Contain      xpath=${INVALID MAIL OR PASSWORD XPATH}     ${TEXT FOR INVALID MAIL OR PASSWORD}
+
+Invalid Mail Text
+    Element Should Contain      xpath=${INVALID MAIL XPATH}     ${TEXT FOR INVALID MAIL}

@@ -1,0 +1,32 @@
+*** Settings ***
+Documentation     A test suite for verifying possibility to login into system.
+Resource          resource.txt
+Suite Setup       Open Browser To Main Page    chrome
+Suite Teardown    Close Browser
+
+*** Test Cases ***
+Check Log In With Existing Account
+    Click Dropdown Button
+    Input Username    ${VALID USER}
+    Input Password    ${VALID PASSWORD}
+    Submit Credentials
+    Profile Page Should Be Open
+
+Check Log In With Incorrect Password
+    Click Dropdown Button
+    Input Username    ${VALID USER}
+    Input Password    ${INVALID PASSWORD}
+    Submit Credentials
+    Invalid Mail Or Password Text
+
+Check Log In With Two At Signs
+    Click Dropdown Button
+    Input Username    ${TWO AT SIGNS LOGIN}
+    Input Password    ${VALID PASSWORD}
+    Invalid Mail Text
+
+Check Log In With No Domain
+    Click Dropdown Button
+    Input Username    ${NO DOMAIN LOGIN}
+    Input Password    ${VALID PASSWORD}
+    Invalid Mail Text
