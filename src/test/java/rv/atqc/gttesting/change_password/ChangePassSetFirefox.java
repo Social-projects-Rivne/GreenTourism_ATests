@@ -9,8 +9,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
+@Features("Checking possibility to set new password")
+@Stories("Firefox browser")
 public class ChangePassSetFirefox {
 
 	private static String MAIL = "romanukhaav@i.ua";
@@ -36,6 +41,7 @@ public class ChangePassSetFirefox {
 		driver.close();
 	}	
 	
+	@TestCaseId("RVAT-642")
 	@Test
 	public void changePassword() {
 		logIn(MAIL, OLD_PASS);
@@ -46,6 +52,7 @@ public class ChangePassSetFirefox {
 		Assert.assertEquals(isProfileActive(), "Email:");
 	}
 
+	@TestCaseId("RVAT-643")
 	@Test(dependsOnMethods = { "changePassword" })
 	public void isNewPasswordLegal() {
 		logIn(MAIL, NEW_PASS);

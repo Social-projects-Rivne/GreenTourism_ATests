@@ -7,10 +7,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+@Features("Checking possibility to change password")
+@Stories("Chrome browser")
 public class ChangePassCheckChrome {
 
 	private static String MAIL = "romanukhaav@gmail.com";
@@ -42,12 +47,14 @@ public class ChangePassCheckChrome {
 	}
 	
 	
+	@TestCaseId("RVAT-634")
 	@Test
 	public void isChangePassMenuPresent() {
 		clickOnChangePassButton();
 		Assert.assertEquals(getTextFromFildNewPass(), "New password");
 	}
 	
+	@TestCaseId("RVAT-635")
 	@Test
 	public void inputShortPasswords() {
 		clickOnChangePassButton();
@@ -56,6 +63,7 @@ public class ChangePassCheckChrome {
 		Assert.assertEquals(getError1Text(), "Password should be longer than 8 characters");	
 	}
 	
+	@TestCaseId("RVAT-636")
 	@Test
 	public void inputDifferentPasswords() {
 		clickOnChangePassButton();
@@ -63,7 +71,8 @@ public class ChangePassCheckChrome {
 		inputPassField2(SHORT_PASS);
 		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
 	}
-
+	
+	@TestCaseId("RVAT-637")
 	@Test
 	public void inputEmptyPasswords() {
 		clickOnChangePassButton();
