@@ -1,0 +1,88 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${HOME URL}                             https://green-tourism.herokuapp.com/#!/
+${MAP URL}                              https://green-tourism.herokuapp.com/#!/places
+${VISIBLE ITEM DETAILS URL}             https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3
+${INVISIBLE ITEM DETAILS URL}           https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd
+${DELAY}                                5
+${VALID USER}                           test@test.com
+${VALID PASSWORD}                       Test@123
+${VISIBLE ITEM NAME}                    ASdazxc
+${INVISIBLE ITEM NAME}                  Hight Castle
+${FAILED PLACE NAME}                    FAILED_PLACE
+${DOUBLE ITEM NAME}                     sda
+${ERROR ITEM NAME}                      1
+${SCRIPT}                               <script>alert( 'Hello, World!' );</script>
+${DROPDOWN BUTTON XPATH}                //*[@id='navbar']/ul[1]/li/a/i
+${USERNAME XPATH}                       //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input
+${PASSWORD XPATH}                       //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input
+${CATEGORIES BUTTON XPATH}              html/body/main/div/place-list/div/div/div[1]/div[2]/div/div[3]/button
+${LOGIN BUTTON XPATH}                   //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
+${PLACES BUTTON XPATH} 	                //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]
+${SEARCH BUTTON XPATH}                  //*[@id=\"search\"]/div/span[1]/button
+${SEARCH FIELD XPATH}                   //*[@id=\"search\"]/div/input
+${CAMP PLACE XPATH}                     //*[@id='map']/div[1]/div[2]/div[1]/img[1]
+${SERVICE PLACE XPATH}                  //*[@id='map']/div[1]/div[2]/div[1]/img[7]
+${HOSTELS PLACE XPATH}                  //*[@id='map']/div[1]/div[2]/div[3]/img[2]
+${FEATURED PLACE XPATH}                 //*[@id='map']/div[1]/div[2]/div[1]/img[5]
+${HEALTHCARE PLACE XPATH}               //*[@id='map']/div[1]/div[2]/div[1]/img
+${CLOSE RESULT BUTTON XPATH}            //*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i
+${FAILED REQUEST XPATH}                 //*[@id=\"search\"]/div/span[3]
+${NO ITEM MESSAGE XPATH}                //*[@id="searchPlaces"]/h3
+${ITEM SEARCHRESULTS XPATH}             //*[@id=\"searchPlaces\"]/ul
+${TEXT SEARCHRESULTS XPATH}             //*[@id=\"searchPlaces\"]/h3 
+${FOUND RESULT VISIBLE ITEM XPATH}      //*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a
+${FOUND RESULT VISIBLE ITEM2 XPATH}     //*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a
+${FOUND RESULT INVISIBLE ITEM XPATH}    //*[@id=\"584e7ef0b61f280400d36ebd\"]/button/h3
+${FOUND ITEM XPATH}                     //*[@id=\"map\"]/div[1]/div[2]/div[3]/img[1]
+${ITEM DETAILS XPATH}                   //*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button
+
+
+*** Keywords ***
+Login To Site
+    [Arguments]    ${browser}
+    Open Browser    ${HOME URL}    ${browser}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Click Dropdown Button
+    Input Username    test@test.com
+    Input Password    Test@123
+    Submit Credentials
+
+Look For Item
+    [Arguments]    ${itemname}
+    Go To Map Page
+    Input Search Item   ${itemname}
+    Click Element         xpath=${SEARCH BUTTON XPATH}
+
+Go To Map Page
+    Go To    ${MAP URL}
+    Wait Until Element Is Visible    ${SEARCH BUTTON XPATH}
+    Element Should Be Visible        ${SEARCH BUTTON XPATH}
+
+Main Page Should Be Open
+    Location Should Be    ${HOME URL}
+    
+Click Dropdown Button    
+    Click Element    xpath=${DROPDOWN BUTTON XPATH}
+
+Input Username
+    [Arguments]    ${username}
+    Input Text    xpath=${USERNAME XPATH}    ${username}
+
+Input Password
+    [Arguments]    ${password}
+    Input Text    xpath=${PASSWORD XPATH}    ${password}
+
+Input Search Item
+    [Arguments]    ${itemname}
+    Input Text    xpath=${SEARCH FIELD XPATH}      ${itemname}
+
+Submit Credentials
+    Click Element         xpath=${LOGIN BUTTON XPATH}
+
+Map Page Should Be Open
+    Location Should Be    ${MAP URL}

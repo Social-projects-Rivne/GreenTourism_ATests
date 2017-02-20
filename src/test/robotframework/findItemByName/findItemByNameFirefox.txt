@@ -1,0 +1,74 @@
+*** Settings ***
+Documentation     A test suite with a single test for valid login.
+Resource          resource.txt
+Suite Setup       Login To Site    firefox              
+Suite Teardown    Close Browser
+
+*** Test Cases ***
+Check Search Results Field
+    Look For Item    ${VISIBLE ITEM NAME}
+    Wait Until Element Is Visible      ${TEXT SEARCHRESULTS XPATH}
+    Element Should Be Visible          ${TEXT SEARCHRESULTS XPATH}
+ 
+Check Search InptField Security
+    Look For Item    ${SCRIPT}
+    Wait Until Element Is Visible      ${TEXT SEARCHRESULTS XPATH}
+    Element Should Be Visible          ${NO ITEM MESSAGE XPATH} 
+    
+Check Failed Request Search
+    Look For Item                      ${ERROR ITEM NAME}   
+    Wait Until Element Is Visible      ${FAILED REQUEST XPATH}
+    Element Should Be Visible          ${FAILED REQUEST XPATH}
+
+Check Failed Place Search
+    Look For Item                      ${FAILED PLACE NAME}
+    Wait Until Element Is Visible      ${TEXT SEARCHRESULTS XPATH}
+    Element Should Be Visible          ${NO ITEM MESSAGE XPATH}
+
+Check SearchResults From Visible Region
+    Look For Item                      ${VISIBLE ITEM NAME}
+    Wait Until Element Is Clickable    ${ITEM SEARCHRESULTS XPATH}
+    Click Element         			   ${ITEM SEARCHRESULTS XPATH}
+    Location Should Be                 ${VISIBLE ITEM DETAILS URL}
+
+Check SearchResults From Invisible Region
+    Look For Item                      ${INVISIBLE ITEM NAME}
+    Wait Until Element Is Clickable    ${ITEM SEARCHRESULTS XPATH}
+    Click Element         			   ${ITEM SEARCHRESULTS XPATH}
+    Location Should Be                 ${INVISIBLE ITEM DETAILS URL}
+    
+Check Item From Visible Region
+    Look For Item                      ${VISIBLE ITEM NAME}
+    Wait Until Element Is Clickable    ${ITEM SEARCHRESULTS XPATH}
+    Mouse Over             			   ${ITEM SEARCHRESULTS XPATH}
+    Wait Until Element Is Visible      ${FOUND ITEM XPATH}
+    Element Should Be Visible          ${FOUND ITEM XPATH}
+
+Check Item From Invisible Region
+    Look For Item                      ${INVISIBLE ITEM NAME}
+    Wait Until Element Is Clickable    ${ITEM SEARCHRESULTS XPATH}
+    Mouse Over             			   ${ITEM SEARCHRESULTS XPATH}
+    Wait Until Element Is Visible      ${FOUND ITEM XPATH}
+    Element Should Be Visible          ${FOUND ITEM XPATH}
+
+Check ItemDetails From InvisibleRegion
+    Look For Item                      ${INVISIBLE ITEM NAME}
+    Wait Until Element Is Clickable    ${FOUND ITEM XPATH}
+    Click Element         			   ${FOUND ITEM XPATH}
+    Wait Until Element Is Clickable    ${ITEM DETAILS XPATH}
+    Element Should Be Visible          ${ITEM DETAILS XPATH}
+
+Check ItemDetailsUrl From InvsibleRegion
+    Look For Item                      ${INVISIBLE ITEM NAME}
+    Wait Until Element Is Clickable    ${FOUND ITEM XPATH}
+    Click Element         			   ${FOUND ITEM XPATH}
+    Wait Until Element Is Clickable    ${ITEM DETAILS XPATH}
+    Click Element                      ${ITEM DETAILS XPATH}
+    Location Should Be                 ${INVISIBLE ITEM DETAILS URL}
+
+checkSearchResultsForTwoPlaces
+    Look For Item                      ${DOUBLE ITEM NAME}
+    Wait Until Element Is Visible      ${FOUND RESULT VISIBLE ITEM XPATH}
+    Wait Until Element Is Visible      ${FOUND RESULT VISIBLE ITEM2 XPATH}
+    Element Should Be Visible          ${FOUND RESULT VISIBLE ITEM XPATH}
+    Element Should Be Visible          ${FOUND RESULT VISIBLE ITEM2 XPATH}
