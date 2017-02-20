@@ -9,7 +9,12 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import rv.atqc.gttesting.archex.PlacesPage;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
+@Features("Checking possibility to search for items on map page")
+@Stories("Firefox browser")
 public class SearchOnMapPageFirefox {
 	private WebDriver driver;
 	private PlacesPage placesPage;
@@ -40,37 +45,44 @@ public class SearchOnMapPageFirefox {
 	      driver.quit();
 	}
 	
+	@TestCaseId("RVAT-943")
 	@Test
 	public void searchForExistingPlace(){
 		Assert.assertTrue(placesPage.lookForItem(EXISTING_PLACE).getTextSearchResults().isDisplayed());    
 	}
 	
+	@TestCaseId("RVAT-945")
 	@Test
 	public void searchForExistingTrack(){
 		Assert.assertTrue(placesPage.lookForItem(EXISTING_TRACK).getTextSearchResults().isDisplayed());    
 	}
 	
-    @Test
-    public void shortSeacthRequest(){
-		Assert.assertTrue(placesPage.lookForItem(SHORT_REQUEST).getFailedRequestField().isDisplayed());
-    }
-	
+	@TestCaseId("RVAT-947")
     @Test
     public void searchForNonExistingItem(){
 		Assert.assertEquals(placesPage.lookForItem(NON_EXISTING_ITEM). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
 	
+	@TestCaseId("RVAT-949")
+    @Test
+    public void shortSeacthRequest(){
+		Assert.assertTrue(placesPage.lookForItem(SHORT_REQUEST).getFailedRequestField().isDisplayed());
+    }
+	
+	@TestCaseId("RVAT-991")
   	@Test
 	public void checkSearchInputFieldSecurity(){
   		Assert.assertEquals(placesPage.lookForItem(SCRIPT). getTextSearchResults().getText(), placesPage.getNoItemMessage());
     }
   	
+	@TestCaseId("RVAT-1501")
 	@Test
     public void checkItemDetailsFromInvisibleRegion(){
     	placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
     	Assert.assertTrue(placesPage.getItemDetails().isDisplayed());
     }
 	
+	@TestCaseId("RVAT-1503")
 	@Test
     public void checkItemDetailsUrlFromInvsibleRegion(){
 		placesPage.lookForItem(INVISIBLE_ITEM_NAME).getFoundItem().click();
@@ -78,6 +90,7 @@ public class SearchOnMapPageFirefox {
     	Assert.assertEquals(driver.getCurrentUrl(),placesPage.getInvisibleItemDetailsUrl());
     }
 	
+	@TestCaseId("RVAT-1505")
 	@Test
     public void checkSearchResultsForTwoPlaces(){
 		placesPage.lookForItem(DOUBLE_ITEM_NAME);

@@ -1,7 +1,5 @@
 package rv.atqc.gttesting.possibilityToViewToolbarOnMapPage;
 
-import org.testng.annotations.Test;
-import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +9,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.ChromeDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
+
+@Features("Checking possibility to view toolbar on map page")
+@Stories("Chrome browser")
 public class PossibilityToViewToolbarOnMapPageChrome {
     private WebDriver driver;
     private String USER_LOGIN = "test@test.com";
@@ -19,6 +25,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
     private WebDriverWait wait;
     private final int MAX_WAIT_TIME=10;
     
+    @TestCaseId("RVAT-715")
     @Test
     public void checkDefaultValueOfPlacesButtonChrome() {
         WebElement ValueOfPlacesButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -26,6 +33,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(ValueOfPlacesButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-717")
     @Test
     public void checkDefaultValueOfTracksButtonChrome() {
         WebElement ValueOfTracksButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -33,6 +41,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(ValueOfTracksButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-719")
     @Test
     public void checkDefaultValueOfEventsButtonChrome() {
         WebElement ValueOfEventsButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -40,6 +49,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(ValueOfEventsButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-723")
     @Test
     public void checkNewItemDropdownListChrome() {
     	WebElement NewItemDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -47,6 +57,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(NewItemDropdownList.isDisplayed());
     }
     
+    @TestCaseId("RVAT-727")
     @Test
     public void checkMapTypeDropdownListChrome() {
         WebElement MapTypeDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -54,6 +65,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(MapTypeDropdownList.isDisplayed());
     }
     
+    @TestCaseId("RVAT-730")
     @Test
     public void checkCategoriesDropdownListChrome() {
         WebElement CategoriesDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -61,6 +73,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(CategoriesDropdownList.isDisplayed());
     }
     
+    @TestCaseId("RVAT-735")
     @Test
     public void checkSearchInputFieldChrome() {
         WebElement SearchInputField = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -68,6 +81,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(SearchInputField.isDisplayed());
     }
     
+    @TestCaseId("RVAT-739")
     @Test
     public void checkSearchButtonChrome() {
         WebElement SearchButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -75,6 +89,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(SearchButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-741")
     @Test
     public void checkPlacesInLocationButtonChrome() {
         WebElement PlacesInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -82,6 +97,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(PlacesInLocationButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-744")
     @Test
     public void checkTracksnLocationButtonChrome() {
         WebElement TracksInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -89,6 +105,7 @@ public class PossibilityToViewToolbarOnMapPageChrome {
         Assert.assertTrue(TracksInLocationButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-750")
     @Test
     public void checkEventsInLocationButtonChrome() {
         WebElement EventsInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 

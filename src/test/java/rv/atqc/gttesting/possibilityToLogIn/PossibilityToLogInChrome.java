@@ -8,7 +8,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
+@Features("Checking possibility to log in")
+@Stories("Chrome browser")
 public class PossibilityToLogInChrome {
     private WebDriver driver;
     private String USER_LOGIN = "test@test.com";
@@ -17,6 +22,7 @@ public class PossibilityToLogInChrome {
     private String TWO_AT_SIGNS_LOGIN = "test@@test.com";
     private String NO_DOMAIN_LOGIN = "test@";
     
+    @TestCaseId("RVAT-538")
     @Test
     public void checkLogInWithExistingAccountChrome() {
         clickOnDropdownButton();
@@ -27,6 +33,7 @@ public class PossibilityToLogInChrome {
         Assert.assertEquals(getProfileButtonText(), "Profile");
     }
     
+    @TestCaseId("RVAT-541")
     @Test
     public void checkLogInWithIncorrectPasswordChrome() {
         clickOnDropdownButton();
@@ -36,6 +43,7 @@ public class PossibilityToLogInChrome {
         Assert.assertEquals(getInvalidMailOrPasswordText(), "×\nInvalid email or password!");
     }
     
+    @TestCaseId("RVAT-544")
     @Test
     public void checkLogInWithTwoAtSignsChrome() {
         clickOnDropdownButton();
@@ -44,6 +52,7 @@ public class PossibilityToLogInChrome {
         Assert.assertEquals(getInvalidEmailText(), "Invalid email");
     }
     
+    @TestCaseId("RVAT-548")
     @Test
     public void checkLogInWithNoDomainChrome() {
         clickOnDropdownButton();
