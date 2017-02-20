@@ -3,8 +3,8 @@ Documentation     A resource file with reusable keywords and variables.
 Library           Selenium2Library
 
 *** Variables ***
-${HOME URL}                http://green-tourism.herokuapp.com/
-${DELAY}                   10
+${HOME URL}                https://green-tourism.herokuapp.com/#!
+${DELAY}                   20
 ${VALID USER}              test@test.com
 ${VALID PASSWORD}          Test@123
 ${INVALID PASSWORD}        111
