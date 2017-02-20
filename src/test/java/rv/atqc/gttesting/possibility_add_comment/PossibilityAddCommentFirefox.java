@@ -9,10 +9,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
 import rv.atqc.gttesting.archex.LoggedPlaceViewPage;
 import rv.atqc.gttesting.res.Resources;
 
+
+@Features("Checking possibility to add my comment")
+@Stories("Firefox browser")
 public class PossibilityAddCommentFirefox {
 	
 private WebDriver driver;
@@ -37,7 +43,7 @@ private WebDriver driver;
 		driver.quit();
 	}
 	
-	
+	@TestCaseId("RVAT-917")
 	@Test
 	public void verifyExistenceOfTextAreaForNewComment() {
 		WebElement we = new LoggedPlaceViewPage(driver)
@@ -47,6 +53,7 @@ private WebDriver driver;
 		
 	}
 	
+	@TestCaseId("RVAT-918")
 	@Test
 	public void verifyExistenceOfPostButton() {
 		WebElement we = new LoggedPlaceViewPage(driver)
@@ -56,6 +63,7 @@ private WebDriver driver;
 		
 	}
 	
+	@TestCaseId("RVAT-919")
 	@Test
 	public void verifyExistenceOfLastAddedComment() {
 		String newComment = Resources.Comment.SIMPLE_COMMENT;
@@ -69,6 +77,7 @@ private WebDriver driver;
 		Assert.assertTrue(we.getText().contains(newComment));
 	}
 	
+	@TestCaseId("RVAT-920")
 	@Test
 	public void verifyFormatOfLastAddedComment() {
 		String newComment = Resources.Comment.FORMATING_COMMENT;
