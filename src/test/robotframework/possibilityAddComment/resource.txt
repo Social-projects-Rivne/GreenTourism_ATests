@@ -1,0 +1,75 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${HOME URL}                https://green-tourism.herokuapp.com/#!/
+${DELAY}                   10
+${USER NAME}               juger@juger.juger
+${PASSWORD}                11111111
+${ITEM URL}                http://green-tourism.herokuapp.com/#!/places/57a10d7680535c7c117f540a
+${DROPDOWNBUTTON XPATH}    //*[@id='navbar']/ul[1]/li/a/i
+${USERNAME XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input
+${PASSWORD XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input
+${LOGIN BUTTON XPATH}      //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
+${NEW COMMENT TEXT AREA}   //*[@id="main"]/div/place-detail/div/div/div[3]/div/comment/div/div[1]/div[2]/div[1]/textarea
+${POST BUTTON}   		   //*[@id="main"]/div/place-detail/div/div/div[3]/div/comment/div/div[1]/div[2]/div[2]/button
+${LAST ADDED COMMENT}	   //*[@id="main"]/div/place-detail/div/div/div[3]/div/comment/div/div[2]/div[2]/p[1]
+${COMMENT}   		   	   New Comment
+${COMMENT WITH NEXT ROW}   New \n Comment
+
+*** Keywords ***
+Open Browser To Main Page 
+    [Arguments]     ${BROWSER}
+    Open Browser    ${HOME URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Browser Implicit Wait    ${DELAY}
+    Main Page Should Be Open
+    
+Main Page Should Be Open
+    Location Should Be    ${HOME URL}
+    
+Click Dropdown Button
+	Wait Until Element Is Clickable      xpath=${DROPDOWNBUTTON XPATH}
+    Click Element                        xpath=${DROPDOWNBUTTON XPATH}
+
+Input Username
+	Wait Until Element Is Visible    xpath=${USERNAME XPATH}
+    Input Text    xpath=${USERNAME XPATH}    ${USER NAME}
+
+Input Comment
+	Wait Until Element Is Visible    xpath=${NEW COMMENT TEXT AREA}
+    Input Text    xpath=${NEW COMMENT TEXT AREA}    ${COMMENT}
+    
+Input Comment With Next Row
+	Wait Until Element Is Visible    xpath=${NEW COMMENT TEXT AREA}
+    Input Text    xpath=${NEW COMMENT TEXT AREA}    ${COMMENT WITH NEXT ROW}
+
+Сlick Post
+	Wait Until Element Is Clickable      xpath=${POST BUTTON}
+    Click Element                        xpath=${POST BUTTON} 
+
+Input Password
+	Wait Until Element Is Visible    xpath=${PASSWORD XPATH}
+    Input Text    xpath=${PASSWORD XPATH}    ${PASSWORD}
+
+Submit Credentials
+	Wait Until Element Is Clickable    xpath=${LOGIN BUTTON XPATH}
+    Click Element         xpath=${LOGIN BUTTON XPATH}
+
+Item Page Should Be Open
+    Location Should Be    ${ITEM URL}
+
+Go To Item Page
+	Go To	${ITEM URL}
+
+Open Browser then Log In and Go To Item Page 
+	[Arguments]     ${BROWSER}
+	Open Browser To Main Page	${BROWSER}
+	Click Dropdown Button
+    Input Username
+    Input Password
+    Submit Credentials
+    Go To Item Page
+    Item Page Should Be Open
+    

@@ -1,0 +1,29 @@
+*** Settings ***
+Documentation     A test suite for checking possibility add comment to item page
+Resource          resource.txt
+Test Setup       Open Browser then Log In and Go To Item Page    firefox               
+Test Teardown    Close Browser
+
+*** Test Cases ***
+Check existance of "new comment" text area
+	Wait Until Element Is Visible    xpath=${NEW COMMENT TEXT AREA}
+	Element Should Be Visible        xpath=${NEW COMMENT TEXT AREA}
+
+Check existance of "post" button text area
+	Wait Until Element Is Visible    xpath=${POST BUTTON}
+	Input Comment
+    Element Should Be Visible        xpath=${POST BUTTON}
+    
+Check existance of last added comment
+	Input Comment
+    Сlick Post
+    Reload Page
+    Wait Until Element Is Visible    ${LAST ADDED COMMENT}
+    Element Should Contain 		${LAST ADDED COMMENT}  ${COMMENT} 
+    
+Check format of last added comment
+	Input Comment With Next Row
+    Сlick Post
+    Reload Page
+    Wait Until Element Is Visible    ${LAST ADDED COMMENT}
+    Element Should Contain 		${LAST ADDED COMMENT}  ${COMMENT WITH NEXT ROW} 
