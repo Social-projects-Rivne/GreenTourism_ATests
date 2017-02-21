@@ -30,6 +30,7 @@ public class PossibilityViewMainPageMozillaFirefox {
 		FirefoxDriverManager.getInstance().setup();
 		driver = new FirefoxDriver();
 		driver.get("https://green-tourism.herokuapp.com/");
+		driver.manage().window().maximize();
 		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 	}
 

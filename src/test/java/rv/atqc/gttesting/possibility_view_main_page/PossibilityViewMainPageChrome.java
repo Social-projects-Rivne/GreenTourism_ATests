@@ -29,6 +29,7 @@ public class PossibilityViewMainPageChrome{
 		ChromeDriverManager.getInstance().setup();
 		driver=new ChromeDriver();
 		driver.get("https://green-tourism.herokuapp.com/");
+		driver.manage().window().maximize();
 		wait = new WebDriverWait(driver,MAX_WAIT_TIME);
 	}
 	
