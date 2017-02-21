@@ -1,0 +1,38 @@
+*** Settings ***
+Documentation     A test suite for verifying possibility to login into system.
+Resource          resource.txt
+
+*** Test Cases ***
+Check Log In With Existing Account
+    Open Browser To Main Page    firefox
+    Click Dropdown Button
+    Input Username    ${VALID USER}
+    Input Password    ${VALID PASSWORD}
+    Submit Credentials
+    Profile Page Should Be Open
+    [Teardown]  Close Browser
+
+Check Log In With Incorrect Password
+    Open Browser To Main Page    firefox
+    Click Dropdown Button
+    Input Username    ${VALID USER}
+    Input Password    ${INVALID PASSWORD}
+    Submit Credentials
+    Invalid Mail Or Password Text
+    [Teardown]  Close Browser
+
+Check Log In With Two At Signs
+    Open Browser To Main Page    firefox
+    Click Dropdown Button
+    Input Username    ${TWO AT SIGNS LOGIN}
+    Input Password    ${VALID PASSWORD}
+    Invalid Mail Text
+    [Teardown]  Close Browser
+
+Check Log In With No Domain
+    Open Browser To Main Page    firefox
+    Click Dropdown Button
+    Input Username    ${NO DOMAIN LOGIN}
+    Input Password    ${VALID PASSWORD}
+    Invalid Mail Text
+    [Teardown]  Close Browser
