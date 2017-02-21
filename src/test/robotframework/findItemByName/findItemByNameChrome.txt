@@ -16,7 +16,7 @@ Check Search InptField Security
     Element Should Be Visible          ${NO ITEM MESSAGE XPATH} 
     
 Check Failed Request Search
-    Look For Item                      ${ERROR ITEM NAME}   
+    Look For Item                        ${ERROR ITEM NAME}   
     Wait Until Element Is Visible      ${FAILED REQUEST XPATH}
     Element Should Be Visible          ${FAILED REQUEST XPATH}
 
@@ -27,15 +27,19 @@ Check Failed Place Search
 
 Check SearchResults From Visible Region
     Look For Item                      ${VISIBLE ITEM NAME}
-    Wait Until Element Is Clickable    ${ITEM SEARCHRESULTS XPATH}
-    Click Element         			   ${ITEM SEARCHRESULTS XPATH}
+    Wait Until Element Is Clickable    ${FOUND RESULT VISIBLE ITEM XPATH}
+    Click Element         			   ${FOUND RESULT VISIBLE ITEM XPATH}
     Location Should Be                 ${VISIBLE ITEM DETAILS URL}
+    Reload Page
 
 Check SearchResults From Invisible Region
     Look For Item                      ${INVISIBLE ITEM NAME}
-    Wait Until Element Is Clickable    ${ITEM SEARCHRESULTS XPATH}
-    Click Element         			   ${ITEM SEARCHRESULTS XPATH}
+    Wait Until Element Is Visible      ${ITEM SEARCHRESULTS XPATH}
+    Mouse Over             			   ${ITEM SEARCHRESULTS XPATH}
+    Wait Until Element Is Clickable    ${FOUND RESULT INVISIBLE ITEM XPATH}
+    Click Element         			   ${FOUND RESULT INVISIBLE ITEM XPATH}
     Location Should Be                 ${INVISIBLE ITEM DETAILS URL}
+    Reload Page
     
 Check Item From Visible Region
     Look For Item                      ${VISIBLE ITEM NAME}
@@ -50,21 +54,27 @@ Check Item From Invisible Region
     Mouse Over             			   ${ITEM SEARCHRESULTS XPATH}
     Wait Until Element Is Visible      ${FOUND ITEM XPATH}
     Element Should Be Visible          ${FOUND ITEM XPATH}
+    Reload Page
 
 Check ItemDetails From InvisibleRegion
     Look For Item                      ${INVISIBLE ITEM NAME}
+    Wait Until Element Is Visible      ${ITEM SEARCHRESULTS XPATH}
+    Mouse Over             			   ${ITEM SEARCHRESULTS XPATH}
     Wait Until Element Is Clickable    ${FOUND ITEM XPATH}
     Click Element         			   ${FOUND ITEM XPATH}
-    Wait Until Element Is Clickable    ${ITEM DETAILS XPATH}
+    Wait Until Element Is Visible      ${ITEM DETAILS XPATH}
     Element Should Be Visible          ${ITEM DETAILS XPATH}
 
 Check ItemDetailsUrl From InvsibleRegion
     Look For Item                      ${INVISIBLE ITEM NAME}
+    Wait Until Element Is Visible      ${ITEM SEARCHRESULTS XPATH}
+    Mouse Over             			   ${ITEM SEARCHRESULTS XPATH}
     Wait Until Element Is Clickable    ${FOUND ITEM XPATH}
     Click Element         			   ${FOUND ITEM XPATH}
     Wait Until Element Is Clickable    ${ITEM DETAILS XPATH}
     Click Element                      ${ITEM DETAILS XPATH}
     Location Should Be                 ${INVISIBLE ITEM DETAILS URL}
+    Reload Page
 
 checkSearchResultsForTwoPlaces
     Look For Item                      ${DOUBLE ITEM NAME}
