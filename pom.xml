@@ -143,7 +143,7 @@
 				</configuration>
 			</plugin>
 
-			<!--Needed only to show reports locally. Run jetty:run and open localhost:8080 
+			<!--Needed only to show reports locally. Run jetty:run and open localhost:8080
 				to show the report -->
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>

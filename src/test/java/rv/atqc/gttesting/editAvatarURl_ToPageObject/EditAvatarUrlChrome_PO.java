@@ -12,6 +12,7 @@ import ru.yandex.qatools.allure.annotations.Stories;
 import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.LogInPage;
 import rv.atqc.gttesting.archex.ProfilePage;
+import rv.atqc.gttesting.driverfactory.DriverFactory;
 import rv.atqc.gttesting.res.Resources;
 import static rv.atqc.gttesting.res.Resources.LogInConstants.*;
 
@@ -24,7 +25,7 @@ public class EditAvatarUrlChrome_PO {
     @BeforeMethod
     public void before() {
         ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+        driver = DriverFactory.init(DriverFactory.CHROME);
         driver.get("https://green-tourism.herokuapp.com/");
         profilePage = new LogInPage(driver).loging();
     }
