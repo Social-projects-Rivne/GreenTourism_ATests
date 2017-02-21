@@ -1,0 +1,49 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${HOME URL}                 https://green-tourism.herokuapp.com/#!/
+${TIMEOUT}                  10 seconds
+${VALID USER}               test@test.com
+${VALID PASSWORD}           Test@123
+${PROFILE PAGE URL}         https://green-tourism.herokuapp.com/#!/profile
+${DROPDOWN BUTTON XPATH}     //*[@id='navbar']/ul[1]/li/a/i
+${USERNAME XPATH}            //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input
+${PASSWORD XPATH}            //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input
+${LOGIN BUTTON XPATH}        //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
+${AVATAR XPATH}              //*[@id='main']/div/user-profile/div/div/section[1]/div[1]/img
+${NAME AND SURNAME XPATH}    //*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/div/h3
+${NICKNAME XPATH}            //*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/div/h4
+${EMAIL XPATH}               //*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/p[1]
+${PHONE XPATH}               //*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/p[2]
+${ADDRESS XPATH}             //*[@id='main']/div/user-profile/div/div/section[2]/div[1]/div[1]/p[3]
+
+*** Keywords ***
+Login
+    [Arguments]                ${browser}
+    Open Browser               ${HOME URL}    ${browser}
+    Maximize Browser Window
+    Click Element              xpath=${DROPDOWN BUTTON XPATH}
+    Input Text                 xpath=${USERNAME XPATH}    ${VALID USER}
+    Input Text                 xpath=${PASSWORD XPATH}    ${VALID PASSWORD}
+    Click Element              xpath=${LOGIN BUTTON XPATH}
+    Location Should Be         ${PROFILE PAGE URL}
+    
+Check If Avatar Is Visible
+    Wait Until Element Is Visible    xpath=${AVATAR XPATH}    timeout=${TIMEOUT}
+    
+Check If Name And Surname Are Visible
+    Wait Until Element Is Visible    xpath=${NAME AND SURNAME XPATH}    timeout=${TIMEOUT}
+    
+Check If Nickname Is Visible
+    Wait Until Element Is Visible    xpath=${NICKNAME XPATH}    timeout=${TIMEOUT}
+    
+Check If Email Is Visible
+    Wait Until Element Is Visible    xpath=${EMAIL XPATH}    timeout=${TIMEOUT}
+    
+Check If Phone Is Visible
+    Wait Until Element Is Visible    xpath=${PHONE XPATH}    timeout=${TIMEOUT}
+    
+Check If Address Is Visible
+    Wait Until Element Is Visible    xpath=${ADDRESS XPATH}    timeout=${TIMEOUT}

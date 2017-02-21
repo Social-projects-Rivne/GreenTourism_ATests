@@ -1,0 +1,24 @@
+*** Settings ***
+Documentation     A test suite with that verifies wether it is possible to view profile page data in Chrome
+Resource          resource.txt
+Suite Setup       Login    Chrome              
+Suite Teardown    Close Browser
+
+*** Test Cases ***
+Visibility Of Avatar
+    Check If Avatar Is Visible
+    
+Visibility Of Name And Surname
+    Check If Name And Surname Are Visible
+    
+Visibility Of Nickname
+    Check If Nickname Is Visible
+    
+Visibility Of Email
+    Check If Email Is Visible
+    
+Visibility Of Phone
+    Check If Phone Is Visible
+    
+Visibility Of Address
+    Check If Address Is Visible
