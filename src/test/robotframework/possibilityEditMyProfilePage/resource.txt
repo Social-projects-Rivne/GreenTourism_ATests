@@ -1,0 +1,75 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${HOME URL}                https://green-tourism.herokuapp.com/#!/
+${DELAY}                   10
+${USER NAME}               energmaxymys@gmail.com
+${PASSWORD}                12345678
+${WELCOME URL}             https://green-tourism.herokuapp.com/#!/profile
+${DROPDOWNBUTTON XPATH}    //*[@id='navbar']/ul[1]/li/a/i
+${USERNAME XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input
+${PASSWORD XPATH}          //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input
+${LOGIN BUTTON XPATH}      //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
+${EDIT BUTTON}             //button[text()='Edit']
+${FIRST NAME TEXTAREA}     //input[@name='firstName']
+${LAST NAME TEXTAREA}      //input[@name='lastName']
+${NICKNAME TEXTAREA}       //input[@name='nickname']
+${PHONE TEXTAREA}          //input[@name='phone']
+${ADDRESS TEXTAREA}        //input[@name='address']
+${CANCEL BUTTON}           //*[@id="main"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/button
+${CHANGE BUTTON}           //*[@id="main"]/div/user-profile/div/div/section[2]/div[1]/div[2]/form/input
+${FIRST NAME BEFORE}       Maxym
+${FIRST NAME AFTER}        Petro
+${FIRST NAME FIELD}        //div[@class='user-page__name']/h3
+${NICKNAME FIELD}          //div[@class='user-page__name']/h4
+${LAST NAME BEFORE}        Kovalets
+${LAST NAME AFTER}         Poroshenko  
+${NICKNAME BEFORE}         SUPERMAN
+${NICKNAME AFTER}          BATMAN   
+${PHONE AFTER}             +380111111111
+${PHONE BEFORE}            +380555555555
+${PHONE FIELD}             //div[@ng-hide='$ctrl.editMode || $ctrl.changePasswordMode']/p[2]
+${ADDRESS FIELD}           //div[@ng-hide='$ctrl.editMode || $ctrl.changePasswordMode']/p[3]
+${ADDRESS AFTER}           USA
+${ADDRESS BEFORE}          Ukraine
+
+*** Keywords ***
+Open Browser To Main Page 
+    [Arguments]     ${BROWSER}
+    Open Browser    ${HOME URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Browser Implicit Wait    ${DELAY}
+    Main Page Should Be Open
+    
+Main Page Should Be Open
+    Location Should Be    ${HOME URL}
+    
+Click Dropdown Button
+	Wait Until Element Is Clickable      xpath=${DROPDOWNBUTTON XPATH}
+    Click Element                        xpath=${DROPDOWNBUTTON XPATH}
+
+Input Username
+	Wait Until Element Is Visible    xpath=${USERNAME XPATH}
+    Input Text    xpath=${USERNAME XPATH}    ${USER NAME}
+
+Input Password
+	Wait Until Element Is Visible    xpath=${PASSWORD XPATH}
+    Input Text    xpath=${PASSWORD XPATH}    ${PASSWORD}
+
+Submit Credentials
+	Wait Until Element Is Clickable    xpath=${LOGIN BUTTON XPATH}
+    Click Element         xpath=${LOGIN BUTTON XPATH}
+
+Profile Page Should Be Open
+    Location Should Be    ${WELCOME URL}
+
+Open Browser and Log In
+	[Arguments]     ${BROWSER}
+	Open Browser To Main Page	${BROWSER}
+	Click Dropdown Button
+    Input Username
+    Input Password
+    Submit Credentials
+    Profile Page Should Be Open

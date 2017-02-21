@@ -1,0 +1,395 @@
+*** Settings ***
+Documentation     A test suite for checking possibility edit my profile page
+Resource          resource.txt
+Suite Setup       Open Browser and Log In    firefox              
+Suite Teardown    Close Browser
+
+*** Test Cases ***
+Check possibility click "Edit" button
+	Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Element Should Be Clickable        xpath=${EDIT BUTTON}
+
+Check existence of textarea "Firs name"
+	Wait Until Element Is Clickable    xpath=${EDIT BUTTON}    
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Element Should Be Visible          xpath=${FIRST NAME TEXTAREA} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+Check existence of textarea "Last name"
+	Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${LAST NAME TEXTAREA}
+    Element Should Be Visible          xpath=${LAST NAME TEXTAREA} 
+     
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+ 
+Check existence of textarea "Nickname"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME TEXTAREA} 
+    Element Should Be Visible          xpath=${NICKNAME TEXTAREA} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+
+Check existence of textarea "Phone"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${PHONE TEXTAREA}
+    Element Should Be Visible          xpath=${PHONE TEXTAREA} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+
+Check existence of textarea "Address"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS TEXTAREA}
+    Element Should Be Visible          xpath=${ADDRESS TEXTAREA} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+Check possibility click "Cancel" button
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Element Should Be Clickable        xpath=${CANCEL BUTTON}
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+
+Check possibility click "Change" button
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Element Should Be Clickable        xpath=${CHANGE BUTTON}
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+
+Check possibility to change "First name"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Input Text                         xpath=${FIRST NAME TEXTAREA}    ${FIRST NAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME FIELD}
+    Element Text Should Be             xpath=${FIRST NAME FIELD}    ${FIRST NAME AFTER} ${LAST NAME BEFORE} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Input Text                         xpath=${FIRST NAME TEXTAREA}    ${FIRST NAME BEFORE} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+    
+Check possibility to change "Last name"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${LAST NAME TEXTAREA}
+    Input Text                         xpath=${LAST NAME TEXTAREA}    ${LAST NAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME FIELD}
+    Element Text Should Be             xpath=${FIRST NAME FIELD}    ${FIRST NAME BEFORE} ${LAST NAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Input Text                         xpath=${LAST NAME TEXTAREA}    ${LAST NAME BEFORE} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+
+Check possibility to change "Nickname"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME TEXTAREA}
+    Input Text                         xpath=${NICKNAME TEXTAREA}    ${NICKNAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME FIELD}
+    Element Text Should Be             xpath=${NICKNAME FIELD}    ${NICKNAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME TEXTAREA}
+    Input Text                         xpath=${NICKNAME TEXTAREA}    ${NICKNAME BEFORE} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON} 
+
+Check possibility to change "Phone number"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${PHONE TEXTAREA}
+    Input Text                         xpath=${PHONE TEXTAREA}    ${PHONE AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${PHONE FIELD}
+    Element Text Should Be             xpath=${PHONE FIELD}    Phone: ${PHONE AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${PHONE TEXTAREA}
+    Input Text                         xpath=${PHONE TEXTAREA}    ${PHONE BEFORE} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON} 
+
+Check possibility to change "Address"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS TEXTAREA}
+    Input Text                         xpath=${ADDRESS TEXTAREA}    ${ADDRESS AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS FIELD}
+    Element Text Should Be             xpath=${ADDRESS FIELD}    Address: ${ADDRESS AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS TEXTAREA}
+    Input Text                         xpath=${ADDRESS TEXTAREA}    ${ADDRESS BEFORE} 
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+
+Check possibility to change all information about user
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Input Text                         xpath=${FIRST NAME TEXTAREA}    ${FIRST NAME AFTER}
+    
+    Wait Until Element Is Visible      xpath=${LAST NAME TEXTAREA}
+    Input Text                         xpath=${LAST NAME TEXTAREA}    ${LAST NAME AFTER}
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME TEXTAREA}
+    Input Text                         xpath=${NICKNAME TEXTAREA}    ${NICKNAME AFTER}
+    
+    Wait Until Element Is Visible      xpath=${PHONE TEXTAREA}
+    Input Text                         xpath=${PHONE TEXTAREA}    ${PHONE AFTER}
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS TEXTAREA}
+    Input Text                         xpath=${ADDRESS TEXTAREA}    ${ADDRESS AFTER}
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+    
+    Reload Page 
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME FIELD}
+    Element Text Should Be             xpath=${FIRST NAME FIELD}    ${FIRST NAME AFTER} ${LAST NAME AFTER} 
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME FIELD}
+    Element Text Should Be             xpath=${NICKNAME FIELD}    ${NICKNAME AFTER} 
+    
+    Wait Until Element Is Visible      xpath=${PHONE FIELD}
+    Element Text Should Be             xpath=${PHONE FIELD}    Phone: ${PHONE AFTER} 
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS FIELD}
+    Element Text Should Be             xpath=${ADDRESS FIELD}    Address: ${ADDRESS AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Input Text                         xpath=${FIRST NAME TEXTAREA}    ${FIRST NAME BEFORE}
+    
+    Wait Until Element Is Visible      xpath=${LAST NAME TEXTAREA}
+    Input Text                         xpath=${LAST NAME TEXTAREA}    ${LAST NAME BEFORE}
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME TEXTAREA}
+    Input Text                         xpath=${NICKNAME TEXTAREA}    ${NICKNAME BEFORE}
+    
+    Wait Until Element Is Visible      xpath=${PHONE TEXTAREA}
+    Input Text                         xpath=${PHONE TEXTAREA}    ${PHONE BEFORE}
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS TEXTAREA}
+    Input Text                         xpath=${ADDRESS TEXTAREA}    ${ADDRESS BEFORE}
+    
+    Wait Until Element Is Clickable    xpath=${CHANGE BUTTON}
+    Click Button                       xpath=${CHANGE BUTTON}
+
+Check possibility to cancel changing of all information about user
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Input Text                         xpath=${FIRST NAME TEXTAREA}    ${FIRST NAME AFTER}
+    
+    Wait Until Element Is Visible      xpath=${LAST NAME TEXTAREA}
+    Input Text                         xpath=${LAST NAME TEXTAREA}    ${LAST NAME AFTER}
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME TEXTAREA}
+    Input Text                         xpath=${NICKNAME TEXTAREA}    ${NICKNAME AFTER}
+    
+    Wait Until Element Is Visible      xpath=${PHONE TEXTAREA}
+    Input Text                         xpath=${PHONE TEXTAREA}    ${PHONE AFTER}
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS TEXTAREA}
+    Input Text                         xpath=${ADDRESS TEXTAREA}    ${ADDRESS AFTER}
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+    
+    Reload Page 
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME FIELD}
+    Element Text Should Be             xpath=${FIRST NAME FIELD}    ${FIRST NAME BEFORE} ${LAST NAME BEFORE} 
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME FIELD}
+    Element Text Should Be             xpath=${NICKNAME FIELD}    ${NICKNAME BEFORE} 
+    
+    Wait Until Element Is Visible      xpath=${PHONE FIELD}
+    Element Text Should Be             xpath=${PHONE FIELD}    Phone: ${PHONE BEFORE} 
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS FIELD}
+    Element Text Should Be             xpath=${ADDRESS FIELD}    Address: ${ADDRESS BEFORE} 
+    
+Check possibility to cancel changing "First name"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Input Text                         xpath=${FIRST NAME TEXTAREA}    ${FIRST NAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME FIELD}
+    Element Text Should Be             xpath=${FIRST NAME FIELD}    ${FIRST NAME BEFORE} ${LAST NAME BEFORE} 
+    
+Check possibility to cancel changing "Last name"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${LAST NAME TEXTAREA}
+    Input Text                         xpath=${LAST NAME TEXTAREA}    ${LAST NAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME FIELD}
+    Element Text Should Be             xpath=${FIRST NAME FIELD}    ${FIRST NAME BEFORE} ${LAST NAME BEFORE} 
+    
+Check possibility to cancel changing "Nickname"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME TEXTAREA}
+    Input Text                         xpath=${NICKNAME TEXTAREA}    ${NICKNAME AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${NICKNAME FIELD}
+    Element Text Should Be             xpath=${NICKNAME FIELD}    ${NICKNAME BEFORE} 
+    
+Check possibility to cancel changing "Phone number"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${PHONE TEXTAREA}
+    Input Text                         xpath=${PHONE TEXTAREA}    ${PHONE AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${PHONE FIELD}
+    Element Text Should Be             xpath=${PHONE FIELD}    Phone: ${PHONE BEFORE} 
+    
+Check possibility to cancel changing "Address"
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS TEXTAREA}
+    Input Text                         xpath=${ADDRESS TEXTAREA}    ${ADDRESS AFTER} 
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+    
+    Reload Page
+    
+    Wait Until Element Is Visible      xpath=${ADDRESS FIELD}
+    Element Text Should Be             xpath=${ADDRESS FIELD}    Address: ${ADDRESS BEFORE} 
+
+Check disabling of button "Change" when "First name" textarea is empty
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${FIRST NAME TEXTAREA}
+    Clear Element Text                 xpath=${FIRST NAME TEXTAREA} 
+    
+    Wait Until Element Is Visible      xpath=${CHANGE BUTTON}
+    Element Should Be Disabled         xpath=${CHANGE BUTTON}
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+    
+Check disabling of button "Change" when "Last name" textarea is empty
+    Wait Until Element Is Clickable    xpath=${EDIT BUTTON}
+    Click Button                       xpath=${EDIT BUTTON}
+    
+    Wait Until Element Is Visible      xpath=${LAST NAME TEXTAREA}
+    Clear Element Text                 xpath=${LAST NAME TEXTAREA}
+    
+    Wait Until Element Is Visible      xpath=${CHANGE BUTTON}
+    Element Should Be Disabled         xpath=${CHANGE BUTTON} 
+    
+    Wait Until Element Is Clickable    xpath=${CANCEL BUTTON}
+    Click Button                       xpath=${CANCEL BUTTON}
+        

@@ -12,11 +12,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.HeadForGuestUserPage;
 import rv.atqc.gttesting.archex.HeadForLoggedUserPage;
 import rv.atqc.gttesting.archex.SignUpPage;
 import rv.atqc.gttesting.res.Resources;
 
+@Features("Checking possibility signup into system")
+@Stories("Chrome browser")
 public class PossibilitySignUpIntoSystemChrome {
 
 	private WebDriver driver;
@@ -51,30 +56,35 @@ public class PossibilitySignUpIntoSystemChrome {
 		driver.quit();
 	}
 
+	@TestCaseId("RVAT-573")
 	@Test(groups = {EXISTENCE_OF_SIGNUP})
 	public void verifyExistenceOfSignUpForm() {
 		WebElement signUpForm = page.getSignUpForm();
 		Assert.assertTrue(signUpForm.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-567")
 	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
 	public void verifyExistenceOfFirstNameInput() {
 		WebElement firstName = page.getFirstName();
 		Assert.assertTrue(firstName.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-568")
 	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
 	public void verifyExistenceOfLastNameInput() {
 		WebElement lastName = page.getLastName();
 		Assert.assertTrue(lastName.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-569")
 	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
 	public void verifyExistenceOfEmailInput() {
 		WebElement email = page.getEmail();
 		Assert.assertTrue(email.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-570")
 	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
 	public void verifyExistenceOfPasswordInput() {
 		WebElement password = page.getPassword();
@@ -82,12 +92,14 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	}
 
+	@TestCaseId("RVAT-571")
 	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
 	public void verifyExistenceOfConfitmPasswordInput() {
 		WebElement confirmPassword = page.getPasswordConfirm();
 		Assert.assertTrue(confirmPassword.isDisplayed());
 	}
 
+	@TestCaseId("RVAT-572")
 	@Test(groups = {EXISTENCE_OF_SIGNUP}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
 	public void verifyExistenceOfSignUpButton() {
 		WebElement signUpButton = page.getSignUpButton();
@@ -99,6 +111,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearFirstName();
 	}
 
+	@TestCaseId("RVAT-616")
 	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = {"verifyExistenceOfFirstNameInput"})
 	public void verifyFirstNameInputToValidData() {
 		String actual = page.setFirstName(Resources.UserTestData.VALID_NAME)
@@ -109,6 +122,7 @@ public class PossibilitySignUpIntoSystemChrome {
 
 	}
 
+	@TestCaseId("RVAT-617")
 	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfFirstNameInput" })
 	public void verifyFirstNameInputToEmptyData() {
 		String actual = page.setFirstName(Resources.UserTestData.EMPTY)
@@ -118,6 +132,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.FIRST_NAME_EMPTY);
 	}
 
+	@TestCaseId("RVAT-618")
 	@Test(groups = {FIRST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfFirstNameInput" })
 	public void verifyFirstNameInputToInvaldData() {
 		String actual = page.setFirstName(Resources.UserTestData.INVALID_NAME)
@@ -127,11 +142,13 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.FIRST_NAME_INVALID);
 	}
 
+	
 	@BeforeMethod(groups = {LAST_NAME_VALIDATION})
 	public void clearLastName() {
 		page.clearLastName();
 	}
 
+	@TestCaseId("RVAT-619")
 	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfLastNameInput" })
 	public void verifyLastNameInputToValidData() {
 		String actual = page.setLastName(Resources.UserTestData.VALID_NAME)
@@ -141,6 +158,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
+	@TestCaseId("RVAT-620")
 	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfLastNameInput" })
 	public void verifyLastNameInputToEmptyData() {
 		String actual = page.setLastName(Resources.UserTestData.EMPTY)
@@ -150,6 +168,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.LAST_NAME_EMPTY);
 	}
 
+	@TestCaseId("RVAT-621")
 	@Test(groups = {LAST_NAME_VALIDATION}, dependsOnMethods = { "verifyExistenceOfLastNameInput" })
 	public void verifyLastNameInputToInvalidData() {
 		String actual = page.setLastName(Resources.UserTestData.INVALID_NAME)
@@ -164,6 +183,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearEmail();
 	}
 
+	@TestCaseId("RVAT-622")
 	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "verifyExistenceOfEmailInput" })
 	public void verifyEmailInputToValidData() {
 		String actual = page.setEmail(Resources.UserTestData.VALID_EMAIL)
@@ -173,6 +193,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
+	@TestCaseId("RVAT-623")
 	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "verifyExistenceOfEmailInput" })
 	public void verifyEmailInputToEmptyData() {
 		String actual = page.setEmail(Resources.UserTestData.EMPTY)
@@ -182,6 +203,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.EMAIL_EMPTY);
 	}
 
+	@TestCaseId("RVAT-624")
 	@Test(groups = {EMAIL_VALIDATION}, dependsOnMethods = { "verifyExistenceOfEmailInput" })
 	public void verifyEmailInputToInvalidData() {
 		String actual = page.setLastName(Resources.UserTestData.INVALID_EMAIL)
@@ -196,6 +218,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearPassword();
 	}
 
+	@TestCaseId("RVAT-625")
 	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "verifyExistenceOfPasswordInput" })
 	public void verifyPasswordInputToPasswordLess8Symbols() {
 		String actual = page.setPassword(Resources.UserTestData.PASSWORD7)
@@ -205,6 +228,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.PASSWORD_LONGER);
 	}
 
+	@TestCaseId("RVAT-626")
 	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "verifyExistenceOfPasswordInput" })
 	public void verifyPasswordInputToPassword8Symbols() {
 		String actual = page.setPassword(Resources.UserTestData.PASSWORD8)
@@ -214,6 +238,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
+	@TestCaseId("RVAT-627")
 	@Test(groups = {PASSWORD_VALIDATION}, dependsOnMethods = { "verifyExistenceOfPasswordInput" })
 	public void verifyPasswordInputToEmptyPassword() {
 		String actual = page.setPassword(Resources.UserTestData.EMPTY)
@@ -228,6 +253,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		page.clearPasswordConfirm();
 	}
 
+	@TestCaseId("RVAT-629")
 	@Test(groups = {PASSWORD_CONFIRM_VALIDATION}, dependsOnMethods = { "verifyExistenceOfConfitmPasswordInput" })
 	public void verifyConfirmPasswordInputToPasswordLess8Symbols() {
 		clearConfirmPassword();
@@ -242,7 +268,8 @@ public class PossibilitySignUpIntoSystemChrome {
 	public void clearPasswords() {
 		page.clearPasswordConfirm().clearPassword();
 	}
-
+	
+	@TestCaseId("RVAT-631")
 	@Test(groups = {PASSWORD_CONFIRM}, dependsOnMethods = { "verifyExistenceOfPasswordInput", "verifyExistenceOfConfitmPasswordInput" })
 	public void verifyPasswordsAndConfirmPasswordInputsToEqualsPasswords() {
 		String actual = page.setPassword(Resources.UserTestData.PASSWORD8)
@@ -253,6 +280,7 @@ public class PossibilitySignUpIntoSystemChrome {
 		Assert.assertEquals(actual, Resources.SignUpErrorMessage.NO_MESSAGE);
 	}
 
+	@TestCaseId("RVAT-632")
 	@Test(groups = {PASSWORD_CONFIRM}, dependsOnMethods = { "verifyExistenceOfPasswordInput", "verifyExistenceOfConfitmPasswordInput" })
 	public void verifyPasswordsAndConfirmPasswordInputsToNoEqualsPasswords() {
 		String actual = page.setPassword(Resources.UserTestData.PASSWORD8)
@@ -272,6 +300,7 @@ public class PossibilitySignUpIntoSystemChrome {
 			.clearPasswordConfirm();
 	}
 
+	@TestCaseId("RVAT-646")
 	@Test(groups = {SIGNUP_FUNCTIONALITY}, dependsOnMethods = {"verifyExistenceOfSignUpForm"})
 	public void verifySignUpSystem() {
 		String expected = "https://green-tourism.herokuapp.com/#!/profile";
