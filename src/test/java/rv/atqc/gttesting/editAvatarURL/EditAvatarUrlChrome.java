@@ -17,7 +17,6 @@ import rv.atqc.gttesting.driverfactory.Chrome;
 import rv.atqc.gttesting.driverfactory.Driver;
 import rv.atqc.gttesting.driverfactory.DriverFactory;
 import rv.atqc.gttesting.driverfactory.Firefox;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 
