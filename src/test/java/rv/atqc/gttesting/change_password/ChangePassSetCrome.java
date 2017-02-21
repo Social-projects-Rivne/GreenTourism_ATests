@@ -10,7 +10,12 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
+@Features("Checking possibility to set new password")
+@Stories("Chrome browser")
 public class ChangePassSetCrome {
 
 	private static String MAIL = "romanukhaav@i.ua";
@@ -34,7 +39,8 @@ public class ChangePassSetCrome {
 	public void afterMethod() {
 		driver.close();
 	}	
-	
+
+	@TestCaseId("RVAT-637")
 	@Test
 	public void changePassword() {
 		logIn(MAIL, OLD_PASS);
@@ -45,6 +51,7 @@ public class ChangePassSetCrome {
 		Assert.assertEquals(isProfileActive(), "Email:");
 	}
 
+	@TestCaseId("RVAT-638")
 	@Test(dependsOnMethods = { "changePassword" })
 	public void isNewPasswordLegal() {
 		logIn(MAIL, NEW_PASS);

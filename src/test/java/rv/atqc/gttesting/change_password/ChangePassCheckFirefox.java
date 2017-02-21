@@ -6,11 +6,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 
+@Features("Checking possibility to change password")
+@Stories("Firefox browser")
 public class ChangePassCheckFirefox {
 	
 	private static String MAIL = "romanukhaav@gmail.com";
@@ -42,12 +47,14 @@ public class ChangePassCheckFirefox {
 	}
 	
 	
+	@TestCaseId("RVAT-639")
 	@Test
 	public void isChangePassMenuPresent() {
 		clickOnChangePassButton();
 		Assert.assertEquals(getTextFromFildNewPass(), "New password");
 	}
 	
+	@TestCaseId("RVAT-640")
 	@Test
 	public void inputShortPasswords() {
 		clickOnChangePassButton();
@@ -56,6 +63,7 @@ public class ChangePassCheckFirefox {
 		Assert.assertEquals(getError1Text(), "Password should be longer than 8 characters");	
 	}
 	
+	@TestCaseId("RVAT-641")
 	@Test
 	public void inputDifferentPasswords() {
 		clickOnChangePassButton();
@@ -63,7 +71,8 @@ public class ChangePassCheckFirefox {
 		inputPassField2(SHORT_PASS);
 		Assert.assertEquals(getError2Text(), "Passwords doesn't match");
 	}
-
+	
+	@TestCaseId("RVAT-642")
 	@Test
 	public void inputEmptyPasswords() {
 		clickOnChangePassButton();
