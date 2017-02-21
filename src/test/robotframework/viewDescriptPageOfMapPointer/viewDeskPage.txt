@@ -1,0 +1,52 @@
+*** Settings ***
+
+Documentation     A test suite view deskrittion page using Chrome
+Resource          descPageResource.txt
+
+
+
+CheckPresentButtonDetailsOnRaiseWindow_Chrome
+    open Chrome browser on map page
+    Maximize Browser Window
+    clickOnPlaceButton
+    getDatailsWindow
+    [Teardown]    Close Browser
+
+CheckPresentPlasesOnMap_Chrome
+    open Chrome browser on map page
+    getPlaceOnMapPage
+    [Teardown]    Close Browser
+
+CheckPresentMapOnDatailsPage_Chrome
+    open Chrome browser on datails page
+    getMapOnDeskPage
+    [Teardown]    Close Browser
+
+CheckPresentImageOnDatailsPage_Chrome
+    open Chrome browser on datails page
+    getImageOnDeskPage
+    [Teardown]    Close Browser
+
+CheckPresentTitleOnDatailsPage_Chrome
+    open Chrome browser on datails page
+    getTitleOnDeskPage
+    [Teardown]    Close Browser
+
+CheckPresentCloseButtonOnDatailsPage_Chrome
+    open Chrome browser on datails page
+    getTitleOnDeskPage
+    [Teardown]    Close Browser
+
+CheckWorkingCloseButtonOnDatailsPage_Chrome
+    open Chrome browser on datails page
+    clickOnCloseButtonOnDeskPage
+    getMapPage
+    [Teardown]    Close Browser
+
+*** Test Cases ***
+
+CheckPresentPlasesOnMap_Firefox
+    open Firefox browser on datails page
+    getPlaceOnMapPage
+    [Teardown]    Close Browser
+
