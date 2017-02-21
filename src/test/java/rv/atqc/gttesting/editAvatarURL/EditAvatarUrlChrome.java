@@ -34,8 +34,7 @@ public class EditAvatarUrlChrome {
     @BeforeMethod
     public void before() {
         ChromeDriverManager.getInstance().setup();
-      //  driver = new ChromeDriver();
-        driver = DriverFactory.init(DriverFactory.CHROME, 32772);
+        driver = DriverFactory.init(DriverFactory.CHROME);
         driver.get("https://green-tourism.herokuapp.com/");
         wait = new WebDriverWait(driver, MAX_WAIT_TIME);
     }
