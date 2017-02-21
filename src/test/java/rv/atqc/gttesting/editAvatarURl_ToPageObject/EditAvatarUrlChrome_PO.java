@@ -26,7 +26,6 @@ public class EditAvatarUrlChrome_PO {
     public void before() {
         ChromeDriverManager.getInstance().setup();
         driver = DriverFactory.init(DriverFactory.CHROME);
-      //  driver = new ChromeDriver();
         driver.get("https://green-tourism.herokuapp.com/");
         profilePage = new LogInPage(driver).loging();
     }
