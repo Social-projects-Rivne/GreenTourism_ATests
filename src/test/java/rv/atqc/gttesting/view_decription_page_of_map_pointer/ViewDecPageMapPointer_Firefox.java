@@ -7,8 +7,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
 
+@Features("Verify possibility to view deckriptoon psge on map pointer")
+@Stories("Firefox browser")
 public class ViewDecPageMapPointer_Firefox {
     private MapHeadPageForGuestUserPage page;
     private WebDriver driver;
@@ -26,17 +31,20 @@ public class ViewDecPageMapPointer_Firefox {
         driver.quit();
     }
 
+    @TestCaseId("RVAT-1075")
     @Test
     public void checkPresentPlasesOnMap_Firefox() {
         Assert.assertTrue(page.getPlasesOnMapChrome().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1077")
     @Test
     public void checkPresentButtonDetailsOnRaiseWindow_Firefox() {
         page.clickOnPlaceButton();
         Assert.assertTrue(page.getDetailsButton().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1079")
     @Test
     public void checkPresentTitleOnDatailsPage_Firefox() {
         page.clickOnPlaceButton();
@@ -44,6 +52,7 @@ public class ViewDecPageMapPointer_Firefox {
         Assert.assertTrue(page.getTitleOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1081")
     @Test
     public void checkPresentImageOnDatailsPage_Firefox() {
         page.clickOnPlaceButton();
@@ -51,6 +60,7 @@ public class ViewDecPageMapPointer_Firefox {
         Assert.assertTrue(page.getImageOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1083")
     @Test
     public void checkPresentMapOnDatailsPage_Firefox() {
         page.clickOnPlaceButton();
@@ -58,6 +68,7 @@ public class ViewDecPageMapPointer_Firefox {
         Assert.assertTrue(page.getMapOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1085")
     @Test
     public void checkPresentCloseButtonOnDatailsPage_Firefox() {
         page.clickOnPlaceButton();
@@ -65,6 +76,7 @@ public class ViewDecPageMapPointer_Firefox {
         Assert.assertTrue(page.getCloseButtonOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1087")
     @Test
     public void checkWorkingCloseButtonOnDatailsPage_Firefox() {
         page.clickOnPlaceButton();
