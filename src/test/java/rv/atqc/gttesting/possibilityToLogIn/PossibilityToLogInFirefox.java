@@ -1,6 +1,5 @@
 package rv.atqc.gttesting.possibilityToLogIn;
 
-import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -10,6 +9,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import io.github.bonigarcia.wdm.FirefoxDriverManager;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
+
+@Features("Checking possibility to log in")
+@Stories("Firefox browser")
 public class PossibilityToLogInFirefox {
     private WebDriver driver;
     WebDriverWait wait;
@@ -20,6 +26,7 @@ public class PossibilityToLogInFirefox {
     private String NO_DOMAIN_LOGIN = "test@";
     private long MAX_WAIT_TIME = 5;
     
+    @TestCaseId("RVAT-539")
     @Test
     public void checkLogInWithExistingAccountFirefox() {
         clickOnDropdownButton();
@@ -30,6 +37,7 @@ public class PossibilityToLogInFirefox {
         Assert.assertEquals(getProfileButtonText(), "Profile");
     }
     
+    @TestCaseId("RVAT-542")
     @Test
     public void checkLogInWithIncorrectPasswordFirefox() {
         clickOnDropdownButton();
@@ -39,6 +47,7 @@ public class PossibilityToLogInFirefox {
         Assert.assertEquals(getInvalidMailOrPasswordText(), "×\nInvalid email or password!");
     }
     
+    @TestCaseId("RVAT-546")
     @Test
     public void checkLogInWithTwoAtSignsFirefox() {
         clickOnDropdownButton();
@@ -47,6 +56,7 @@ public class PossibilityToLogInFirefox {
         Assert.assertEquals(getInvalidEmailText(), "Invalid email");
     }
     
+    @TestCaseId("RVAT-549")
     @Test
     public void checkLogInWithNoDomainFirefox() {
         clickOnDropdownButton();

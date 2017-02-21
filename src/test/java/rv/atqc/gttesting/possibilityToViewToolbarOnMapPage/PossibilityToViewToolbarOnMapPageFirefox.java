@@ -11,7 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 
+@Features("Checking possibility to view toolbar on map page")
+@Stories("Firefox browser")
 public class PossibilityToViewToolbarOnMapPageFirefox {
     private WebDriver driver;
     private String USER_LOGIN = "test@test.com";
@@ -19,6 +24,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
     private WebDriverWait wait;
     private final int MAX_WAIT_TIME=10;
     
+    @TestCaseId("RVAT-716")
     @Test
     public void checkDefaultValueOfPlacesButtonFirefox() {
         WebElement ValueOfPlacesButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -26,6 +32,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(ValueOfPlacesButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-718")
     @Test
     public void checkDefaultValueOfTracksButtonFirefox() {
         WebElement ValueOfTracksButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -33,6 +40,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(ValueOfTracksButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-721")
     @Test
     public void checkDefaultValueOfEventsButtonFirefox() {
         WebElement ValueOfEventsButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -40,6 +48,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(ValueOfEventsButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-724")
     @Test
     public void checkNewItemDropdownListFirefox() {
     	WebElement NewItemDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -47,6 +56,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(NewItemDropdownList.isDisplayed());
     }
     
+    @TestCaseId("RVAT-728")
     @Test
     public void checkMapTypeDropdownListFirefox() {
         WebElement MapTypeDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -54,6 +64,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(MapTypeDropdownList.isDisplayed());
     }
     
+    @TestCaseId("RVAT-732")
     @Test
     public void checkCategoriesDropdownListFirefox() {
         WebElement CategoriesDropdownList = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -61,6 +72,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(CategoriesDropdownList.isDisplayed());
     }
     
+    @TestCaseId("RVAT-736")
     @Test
     public void checkSearchInputFieldFirefox() {
         WebElement SearchInputField = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -68,6 +80,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(SearchInputField.isDisplayed());
     }
     
+    @TestCaseId("RVAT-740")
     @Test
     public void checkSearchButtonFirefox() {
         WebElement SearchButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -75,6 +88,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(SearchButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-743")
     @Test
     public void checkPlacesInLocationButtonFirefox() {
         WebElement PlacesInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -82,6 +96,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(PlacesInLocationButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-747")
     @Test
     public void checkTracksnLocationButtonFirefox() {
         WebElement TracksInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
@@ -89,6 +104,7 @@ public class PossibilityToViewToolbarOnMapPageFirefox {
         Assert.assertTrue(TracksInLocationButton.isDisplayed());
     }
     
+    @TestCaseId("RVAT-753")
     @Test
     public void checkEventsInLocationButtonFirefox() {
         WebElement EventsInLocationButton = wait.until(ExpectedConditions.visibilityOfElementLocated 
