@@ -1,0 +1,69 @@
+*** Settings ***
+
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${MAP PAGE URL}                      https://green-tourism.herokuapp.com/#!/places
+${DATAILS PAGE URL}                  https://green-tourism.herokuapp.com/#!/places/57a0d2ac5c9cc434265a0982
+${BROWSER}                           Firefox
+${BROWSER FIREFOX}                   Chrome
+${DELAY}                             5
+${MAP ON DASK PAGE XPATH}            //*[@id="abovemap"]
+${IMAGE ON DASK PAGE XPATH}          //*[@id="firstimg"]/img
+${TITLE ON DASK PAGE XPATH}          //*[@id="main"]/div/place-detail/div/div/div[2]/div[1]/div/h2
+${CLOSE BUTTON ON DASK PAGE XPATH}   //*[@id="close"]
+${MAP PAGE XPATH}                    //*[@id="search"]/div/span[1]/button
+${PLACE ON MAP PAGE XPATH}           //*[@id="map"]/div[1]/div[2]/div[3]/img[1]
+${DATAILS BUTTON XPATH}              //*[@id="map"]/div[1]/div[2]/div[4]/div/div[1]/div/div/a[2]
+
+*** Keywords ***
+
+open Chrome browser on map page
+    Open Browser    ${MAP PAGE URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+
+open Chrome browser on datails page
+    Open Browser    ${DATAILS PAGE URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+
+open Firefox browser on datails page
+    Open Browser    ${DATAILS PAGE URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+
+getPlaceOnMapPage
+    Wait Until Page Contains Element  xpath=${PLACE ON MAP PAGE XPATH}
+    Page Should Contain Element  xpath=${PLACE ON MAP PAGE XPATH}
+
+clickOnPlaceButton
+    Wait Until Page Contains Element  xpath=${PLACE ON MAP PAGE XPATH}
+    Click Element    xpath=${PLACE ON MAP PAGE XPATH}
+
+getDatailsWindow
+    Wait Until Page Contains Element  xpath=${DATAILS BUTTON XPATH}
+    Page Should Contain Element  xpath=${DATAILS BUTTON XPATH}
+
+getMapOnDeskPage
+    Wait Until Page Contains Element  xpath=${MAP ON DASK PAGE XPATH}
+    Page Should Contain Element  xpath=${MAP ON DASK PAGE XPATH}
+
+getImageOnDeskPage
+    Wait Until Page Contains Element  xpath=${IMAGE ON DASK PAGE XPATH}
+    Page Should Contain Element  xpath=${IMAGE ON DASK PAGE XPATH}
+
+getTitleOnDeskPage
+    Page Should Contain Element  xpath=${TITLE ON DASK PAGE XPATH}
+
+getCloseButtonOnDeskPage
+    Page Should Contain Element  xpath=${CLOSE BUTTON ON DASK PAGE XPATH}
+
+clickOnCloseButtonOnDeskPage
+    Wait Until Page Contains Element  xpath=${CLOSE BUTTON ON DASK PAGE XPATH}
+    Click Element    xpath=${CLOSE BUTTON ON DASK PAGE XPATH}
+
+getMapPage
+    Wait Until Page Contains Element  xpath=${MAP PAGE XPATH}
+    Page Should Contain Element  xpath=${MAP PAGE XPATH}

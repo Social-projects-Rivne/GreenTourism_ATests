@@ -9,10 +9,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
+import ru.yandex.qatools.allure.annotations.TestCaseId;
 import rv.atqc.gttesting.archex.MapHeadPageForGuestUserPage;
-
 import java.util.HashMap;
 
+@Features("Verify possibility to view deckriptoon psge on map pointer")
+@Stories("Chrome browser")
 public class ViewDecPageMapPointer_Chrome {
     private MapHeadPageForGuestUserPage page;
     private WebDriver driver;
@@ -37,17 +41,20 @@ public class ViewDecPageMapPointer_Chrome {
         driver.quit();
     }
 
+    @TestCaseId("RVAT-941")
     @Test
     public void checkPresentPlasesOnMap_Chrome() {
         Assert.assertTrue(page.getPlasesOnMapChrome().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1076")
     @Test
     public void checkPresentButtonDetailsOnRaiseWindow_Chrome() {
         page.clickOnPlaceButton();
         Assert.assertTrue(page.getDetailsButton().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1078")
     @Test
     public void checkPresentTitleOnDatailsPage_Chrome() {
         page.clickOnPlaceButton();
@@ -55,6 +62,7 @@ public class ViewDecPageMapPointer_Chrome {
         Assert.assertTrue(page.getTitleOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1080")
     @Test
     public void checkPresentImageOnDatailsPage_Chrome() {
         page.clickOnPlaceButton();
@@ -62,6 +70,7 @@ public class ViewDecPageMapPointer_Chrome {
         Assert.assertTrue(page.getImageOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1082")
     @Test
     public void checkPresentMapOnDatailsPage_Chrome() {
         page.clickOnPlaceButton();
@@ -69,6 +78,7 @@ public class ViewDecPageMapPointer_Chrome {
         Assert.assertTrue(page.getMapOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1084")
     @Test
     public void checkPresentCloseButtonOnDatailsPage_Chrome() {
         page.clickOnPlaceButton();
@@ -76,6 +86,7 @@ public class ViewDecPageMapPointer_Chrome {
         Assert.assertTrue(page.getCloseButtonOnDeskPage().isDisplayed());
     }
 
+    @TestCaseId("RVAT-1086")
     @Test
     public void checkWorkingCloseButtonOnDatailsPage_Chrome() {
         page.clickOnPlaceButton();
