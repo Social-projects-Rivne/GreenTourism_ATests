@@ -88,7 +88,7 @@ public class Resources {
 			input = Resources.class.getClassLoader().getResourceAsStream(propertiesTitle);
 			properties.load(input);
 		} catch (IOException ex) {
-			throw new RuntimeException();
+			ex.printStackTrace();
 		} finally {
 			closeSafely(input);
 		}
