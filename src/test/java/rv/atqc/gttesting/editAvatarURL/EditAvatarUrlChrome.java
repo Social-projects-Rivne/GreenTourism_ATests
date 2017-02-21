@@ -5,12 +5,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import rv.atqc.gttesting.driverfactory.Chrome;
+import rv.atqc.gttesting.driverfactory.Driver;
+import rv.atqc.gttesting.driverfactory.DriverFactory;
+import rv.atqc.gttesting.driverfactory.Firefox;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class EditAvatarUrlChrome {
     private WebDriver driver;
@@ -25,7 +34,8 @@ public class EditAvatarUrlChrome {
     @BeforeMethod
     public void before() {
         ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
+      //  driver = new ChromeDriver();
+        driver = DriverFactory.init(DriverFactory.CHROME, 32772);
         driver.get("https://green-tourism.herokuapp.com/");
         wait = new WebDriverWait(driver, MAX_WAIT_TIME);
     }
