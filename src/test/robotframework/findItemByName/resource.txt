@@ -7,7 +7,7 @@ ${HOME URL}                             https://green-tourism.herokuapp.com/#!/
 ${MAP URL}                              https://green-tourism.herokuapp.com/#!/places
 ${VISIBLE ITEM DETAILS URL}             https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3
 ${INVISIBLE ITEM DETAILS URL}           https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd
-${DELAY}                                5
+${DELAY}                                10
 ${VALID USER}                           test@test.com
 ${VALID PASSWORD}                       Test@123
 ${VISIBLE ITEM NAME}                    ASdazxc
