@@ -1,0 +1,92 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${HOME URL}                https://green-tourism.herokuapp.com/#!/
+${PROFILE URL}             https://green-tourism.herokuapp.com/#!/profile
+${DELAY}                   10
+${ITEM URL}                http://green-tourism.herokuapp.com/#!/places/57a10d7680535c7c117f540a
+${DROPDOWNBUTTON XPATH}    //*[@id='navbar']/ul[1]/li/a/i
+${SIGNUP}				   /html/body/header/nav/div/div[2]/ul[1]/li/ul/auth/div[1]/h6/a[2]
+${SIGNUP FORM}             //*[@id="navbar"]/ul[1]/li/ul/auth/div[1]
+${FIRST NAME}          	   //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/input
+${LAST NAME}          	   //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/input
+${EMAIL}      			   //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/input
+${PASSWORD}   			   //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/input
+${CONFIRM PASSWORD}   	   //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/input
+${SIGNUP BUTTON}	       //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/input
+${FIRST NAME ERROR}        //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[1]/p[3]
+${LAST NAME ERROR}         //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[2]/p[3]
+${EMAIL ERROR}			   //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[3]/p[1]
+${PASSWORD ERROR}          //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[2]
+${PASSWORD LESS}           //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[4]/p[1]
+${CONFIRM PASSWORD ERROR}  //*[@id="navbar"]/ul[1]/li/ul/auth/div[3]/div/form/div[5]/p[1]
+${EMPTY}   		   	   
+${VALID NAME}              Aklsdslk
+${INVALID NAME}            An786msasd
+${VALID EMAIL}			   dsjgubksucu@google.com
+${INVALID EMAIL}           1111111@11111.1111
+${PASSWORD 7}			   1111111
+${PASSWORD 8}              11111111
+${PASSWORD 9}              111111111
+${FIRST NAME INVALID TEXT}   First name is invalid 
+${FIRST NAME REQUARE TEXT}   First name is required
+${LAST NAME INVALID TEXT}   Last name is invalid 
+${LAST NAME REQUARE TEXT}   Last name is required
+${EMAIL INVALID TEXT}       Email is invalid 
+${EMAIL REQUARE TEXT}   	Email is required
+${PASSWORD REQUARE TEXT}   	Password is required
+${ERROR IF PASSWORD LESS}   Password should be longer than 8 characters
+${PASSWORD NO MATCH}        Passwords doesn't match
+${SIGNUP EMAIL}             uasgfrjkhs@gmail.com
+*** Keywords ***
+Open Browser To Main Page 
+    [Arguments]     ${BROWSER}
+    Open Browser    ${HOME URL}    ${BROWSER}
+    Maximize Browser Window
+    Set Browser Implicit Wait    ${DELAY}
+    Main Page Should Be Open
+    
+Main Page Should Be Open
+    Location Should Be    ${HOME URL}
+    
+Click Dropdown Button
+	Wait Until Element Is Clickable      xpath=${DROPDOWNBUTTON XPATH}
+    Click Element                        xpath=${DROPDOWNBUTTON XPATH}
+    
+Click SignUp Button
+	Wait Until Element Is Clickable      xpath=${SIGNUP BUTTON}
+    Click Element                        xpath=${SIGNUP BUTTON}
+
+Input First Name
+	[Arguments]     ${TEXT}
+	Wait Until Element Is Visible    xpath=${FIRST NAME}
+    Input Text    xpath=${FIRST NAME}    ${TEXT}
+
+Input Last Name
+	[Arguments]     ${TEXT}
+	Wait Until Element Is Visible    xpath=${LAST NAME}
+    Input Text    xpath=${LAST NAME}    ${TEXT}
+
+Input Email
+	[Arguments]     ${TEXT}
+	Wait Until Element Is Visible    xpath=${EMAIL}
+    Input Text    xpath=${EMAIL}    ${TEXT}
+
+Input Password
+	[Arguments]     ${TEXT}
+	Wait Until Element Is Visible    xpath=${PASSWORD}
+    Input Text    xpath=${PASSWORD}    ${TEXT}
+    
+Input Confirm Password
+	[Arguments]     ${TEXT}
+	Wait Until Element Is Visible    xpath=${CONFIRM PASSWORD}
+    Input Text    xpath=${CONFIRM PASSWORD}    ${TEXT}
+
+Open Browser and Go To SignUp Page 
+	[Arguments]     ${BROWSER}
+	Open Browser To Main Page	${BROWSER}
+	Click Dropdown Button
+    Click Link    xpath=${SIGNUP}  
+    

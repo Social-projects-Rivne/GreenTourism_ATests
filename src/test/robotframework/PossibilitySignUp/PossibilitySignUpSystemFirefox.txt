@@ -1,0 +1,132 @@
+*** Settings ***
+Documentation     A test suite for checking possibility sign up into system
+Resource          resource.txt
+Test Setup       Open Browser and Go To SignUp Page    	firefox               
+Test Teardown    Close Browser
+
+*** Test Cases ***
+Verify Existance of SignUp Form
+	Wait Until Element Is Visible    ${SIGNUP FORM}
+	Element Should Be Visible        xpath=${SIGNUP FORM}
+
+Verify Existance of First Name Input
+	Wait Until Element Is Visible    ${FIRST NAME}
+	Element Should Be Visible        xpath=${FIRST NAME}
+	
+Verify Existance of Last Name Input
+	Wait Until Element Is Visible    ${LAST NAME}
+	Element Should Be Visible        xpath=${LAST NAME}
+
+Verify Existance of Email Input
+	Wait Until Element Is Visible    ${EMAIL}
+	Element Should Be Visible        xpath=${EMAIL}
+
+Verify Existance of Password Input
+	Wait Until Element Is Visible    ${PASSWORD}
+	Element Should Be Visible        xpath=${PASSWORD}
+
+Verify Existance of Confirm Password Input
+	Wait Until Element Is Visible    ${CONFIRM PASSWORD}
+	Element Should Be Visible        xpath=${CONFIRM PASSWORD}
+	
+Verify Existance of SignUp Button
+	Wait Until Element Is Visible    ${SIGNUP BUTTON}
+	Element Should Be Visible        xpath=${SIGNUP BUTTON}
+
+Verify Input First Name With Valid Data
+	Input First Name    ${VALID NAME}
+	Input Last Name    ${EMPTY}
+	Element Should Not Be Visible    xpath=${FIRST NAME ERROR} 
+
+Verify Input First Name With Invalid Data
+	Input First Name    ${INVALID NAME}
+	Input Last Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${FIRST NAME ERROR}
+	Element Should Contain    ${FIRST NAME ERROR}    ${FIRST NAME INVALID TEXT}
+	
+Verify Input First Name With Empty Data
+	Input First Name    ${EMPTY}
+	Input Last Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${FIRST NAME ERROR}
+	Element Should Contain    ${FIRST NAME ERROR}    ${FIRST NAME REQUARE TEXT}
+	
+Verify Input Last Name With Valid Data
+	Input Last Name    ${VALID NAME}
+	Input First Name    ${EMPTY}
+	Element Should Not Be Visible    xpath=${LAST NAME ERROR}
+
+Verify Input Last Name With Invalid Data
+	Input Last Name    ${INVALID NAME}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${LAST NAME ERROR}
+	Element Should Contain    ${LAST NAME ERROR}    ${LAST NAME INVALID TEXT}
+	
+Verify Input Last Name With Empty Data
+	Input Last Name    ${EMPTY}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${LAST NAME ERROR}
+	Element Should Contain    ${LAST NAME ERROR}    ${LAST NAME REQUARE TEXT}
+
+Verify Input Email With Valid Data
+	Input Email    ${VALID EMAIL}
+	Input First Name    ${EMPTY}
+	Element Should Not Be Visible    xpath=${EMAIL ERROR}
+
+Verify Input Email With Invalid Data
+	Input Email    ${INVALID EMAIL}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${EMAIL ERROR}
+	Element Should Contain    ${EMAIL ERROR}    ${EMAIL INVALID TEXT}
+	
+Verify Input Email With Empty Data
+	Input Email    ${EMPTY}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${EMAIL ERROR}
+	Element Should Contain    ${EMAIL ERROR}    ${EMAIL REQUARE TEXT}
+
+Verify Input Password With Password Less then 8 symbols
+	Input Password    ${PASSWORD 7}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${PASSWORD LESS}
+	Element Should Contain    ${PASSWORD LESS}    ${ERROR IF PASSWORD LESS}
+	
+Verify Input Password With Password 8 Symbols
+	Input Password    ${PASSWORD 8}
+	Input First Name    ${EMPTY}
+	Element Should Not Be Visible    xpath=${PASSWORD ERROR}
+	
+Verify Input Password With Empty Password
+	Input Password    ${EMPTY}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${PASSWORD ERROR}
+	Element Should Contain    ${PASSWORD ERROR}    ${PASSWORD REQUARE TEXT}
+	
+Verify Input Confirm Password With Password 8 Symbols
+	Input Confirm Password    ${PASSWORD 8}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${CONFIRM PASSWORD ERROR}
+	Element Should Contain    ${CONFIRM PASSWORD ERROR}    ${PASSWORD NO MATCH}
+	
+Verify Input Confirm Password And Password With Equals Password
+	Input Password    ${PASSWORD 8}
+	Input Confirm Password    ${PASSWORD 8}
+	Input First Name    ${EMPTY}
+	Element Should Not Be Visible    xpath=${CONFIRM PASSWORD ERROR}
+	
+Verify Input Confirm Password And Password With No Equals Password
+	Input Password    ${PASSWORD 8}
+	Input Confirm Password    ${PASSWORD 9}
+	Input First Name    ${EMPTY}
+	Wait Until Element Is Visible    xpath=${CONFIRM PASSWORD ERROR}
+	Element Should Contain    ${CONFIRM PASSWORD ERROR}    ${PASSWORD NO MATCH}
+	
+Verify SignUp System
+	Input First Name    ${VALID NAME}
+	Input Last Name     ${VALID NAME}
+	Input Email     ${SIGNUP EMAIL}
+	Input Password      ${PASSWORD 8}
+	Input Confirm Password      ${PASSWORD 8}
+	Click SignUp Button
+	Location Should Be    ${PROFILE URL}
+	
+	
