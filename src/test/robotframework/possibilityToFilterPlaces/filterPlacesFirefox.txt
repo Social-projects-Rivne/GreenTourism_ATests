@@ -1,0 +1,123 @@
+*** Settings ***
+Documentation     A test suite with a single test for valid login.
+Resource          resource.txt
+Suite Setup       Login To Site    firefox              
+Suite Teardown    Close Browser
+  
+*** Test Cases ***
+Check Existence Of PlacesButton
+    Open Places
+    Element Should Be Visible          ${PLACES BUTTON}
+    
+Check Existence Of CheckAllButton
+    Element Should Be Visible          ${CHECK ALL BUTTON}
+
+Check Existence Of Filters
+    Element Should Be Visible          ${CAMP PLACES FILTER}
+    Element Should Be Visible          ${FEATURED PLACES FILTER}
+    
+Check Existence Of Place
+    Element Should Be Visible          ${FEATURED PLACE}
+    
+Check Existence Of PlaceLable
+    Element Should Be Visible          ${FEATURED PLACE LABLE}
+    
+Check Filter01 CampPlaces
+	Wait Until Element Is Visible      ${CAMP PLACES FILTER}
+	Click Element                      ${CAMP PLACES FILTER}
+	
+	Wait Until Element Is Visible      ${CAMP PLACE}
+	Element Should Be Visible          ${CAMP PLACE}
+	
+Check Filter02 ServicePlaces
+    Wait Until Element Is Visible      ${SERVICE PLACES FILTER}
+	Click Element                      ${SERVICE PLACES FILTER}
+	
+	Wait Until Element Is Visible      ${SERVICE PLACE}
+	Element Should Be Visible          ${SERVICE PLACE}
+	Reload Page
+	
+Check Filter03 CampHostelsPlaces
+    Open Places
+    Deselect Filters
+    Wait Until Element Is Visible      ${CAMP PLACES FILTER}
+	Click Element                      ${CAMP PLACES FILTER}
+	Wait Until Element Is Visible      ${HOSTELS PLACES FILTER}
+	Click Element                      ${HOSTELS PLACES FILTER}
+	
+    Wait Until Element Is Visible      ${CAMP PLACE}
+	Element Should Be Visible          ${CAMP PLACE}
+	Wait Until Element Is Visible      ${HOSTELS PLACE}
+	Element Should Be Visible          ${HOSTELS PLACE}
+    Reload Page
+    
+Check Filter04 FeaturedHealthcarePlaces
+    Open Places
+    Deselect Filters
+    Wait Until Element Is Visible      ${FEATURED PLACES FILTER}
+	Click Element                      ${FEATURED PLACES FILTER}
+	Wait Until Element Is Visible      ${HEALTHCARE PLACES FILTER}
+	Click Element                      ${HEALTHCARE PLACES FILTER}
+	
+    Wait Until Element Is Visible      ${FEATURED PLACE}
+	Element Should Be Visible          ${FEATURED PLACE}
+	Wait Until Element Is Visible      ${HEALTHCARE PLACE}
+	Element Should Be Visible          ${HEALTHCARE PLACE}
+	Reload Page
+	
+Check Filter05 Places Without FeaturedHealthcare
+    Open Places
+    Deselect Filters
+    Wait Until Element Is Visible      ${CAMP PLACES FILTER}
+	Click Element                      ${CAMP PLACES FILTER}
+	Wait Until Element Is Visible      ${HOSTELS PLACES FILTER}
+	Click Element                      ${HOSTELS PLACES FILTER}	
+    Wait Until Element Is Visible      ${SERVICE PLACES FILTER}
+	Click Element                      ${SERVICE PLACES FILTER}
+	
+    Wait Until Element Is Visible      ${CAMP PLACE}
+	Element Should Be Visible          ${CAMP PLACE}
+	Wait Until Element Is Visible      ${HOSTELS PLACE}
+	Element Should Be Visible          ${HOSTELS PLACE}
+	Wait Until Element Is Visible      ${SERVICE PLACE}
+	Element Should Be Visible          ${SERVICE PLACE}
+	Reload Page
+
+Check Filter06 Places Without ServicesFeatured
+    Open Places
+    Deselect Filters
+    Wait Until Element Is Visible      ${CAMP PLACES FILTER}
+	Click Element                      ${CAMP PLACES FILTER}
+	Wait Until Element Is Visible      ${HOSTELS PLACES FILTER}
+	Click Element                      ${HOSTELS PLACES FILTER}	
+    Wait Until Element Is Visible      ${HEALTHCARE PLACES FILTER}
+	Click Element                      ${HEALTHCARE PLACES FILTER}
+	
+    Wait Until Element Is Visible      ${CAMP PLACE}
+	Element Should Be Visible          ${CAMP PLACE}
+	Wait Until Element Is Visible      ${HOSTELS PLACE}
+	Element Should Be Visible          ${HOSTELS PLACE}
+	Wait Until Element Is Visible      ${HEALTHCARE PLACE}
+	Element Should Be Visible          ${HEALTHCARE PLACE}
+	Reload Page
+
+Check Filter07 Places Without Camps
+    Open Places
+    Deselect Filters
+    Wait Until Element Is Visible      ${SERVICE PLACES FILTER}
+	Click Element                      ${SERVICE PLACES FILTER}
+	Wait Until Element Is Visible      ${HOSTELS PLACES FILTER}
+	Click Element                      ${HOSTELS PLACES FILTER}
+	Wait Until Element Is Visible      ${FEATURED PLACES FILTER}
+	Click Element                      ${FEATURED PLACES FILTER}		
+    Wait Until Element Is Visible      ${HEALTHCARE PLACES FILTER}
+	Click Element                      ${HEALTHCARE PLACES FILTER}
+	
+    Wait Until Element Is Visible      ${SERVICE PLACE}
+	Element Should Be Visible          ${SERVICE PLACE}
+	Wait Until Element Is Visible      ${HOSTELS PLACE}
+	Element Should Be Visible          ${HOSTELS PLACE}
+	Wait Until Element Is Visible      ${FEATURED PLACE}
+	Element Should Be Visible          ${FEATURED PLACE}	
+	Wait Until Element Is Visible      ${HEALTHCARE PLACE}
+	Element Should Be Visible          ${HEALTHCARE PLACE}

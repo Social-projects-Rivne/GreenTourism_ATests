@@ -1,0 +1,130 @@
+*** Settings ***
+Documentation     A resource file with reusable keywords and variables.
+Library           Selenium2Library
+
+*** Variables ***
+${HOME URL}                             https://green-tourism.herokuapp.com/#!/
+${MAP URL}                              https://green-tourism.herokuapp.com/#!/places
+${VISIBLE ITEM DETAILS URL}             https://green-tourism.herokuapp.com/#!/places/57a4d84dca7a727c0ca59ba3
+${INVISIBLE ITEM DETAILS URL}           https://green-tourism.herokuapp.com/#!/places/584e7ef0b61f280400d36ebd
+
+${VALID USER}                           test@test.com
+${VALID PASSWORD}                       Test@123
+${INVISIBLE ITEM NAME}                  Hight Castle
+${FAILED PLACE NAME}                    FAILED_PLACE
+${DOUBLE ITEM NAME}                     sda
+${ERROR ITEM NAME}                      1
+${SCRIPT}                               <script>alert( 'Hello, World!' );</script>
+${DROPDOWN BUTTON XPATH}                //*[@id='navbar']/ul[1]/li/a/i
+${USERNAME XPATH}                       //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[1]/input
+${PASSWORD XPATH}                       //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/div[2]/input
+${LOGIN BUTTON XPATH}                   //*[@id='navbar']/ul[1]/li/ul/auth/div[2]/div/form/input
+
+${SEARCH FIELD XPATH}                   //*[@id=\"search\"]/div/input
+${CAMP PLACE XPATH}                     //*[@id='map']/div[1]/div[2]/div[1]/img[1]
+${SERVICE PLACE XPATH}                  //*[@id='map']/div[1]/div[2]/div[1]/img[7]
+${HOSTELS PLACE XPATH}                  //*[@id='map']/div[1]/div[2]/div[3]/img[2]
+${FEATURED PLACE XPATH}                 //*[@id='map']/div[1]/div[2]/div[1]/img[5]
+${HEALTHCARE PLACE XPATH}               //*[@id='map']/div[1]/div[2]/div[1]/img
+${CLOSE RESULT BUTTON XPATH}            //*[@id=\"main\"]/div/place-list/div/div/div[2]/div[4]/a/i
+${FAILED REQUEST XPATH}                 //*[@id=\"search\"]/div/span[3]
+${NO ITEM MESSAGE XPATH}                //*[@id="searchPlaces"]/h3
+${TEXT SEARCHRESULTS XPATH}             //*[@id=\"searchPlaces\"]/h3 
+${FOUND RESULT VISIBLE ITEM XPATH}      //*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a
+${FOUND RESULT VISIBLE ITEM2 XPATH}     //*[@id=\"57a4d84dca7a727c0ca59ba3\"]/button/h3/a
+${FOUND RESULT INVISIBLE ITEM XPATH}    //*[@id=\"584e7ef0b61f280400d36ebd\"]/button/h3
+${FOUND ITEM XPATH}                     //*[@id=\"map\"]/div[1]/div[2]/div[3]/img[1]
+${ITEM DETAILS XPATH}                   //*[@id=\"map\"]/div[1]/div[2]/div[4]/div/div[1]/div/div/button
+
+${DELAY}                                10
+${ITEM NAME}                            asd
+${ITEM SEARCHRESULTS}                   //*[@id="57a10d7680535c7c117f540a"]/button/h3/a
+${SEARCH BUTTON}                        //*[@id=\"search\"]/div/span[1]/button
+${CLOSE RESULTS BUTTON} 	            //*[@id="main"]/div/place-list/div/div/div[2]/div[4]/a/i
+
+${CATEGORIES BUTTON} 	                //*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]
+${PLACES BUTTON} 	                    //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]
+${CHECK ALL BUTTON}                     //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[6] 
+${CAMP PLACE}                           //*[@id='map']/div[1]/div[2]/div[1]/img[1]
+${SERVICE PLACE}                        //*[@id='map']/div[1]/div[2]/div[1]/img[7]
+${HOSTELS PLACE}                        //*[@id='map']/div[1]/div[2]/div[3]/img[2]
+${FEATURED PLACE}                       //*[@id='map']/div[1]/div[2]/div[1]/img[5]
+${HEALTHCARE PLACE}                     //*[@id='map']/div[1]/div[2]/div[1]/img
+	
+${CAMP PLACES FILTER}                   //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[1]
+${SERVICE PLACES FILTER}                //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[2]
+${HOSTELS PLACES FILTER}                //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[3]
+${FEATURED PLACES FILTER}               //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]
+${HEALTHCARE PLACES FILTER}             //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[5]
+${FEATURED PLACE LABLE}                 //*[@id='main']/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[1]/ul/li[4]/a/span
+
+*** Keywords ***
+Login To Site
+    [Arguments]    ${browser}
+    Open Browser    ${HOME URL}    ${browser}
+    Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Click Dropdown Button
+    Input Username    test@test.com
+    Input Password    Test@123
+    Submit Credentials
+    Go To Map Page
+    Set Default Location
+
+Login To Map
+	Open Browser    ${MAP URL}    Chrome
+	Maximize Browser Window
+    Set Selenium Speed    ${DELAY}
+    Set Default Location
+
+Set Default Location
+    Look For Item    ${ITEM NAME}
+    Wait Until Element Is Visible      ${ITEM SEARCHRESULTS}
+    Mouse Over             			   ${ITEM SEARCHRESULTS}
+    Wait Until Element Is Visible      ${CLOSE RESULTS BUTTON}
+    Click Element 					   ${CLOSE RESULTS BUTTON}
+
+Open Places
+    Wait Until Element Is Clickable    ${CATEGORIES BUTTON}
+    Click Element 					   ${CATEGORIES BUTTON}
+    Wait Until Element Is Visible      ${PLACES BUTTON} 
+    Mouse Over             			   ${PLACES BUTTON} 
+    
+Look For Item
+    [Arguments]    ${itemname}
+    Input Search Item   ${itemname}
+    Click Element         xpath=${SEARCH BUTTON}
+
+Deselect Filters
+	Wait Until Element Is Visible        ${FEATURED PLACE}
+    Click Element                        ${FEATURED PLACES FILTER}
+    Wait Until Element Is Not Visible    ${FEATURED PLACE}
+
+Go To Map Page
+    Go To    ${MAP URL}
+    Wait Until Element Is Visible    ${SEARCH BUTTON}
+    Element Should Be Visible        ${SEARCH BUTTON}
+
+Main Page Should Be Open
+    Location Should Be    ${HOME URL}
+    
+Click Dropdown Button    
+    Click Element    xpath=${DROPDOWN BUTTON XPATH}
+
+Input Username
+    [Arguments]    ${username}
+    Input Text    xpath=${USERNAME XPATH}    ${username}
+
+Input Password
+    [Arguments]    ${password}
+    Input Text    xpath=${PASSWORD XPATH}    ${password}
+
+Input Search Item
+    [Arguments]    ${itemname}
+    Input Text    xpath=${SEARCH FIELD XPATH}      ${itemname}
+
+Submit Credentials
+    Click Element         xpath=${LOGIN BUTTON XPATH}
+
+Map Page Should Be Open
+    Location Should Be    ${MAP URL}
