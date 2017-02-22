@@ -31,7 +31,7 @@ public class ClassAbsoluteXPath {
         private By eventsLocator =
                 By.xpath("/html/body/main/div/place-list/div/div/div/div[2]/div/div[3]/ul/li[3]");
         private By eventsNameLocator =
-                By.xpath("//*[@id=\"main\"]/div/place-list/div/div/div[1]/div[2]/div/div[3]/ul/li[3]/a");
+                By.xpath("/html/body/main/div/place-list/div/div/div/div[2]/div/div[3]/ul/li[3]/a");
         private By gamePlaceFilterLocator =
                 By.xpath("/html/body/main/div/place-list/div/div/div/div[2]/div/div[3]/ul/li[3]/ul/li");
         private By festivalPlaceFilterLocator =
